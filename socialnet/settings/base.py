@@ -156,6 +156,16 @@ DATABASES = {
     }
 }
 
+# REDIS CONFIG
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(config("REDIS_URL"))],
+            "symmetric_encryption_keys": [SECRET_KEY],
+        },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
