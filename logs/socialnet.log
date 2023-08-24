@@ -665,3 +665,5 @@ AttributeError: 'NoneType' object has no attribute 'status_code'
 2023-08-24 18:42:20,373 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-08-24 18:42:20,580 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2023-08-24 18:42:20,706 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:45:07,150 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-24 18:46:57,859 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
