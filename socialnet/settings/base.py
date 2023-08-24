@@ -75,7 +75,6 @@ CORS_ALLOW_HEADERS = (
     "accept",
     "origin",
     "authorization",
-    "guestuserid",
     "accept-encoding",
     "access-control-allow-origin",
     "content-disposition",
@@ -87,7 +86,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "BIDOUT AUCTION API",
+    "TITLE": "SOCIALNET API",
     "APPEND_COMPONENTS": {
         "securitySchemes": {
             "bearerAuth": {
@@ -106,6 +105,7 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "SCHEMA_PATH_PREFIX": r"/api/v[0-9]",
+    "AUTHENTICATION_WHITELIST": [],
 }
 
 MIDDLEWARE = [
