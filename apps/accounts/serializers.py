@@ -14,7 +14,7 @@ class RegisterSerializer(serializers.Serializer):
     )
     email = serializers.EmailField()
     password = serializers.CharField(
-        min_length=8, error_messages={"min_length": _("{min_length} characters max.")}
+        min_length=8, error_messages={"min_length": _("{min_length} characters min.")}
     )
     terms_agreement = serializers.BooleanField()
 
@@ -46,7 +46,7 @@ class VerifyOtpSerializer(ResendOtpSerializer):
 
 class SetNewPasswordSerializer(VerifyOtpSerializer):
     password = serializers.CharField(
-        min_length=8, error_messages={"min_length": _("{min_length} characters max.")}
+        min_length=8, error_messages={"min_length": _("{min_length} characters min.")}
     )
 
 

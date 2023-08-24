@@ -669,3 +669,12 @@ AttributeError: 'NoneType' object has no attribute 'status_code'
 2023-08-24 18:46:57,859 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
 2023-08-24 18:56:41,008 django.request ERROR    Internal Server Error: /schema/
 2023-08-24 18:56:41,089 django.request ERROR    Internal Server Error: /schema/
+2023-08-24 19:21:26,814 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2023-08-24 19:22:15,807 django.request WARNING  Not Found: /api/v1/auth/verify-email/
+2023-08-24 19:22:23,477 django.request WARNING  Not Found: /api/v1/auth/verify-email/
+2023-08-24 19:22:57,736 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-24 19:23:30,980 django.request WARNING  Unprocessable Entity: /api/v1/auth/set-new-password/
+2023-08-24 19:28:50,159 django.request WARNING  Unprocessable Entity: /api/v1/auth/set-new-password/
+2023-08-24 19:28:58,091 django.request WARNING  Unprocessable Entity: /api/v1/auth/set-new-password/
+2023-08-24 19:29:05,679 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-24 19:29:17,233 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
