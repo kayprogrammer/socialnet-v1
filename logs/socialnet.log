@@ -237,3 +237,431 @@ TypeError: Object of type SerializerMetaclass is not JSON serializable
 2023-08-24 13:26:58,620 django.request ERROR    Internal Server Error: /schema/
 2023-08-24 13:35:58,441 django.request ERROR    Internal Server Error: /schema/
 2023-08-24 13:35:58,548 django.request ERROR    Internal Server Error: /schema/
+2023-08-24 17:40:22,874 cities_light INFO     Creating /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data
+2023-08-24 17:40:28,924 cities_light INFO     Downloading http://download.geonames.org/export/dump/countryInfo.txt into /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/countryInfo.txt
+2023-08-24 17:40:29,615 cities_light INFO     Forced import of countryInfo.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 17:40:29,615 cities_light INFO     Importing countryInfo.txt
+2023-08-24 17:40:33,432 cities_light INFO     Downloading http://download.geonames.org/export/dump/admin1CodesASCII.txt into /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/admin1CodesASCII.txt
+2023-08-24 17:40:34,951 cities_light INFO     Forced import of admin1CodesASCII.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 17:40:34,952 cities_light INFO     Importing admin1CodesASCII.txt
+2023-08-24 17:41:29,164 cities_light INFO     Downloading http://download.geonames.org/export/dump/admin2Codes.txt into /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/admin2Codes.txt
+2023-08-24 17:41:34,435 cities_light INFO     Forced import of admin2Codes.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 17:41:34,435 cities_light INFO     Importing admin2Codes.txt
+2023-08-24 17:46:15,390 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:46:15,578 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-24 17:46:20,328 django.request ERROR    Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/psycopg/cursor.py", line 723, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column accounts_user.dob does not exist
+LINE 1: ...ts_user"."country_id", "accounts_user"."city_id", "accounts_...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 441, in login
+    return LoginView.as_view(**defaults)(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/debug.py", line 92, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/auth/views.py", line 90, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/generic/edit.py", line 152, in post
+    if form.is_valid():
+       ^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/forms.py", line 201, in is_valid
+    return self.is_bound and not self.errors
+                                 ^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/forms.py", line 196, in errors
+    self.full_clean()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/forms.py", line 434, in full_clean
+    self._clean_form()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/forms.py", line 455, in _clean_form
+    cleaned_data = self.clean()
+                   ^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/auth/forms.py", line 242, in clean
+    self.user_cache = authenticate(
+                      ^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/debug.py", line 42, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/auth/__init__.py", line 77, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/auth/backends.py", line 46, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 54, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/psycopg/cursor.py", line 723, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column accounts_user.dob does not exist
+LINE 1: ...ts_user"."country_id", "accounts_user"."city_id", "accounts_...
+                                                             ^
+2023-08-24 17:46:20,562 django.request WARNING  Not Found: /favicon.ico
+2023-08-24 17:46:44,995 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:46:45,129 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-24 17:46:51,331 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:46:58,045 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:50:40,512 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:50:40,515 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:50:40,779 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:50:43,801 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:50:43,803 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:50:44,486 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:50:45,254 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:50:59,229 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:50:59,231 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:50:59,473 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:50:59,761 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:51:05,846 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:51:05,849 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:51:06,082 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:51:06,242 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:51:59,462 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+2023-08-24 17:51:59,462 cities_light INFO     Forced import of countryInfo.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 17:51:59,462 cities_light INFO     Importing countryInfo.txt
+2023-08-24 17:52:03,319 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+2023-08-24 17:52:03,319 cities_light INFO     Forced import of admin1CodesASCII.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 17:52:03,320 cities_light INFO     Importing admin1CodesASCII.txt
+2023-08-24 17:52:08,258 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+2023-08-24 17:52:08,258 cities_light INFO     Forced import of admin2Codes.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 17:52:08,258 cities_light INFO     Importing admin2Codes.txt
+2023-08-24 17:54:47,662 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:54:47,665 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:54:47,858 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:54:47,965 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:54:48,556 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:54:48,558 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:54:48,761 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:54:48,877 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:54:48,926 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-24 17:55:24,736 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:55:24,738 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:55:25,179 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:55:25,314 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:55:32,062 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:55:32,064 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:55:32,239 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:55:32,399 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:55:32,455 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-24 17:55:36,045 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:55:36,047 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:55:36,319 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:55:36,567 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:55:39,295 cities_light INFO     Downloading http://download.geonames.org/export/dump/cities15000.zip into /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/cities15000.zip
+2023-08-24 17:55:45,278 cities_light INFO     Extracting cities15000.txt from /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/cities15000.zip into /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/cities15000.txt
+2023-08-24 17:55:45,343 cities_light INFO     Forced import of cities15000.zip because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 17:55:45,343 cities_light INFO     Importing cities15000.zip
+2023-08-24 17:56:35,567 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:56:35,571 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:56:35,992 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:56:36,123 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:56:41,932 cities_light WARNING  Saving Zhonghe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Zhonghe) already exists.')
+2023-08-24 17:56:44,432 cities_light WARNING  Saving Xinglong, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Xinglong) already exists.')
+2023-08-24 17:56:50,485 cities_light WARNING  Saving Longtan, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Longtan) already exists.')
+2023-08-24 17:56:50,985 cities_light WARNING  Saving Linjiang, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Linjiang) already exists.')
+2023-08-24 17:56:54,386 cities_light WARNING  Saving Guandu, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Guandu) already exists.')
+2023-08-24 17:56:57,587 cities_light WARNING  Saving Longxing, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Longxing) already exists.')
+2023-08-24 17:56:58,497 cities_light WARNING  Saving Shuanglong, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Shuanglong) already exists.')
+2023-08-24 17:56:59,608 cities_light WARNING  Saving Sanjiao, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Sanjiao) already exists.')
+2023-08-24 17:57:00,052 cities_light WARNING  Saving Shima, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Shima) already exists.')
+2023-08-24 17:57:00,284 cities_light WARNING  Saving Taiping, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Taiping) already exists.')
+2023-08-24 17:57:03,472 cities_light WARNING  Saving E’zhou, Hubei, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(627, 9789, ezhou) already exists.')
+2023-08-24 17:57:04,662 cities_light WARNING  Saving Wushan, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Wushan) already exists.')
+2023-08-24 17:57:04,687 cities_light WARNING  Saving Zhuxi, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Zhuxi) already exists.')
+2023-08-24 17:57:05,017 cities_light WARNING  Saving Tai’an, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Tai’an) already exists.')
+2023-08-24 17:57:05,172 cities_light WARNING  Saving Xinmin, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Xinmin) already exists.')
+2023-08-24 17:57:05,197 cities_light WARNING  Saving Yong’an, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Yong’an) already exists.')
+2023-08-24 17:57:05,230 cities_light WARNING  Saving Gaofeng, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Gaofeng) already exists.')
+2023-08-24 17:57:05,372 cities_light WARNING  Saving Xinsheng, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Xinsheng) already exists.')
+2023-08-24 17:57:05,562 cities_light WARNING  Saving Tonggu, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Tonggu) already exists.')
+2023-08-24 17:57:05,629 cities_light WARNING  Saving Sanhe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Sanhe) already exists.')
+2023-08-24 17:57:05,635 cities_light WARNING  Saving Xintian, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Xintian) already exists.')
+2023-08-24 17:57:05,816 cities_light WARNING  Saving Yihe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Yihe) already exists.')
+2023-08-24 17:57:05,972 cities_light WARNING  Saving Longhe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Longhe) already exists.')
+2023-08-24 17:57:06,074 cities_light WARNING  Saving Gulu, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Gulu) already exists.')
+2023-08-24 17:57:06,360 cities_light WARNING  Saving Longfeng, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Longfeng) already exists.')
+2023-08-24 17:57:06,366 cities_light WARNING  Saving Longxing, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Longxing) already exists.')
+2023-08-24 17:57:08,305 cities_light WARNING  Saving Shizuishan, Ningxia Hui Autonomous Region, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(623, 9697, Shizuishan) already exists.')
+2023-08-24 17:57:09,596 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:09,598 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:09,684 cities_light WARNING  Saving Liangping, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Liangping) already exists.')
+2023-08-24 17:57:09,689 cities_light WARNING  Saving Xinglong, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(636, 9924, Xinglong) already exists.')
+2023-08-24 17:57:10,061 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:10,226 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:14,273 cities_light WARNING  Saving Buenaventura, Valle del Cauca, Colombia failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(645, 10949, Buenaventura) already exists.')
+2023-08-24 17:57:14,682 cities_light WARNING  Saving Bosconia, Cesar, Colombia failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(664, 10906, Bosconia) already exists.')
+2023-08-24 17:57:15,017 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:15,020 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:15,420 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:15,541 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:18,397 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:18,399 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:18,842 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:18,980 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:28,774 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:28,776 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:29,212 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:29,315 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:31,096 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:31,099 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:31,546 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:32,783 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:32,785 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:33,199 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:33,334 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:34,429 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:34,434 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:34,948 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:35,107 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:57:35,947 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:57:35,950 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:57:36,444 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:58:13,404 cities_light WARNING  Saving Hayes, England, United Kingdom failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(1028, 13468, Hayes) already exists.')
+2023-08-24 17:59:50,566 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 17:59:50,569 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 17:59:51,020 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 17:59:51,202 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:00:21,591 cities_light WARNING  Saving Panauti, Bagmati Province, Nepal failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(2414, 27928, panauti) already exists.')
+2023-08-24 18:00:31,558 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:00:31,560 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:00:32,015 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:00:32,168 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:01:01,831 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:01:01,834 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:01:02,321 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:01:02,471 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:01:54,208 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:01:54,211 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:01:54,663 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:01:54,804 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:02:10,337 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:02:10,339 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:02:10,775 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:02:14,320 cities_light WARNING  Saving Vincent, California, United States failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_name_cdfc77ea_uniq"\nDETAIL:  Key (region_id, subregion_id, name)=(3637, 42269, Vincent) already exists.')
+2023-08-24 18:02:31,655 cities_light INFO     Downloading http://download.geonames.org/export/dump/alternateNames.zip into /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/alternateNames.zip
+2023-08-24 18:02:48,830 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:02:48,832 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:02:49,259 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:01,436 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:03:01,438 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:03:01,911 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:02,015 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:06,277 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:03:06,280 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:03:06,666 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:06,780 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:08,605 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:03:08,608 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:03:09,036 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:09,140 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:21,064 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:03:21,067 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:03:22,524 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:23,195 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-24 18:03:38,889 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:03:38,891 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:03:39,491 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:52,097 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:03:52,099 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:03:52,719 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:03:52,868 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:05:56,995 cities_light INFO     Extracting alternateNames.txt from /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/alternateNames.zip into /home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/cities_light/data/alternateNames.txt
+2023-08-24 18:06:01,020 cities_light INFO     Forced import of alternateNames.zip because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-08-24 18:06:01,020 cities_light INFO     Importing alternateNames.zip
+2023-08-24 18:07:01,607 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:07:01,610 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:07:02,257 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:07:02,412 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:07:07,133 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:07:07,135 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:07:07,693 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:07:07,870 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:27:59,021 django.request ERROR    Internal Server Error: /api/v1/auth/register/
+2023-08-24 18:30:11,925 django.request ERROR    Internal Server Error: /api/v1/auth/register/
+2023-08-24 18:33:14,109 django.request ERROR    Internal Server Error: /api/v1/auth/register/
+2023-08-24 18:33:16,266 django.request ERROR    Internal Server Error: /api/v1/auth/register/
+2023-08-24 18:34:01,021 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-24 18:34:06,579 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-24 18:34:33,853 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:34:33,856 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:34:34,119 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:34:34,323 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:34:34,419 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-24 18:34:42,033 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:34:42,037 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:34:42,334 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:34:42,495 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:34:44,286 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:34:44,289 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:34:44,570 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:37:22,894 django.request ERROR    Internal Server Error: /api/v1/auth/register/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/adrf/views.py", line 60, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/accounts/views.py", line 51, in post
+    await Util.send_activation_otp(user)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/accounts/emails.py", line 27, in send_activation_otp
+    otp = await accounts_models.Otp.objects.get_or_none(user=user)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/common/managers.py", line 27, in get_or_none
+    return self.get_queryset().get_or_none(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/common/managers.py", line 9, in get_or_none
+    return self.get(**kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/asyncio.py", line 24, in inner
+    raise SynchronousOnlyOperation(message)
+django.core.exceptions.SynchronousOnlyOperation: You cannot call this from an async context - use a thread or sync_to_async.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/adrf/views.py", line 63, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/views.py", line 466, in handle_exception
+    response = exception_handler(exc, context)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/common/exceptions.py", line 56, in custom_exception_handler
+    status=response.status_code,
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'status_code'
+2023-08-24 18:37:59,649 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:37:59,652 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:37:59,868 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:38:00,022 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:38:05,888 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:38:05,891 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:38:06,121 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:38:08,200 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:38:08,202 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:38:08,413 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:38:08,518 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:38:15,553 django.request ERROR    Internal Server Error: /api/v1/auth/register/
+2023-08-24 18:40:54,969 django.request ERROR    Internal Server Error: /api/v1/auth/register/
+2023-08-24 18:42:06,082 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-24 18:42:08,592 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-24 18:42:13,731 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:42:13,734 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:42:13,944 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:42:14,160 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:42:18,446 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:42:18,450 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:42:18,588 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:42:18,735 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:42:20,371 jazzmin.utils WARNING  listings not found when generating links
+2023-08-24 18:42:20,373 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-24 18:42:20,580 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-24 18:42:20,706 django.request WARNING  Not Found: /static/media/banner2-icon3.png

@@ -27,4 +27,4 @@ class GetOrNoneManager(models.Manager):
         return self.get_queryset().get_or_none(**kwargs)
 
     async def aget_or_none(self, **kwargs):
-        return await self.get_queryset().get_or_none(**kwargs)
+        return await self.get_queryset().aget_or_none(**kwargs)

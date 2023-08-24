@@ -26,6 +26,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # Profile Fields
+    bio = models.CharField(max_length=200, null=True)
+    country = models.ForeignKey(
+        "cities_light.Country", on_delete=models.SET_NULL, null=True
+    )
+    city = models.ForeignKey("cities_light.City", on_delete=models.SET_NULL, null=True)
+    dob = models.DateTimeField(verbose_name=(_("Date of Birth")), null=True)
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
 

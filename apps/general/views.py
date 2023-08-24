@@ -12,6 +12,7 @@ class SiteDetailView(APIView):
     @extend_schema(
         summary="Retrieve site details",
         description="This endpoint retrieves few details of the site/application",
+        tags=["General"],
         responses=SiteDetailResponseSerializer,
     )
     async def get(self, request):

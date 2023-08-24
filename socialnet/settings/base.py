@@ -54,6 +54,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "cloudinary",
     "drf_spectacular",
+    "cities_light",
 ]
 
 LOCAL_APPS = [

@@ -21,6 +21,7 @@ class HealthCheckView(APIView):
         summary="API Health Check",
         description="This endpoint checks the health of the API",
         responses=SuccessResponseSerializer,
+        tags=["HealthCheck"],
     )
     async def get(self, request):
         return CustomResponse.success(message="pong")
@@ -50,6 +51,7 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("api/v1/general/", include("apps.general.urls")),
+    path("api/v1/auth/", include("apps.accounts.urls")),
     path("api/v1/healthcheck/", HealthCheckView.as_view()),
     path("__debug__/", include(debug_toolbar.urls)),
 ]

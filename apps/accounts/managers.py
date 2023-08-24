@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
         else:
             raise ValueError(_("Base User Account: An email address is required"))
 
-    def validate_superuser(self, password, **extra_fields):
+    def validate_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
@@ -69,14 +69,14 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, first_name, last_name, email, password, **extra_fields):
-        extra_fields = self.validate_superuser(password, **extra_fields)
+        extra_fields = self.validate_superuser(email, password, **extra_fields)
         user = self.create_user(first_name, last_name, email, password, **extra_fields)
         return user
 
     async def acreate_superuser(
         self, first_name, last_name, email, password, **extra_fields
     ):
-        extra_fields = self.validate_superuser(password, **extra_fields)
+        extra_fields = self.validate_superuser(email, password, **extra_fields)
         user = await self.acreate_user(
             first_name, last_name, email, password, **extra_fields
         )
@@ -88,7 +88,7 @@ class CustomUserManager(BaseUserManager):
         except self.model.DoesNotExist:
             return None
 
-    async def get_or_none(self, **kwargs):
+    async def aget_or_none(self, **kwargs):
         try:
             return await self.aget(**kwargs)
         except self.model.DoesNotExist:
