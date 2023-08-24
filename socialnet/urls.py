@@ -11,17 +11,21 @@ from drf_spectacular.utils import extend_schema
 from adrf.views import APIView
 
 from apps.common.responses import CustomResponse
+from apps.common.serializers import SuccessResponseSerializer
 import debug_toolbar
+
 
 class HealthCheckView(APIView):
     @extend_schema(
         "/",
         summary="API Health Check",
         description="This endpoint checks the health of the API",
+        responses=SuccessResponseSerializer,
     )
     async def get(self, request):
         return CustomResponse.success(message="pong")
-    
+
+
 def handler404(request, exception=None):
     response = JsonResponse({"status": "failure", "message": "Not Found"})
     response.status_code = 404
@@ -32,6 +36,7 @@ def handler500(request, exception=None):
     response = JsonResponse({"status": "failure", "message": "Server Error"})
     response.status_code = 500
     return response
+
 
 handler404 = handler404
 handler500 = handler500

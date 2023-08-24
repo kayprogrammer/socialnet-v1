@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from apps.general.models import SiteDetail
 
+
 class SiteDetailAdmin(admin.ModelAdmin):
     fieldsets = (
         ("General", {"fields": ["name", "email", "phone", "address"]}),
@@ -28,5 +29,6 @@ class SiteDetailAdmin(admin.ModelAdmin):
                 args=(obj.id,),
             )
         )
-    
+
+
 admin.site.register(SiteDetail, SiteDetailAdmin)

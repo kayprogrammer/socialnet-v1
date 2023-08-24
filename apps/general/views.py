@@ -3,19 +3,16 @@ from drf_spectacular.utils import extend_schema
 from apps.common.responses import CustomResponse
 
 from apps.general.models import SiteDetail
-from apps.general.serializers import (
-    SiteDetailSerializer,
-)
-from apps.common.serializers import SuccessResponseSerializer
+from apps.general.serializers import SiteDetailSerializer, SiteDetailResponseSerializer
+
 
 class SiteDetailView(APIView):
     serializer_class = SiteDetailSerializer
-    response_data = SiteDetailSerializer
 
     @extend_schema(
         summary="Retrieve site details",
         description="This endpoint retrieves few details of the site/application",
-        responses={200: SuccessResponseSerializer}
+        responses=SiteDetailResponseSerializer,
     )
     async def get(self, request):
         sitedetail, created = await SiteDetail.objects.aget_or_create()

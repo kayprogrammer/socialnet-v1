@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from apps.common.serializers import SuccessResponseSerializer
+
 
 class SiteDetailSerializer(serializers.Serializer):
     name = serializers.CharField()
@@ -9,3 +11,7 @@ class SiteDetailSerializer(serializers.Serializer):
     tw = serializers.CharField()
     wh = serializers.CharField()
     ig = serializers.CharField()
+
+
+class SiteDetailResponseSerializer(SuccessResponseSerializer):
+    data = SiteDetailSerializer()

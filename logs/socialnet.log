@@ -231,3 +231,9 @@ Traceback (most recent call last):
   File "/usr/lib/python3.11/json/encoder.py", line 180, in default
     raise TypeError(f'Object of type {o.__class__.__name__} '
 TypeError: Object of type SerializerMetaclass is not JSON serializable
+2023-08-24 13:26:17,404 django.request ERROR    Internal Server Error: /schema/
+2023-08-24 13:26:17,520 django.request ERROR    Internal Server Error: /schema/
+2023-08-24 13:26:58,563 django.request ERROR    Internal Server Error: /schema/
+2023-08-24 13:26:58,620 django.request ERROR    Internal Server Error: /schema/
+2023-08-24 13:35:58,441 django.request ERROR    Internal Server Error: /schema/
+2023-08-24 13:35:58,548 django.request ERROR    Internal Server Error: /schema/

@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
 
+
 class SiteDetail(BaseModel):
     name = models.CharField(max_length=300, default="SocialNet")
     email = models.EmailField(default="kayprogrammer1@gmail.com")
