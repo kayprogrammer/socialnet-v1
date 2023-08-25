@@ -6,3 +6,5 @@ class ErrorCode:
     INCORRECT_EMAIL = "incorrect_email"
     INCORRECT_OTP = "incorrect_otp"
     EXPIRED_OTP = "expired_otp"
+    INVALID_AUTH = "invalid_auth"
+    INVALID_TOKEN = "invalid_token"
