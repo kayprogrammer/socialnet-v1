@@ -11,12 +11,17 @@ class IsAuthenticatedCustom(BasePermission):
     def has_permission(self, request, view):
         http_auth = request.META.get("HTTP_AUTHORIZATION")
         if not http_auth:
-            raise RequestError(err_code=ErrorCode.INVALID_AUTH, err_msg="Auth Bearer not provided!", status_code=401)
+            raise RequestError(
+                err_code=ErrorCode.INVALID_AUTH,
+                err_msg="Auth Bearer not provided!",
+                status_code=401,
+            )
         user = Authentication.decodeAuthorization(http_auth)
         if not user:
             raise RequestError(
-                err_code=ErrorCode.INVALID_TOKEN, 
-                err_msg="Auth Token is Invalid or Expired!", status_code=401
+                err_code=ErrorCode.INVALID_TOKEN,
+                err_msg="Auth Token is Invalid or Expired!",
+                status_code=401,
             )
         request.user = user
         if request.user and request.user.is_authenticated:

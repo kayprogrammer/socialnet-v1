@@ -61,3 +61,12 @@ class RefreshSerializer(serializers.Serializer):
 # RESPONSE SERIALIZERS
 class RegisterResponseSerializer(SuccessResponseSerializer):
     data = serializers.DictField(default={"email": "johndoe@example.com"})
+
+
+class LoginResponseSerializer(SuccessResponseSerializer):
+    data = serializers.DictField(
+        default={
+            "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.",
+            "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lMSIsInBhc3N3b3JkIjoiYXNkZmFzZGYiLCJpYXQiOjE2MzA2MzA3NTh9.",
+        }
+    )

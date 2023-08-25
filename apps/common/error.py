@@ -8,3 +8,5 @@ class ErrorCode:
     EXPIRED_OTP = "expired_otp"
     INVALID_AUTH = "invalid_auth"
     INVALID_TOKEN = "invalid_token"
+    INVALID_CREDENTIALS = "invalid_credentials"
+    UNVERIFIED_USER = "unverified_user"

@@ -678,3 +678,40 @@ AttributeError: 'NoneType' object has no attribute 'status_code'
 2023-08-24 19:28:58,091 django.request WARNING  Unprocessable Entity: /api/v1/auth/set-new-password/
 2023-08-24 19:29:05,679 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
 2023-08-24 19:29:17,233 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-25 18:15:27,849 django.request WARNING  Not Found: /api/v4/auth/send-password-reset-otp/
+2023-08-25 18:16:54,211 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-25 18:16:55,289 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-25 18:16:56,052 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2023-08-25 18:20:13,298 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-25 18:20:14,401 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-25 18:20:15,124 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2023-08-25 18:20:15,844 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-25 18:20:15,851 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-25 18:20:16,917 django.request WARNING  Not Found: /api/v1/auth/verify-email/
+2023-08-25 18:36:36,613 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-25 18:36:37,352 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-25 18:36:37,719 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-25 18:36:38,798 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-08-25 18:36:39,601 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-08-25 18:36:39,605 django.request WARNING  Unauthorized: /api/v1/auth/refresh/
+2023-08-25 18:36:40,686 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-25 18:36:41,459 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2023-08-25 18:36:42,206 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-25 18:36:42,212 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-25 18:36:43,294 django.request WARNING  Not Found: /api/v1/auth/verify-email/
+2023-08-25 18:42:19,939 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-25 18:42:35,633 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-25 18:45:19,835 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-08-25 18:46:02,731 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-08-25 18:46:15,856 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-08-25 18:46:32,206 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-25 18:46:33,104 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-25 18:46:33,617 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-25 18:46:34,940 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-08-25 18:46:35,768 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-08-25 18:46:35,773 django.request WARNING  Unauthorized: /api/v1/auth/refresh/
+2023-08-25 18:46:37,246 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-25 18:46:38,271 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2023-08-25 18:46:39,072 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-25 18:46:39,078 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-25 18:46:40,325 django.request WARNING  Not Found: /api/v1/auth/verify-email/

@@ -1,11 +1,14 @@
 from adrf.views import APIView
+from apps.accounts.auth import Authentication
 
 from apps.common.error import ErrorCode
+from apps.common.utils import IsAuthenticatedCustom
 
 from .emails import Util
 
 from .models import Jwt, Otp, User
 from .serializers import (
+    LoginResponseSerializer,
     LoginSerializer,
     RefreshSerializer,
     RegisterSerializer,
@@ -235,3 +238,118 @@ class SetNewPasswordView(APIView):
         # Send password reset success email
         Util.password_reset_confirmation(user)
         return CustomResponse.success(message="Password reset successful")
+
+
+class LoginView(APIView):
+    serializer_class = LoginSerializer
+
+    @extend_schema(
+        summary="Login a user",
+        description="This endpoint generates new access and refresh tokens for authentication",
+        responses={
+            201: LoginResponseSerializer,
+            422: ErrorDataResponseSerializer,
+            401: ErrorResponseSerializer,
+        },
+        tags=tags,
+    )
+    async def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        email = data["email"]
+        password = data["password"]
+
+        user = await User.objects.aget_or_none(email=email)
+        if not user or not user.check_password(password):
+            raise RequestError(
+                err_code=ErrorCode.INVALID_CREDENTIALS,
+                err_msg="Invalid credentials",
+                status_code=401,
+            )
+
+        if not user.is_email_verified:
+            raise RequestError(
+                err_code=ErrorCode.UNVERIFIED_USER,
+                err_msg="Verify your email first",
+                status_code=401,
+            )
+        await Jwt.objects.filter(user_id=user.id).adelete()
+
+        # Create tokens and store in jwt model
+        access = Authentication.create_access_token({"user_id": str(user.id)})
+        refresh = Authentication.create_refresh_token()
+        await Jwt.objects.acreate(user_id=user.id, access=access, refresh=refresh)
+        return CustomResponse.success(
+            message="Login successful",
+            data={"access": access, "refresh": refresh},
+            status_code=201,
+        )
+
+
+class RefreshTokensView(APIView):
+    serializer_class = RefreshSerializer
+
+    @extend_schema(
+        summary="Refresh tokens",
+        description="This endpoint refresh tokens by generating new access and refresh tokens for a user",
+        responses={
+            201: LoginResponseSerializer,
+            422: ErrorDataResponseSerializer,
+            401: ErrorResponseSerializer,
+            404: ErrorResponseSerializer,
+        },
+        tags=tags,
+    )
+    async def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        token = data["refresh"]
+        jwt = await Jwt.objects.aget_or_none(refresh=token)
+
+        if not jwt:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_TOKEN,
+                err_msg="Refresh token does not exist",
+                status_code=404,
+            )
+        if not Authentication.decode_jwt(token):
+            raise RequestError(
+                err_code=ErrorCode.INVALID_TOKEN,
+                err_msg="Refresh token is invalid or expired",
+                status_code=401,
+            )
+
+        access = Authentication.create_access_token({"user_id": str(jwt.user_id)})
+        refresh = Authentication.create_refresh_token()
+
+        jwt.access = access
+        jwt.refresh = refresh
+        await jwt.asave()
+
+        return CustomResponse.success(
+            message="Tokens refresh successful",
+            data={"access": access, "refresh": refresh},
+            status_code=201,
+        )
+
+
+class LogoutView(APIView):
+    serializer_class = None
+    permission_classes = (IsAuthenticatedCustom,)
+
+    @extend_schema(
+        summary="Logout a user",
+        description="This endpoint logs a user out from our application",
+        responses={
+            200: SuccessResponseSerializer,
+            401: ErrorResponseSerializer,
+        },
+        tags=tags,
+    )
+    async def get(self, request):
+        await Jwt.objects.filter(user_id=request.user.id).adelete()
+        return CustomResponse.success(message="Logout successful")
