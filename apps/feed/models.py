@@ -2,6 +2,7 @@ from autoslug import AutoSlugField
 from django.db import models
 from apps.accounts.models import User
 from django.utils.translation import gettext_lazy as _
+from apps.common.file_processors import FileProcessor
 
 from apps.common.models import BaseModel, File
 
@@ -33,6 +34,20 @@ class Post(BaseModel):
     slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
     image = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
     reactions = models.ManyToManyField(Reaction, blank=True)
+
+    @property
+    def get_image(self):
+        image = self.image
+        if image:
+            return FileProcessor.generate_file_url(
+                key=self.image_id,
+                folder="posts",
+                content_type=image.resource_type,
+            )
+        return None
+
+    class Meta:
+        ordering = ["-created_at"]
 
 
 class Comment(BaseModel):

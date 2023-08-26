@@ -8,6 +8,11 @@ from apps.common.models import BaseModel, File
 from django.conf import settings
 from apps.common.file_processors import FileProcessor
 from .managers import CustomUserManager
+from autoslug import AutoSlugField
+
+
+def slugify_two_fields(self):
+    return f"{self.first_name}-{self.last_name}"
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -16,8 +21,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    username = AutoSlugField(
+        _("Username"), populate_from=slugify_two_fields, unique=True
+    )
     email = models.EmailField(verbose_name=(_("Email address")), unique=True)
-    avatar = models.ForeignKey(File, on_delete=models.SET_NULL, null=True)
+    avatar = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
     terms_agreement = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
@@ -27,12 +35,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     updated_at = models.DateTimeField(auto_now=True)
 
     # Profile Fields
-    bio = models.CharField(max_length=200, null=True)
+    bio = models.CharField(max_length=200, null=True, blank=True)
     country = models.ForeignKey(
-        "cities_light.Country", on_delete=models.SET_NULL, null=True
+        "cities_light.Country", on_delete=models.SET_NULL, null=True, blank=True
     )
-    city = models.ForeignKey("cities_light.City", on_delete=models.SET_NULL, null=True)
-    dob = models.DateTimeField(verbose_name=(_("Date of Birth")), null=True)
+    city = models.ForeignKey(
+        "cities_light.City", on_delete=models.SET_NULL, null=True, blank=True
+    )
+    dob = models.DateTimeField(verbose_name=(_("Date of Birth")), null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]

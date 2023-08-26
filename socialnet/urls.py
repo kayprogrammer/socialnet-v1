@@ -52,6 +52,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/general/", include("apps.general.urls")),
     path("api/v1/auth/", include("apps.accounts.urls")),
+    path("api/v1/feed/", include("apps.feed.urls")),
     path("api/v1/healthcheck/", HealthCheckView.as_view()),
     path("__debug__/", include(debug_toolbar.urls)),
 ]

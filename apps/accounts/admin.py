@@ -34,6 +34,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = [
         "first_name",
         "last_name",
+        "username",
         "email",
         "is_staff",
         "is_active",
@@ -50,6 +51,7 @@ class UserAdmin(BaseUserAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
+                    "username",
                     "bio",
                     "country",
                     "city",
@@ -94,7 +96,7 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
     )
-    readonly_fields = ("created_at", "updated_at")
+    readonly_fields = ("username", "created_at", "updated_at")
     search_fields = ["first_name", "first_name", "email"]
 
 
