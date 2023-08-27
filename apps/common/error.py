@@ -10,3 +10,5 @@ class ErrorCode:
     INVALID_TOKEN = "invalid_token"
     INVALID_CREDENTIALS = "invalid_credentials"
     UNVERIFIED_USER = "unverified_user"
+    NON_EXISTENT = "non_existent"
+    INVALID_OWNER = "invalid_owner"

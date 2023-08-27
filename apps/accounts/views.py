@@ -26,7 +26,6 @@ from apps.common.serializers import (
 )
 
 from apps.common.exceptions import RequestError
-from asgiref.sync import sync_to_async
 
 tags = ["Auth"]
 
