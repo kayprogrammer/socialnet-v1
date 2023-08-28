@@ -14,6 +14,8 @@ class TestFeed(APITestCase):
             author=verified_user, text="This is a nice new platform"
         )
         self.post = post
+        auth_token = TestUtil.auth_token(verified_user)
+        self.bearer = {"HTTP_AUTHORIZATION": f"Bearer {auth_token}"}
 
     def test_retrieve_posts(self):
         post = self.post
@@ -35,5 +37,25 @@ class TestFeed(APITestCase):
                         "updated_at": mock.ANY,
                     }
                 ],
+            },
+        )
+
+    def test_create_post(self):
+        post_dict = {"text": "My new Post"}
+        response = self.client.post(self.posts_url, data=post_dict, **self.bearer)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Post created",
+                "data": {
+                    "author": mock.ANY,
+                    "text": post_dict["text"],
+                    "slug": mock.ANY,
+                    "created_at": mock.ANY,
+                    "updated_at": mock.ANY,
+                    "file_upload_data": None,
+                },
             },
         )
