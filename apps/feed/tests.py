@@ -150,3 +150,42 @@ class TestFeed(APITestCase):
                 },
             },
         )
+
+    def test_delete_post(self):
+        post = self.post
+        # Check if endpoint fails for invalid post
+        response = self.client.delete(f"{self.posts_url}invalid-slug/", **self.bearer)
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "No post with that slug",
+            },
+        )
+
+        # Check if endpoint fails for invalid owner
+        response = self.client.delete(
+            f"{self.posts_url}{post.slug}/", **self.other_user_bearer
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.INVALID_OWNER,
+                "message": "This Post isn't yours",
+            },
+        )
+
+        # Check if endpoint succeeds if all requirements are met
+        response = self.client.delete(f"{self.posts_url}{post.slug}/", **self.bearer)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Post deleted",
+            },
+        )

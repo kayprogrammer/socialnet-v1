@@ -1330,3 +1330,11 @@ django.core.exceptions.FieldError: 'username' cannot be specified for User model
 2023-08-28 13:45:44,024 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
 2023-08-28 13:45:45,555 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
 2023-08-28 13:45:45,563 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-62606357-d0e0-48a5-bbe0-90292abb4b72/
+2023-08-28 13:47:36,487 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 13:47:36,498 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-990347bb-21db-4cd6-aa5f-79c59e656b30/
+2023-08-28 13:47:36,507 django.request WARNING  Unprocessable Entity: /api/v1/feed/posts/test-verified-990347bb-21db-4cd6-aa5f-79c59e656b30/
+2023-08-28 13:48:31,953 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 13:48:31,963 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-b91c0e9f-6453-4fab-9e5d-91d146e0b1d6/
+2023-08-28 13:48:32,717 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 13:48:34,233 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 13:48:34,242 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-ba0e4755-4798-433c-a363-a6dbb569e3f3/
