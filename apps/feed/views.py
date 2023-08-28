@@ -51,14 +51,18 @@ class PostsView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
         file_type = data.get("file_type")
+        image_upload_status = False
         if file_type:
             file = await File.objects.acreate(resource_type=file_type)
             data["image_id"] = file.id
             data.pop("file_type")
+            image_upload_status = True
 
         data["author"] = request.user
         post = await Post.objects.acreate(**data)
-        serializer = self.post_resp_serializer_class(post)
+        serializer = self.post_resp_serializer_class(
+            post, context={"image_upload_status": image_upload_status}
+        )
         return CustomResponse.success(
             message="Post created", data=serializer.data, status_code=201
         )
@@ -121,6 +125,7 @@ class PostDetailView(APIView):
         data = serializer.validated_data
 
         file_type = data.get("file_type")
+        image_upload_status = False
         if file_type:
             file = post.image
             if not file:
@@ -130,12 +135,15 @@ class PostDetailView(APIView):
                 await file.asave()
             data["image_id"] = file.id
             data.pop("file_type")
+            image_upload_status = True
 
         for attr, value in data.items():
             setattr(post, attr, value)
         await post.asave()
 
-        serializer = self.put_resp_serializer_class(post)
+        serializer = self.put_resp_serializer_class(
+            post, context={"image_upload_status": image_upload_status}
+        )
         return CustomResponse.success(
             message="Post updated", data=serializer.data, status_code=200
         )

@@ -61,8 +61,8 @@ class PostCreateResponseDataSerializer(PostSerializer):
         return fields
 
     def get_file_upload_data(self, obj) -> dict:
-        image_id = obj.image_id
-        if image_id:
+        image_upload_status = self.context.get("image_upload_status")
+        if image_upload_status:
             return FileProcessor.generate_file_signature(
                 key=obj.image_id,
                 folder="posts",
