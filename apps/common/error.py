@@ -13,3 +13,4 @@ class ErrorCode:
     NON_EXISTENT = "non_existent"
     INVALID_OWNER = "invalid_owner"
     INVALID_PAGE = "invalid_page"
+    INVALID_VALUE = "invalid_value"

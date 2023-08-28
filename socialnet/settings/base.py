@@ -51,10 +51,12 @@ SITE_ID = 1
 
 THIRD_PARTY_APPS = [
     "adrf",
+    "rest_framework",
     "corsheaders",
     "cloudinary",
     "drf_spectacular",
     "cities_light",
+    "debug_toolbar",
 ]
 
 LOCAL_APPS = [
@@ -110,6 +112,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -227,7 +230,9 @@ DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 
 SITE_NAME = config("SITE_NAME")
 FRONTEND_URL = config("FRONTEND_URL")
-
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 logger = logging.getLogger(__name__)
 
 LOG_LEVEL = "INFO"

@@ -3,7 +3,9 @@ from rest_framework import serializers
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.file_types import ALLOWED_IMAGE_TYPES
-from drf_spectacular.utils import extend_schema_serializer, OpenApiExample
+from .models import REACTION_CHOICES
+
+# POSTS
 
 
 class PostSerializer(serializers.Serializer):
@@ -80,3 +82,21 @@ class PostResponseSerializer(SuccessResponseSerializer):
 
 class PostCreateResponseSerializer(SuccessResponseSerializer):
     data = PostCreateResponseDataSerializer()
+
+
+# REACTIONS
+
+
+class ReactionSerializer(serializers.Serializer):
+    user = serializers.SerializerMethodField()
+    rtype = serializers.ChoiceField(choices=REACTION_CHOICES, default="LIKE")
+
+    def get_user(self, obj):
+        return {
+            "name": obj.user.full_name,
+            "avatar": obj.user.get_avatar,
+        }
+
+
+class ReactionsResponseSerializer(SuccessResponseSerializer):
+    data = ReactionSerializer(many=True)

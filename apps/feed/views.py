@@ -1,15 +1,18 @@
+from django.db.models import Q
 from adrf.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 
-from .models import Post
+from .models import Post, Comment, Reply, Reaction
 from .serializers import (
     PostSerializer,
     PostsResponseSerializer,
     PostResponseSerializer,
     PostCreateResponseSerializer,
     PostCreateResponseDataSerializer,
+    ReactionSerializer,
+    ReactionsResponseSerializer,
 )
 
 from apps.common.models import File
@@ -22,6 +25,8 @@ from apps.common.utils import (
 )
 
 tags = ["Feed"]
+
+# POSTS
 
 
 class PostsView(APIView):
@@ -182,3 +187,100 @@ class PostDetailView(APIView):
                 IsAuthenticatedCustom(),
             ]
         return permissions
+
+
+# REACTIONS
+class ReactionsView(APIView):
+    serializer_class = ReactionSerializer
+    paginator_class = PageNumberPagination()
+    reaction_for = {"POST": Post, "COMMENT": Comment, "REPLY": Reply}
+
+    def validate_for(self, value):
+        if not value in list(self.reaction_for.keys()):
+            raise RequestError(
+                err_code=ErrorCode.INVALID_VALUE,
+                err_msg="Invalid 'for' value",
+                status_code=404,
+            )
+        return value
+
+    async def get_queryset(self, value, slug):
+        value = self.validate_for(value)
+
+        model = self.reaction_for[value]
+        obj = await model.objects.aget_or_none(slug=slug)
+        if not obj:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg=f"{value.capitalize()} does not exist",
+                status_code=404,
+            )
+        field_name = f"{value.lower()}_id"
+        filter = {field_name: obj.id}
+        reactions = await sync_to_async(list)(
+            Reaction.objects.filter(**filter).select_related("user")
+        )
+        return reactions
+
+    @extend_schema(
+        summary="Retrieve Latest Reactions of a Post, Comment, or Reply",
+        description="""
+            This endpoint retrieves paginated responses of reactions of post, comment, reply.
+        """,
+        tags=tags,
+        responses=ReactionsResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="for",
+                description="Specify the usage. Use any of the three: POST, COMMENT, FEED",
+                required=True,
+                type=str,
+                location="path",
+            ),
+            OpenApiParameter(
+                name="slug",
+                description="Enter the slug of the post or comment or reply",
+                required=True,
+                type=str,
+                location="path",
+            ),
+            OpenApiParameter(
+                name="page",
+                description="Retrieve a particular page of reactions. Defaults to 1",
+                required=False,
+                type=int,
+            ),
+        ],
+    )
+    async def get(self, request, *args, **kwargs):
+        reactions = await self.get_queryset(kwargs.get("for"), kwargs.get("slug"))
+        paginated_reactions = self.paginator_class.paginate_queryset(reactions, request)
+        serializer = self.serializer_class(paginated_reactions, many=True)
+        return CustomResponse.success(message="Reactions fetched", data=serializer.data)
+
+    # @extend_schema(
+    #     summary="Create Post",
+    #     description="This endpoint creates a new post",
+    #     tags=tags,
+    #     responses={201: PostCreateResponseSerializer},
+    # )
+    # async def post(self, request):
+    #     serializer = self.serializer_class(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     data = serializer.validated_data
+    #     file_type = data.get("file_type")
+    #     image_upload_status = False
+    #     if file_type:
+    #         file = await File.objects.acreate(resource_type=file_type)
+    #         data["image_id"] = file.id
+    #         data.pop("file_type")
+    #         image_upload_status = True
+
+    #     data["author"] = request.user
+    #     post = await Post.objects.acreate(**data)
+    #     serializer = self.post_resp_serializer_class(
+    #         post, context={"image_upload_status": image_upload_status}
+    #     )
+    #     return CustomResponse.success(
+    #         message="Post created", data=serializer.data, status_code=201
+    #     )

@@ -1,3 +1,4 @@
+from rest_framework.documentation import include_docs_urls
 from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import include, path
@@ -54,6 +55,7 @@ urlpatterns = [
     path("api/v1/auth/", include("apps.accounts.urls")),
     path("api/v1/feed/", include("apps.feed.urls")),
     path("api/v1/healthcheck/", HealthCheckView.as_view()),
+    path("docs/", include_docs_urls(title="SOCIAL NET V1")),
     path("__debug__/", include(debug_toolbar.urls)),
 ]
 

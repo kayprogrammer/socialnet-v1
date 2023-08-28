@@ -18,11 +18,6 @@ REACTION_CHOICES = (
 )
 
 
-class Reaction(BaseModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rtype = models.CharField(max_length=20, choices=REACTION_CHOICES)
-
-
 def slugify_two_fields(self):
     author = self.author
     return f"{author.first_name}-{author.last_name}-{self.id}"
@@ -33,7 +28,6 @@ class Post(BaseModel):
     text = models.TextField()
     slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
     image = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
-    reactions = models.ManyToManyField(Reaction, blank=True)
 
     @property
     def get_image(self):
@@ -54,7 +48,7 @@ class Comment(BaseModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     text = models.TextField()
-    reactions = models.ManyToManyField(Reaction, blank=True)
+    slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
 
 
 class Reply(BaseModel):
@@ -63,4 +57,29 @@ class Reply(BaseModel):
         Comment, on_delete=models.CASCADE, related_name="replies"
     )
     text = models.TextField()
-    reactions = models.ManyToManyField(Reaction, blank=True)
+    slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
+
+
+class Reaction(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rtype = models.CharField(max_length=20, choices=REACTION_CHOICES)
+    post = models.ForeignKey(
+        Post, related_name="reactions", on_delete=models.SET_NULL, null=True, blank=True
+    )
+    comment = models.ForeignKey(
+        Comment,
+        related_name="reactions",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    reply = models.ForeignKey(
+        Reply,
+        related_name="reactions",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        ordering = ["-created_at"]

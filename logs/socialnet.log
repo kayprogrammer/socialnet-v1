@@ -1417,3 +1417,163 @@ TypeError: CustomResponse.error() got an unexpected keyword argument 'status'
 2023-08-28 14:18:53,181 django.request WARNING  Not Found: /api/v1/feed/posts/
 2023-08-28 14:19:04,595 django.request WARNING  Not Found: /api/v1/feed/posts/
 2023-08-28 14:19:06,437 django.request WARNING  Not Found: /api/v1/feed/posts/
+2023-08-28 14:21:22,171 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 14:21:22,180 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-4952cf4c-d7d0-4e9f-b10f-dd20f1d758aa/
+2023-08-28 14:21:22,930 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 14:21:24,475 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 14:21:24,483 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-5c3c4ad7-16ae-4279-a5c4-386c63f444f9/
+2023-08-28 15:32:12,370 django.request WARNING  Not Found: /api/v1/feed/reactions/fghj/fghjk/
+2023-08-28 15:32:21,895 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/fghjk/
+2023-08-28 15:32:51,359 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/fghjk/
+2023-08-28 15:32:53,722 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/fghjk/
+2023-08-28 15:33:14,902 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:34:01,937 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:34:34,307 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:34:59,223 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:35:14,862 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:35:41,312 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:36:34,059 django.request WARNING  Not Found: /api/v1/feed/reactions/COMMENT/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:37:02,994 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:37:02,999 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:37:03,208 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:37:03,809 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 15:37:21,066 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:37:21,070 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:37:21,422 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:37:21,845 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:37:23,397 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:37:23,399 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:37:23,761 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:37:23,925 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 15:37:32,872 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:37:32,874 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:37:33,170 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:37:55,748 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:37:55,750 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:37:56,037 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:37:56,165 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:37:56,251 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 15:38:15,425 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:38:15,427 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:38:15,825 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:38:15,923 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:38:20,496 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:38:20,499 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:38:20,790 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:38:28,285 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:39:32,232 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:47:24,870 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:47:24,873 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:47:25,202 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:47:25,345 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 15:47:26,823 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:47:26,826 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:47:27,208 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:47:27,429 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:47:32,921 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:47:32,925 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:47:33,196 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:47:33,314 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:47:34,974 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:47:34,978 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:47:35,564 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:47:35,988 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:47:36,215 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 15:47:59,715 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:47:59,720 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:48:00,150 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:48:00,432 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:48:09,613 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 15:48:09,617 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 15:48:10,014 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:48:10,150 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 15:48:10,208 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 15:48:13,876 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:48:41,077 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:49:06,801 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:49:29,494 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:49:41,021 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 15:52:13,010 django.request WARNING  Not Found: /api/
+2023-08-28 15:52:13,150 django.request WARNING  Not Found: /favicon.ico
+2023-08-28 15:52:19,059 django.request WARNING  Not Found: /docs/
+2023-08-28 15:57:07,523 django.request ERROR    Internal Server Error: /docs/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/renderers.py", line 722, in render
+    template = loader.get_template(self.template)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: rest_framework/api.html
+2023-08-28 15:58:51,391 django.request ERROR    Internal Server Error: /docs/
+2023-08-28 15:59:16,352 django.request WARNING  Not Found: /api/v1/
+2023-08-28 15:59:24,474 django.request WARNING  Not Found: /api/v1/feed/reactions
+2023-08-28 15:59:27,610 django.request WARNING  Not Found: /api/v1/feed/reactions/
+2023-08-28 15:59:37,707 django.request WARNING  Not Found: /api/v1/feed/reactions/ssss/sss/
+2023-08-28 16:00:05,691 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/sss/
+2023-08-28 16:00:19,149 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 16:00:19,153 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 16:00:19,519 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 16:00:25,728 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 16:00:25,730 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 16:00:25,957 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 16:00:26,082 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 16:00:27,728 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 16:00:27,731 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 16:00:27,994 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 16:02:41,690 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/debug_toolbar/middleware.py", line 74, in __call__
+    rendered = toolbar.render_toolbar()
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/debug_toolbar/toolbar.py", line 82, in render_toolbar
+    return render_to_string("debug_toolbar/base.html", context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
+2023-08-28 16:22:52,208 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:22:53,906 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:34:15,952 django.request WARNING  Not Found: /favicon.ico
+2023-08-28 16:39:53,905 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:40:15,225 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:40:16,138 django.request WARNING  Not Found: /favicon.ico
+2023-08-28 16:40:45,919 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:42:09,130 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:53:45,009 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:57:13,322 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/COMMENT/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:57:14,183 django.request WARNING  Not Found: /favicon.ico
+2023-08-28 16:57:43,541 django.request WARNING  Not Found: /api/v1/feed/reactions/COMMENT/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:58:25,313 django.request WARNING  Not Found: /api/v1/feed/reactions/COMMENT/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 16:58:26,129 django.request WARNING  Not Found: /favicon.ico
+2023-08-28 16:58:36,126 django.request WARNING  Not Found: /favicon.ico
