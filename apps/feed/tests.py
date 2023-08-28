@@ -17,6 +17,9 @@ class TestFeed(APITestCase):
         self.post = post
         auth_token = TestUtil.auth_token(verified_user)
         self.bearer = {"HTTP_AUTHORIZATION": f"Bearer {auth_token}"}
+        another_verified_user = TestUtil.another_verified_user()
+        auth_token = TestUtil.auth_token(another_verified_user)
+        self.other_user_bearer = {"HTTP_AUTHORIZATION": f"Bearer {auth_token}"}
 
     def test_retrieve_posts(self):
         post = self.post
@@ -31,7 +34,7 @@ class TestFeed(APITestCase):
                     {
                         "author": mock.ANY,
                         "text": post.text,
-                        "slug": f"{post.author.first_name}-{post.author.last_name}-{post.id}".lower(),
+                        "slug": post.slug,
                         "reactions_count": 0,
                         "image": None,
                         "created_at": mock.ANY,
@@ -87,11 +90,63 @@ class TestFeed(APITestCase):
                 "data": {
                     "author": mock.ANY,
                     "text": post.text,
-                    "slug": f"{post.author.first_name}-{post.author.last_name}-{post.id}".lower(),
+                    "slug": post.slug,
                     "reactions_count": 0,
                     "image": None,
                     "created_at": mock.ANY,
                     "updated_at": mock.ANY,
+                },
+            },
+        )
+
+    def test_update_post(self):
+        post_dict = {"text": "Post Text Updated"}
+        post = self.post
+        # Check if endpoint fails for invalid post
+        response = self.client.put(
+            f"{self.posts_url}invalid-slug/", data=post_dict, **self.bearer
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "No post with that slug",
+            },
+        )
+
+        # Check if endpoint fails for invalid owner
+        response = self.client.put(
+            f"{self.posts_url}{post.slug}/", data=post_dict, **self.other_user_bearer
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.INVALID_OWNER,
+                "message": "This Post isn't yours",
+            },
+        )
+
+        # Check if endpoint succeeds if all requirements are met
+        response = self.client.put(
+            f"{self.posts_url}{post.slug}/", data=post_dict, **self.bearer
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Post updated",
+                "data": {
+                    "author": mock.ANY,
+                    "text": post_dict["text"],
+                    "slug": mock.ANY,
+                    "created_at": mock.ANY,
+                    "updated_at": mock.ANY,
+                    "file_upload_data": None,
                 },
             },
         )
