@@ -35,6 +35,7 @@ class PostsView(APIView):
     paginator_class = PageNumberPagination()
 
     @extend_schema(
+        operation_id="posts_list",
         summary="Retrieve Latest Posts",
         description="This endpoint retrieves paginated responses of latest posts",
         tags=tags,
@@ -57,6 +58,7 @@ class PostsView(APIView):
         return CustomResponse.success(message="Posts fetched", data=serializer.data)
 
     @extend_schema(
+        operation_id="posts_create",
         summary="Create Post",
         description="This endpoint creates a new post",
         tags=tags,
@@ -194,6 +196,30 @@ class ReactionsView(APIView):
     serializer_class = ReactionSerializer
     paginator_class = PageNumberPagination()
     reaction_for = {"POST": Post, "COMMENT": Comment, "REPLY": Reply}
+    params = [
+        OpenApiParameter(
+            name="for",
+            description="Specify the usage. Use any of the three: POST, COMMENT, FEED",
+            required=True,
+            type=str,
+            location="path",
+        ),
+        OpenApiParameter(
+            name="slug",
+            description="Enter the slug of the post or comment or reply",
+            required=True,
+            type=str,
+            location="path",
+        ),
+    ]
+    get_params = params + [
+        OpenApiParameter(
+            name="page",
+            description="Retrieve a particular page of reactions. Defaults to 1",
+            required=False,
+            type=int,
+        ),
+    ]
 
     def validate_for(self, value):
         if not value in list(self.reaction_for.keys()):
@@ -204,9 +230,8 @@ class ReactionsView(APIView):
             )
         return value
 
-    async def get_queryset(self, value, slug):
+    async def get_object(self, value, slug):
         value = self.validate_for(value)
-
         model = self.reaction_for[value]
         obj = await model.objects.aget_or_none(slug=slug)
         if not obj:
@@ -215,6 +240,10 @@ class ReactionsView(APIView):
                 err_msg=f"{value.capitalize()} does not exist",
                 status_code=404,
             )
+        return obj
+
+    async def get_queryset(self, value, slug):
+        obj = await self.get_object(value, slug)
         field_name = f"{value.lower()}_id"
         filter = {field_name: obj.id}
         reactions = await sync_to_async(list)(
@@ -229,28 +258,7 @@ class ReactionsView(APIView):
         """,
         tags=tags,
         responses=ReactionsResponseSerializer,
-        parameters=[
-            OpenApiParameter(
-                name="for",
-                description="Specify the usage. Use any of the three: POST, COMMENT, FEED",
-                required=True,
-                type=str,
-                location="path",
-            ),
-            OpenApiParameter(
-                name="slug",
-                description="Enter the slug of the post or comment or reply",
-                required=True,
-                type=str,
-                location="path",
-            ),
-            OpenApiParameter(
-                name="page",
-                description="Retrieve a particular page of reactions. Defaults to 1",
-                required=False,
-                type=int,
-            ),
-        ],
+        parameters=get_params,
     )
     async def get(self, request, *args, **kwargs):
         reactions = await self.get_queryset(kwargs.get("for"), kwargs.get("slug"))
@@ -258,29 +266,42 @@ class ReactionsView(APIView):
         serializer = self.serializer_class(paginated_reactions, many=True)
         return CustomResponse.success(message="Reactions fetched", data=serializer.data)
 
-    # @extend_schema(
-    #     summary="Create Post",
-    #     description="This endpoint creates a new post",
-    #     tags=tags,
-    #     responses={201: PostCreateResponseSerializer},
-    # )
-    # async def post(self, request):
-    #     serializer = self.serializer_class(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     data = serializer.validated_data
-    #     file_type = data.get("file_type")
-    #     image_upload_status = False
-    #     if file_type:
-    #         file = await File.objects.acreate(resource_type=file_type)
-    #         data["image_id"] = file.id
-    #         data.pop("file_type")
-    #         image_upload_status = True
+    @extend_schema(
+        summary="Create Reaction",
+        description="""
+            This endpoint creates a new reaction
+            rtype should be any of these:
+            
+            - LIKE    - LOVE
+            - HAHA    - WOW
+            - SAD     - ANGRY
+        """,
+        tags=tags,
+        responses=ReactionsResponseSerializer,
+        parameters=params,
+    )
+    async def post(self, request, *args, **kwargs):
+        for_val = kwargs.get("for")
+        obj = await self.get_object(for_val, kwargs.get("slug"))
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
 
-    #     data["author"] = request.user
-    #     post = await Post.objects.acreate(**data)
-    #     serializer = self.post_resp_serializer_class(
-    #         post, context={"image_upload_status": image_upload_status}
-    #     )
-    #     return CustomResponse.success(
-    #         message="Post created", data=serializer.data, status_code=201
-    #     )
+        data["user"] = request.user
+        rtype = data.pop("rtype")
+        data[f"{for_val.lower()}_id"] = obj.id
+        reaction, created = await Reaction.objects.select_related(
+            "user"
+        ).aupdate_or_create(**data, defaults={"rtype": rtype})
+        serializer = self.serializer_class(reaction)
+        return CustomResponse.success(
+            message="Reaction created", data=serializer.data, status_code=201
+        )
+
+    def get_permissions(self):
+        permissions = []
+        if self.request.method == "POST":
+            permissions = [
+                IsAuthenticatedCustom(),
+            ]
+        return permissions

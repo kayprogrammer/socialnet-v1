@@ -45,7 +45,7 @@ def custom_exception_handler(exc, context):
         elif isinstance(exc, ValidationError):
             errors = exc.detail
             for key in errors:
-                errors[key] = str(errors[key][0])
+                errors[key] = str(errors[key][0]).replace('"', "")
             return CustomResponse.error(
                 message="Invalid Entry",
                 data=errors,

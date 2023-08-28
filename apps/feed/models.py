@@ -83,3 +83,17 @@ class Reaction(BaseModel):
 
     class Meta:
         ordering = ["-created_at"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "post"],
+                name="unique_user_post_reaction",
+            ),
+            models.UniqueConstraint(
+                fields=["user", "comment"],
+                name="unique_user_comment_reaction",
+            ),
+            models.UniqueConstraint(
+                fields=["user", "reply"],
+                name="unique_user_reply_reaction",
+            ),
+        ]

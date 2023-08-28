@@ -7,11 +7,13 @@ from .models import REACTION_CHOICES
 
 # POSTS
 
+user_field = serializers.SerializerMethodField(
+    default={"name": "John Doe", "slug": "john-doe", "avatar": "https://img.url"}
+)
+
 
 class PostSerializer(serializers.Serializer):
-    author = serializers.SerializerMethodField(
-        default={"name": "John Doe", "slug": "john-doe", "avatar": "https://img.url"}
-    )
+    author = user_field
     text = serializers.CharField()
     slug = serializers.SlugField(
         default="john-doe-d10dde64-a242-4ed0-bd75-4c759644b3a6", read_only=True
@@ -88,13 +90,16 @@ class PostCreateResponseSerializer(SuccessResponseSerializer):
 
 
 class ReactionSerializer(serializers.Serializer):
-    user = serializers.SerializerMethodField()
+    id = serializers.UUIDField(read_only=True)
+    user = user_field
     rtype = serializers.ChoiceField(choices=REACTION_CHOICES, default="LIKE")
 
-    def get_user(self, obj):
+    def get_user(self, obj) -> dict:
+        user = obj.user
         return {
-            "name": obj.user.full_name,
-            "avatar": obj.user.get_avatar,
+            "name": user.full_name,
+            "slug": user.username,
+            "avatar": user.get_avatar,
         }
 
 

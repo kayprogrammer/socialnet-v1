@@ -1577,3 +1577,57 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-08-28 16:58:25,313 django.request WARNING  Not Found: /api/v1/feed/reactions/COMMENT/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
 2023-08-28 16:58:26,129 django.request WARNING  Not Found: /favicon.ico
 2023-08-28 16:58:36,126 django.request WARNING  Not Found: /favicon.ico
+2023-08-28 17:14:09,661 django.request WARNING  Unauthorized: /api/v1/feed/reactions/POST1/bala/
+2023-08-28 17:15:50,263 django.request WARNING  Not Found: /api/v1/feed/reactions/dfghj/fghjk/
+2023-08-28 17:17:10,091 django.request WARNING  Unprocessable Entity: /api/v1/feed/reactions/POST1/bala/
+2023-08-28 17:21:19,431 django.request WARNING  Unprocessable Entity: /api/v1/feed/reactions/POST1/bala/
+2023-08-28 17:21:22,567 django.request WARNING  Unprocessable Entity: /api/v1/feed/reactions/POST1/bala/
+2023-08-28 17:21:54,762 django.request WARNING  Not Found: /api/v1/feed/reactions/POST1/bala/
+2023-08-28 17:21:56,242 django.request WARNING  Not Found: /api/v1/feed/reactions/POST1/bala/
+2023-08-28 17:22:01,488 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/bala/
+2023-08-28 17:23:12,056 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:23:12,059 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:23:13,477 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:23:13,593 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 17:23:15,271 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:23:15,274 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:23:16,932 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:23:19,265 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:23:19,268 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:23:21,203 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:23:21,206 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:23:22,804 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:23:23,806 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:23:23,808 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:25:24,014 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:25:24,017 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:25:25,491 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:25:25,575 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 17:25:26,437 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:25:26,440 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:25:27,981 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:25:28,639 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:25:28,642 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:25:41,343 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:25:41,345 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:25:42,635 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:25:44,114 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:25:44,116 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:25:45,456 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:38:03,310 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 17:38:19,336 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 17:38:46,267 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-28 17:39:12,303 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:39:12,306 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:39:13,584 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:39:13,702 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-28 17:39:13,844 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:39:13,846 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:39:15,233 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:39:16,198 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:39:16,200 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:39:17,845 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:39:45,388 jazzmin.utils WARNING  listings not found when generating links
+2023-08-28 17:39:45,391 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-28 17:39:47,096 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-28 17:40:22,555 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
