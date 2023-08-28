@@ -4,6 +4,7 @@ from rest_framework.exceptions import (
     AuthenticationFailed,
     ValidationError,
     APIException,
+    NotFound,
 )
 
 from .responses import CustomResponse
@@ -51,10 +52,16 @@ def custom_exception_handler(exc, context):
                 status_code=422,
                 err_code=ErrorCode.INVALID_ENTRY,
             )
+        elif isinstance(exc, NotFound) and exc.detail == "Invalid page.":
+            return CustomResponse.error(
+                message="Invalid page",
+                status_code=response.status_code,
+                err_code=ErrorCode.INVALID_PAGE,
+            )
         else:
             return CustomResponse.error(
                 message=exc.detail if hasattr(exc, "detail") else exc,
-                status=response.status_code,
+                status_code=response.status_code,
                 err_code=ErrorCode.SERVER_ERROR,
             )
     except:

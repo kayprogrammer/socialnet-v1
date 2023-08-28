@@ -12,3 +12,4 @@ class ErrorCode:
     UNVERIFIED_USER = "unverified_user"
     NON_EXISTENT = "non_existent"
     INVALID_OWNER = "invalid_owner"
+    INVALID_PAGE = "invalid_page"

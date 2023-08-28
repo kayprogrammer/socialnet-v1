@@ -1338,3 +1338,82 @@ django.core.exceptions.FieldError: 'username' cannot be specified for User model
 2023-08-28 13:48:32,717 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
 2023-08-28 13:48:34,233 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
 2023-08-28 13:48:34,242 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-ba0e4755-4798-433c-a363-a6dbb569e3f3/
+2023-08-28 13:52:56,549 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 13:54:59,469 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 13:55:09,195 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 13:55:34,506 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:00:16,437 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:00:33,292 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:02:07,702 django.request WARNING  Not Found: /api/v1/feed/posts/
+2023-08-28 14:03:40,116 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:04:11,692 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:04:22,831 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:05:56,413 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:08:05,040 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:08:06,243 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:08:21,322 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:08:37,326 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:08:56,421 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:09:18,387 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:09:19,555 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:09:37,035 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:09:49,394 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:10:29,483 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:10:45,292 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:10:59,817 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:11:17,174 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:11:47,986 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:12:19,014 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:16:53,308 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+2023-08-28 14:18:01,216 django.request ERROR    Internal Server Error: /api/v1/feed/posts/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/pagination.py", line 204, in paginate_queryset
+    self.page = paginator.page(page_number)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/paginator.py", line 72, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/paginator.py", line 54, in validate_number
+    raise EmptyPage(_("That page contains no results"))
+django.core.paginator.EmptyPage: That page contains no results
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/adrf/views.py", line 60, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/feed/views.py", line 51, in get
+    paginated_posts = self.paginator_class.paginate_queryset(posts, request)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/pagination.py", line 209, in paginate_queryset
+    raise NotFound(msg)
+rest_framework.exceptions.NotFound: Invalid page.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/adrf/views.py", line 63, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/views.py", line 466, in handle_exception
+    response = exception_handler(exc, context)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/common/exceptions.py", line 57, in custom_exception_handler
+    return CustomResponse.error(
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: CustomResponse.error() got an unexpected keyword argument 'status'
+2023-08-28 14:18:45,616 django.request WARNING  Not Found: /api/v1/feed/posts/
+2023-08-28 14:18:53,181 django.request WARNING  Not Found: /api/v1/feed/posts/
+2023-08-28 14:19:04,595 django.request WARNING  Not Found: /api/v1/feed/posts/
+2023-08-28 14:19:06,437 django.request WARNING  Not Found: /api/v1/feed/posts/

@@ -1,5 +1,6 @@
 from adrf.views import APIView
-from drf_spectacular.utils import extend_schema
+from rest_framework.pagination import PageNumberPagination
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 
 from .models import Post
@@ -26,18 +27,28 @@ tags = ["Feed"]
 class PostsView(APIView):
     serializer_class = PostSerializer
     post_resp_serializer_class = PostCreateResponseDataSerializer
+    paginator_class = PageNumberPagination()
 
     @extend_schema(
         summary="Retrieve Latest Posts",
         description="This endpoint retrieves paginated responses of latest posts",
         tags=tags,
         responses=PostsResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="page",
+                description="Retrieve a particular page of posts. Defaults to 1",
+                required=False,
+                type=int,
+            )
+        ],
     )
     async def get(self, request):
         posts = await sync_to_async(list)(
             Post.objects.select_related("author", "image").prefetch_related("reactions")
         )
-        serializer = self.serializer_class(posts, many=True)
+        paginated_posts = self.paginator_class.paginate_queryset(posts, request)
+        serializer = self.serializer_class(paginated_posts, many=True)
         return CustomResponse.success(message="Posts fetched", data=serializer.data)
 
     @extend_schema(
