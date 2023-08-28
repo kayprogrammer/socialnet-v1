@@ -1317,3 +1317,9 @@ django.core.exceptions.FieldError: 'username' cannot be specified for User model
 2023-08-28 01:01:26,004 django.request WARNING  Unprocessable Entity: /api/v1/feed/posts/
 2023-08-28 01:12:19,657 django.request WARNING  Not Found: /index.html
 2023-08-28 01:12:31,714 django.request WARNING  Not Found: /favicon.ico
+2023-08-28 01:36:44,386 django.request WARNING  Not Found: /api/v1/feed/posts//invalid_slug/
+2023-08-28 13:28:47,210 django.request WARNING  Not Found: /api/v1/feed/posts//invalid_slug/
+2023-08-28 13:31:46,017 django.request WARNING  Not Found: /api/v1/feed/posts/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f/
+2023-08-28 13:32:40,210 django.request WARNING  Not Found: /api/v1/feed/posts//invalid-slug/
+2023-08-28 13:33:25,275 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-28 13:34:08,625 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/

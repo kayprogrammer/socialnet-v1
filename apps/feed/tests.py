@@ -2,6 +2,7 @@ from rest_framework.test import APITestCase
 from unittest import mock
 from apps.feed.models import Post
 from apps.common.utils import TestUtil
+from apps.common.error import ErrorCode
 
 
 class TestFeed(APITestCase):
@@ -56,6 +57,41 @@ class TestFeed(APITestCase):
                     "created_at": mock.ANY,
                     "updated_at": mock.ANY,
                     "file_upload_data": None,
+                },
+            },
+        )
+
+    def test_retrieve_post(self):
+        post = self.post
+
+        # Test for post with invalid slug
+        response = self.client.get(f"{self.posts_url}invalid-slug/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "No post with that slug",
+            },
+        )
+
+        # Test for post with valid slug
+        response = self.client.get(f"{self.posts_url}{post.slug}/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Post Detail fetched",
+                "data": {
+                    "author": mock.ANY,
+                    "text": post.text,
+                    "slug": f"{post.author.first_name}-{post.author.last_name}-{post.id}".lower(),
+                    "reactions_count": 0,
+                    "image": None,
+                    "created_at": mock.ANY,
+                    "updated_at": mock.ANY,
                 },
             },
         )
