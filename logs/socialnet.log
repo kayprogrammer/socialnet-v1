@@ -1631,3 +1631,19 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-08-28 17:39:45,391 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-08-28 17:39:47,096 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2023-08-28 17:40:22,555 django.request ERROR    Internal Server Error: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-29 19:42:44,278 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-29 19:42:44,330 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-6741715a-c823-4f98-949c-86cac7046ee1/
+2023-08-29 19:42:45,291 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-29 19:42:47,287 django.request WARNING  Not Found: /api/v1/reactions/invalid_for/test-verified-9611a327-36b7-412a-91b5-c878aff29a25/
+2023-08-29 19:43:59,085 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-29 19:43:59,094 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-afa130cc-4db5-4506-b0d7-31dd636b9fa0/
+2023-08-29 19:43:59,862 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-29 19:44:01,369 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-56bbb697-6baf-448f-8319-b6e2cd28d48a/
+2023-08-29 19:44:01,373 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-29 19:44:47,836 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-29 19:44:47,845 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-c696bbee-f8cf-4b3d-9e83-cd4a1269a597/
+2023-08-29 19:44:48,590 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-29 19:44:50,190 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-f995a269-a338-45dc-8a1c-0d8a91531514/
+2023-08-29 19:44:50,194 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-29 19:44:50,932 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-29 19:44:50,942 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-3542ab0f-2a99-403d-8d6d-b5080ad63fbb/

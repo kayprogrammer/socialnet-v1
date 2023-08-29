@@ -1,16 +1,19 @@
 from rest_framework.test import APITestCase
 from unittest import mock
-from apps.feed.models import Post
+from apps.feed.models import Post, Reaction
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
 
 
 class TestFeed(APITestCase):
     posts_url = "/api/v1/feed/posts/"
+    reactions_url = "/api/v1/feed/reactions/"
+
     maxDiff = None
 
     def setUp(self):
         verified_user = TestUtil.verified_user()
+        self.verified_user = verified_user
         post = Post.objects.create(
             author=verified_user, text="This is a nice new platform"
         )
@@ -187,5 +190,56 @@ class TestFeed(APITestCase):
             {
                 "status": "success",
                 "message": "Post deleted",
+            },
+        )
+
+    def test_retrieve_reactions(self):
+        post = self.post
+        user = self.verified_user
+        reaction = Reaction.objects.create(user=user, rtype="LIKE", post=post)
+
+        # Test for invalid for_value
+        response = self.client.get(f"{self.reactions_url}invalid_for/{post.slug}/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Invalid 'for' value",
+                "code": ErrorCode.INVALID_VALUE,
+            },
+        )
+
+        # Test for invalid slug
+        response = self.client.get(f"{self.reactions_url}POST/invalid_slug/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Post does not exist",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for valid values
+        response = self.client.get(f"{self.reactions_url}POST/{post.slug}/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Reactions fetched",
+                "data": [
+                    {
+                        "id": str(reaction.id),
+                        "user": {
+                            "name": user.full_name,
+                            "slug": user.username,
+                            "avatar": user.get_avatar,
+                        },
+                        "rtype": reaction.rtype,
+                    }
+                ],
             },
         )
