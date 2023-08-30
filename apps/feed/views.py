@@ -1,10 +1,9 @@
-from django.db.models import Q
 from adrf.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 
-from .models import Post, Comment, Reply, Reaction
+from .models import Post, Comment, Reply, Reaction, REACTION_CHOICES
 from .serializers import (
     PostSerializer,
     PostsResponseSerializer,
@@ -192,30 +191,46 @@ class PostDetailView(APIView):
 
 
 # REACTIONS
+reactions_params = [
+    OpenApiParameter(
+        name="for",
+        description="""
+            Specify the usage. Use any of the three: POST, COMMENT, FEED
+        """,
+        required=True,
+        type=str,
+        location="path",
+    ),
+    OpenApiParameter(
+        name="slug",
+        description="Enter the slug of the post or comment or reply",
+        required=True,
+        type=str,
+        location="path",
+    ),
+]
+
+
 class ReactionsView(APIView):
     serializer_class = ReactionSerializer
     paginator_class = PageNumberPagination()
     reaction_for = {"POST": Post, "COMMENT": Comment, "REPLY": Reply}
-    params = [
-        OpenApiParameter(
-            name="for",
-            description="Specify the usage. Use any of the three: POST, COMMENT, FEED",
-            required=True,
-            type=str,
-            location="path",
-        ),
-        OpenApiParameter(
-            name="slug",
-            description="Enter the slug of the post or comment or reply",
-            required=True,
-            type=str,
-            location="path",
-        ),
-    ]
+    params = reactions_params
     get_params = params + [
         OpenApiParameter(
+            name="type",
+            description="""
+                Retrieve a particular type of reactions. Use any of the six (all uppercase):
+                LIKE, LOVE, HAHA, WOW, SAD, ANGRY
+            """,
+            required=False,
+            type=str,
+        ),
+        OpenApiParameter(
             name="page",
-            description="Retrieve a particular page of reactions. Defaults to 1",
+            description="""
+                Retrieve a particular page of reactions. Defaults to 1
+            """,
             required=False,
             type=int,
         ),
@@ -242,10 +257,12 @@ class ReactionsView(APIView):
             )
         return obj
 
-    async def get_queryset(self, value, slug):
+    async def get_queryset(self, value, slug, rtype=None):
         obj = await self.get_object(value, slug)
         field_name = f"{value.lower()}_id"
         filter = {field_name: obj.id}
+        if rtype:
+            filter["rtype"] = rtype
         reactions = await sync_to_async(list)(
             Reaction.objects.filter(**filter).select_related("user")
         )
@@ -261,7 +278,16 @@ class ReactionsView(APIView):
         parameters=get_params,
     )
     async def get(self, request, *args, **kwargs):
-        reactions = await self.get_queryset(kwargs.get("for"), kwargs.get("slug"))
+        rtype = request.GET.get("type")
+        if rtype and rtype not in set(item[0] for item in REACTION_CHOICES):
+            raise RequestError(
+                err_code=ErrorCode.INVALID_VALUE,
+                err_msg=f"Invalid reaction type",
+                status_code=404,
+            )
+        reactions = await self.get_queryset(
+            kwargs.get("for"), kwargs.get("slug"), rtype
+        )
         paginated_reactions = self.paginator_class.paginate_queryset(reactions, request)
         serializer = self.serializer_class(paginated_reactions, many=True)
         return CustomResponse.success(message="Reactions fetched", data=serializer.data)
