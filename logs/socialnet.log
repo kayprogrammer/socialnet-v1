@@ -1722,3 +1722,37 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-08-31 19:08:19,832 django.request WARNING  Not Found: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
 2023-08-31 19:08:33,549 django.request WARNING  Unauthorized: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
 2023-08-31 19:08:38,438 django.request WARNING  Unauthorized: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
+2023-08-31 19:16:54,136 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-9b2b71b6-135f-4667-a490-3ccd87a5dbca/
+2023-08-31 19:16:54,142 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-31 19:16:54,945 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:16:54,956 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-f40d9c92-e09a-486e-8d27-fba7784bea68/
+2023-08-31 19:16:55,769 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_id/
+2023-08-31 19:18:57,360 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/
+2023-08-31 19:19:33,589 django.request WARNING  Not Found: /api/v1/feed/reactions/<uuid:id>/
+2023-08-31 19:19:41,224 django.request WARNING  Not Found: /api/v1/feed/reactions/uuidid/
+2023-08-31 19:20:02,003 django.request WARNING  Unauthorized: /api/v1/feed/reactions/74a6b3ce-2767-4809-b0a2-01dea246a284/
+2023-08-31 19:21:34,235 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-56c6aef7-2680-4519-b611-ef4b9dc78b2e/
+2023-08-31 19:21:34,242 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-31 19:21:35,115 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:21:35,125 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-73b06fde-274c-44d3-b438-aa5d317f9dd9/
+2023-08-31 19:21:36,008 django.request WARNING  Not Found: /api/v1/feed/reactions/902b733c-a729-45e2-9081-30930690471c/
+2023-08-31 19:21:36,016 django.request WARNING  Unauthorized: /api/v1/feed/reactions/2b3fb6d7-b84f-4da4-9251-f9f0f72dc500/
+2023-08-31 19:21:36,784 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:23:35,438 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-55e82411-a3f8-4b5f-9f15-48da46c8cde4/
+2023-08-31 19:23:35,444 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-31 19:23:36,224 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:23:36,233 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-cf79a176-420a-4ef8-9c6e-5626a401ab16/
+2023-08-31 19:23:37,018 django.request WARNING  Not Found: /api/v1/feed/reactions/db378129-c6bc-4dce-a3e3-4c364505b80e/
+2023-08-31 19:23:37,024 django.request WARNING  Unauthorized: /api/v1/feed/reactions/5b962192-00e3-4546-9be7-b494720e931f/
+2023-08-31 19:23:37,791 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:24:30,931 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-61be7f24-efac-4a64-9707-f3df3b79d2db/
+2023-08-31 19:24:30,940 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-31 19:24:31,735 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:24:31,745 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-b7a75980-2891-4273-84a9-518b175e2895/
+2023-08-31 19:24:32,557 django.request WARNING  Not Found: /api/v1/feed/reactions/7435a49d-0998-4522-8a22-1ca29889c560/
+2023-08-31 19:24:32,563 django.request WARNING  Unauthorized: /api/v1/feed/reactions/06b62d76-b9b6-44d7-a33b-84bbecf9afe8/
+2023-08-31 19:24:33,413 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:24:35,368 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-b7f6fdc0-4a81-4dbf-a990-923ccecbdd8f/
+2023-08-31 19:24:35,372 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-31 19:24:36,302 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 19:24:36,312 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-a1b46e31-74d3-4afa-88cf-bdf3bc7367a1/

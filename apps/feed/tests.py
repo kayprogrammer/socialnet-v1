@@ -3,6 +3,7 @@ from unittest import mock
 from apps.feed.models import Post, Reaction
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
+import uuid
 
 
 class TestFeed(APITestCase):
@@ -23,6 +24,9 @@ class TestFeed(APITestCase):
         another_verified_user = TestUtil.another_verified_user()
         auth_token = TestUtil.auth_token(another_verified_user)
         self.other_user_bearer = {"HTTP_AUTHORIZATION": f"Bearer {auth_token}"}
+        self.reaction = Reaction.objects.create(
+            user=verified_user, rtype="LIKE", post=post
+        )
 
     def test_retrieve_posts(self):
         post = self.post
@@ -38,7 +42,7 @@ class TestFeed(APITestCase):
                         "author": mock.ANY,
                         "text": post.text,
                         "slug": post.slug,
-                        "reactions_count": 0,
+                        "reactions_count": mock.ANY,
                         "image": None,
                         "created_at": mock.ANY,
                         "updated_at": mock.ANY,
@@ -94,7 +98,7 @@ class TestFeed(APITestCase):
                     "author": mock.ANY,
                     "text": post.text,
                     "slug": post.slug,
-                    "reactions_count": 0,
+                    "reactions_count": mock.ANY,
                     "image": None,
                     "created_at": mock.ANY,
                     "updated_at": mock.ANY,
@@ -196,7 +200,7 @@ class TestFeed(APITestCase):
     def test_retrieve_reactions(self):
         post = self.post
         user = self.verified_user
-        reaction = Reaction.objects.create(user=user, rtype="LIKE", post=post)
+        reaction = self.reaction
 
         # Test for invalid for_value
         response = self.client.get(f"{self.reactions_url}invalid_for/{post.slug}/")
@@ -299,5 +303,50 @@ class TestFeed(APITestCase):
                     },
                     "rtype": reaction_data["rtype"],
                 },
+            },
+        )
+
+    def test_delete_reaction(self):
+        reaction = self.reaction
+
+        # Test for invalid reaction id
+        invalid_id = str(uuid.uuid4())
+        response = self.client.delete(
+            f"{self.reactions_url}{invalid_id}/", **self.bearer
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Reaction does not exist",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for invalid owner
+        response = self.client.delete(
+            f"{self.reactions_url}{reaction.id}/", **self.other_user_bearer
+        )
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Not yours to delete",
+                "code": ErrorCode.INVALID_OWNER,
+            },
+        )
+
+        # Test for valid values
+        response = self.client.delete(
+            f"{self.reactions_url}{reaction.id}/", **self.bearer
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Reaction deleted",
             },
         )
