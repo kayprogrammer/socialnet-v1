@@ -282,7 +282,7 @@ class ReactionsView(APIView):
         if rtype and rtype not in set(item[0] for item in REACTION_CHOICES):
             raise RequestError(
                 err_code=ErrorCode.INVALID_VALUE,
-                err_msg=f"Invalid reaction type",
+                err_msg="Invalid reaction type",
                 status_code=404,
             )
         reactions = await self.get_queryset(
@@ -331,3 +331,32 @@ class ReactionsView(APIView):
                 IsAuthenticatedCustom(),
             ]
         return permissions
+
+
+class RemoveReaction(APIView):
+    permission_classes = (IsAuthenticatedCustom,)
+
+    @extend_schema(
+        summary="Remove Reaction",
+        description="""
+            This endpoint deletes a reaction.
+        """,
+        tags=tags,
+        responses={200: SuccessResponseSerializer},
+    )
+    async def delete(self, request, *args, **kwargs):
+        reaction = await Reaction.objects.aget_or_none(id=kwargs.get("id"))
+        if not reaction:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="Reaction does not exist",
+                status_code=404,
+            )
+        if request.user.id != reaction.user_id:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_OWNER,
+                err_msg="Not yours to delete",
+                status_code=401,
+            )
+        await reaction.adelete()
+        return CustomResponse.success(message="Reaction deleted", status_code=200)

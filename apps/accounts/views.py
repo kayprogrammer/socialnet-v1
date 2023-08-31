@@ -277,7 +277,9 @@ class LoginView(APIView):
         await Jwt.objects.filter(user_id=user.id).adelete()
 
         # Create tokens and store in jwt model
-        access = Authentication.create_access_token({"user_id": str(user.id)})
+        access = Authentication.create_access_token(
+            {"user_id": str(user.id), "username": user.username}
+        )
         refresh = Authentication.create_refresh_token()
         await Jwt.objects.acreate(user_id=user.id, access=access, refresh=refresh)
         return CustomResponse.success(
@@ -307,7 +309,7 @@ class RefreshTokensView(APIView):
         data = serializer.validated_data
 
         token = data["refresh"]
-        jwt = await Jwt.objects.aget_or_none(refresh=token)
+        jwt = await Jwt.objects.select_related("user").aget_or_none(refresh=token)
 
         if not jwt:
             raise RequestError(
@@ -322,7 +324,9 @@ class RefreshTokensView(APIView):
                 status_code=401,
             )
 
-        access = Authentication.create_access_token({"user_id": str(jwt.user_id)})
+        access = Authentication.create_access_token(
+            {"user_id": str(jwt.user_id), "username": jwt.user.username}
+        )
         refresh = Authentication.create_refresh_token()
 
         jwt.access = access

@@ -1667,3 +1667,58 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-08-30 22:32:52,659 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
 2023-08-30 22:32:55,710 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
 2023-08-30 22:33:08,403 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/
+2023-08-31 18:04:04,918 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-31 18:04:05,744 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:04:06,139 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:10:36,519 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-31 18:10:37,274 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:10:37,717 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:10:39,045 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-08-31 18:10:39,818 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-08-31 18:10:39,822 django.request WARNING  Unauthorized: /api/v1/auth/refresh/
+2023-08-31 18:10:39,828 django.request ERROR    Internal Server Error: /api/v1/auth/refresh/
+2023-08-31 18:12:17,471 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-31 18:12:18,233 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:12:18,606 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:12:19,752 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-08-31 18:12:20,706 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-08-31 18:12:20,710 django.request WARNING  Unauthorized: /api/v1/auth/refresh/
+2023-08-31 18:12:20,717 django.request ERROR    Internal Server Error: /api/v1/auth/refresh/
+2023-08-31 18:46:09,030 django.request ERROR    Internal Server Error: /api/v1/auth/refresh/
+2023-08-31 18:47:21,555 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-08-31 18:47:50,205 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-08-31 18:47:50,963 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:47:51,348 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-08-31 18:47:52,518 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-08-31 18:47:53,668 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-08-31 18:47:53,673 django.request WARNING  Unauthorized: /api/v1/auth/refresh/
+2023-08-31 18:47:55,056 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-08-31 18:47:56,048 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2023-08-31 18:47:56,820 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-31 18:47:56,826 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-08-31 18:47:58,081 django.request WARNING  Not Found: /api/v1/auth/verify-email/
+2023-08-31 18:47:59,648 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-c9df3348-e9f0-4171-ba11-59760c4cf654/
+2023-08-31 18:47:59,654 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-31 18:48:00,450 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 18:48:00,462 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-b4c3b08a-a5de-48d3-9514-003d3084c6e0/
+2023-08-31 18:48:01,231 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 18:48:02,781 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-7b6a1fa3-628f-419e-b9ed-52dd00a05945/
+2023-08-31 18:48:02,785 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-08-31 18:48:03,651 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-08-31 18:48:03,663 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-3f71a785-32c7-4593-87e2-7c7255deda0f/
+2023-08-31 19:01:25,938 django.request WARNING  Not Found: /api/v1/feed/reactions/74a6b3ce-2767-4809-b0a2-01dea246a284/
+2023-08-31 19:01:30,134 django.request WARNING  Not Found: /api/v1/feed/reactions/74a6b3ce-2767-4809-b0a2-01dea246a284/
+2023-08-31 19:05:52,725 django.request WARNING  Unauthorized: /api/v1/feed/reactions/74a6b3ce-2767-4809-b0a2-01dea246a284/
+2023-08-31 19:06:06,639 django.request WARNING  Not Found: /api/v1/feed/reactions/74a6b3ce-2767-4809-b0a2-01dea246a284/
+2023-08-31 19:06:15,594 jazzmin.utils WARNING  listings not found when generating links
+2023-08-31 19:06:15,598 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-31 19:06:16,616 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-08-31 19:06:17,341 django.request WARNING  Not Found: /static/media/logo.png
+2023-08-31 19:07:05,297 django.request WARNING  Not Found: /api/v1/feed/reactions/b9aa2efb-f21a-46f0-8cb0-70e0cb9a5a32/
+2023-08-31 19:08:11,992 django.request WARNING  Not Found: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
+2023-08-31 19:08:14,275 django.request WARNING  Not Found: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
+2023-08-31 19:08:16,076 django.request WARNING  Not Found: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
+2023-08-31 19:08:17,188 django.request WARNING  Not Found: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
+2023-08-31 19:08:19,832 django.request WARNING  Not Found: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
+2023-08-31 19:08:33,549 django.request WARNING  Unauthorized: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/
+2023-08-31 19:08:38,438 django.request WARNING  Unauthorized: /api/v1/feed/reactions/7ba6c3f4-824e-44c4-bafe-0b14acb7ce49/

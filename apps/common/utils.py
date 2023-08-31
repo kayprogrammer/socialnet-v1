@@ -71,7 +71,9 @@ class TestUtil:
         return user
 
     def auth_token(verified_user):
-        access = Authentication.create_access_token({"user_id": str(verified_user.id)})
+        access = Authentication.create_access_token(
+            {"user_id": str(verified_user.id), "username": verified_user.username}
+        )
         refresh = Authentication.create_refresh_token()
         Jwt.objects.create(user_id=verified_user.id, access=access, refresh=refresh)
         return access
