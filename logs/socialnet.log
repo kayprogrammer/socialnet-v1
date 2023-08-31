@@ -1756,3 +1756,6 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-08-31 19:24:35,372 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
 2023-08-31 19:24:36,302 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
 2023-08-31 19:24:36,312 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-a1b46e31-74d3-4afa-88cf-bdf3bc7367a1/
+2023-08-31 19:36:27,964 jazzmin.utils WARNING  listings not found when generating links
+2023-08-31 19:36:27,967 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-08-31 19:36:28,928 django.request WARNING  Not Found: /static/media/banner2-icon3.png

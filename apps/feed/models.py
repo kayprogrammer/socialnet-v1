@@ -29,6 +29,9 @@ class Post(BaseModel):
     slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
     image = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.author.full_name} ------ {self.text[:10]}..."
+
     @property
     def get_image(self):
         image = self.image
@@ -50,6 +53,9 @@ class Comment(BaseModel):
     text = models.TextField()
     slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
 
+    def __str__(self):
+        return f"{self.author.full_name} ------ {self.text[:10]}..."
+
 
 class Reply(BaseModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -58,6 +64,9 @@ class Reply(BaseModel):
     )
     text = models.TextField()
     slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
+
+    def __str__(self):
+        return f"{self.author.full_name} ------ {self.text[:10]}..."
 
 
 class Reaction(BaseModel):
@@ -97,3 +106,6 @@ class Reaction(BaseModel):
                 name="unique_user_reply_reaction",
             ),
         ]
+
+    def __str__(self):
+        return f"{self.user.full_name} ------ {self.rtype}"
