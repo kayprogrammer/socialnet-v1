@@ -68,6 +68,9 @@ class Reply(BaseModel):
     def __str__(self):
         return f"{self.author.full_name} ------ {self.text[:10]}..."
 
+    class Meta:
+        verbose_name_plural = "Replies"
+
 
 class Reaction(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

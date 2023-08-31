@@ -39,6 +39,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     country = models.ForeignKey(
         "cities_light.Country", on_delete=models.SET_NULL, null=True, blank=True
     )
+    state = models.ForeignKey(
+        "cities_light.Region", on_delete=models.SET_NULL, null=True, blank=True
+    )
     city = models.ForeignKey(
         "cities_light.City", on_delete=models.SET_NULL, null=True, blank=True
     )
