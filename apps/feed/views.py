@@ -8,6 +8,7 @@ from apps.common.file_types import ALLOWED_IMAGE_TYPES
 
 from .models import Post, Comment, Reply, Reaction, REACTION_CHOICES
 from .serializers import (
+    CommentResponseSerializer,
     CommentSerializer,
     CommentsResponseSerializer,
     PostSerializer,
@@ -377,6 +378,16 @@ class CommentsView(APIView):
     serializer_class = CommentSerializer
     paginator_class = PageNumberPagination()
 
+    async def get_object(self, slug):
+        post = await Post.objects.aget_or_none(slug=slug)
+        if not post:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="Post does not exist",
+                status_code=404,
+            )
+        return post
+
     @extend_schema(
         summary="Retrieve Post Comments",
         description="""
@@ -384,15 +395,19 @@ class CommentsView(APIView):
         """,
         tags=tags,
         responses=CommentsResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="page",
+                description="""
+                Retrieve a particular page of reactions. Defaults to 1
+            """,
+                required=False,
+                type=int,
+            ),
+        ],
     )
     async def get(self, request, *args, **kwargs):
-        post = await Post.objects.aget_or_none(slug=kwargs.get("slug"))
-        if not post:
-            raise RequestError(
-                err_code=ErrorCode.NON_EXISTENT,
-                err_msg="Post does not exist",
-                status_code=404,
-            )
+        post = await self.get_object(kwargs.get("slug"))
         comments = await sync_to_async(list)(
             Comment.objects.filter(post_id=post.id)
             .select_related("author")
@@ -401,3 +416,32 @@ class CommentsView(APIView):
         paginated_comments = self.paginator_class.paginate_queryset(comments, request)
         serializer = self.serializer_class(paginated_comments, many=True)
         return CustomResponse.success(message="Comments Fetched", data=serializer.data)
+
+    @extend_schema(
+        summary="Create Comment",
+        description="""
+            This endpoint creates a comment for a particular post.
+        """,
+        tags=tags,
+        responses={201: CommentResponseSerializer},
+    )
+    async def post(self, request, *args, **kwargs):
+        post = await self.get_object(kwargs.get("slug"))
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        data.update({"post_id": post.id, "author": request.user})
+
+        comment = await Comment.objects.acreate(**data)
+        serializer = self.serializer_class(comment)
+        return CustomResponse.success(
+            message="Comment Created", data=serializer.data, status_code=201
+        )
+
+    def get_permissions(self):
+        permissions = []
+        if self.request.method == "POST":
+            permissions = [
+                IsAuthenticatedCustom(),
+            ]
+        return permissions

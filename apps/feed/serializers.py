@@ -27,8 +27,8 @@ class PostSerializer(serializers.Serializer):
     slug = serializers.SlugField(
         default="john-doe-d10dde64-a242-4ed0-bd75-4c759644b3a6", read_only=True
     )
-    reactions_count = serializers.IntegerField(default=0)
-    comments_count = serializers.IntegerField(default=0)
+    reactions_count = serializers.IntegerField(default=0, read_only=True)
+    comments_count = serializers.IntegerField(default=0, read_only=True)
 
     image = serializers.SerializerMethodField(default="https://img.url")
     file_type = serializers.CharField(
@@ -106,9 +106,9 @@ class ReactionsResponseSerializer(SuccessResponseSerializer):
 # COMMENTS
 class CommentSerializer(serializers.Serializer):
     author = user_field
-    slug = serializers.CharField()
+    slug = serializers.CharField(read_only=True)
     text = serializers.CharField()
-    replies_count = serializers.IntegerField(default=0)
+    replies_count = serializers.IntegerField(default=0, read_only=True)
 
     def get_author(self, obj) -> dict:
         return get_user(obj.author)
@@ -116,3 +116,7 @@ class CommentSerializer(serializers.Serializer):
 
 class CommentsResponseSerializer(SuccessResponseSerializer):
     data = CommentSerializer(many=True)
+
+
+class CommentResponseSerializer(SuccessResponseSerializer):
+    data = CommentSerializer()

@@ -1917,3 +1917,18 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-09-01 20:51:56,982 django.request WARNING  Not Found: /favicon.ico
 2023-09-01 20:52:41,490 django.request WARNING  Not Found: /favicon.ico
 2023-09-01 20:52:48,051 django.request WARNING  Not Found: /favicon.ico
+2023-09-01 22:11:35,408 django.request ERROR    Internal Server Error: /api/v1/feed/posts/ala/comments/
+2023-09-01 22:11:56,642 django.request WARNING  Not Found: /api/v1/feed/posts/ala/comments/
+2023-09-01 22:28:26,177 django.request WARNING  Not Found: /api/v1/feed/posts/ala/comments/
+2023-09-01 22:28:54,504 django.request ERROR    Internal Server Error: /api/v1/feed/posts/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/comments/
+2023-09-01 22:29:51,947 django.request WARNING  Unprocessable Entity: /api/v1/feed/posts/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/comments/
+2023-09-01 22:29:57,324 django.request ERROR    Internal Server Error: /api/v1/feed/posts/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/comments/
+2023-09-01 22:30:40,420 jazzmin.utils WARNING  listings not found when generating links
+2023-09-01 22:30:40,423 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-01 22:30:41,769 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-01 22:32:08,289 django.request WARNING  Not Found: /api/v1/feed/posts/ala/comments/
+2023-09-01 22:32:25,838 django.request ERROR    Internal Server Error: /api/v1/feed/posts/test-admin-fba606bd-bd3a-42d1-9d18-be0ebf5733f7/comments/
+2023-09-01 22:35:20,187 jazzmin.utils WARNING  listings not found when generating links
+2023-09-01 22:35:20,190 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-01 22:35:20,670 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-01 22:35:21,411 django.request WARNING  Not Found: /static/media/banner2-icon3.png
