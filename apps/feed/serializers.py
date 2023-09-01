@@ -2,8 +2,17 @@ import pytz
 from rest_framework import serializers
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
-from apps.common.file_types import ALLOWED_IMAGE_TYPES
+from apps.common.validators import validate_image_type
 from .models import REACTION_CHOICES
+
+
+def get_user(user):
+    return {
+        "name": user.full_name,
+        "slug": user.username,
+        "avatar": user.get_avatar,
+    }
+
 
 # POSTS
 
@@ -18,9 +27,13 @@ class PostSerializer(serializers.Serializer):
     slug = serializers.SlugField(
         default="john-doe-d10dde64-a242-4ed0-bd75-4c759644b3a6", read_only=True
     )
-    reactions_count = serializers.SerializerMethodField()
+    reactions_count = serializers.IntegerField(default=0)
+    comments_count = serializers.IntegerField(default=0)
+
     image = serializers.SerializerMethodField(default="https://img.url")
-    file_type = serializers.CharField(write_only=True, required=False)
+    file_type = serializers.CharField(
+        write_only=True, required=False, validators=[validate_image_type]
+    )
     created_at = serializers.DateTimeField(
         default_timezone=pytz.timezone("UTC"), read_only=True
     )
@@ -29,23 +42,10 @@ class PostSerializer(serializers.Serializer):
     )
 
     def get_author(self, obj) -> dict:
-        author = obj.author
-        return {
-            "name": author.full_name,
-            "slug": author.username,
-            "avatar": author.get_avatar,
-        }
-
-    def get_reactions_count(self, obj) -> int:
-        return obj.reactions.count()
+        return get_user(obj.author)
 
     def get_image(self, obj) -> str:
         return obj.get_image
-
-    def validate_file_type(self, value):
-        if value and value not in ALLOWED_IMAGE_TYPES:
-            raise serializers.ValidationError("Image type not allowed!")
-        return value
 
 
 # RESPONSE SERIALIZERS
@@ -62,6 +62,7 @@ class PostCreateResponseDataSerializer(PostSerializer):
         fields = super().get_fields(*args, **kwargs)
         fields.pop("image", None)
         fields.pop("reactions_count", None)
+        fields.pop("comments_count", None)
         return fields
 
     def get_file_upload_data(self, obj) -> dict:
@@ -95,13 +96,23 @@ class ReactionSerializer(serializers.Serializer):
     rtype = serializers.ChoiceField(choices=REACTION_CHOICES, default="LIKE")
 
     def get_user(self, obj) -> dict:
-        user = obj.user
-        return {
-            "name": user.full_name,
-            "slug": user.username,
-            "avatar": user.get_avatar,
-        }
+        return get_user(obj.user)
 
 
 class ReactionsResponseSerializer(SuccessResponseSerializer):
     data = ReactionSerializer(many=True)
+
+
+# COMMENTS
+class CommentSerializer(serializers.Serializer):
+    author = user_field
+    slug = serializers.CharField()
+    text = serializers.CharField()
+    replies_count = serializers.IntegerField(default=0)
+
+    def get_author(self, obj) -> dict:
+        return get_user(obj.author)
+
+
+class CommentsResponseSerializer(SuccessResponseSerializer):
+    data = CommentSerializer(many=True)

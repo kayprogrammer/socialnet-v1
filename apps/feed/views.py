@@ -1,10 +1,15 @@
+from django.db.models import Count
 from adrf.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 
+from apps.common.file_types import ALLOWED_IMAGE_TYPES
+
 from .models import Post, Comment, Reply, Reaction, REACTION_CHOICES
 from .serializers import (
+    CommentSerializer,
+    CommentsResponseSerializer,
     PostSerializer,
     PostsResponseSerializer,
     PostResponseSerializer,
@@ -50,7 +55,11 @@ class PostsView(APIView):
     )
     async def get(self, request):
         posts = await sync_to_async(list)(
-            Post.objects.select_related("author", "image").prefetch_related("reactions")
+            Post.objects.select_related("author", "image")
+            .annotate(
+                reactions_count=Count("reactions"), comments_count=Count("comments")
+            )
+            .order_by("-created_at")
         )
         paginated_posts = self.paginator_class.paginate_queryset(posts, request)
         serializer = self.serializer_class(paginated_posts, many=True)
@@ -59,7 +68,10 @@ class PostsView(APIView):
     @extend_schema(
         operation_id="posts_create",
         summary="Create Post",
-        description="This endpoint creates a new post",
+        description=f"""
+            This endpoint creates a new post
+            ALLOWED FILE TYPES: {", ".join(ALLOWED_IMAGE_TYPES)}
+        """,
         tags=tags,
         responses={201: PostCreateResponseSerializer},
     )
@@ -161,9 +173,7 @@ class PostDetailView(APIView):
         serializer = self.put_resp_serializer_class(
             post, context={"image_upload_status": image_upload_status}
         )
-        return CustomResponse.success(
-            message="Post updated", data=serializer.data, status_code=200
-        )
+        return CustomResponse.success(message="Post updated", data=serializer.data)
 
     @extend_schema(
         summary="Delete a Post",
@@ -359,4 +369,35 @@ class RemoveReaction(APIView):
                 status_code=401,
             )
         await reaction.adelete()
-        return CustomResponse.success(message="Reaction deleted", status_code=200)
+        return CustomResponse.success(message="Reaction deleted")
+
+
+# COMMENTS
+class CommentsView(APIView):
+    serializer_class = CommentSerializer
+    paginator_class = PageNumberPagination()
+
+    @extend_schema(
+        summary="Retrieve Post Comments",
+        description="""
+            This endpoint retrieves comments of a particular post.
+        """,
+        tags=tags,
+        responses=CommentsResponseSerializer,
+    )
+    async def get(self, request, *args, **kwargs):
+        post = await Post.objects.aget_or_none(slug=kwargs.get("slug"))
+        if not post:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="Post does not exist",
+                status_code=404,
+            )
+        comments = await sync_to_async(list)(
+            Comment.objects.filter(post_id=post.id)
+            .select_related("author")
+            .annotate(replies_count=Count("replies"))
+        )
+        paginated_comments = self.paginator_class.paginate_queryset(comments, request)
+        serializer = self.serializer_class(paginated_comments, many=True)
+        return CustomResponse.success(message="Comments Fetched", data=serializer.data)
