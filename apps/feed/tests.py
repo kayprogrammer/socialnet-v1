@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase
 from unittest import mock
-from apps.feed.models import Post, Reaction
+from apps.feed.models import Post, Reaction, Comment
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
 import uuid
@@ -28,6 +28,12 @@ class TestFeed(APITestCase):
             user=verified_user, rtype="LIKE", post=post
         )
 
+        # comment
+        comment = Comment.objects.create(
+            author=verified_user, post=post, text="Just a comment"
+        )
+        self.comment = comment
+
     def test_retrieve_posts(self):
         post = self.post
         response = self.client.get(self.posts_url)
@@ -43,6 +49,7 @@ class TestFeed(APITestCase):
                         "text": post.text,
                         "slug": post.slug,
                         "reactions_count": mock.ANY,
+                        "comments_count": mock.ANY,
                         "image": None,
                         "created_at": mock.ANY,
                         "updated_at": mock.ANY,
@@ -99,6 +106,7 @@ class TestFeed(APITestCase):
                     "text": post.text,
                     "slug": post.slug,
                     "reactions_count": mock.ANY,
+                    "comments_count": mock.ANY,
                     "image": None,
                     "created_at": mock.ANY,
                     "updated_at": mock.ANY,
@@ -348,5 +356,45 @@ class TestFeed(APITestCase):
             {
                 "status": "success",
                 "message": "Reaction deleted",
+            },
+        )
+
+    def test_retrieve_comments(self):
+        comment = self.comment
+        post = self.post
+        user = self.verified_user
+
+        # Test for invalid post slug
+        response = self.client.get(f"{self.posts_url}invalid_slug/comments/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Post does not exist",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for valid values
+        response = self.client.get(f"{self.posts_url}{post.slug}/comments/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Comments Fetched",
+                "data": [
+                    {
+                        "author": {
+                            "name": user.full_name,
+                            "slug": user.username,
+                            "avatar": user.get_avatar,
+                        },
+                        "slug": comment.slug,
+                        "text": comment.text,
+                        "replies_count": comment.replies.count(),
+                    }
+                ],
             },
         )
