@@ -103,15 +103,23 @@ class ReactionsResponseSerializer(SuccessResponseSerializer):
     data = ReactionSerializer(many=True)
 
 
-# COMMENTS
-class CommentSerializer(serializers.Serializer):
+# COMMENTS & REPLIES
+class ReplySerializer(serializers.Serializer):
     author = user_field
     slug = serializers.CharField(read_only=True)
     text = serializers.CharField()
-    replies_count = serializers.IntegerField(default=0, read_only=True)
 
     def get_author(self, obj) -> dict:
         return get_user(obj.author)
+
+
+class CommentSerializer(ReplySerializer):
+    replies_count = serializers.IntegerField(default=0, read_only=True)
+
+
+class CommentWithRepliesSerializer(serializers.Serializer):
+    comment = CommentSerializer()
+    replies = ReplySerializer(many=True)
 
 
 class CommentsResponseSerializer(SuccessResponseSerializer):
@@ -120,3 +128,7 @@ class CommentsResponseSerializer(SuccessResponseSerializer):
 
 class CommentResponseSerializer(SuccessResponseSerializer):
     data = CommentSerializer()
+
+
+class CommentWithRepliesResponseSerializer(SuccessResponseSerializer):
+    data = CommentWithRepliesSerializer()

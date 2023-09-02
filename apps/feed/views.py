@@ -10,6 +10,8 @@ from .models import Post, Comment, Reply, Reaction, REACTION_CHOICES
 from .serializers import (
     CommentResponseSerializer,
     CommentSerializer,
+    CommentWithRepliesResponseSerializer,
+    CommentWithRepliesSerializer,
     CommentsResponseSerializer,
     PostSerializer,
     PostsResponseSerializer,
@@ -399,7 +401,7 @@ class CommentsView(APIView):
             OpenApiParameter(
                 name="page",
                 description="""
-                Retrieve a particular page of reactions. Defaults to 1
+                Retrieve a particular page of comments. Defaults to 1
             """,
                 required=False,
                 type=int,
@@ -445,3 +447,61 @@ class CommentsView(APIView):
                 IsAuthenticatedCustom(),
             ]
         return permissions
+
+
+class CommentView(APIView):
+    serializer_class = CommentWithRepliesSerializer
+    paginator_class = PageNumberPagination()
+
+    async def get_object(self, slug):
+        comment = (
+            await Comment.objects.select_related("author")
+            .annotate(replies_count=Count("replies"))
+            .aget_or_none(slug=slug)
+        )
+        if not comment:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="Comment does not exist",
+                status_code=404,
+            )
+        return comment
+
+    @extend_schema(
+        summary="Retrieve Comment with replies",
+        description="""
+            This endpoint retrieves a comment with replies.
+        """,
+        tags=tags,
+        responses=CommentWithRepliesResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="slug",
+                description="""
+                    Enter the slug of the comment
+                """,
+                required=True,
+                type=str,
+                location="path",
+            ),
+            OpenApiParameter(
+                name="page",
+                description="""
+                Retrieve a particular page of replies. Defaults to 1
+            """,
+                required=False,
+                type=int,
+            ),
+        ],
+    )
+    async def get(self, request, *args, **kwargs):
+        comment = await self.get_object(kwargs.get("slug"))
+        replies = await sync_to_async(list)(
+            Reply.objects.filter(comment_id=comment.id).select_related("author")
+        )
+        paginated_replies = self.paginator_class.paginate_queryset(replies, request)
+        data = {"comment": comment, "replies": paginated_replies}
+        serializer = self.serializer_class(data)
+        return CustomResponse.success(
+            message="Comment and Replies Fetched", data=serializer.data
+        )
