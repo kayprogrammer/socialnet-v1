@@ -398,3 +398,46 @@ class TestFeed(APITestCase):
                 ],
             },
         )
+
+    def test_create_comment(self):
+        post = self.post
+        user = self.verified_user
+
+        comment_data = {"text": "My new comment"}
+
+        # Test for invalid slug
+        response = self.client.post(
+            f"{self.posts_url}invalid_slug/comments/", data=comment_data, **self.bearer
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Post does not exist",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for valid values
+        response = self.client.post(
+            f"{self.posts_url}{post.slug}/comments/", data=comment_data, **self.bearer
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Comment Created",
+                "data": {
+                    "author": {
+                        "name": user.full_name,
+                        "slug": user.username,
+                        "avatar": user.get_avatar,
+                    },
+                    "slug": mock.ANY,
+                    "text": comment_data["text"],
+                    "replies_count": 0,
+                },
+            },
+        )
