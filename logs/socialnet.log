@@ -2005,3 +2005,13 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-09-02 16:13:26,942 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-02 16:13:28,539 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2023-09-02 16:14:23,048 django.request WARNING  Not Found: /favicon.ico
+2023-09-02 16:26:33,257 django.request ERROR    Internal Server Error: /api/v1/feed/comments/test-admin-5b854f20-7e39-4f24-885a-40db5a967da3/
+2023-09-02 16:27:00,577 django.request WARNING  Unauthorized: /api/v1/feed/comments/test-admin-5b854f20-7e39-4f24-885a-40db5a967da3/
+2023-09-02 16:27:50,958 django.request ERROR    Internal Server Error: /api/v1/feed/comments/test-admin-5b854f20-7e39-4f24-885a-40db5a967da3/
+2023-09-02 16:29:31,055 jazzmin.utils WARNING  listings not found when generating links
+2023-09-02 16:29:31,058 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-02 16:29:31,602 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-02 16:29:32,506 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-02 16:29:35,900 jazzmin.utils WARNING  listings not found when generating links
+2023-09-02 16:29:35,904 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-02 16:29:37,676 django.request WARNING  Not Found: /static/media/banner2-icon3.png

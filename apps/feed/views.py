@@ -505,3 +505,35 @@ class CommentView(APIView):
         return CustomResponse.success(
             message="Comment and Replies Fetched", data=serializer.data
         )
+
+    @extend_schema(
+        summary="Update Comment",
+        description="""
+            This endpoint updates a particular comment.
+        """,
+        tags=tags,
+        request=CommentSerializer,
+        responses=CommentResponseSerializer,
+    )
+    async def put(self, request, *args, **kwargs):
+        comment = await self.get_object(kwargs.get("slug"))
+        if comment.author_id != request.user.id:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_OWNER,
+                err_msg="Not yours to edit",
+                status_code=401,
+            )
+        serializer = CommentSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        comment.text = serializer.validated_data["text"]
+        await comment.asave()
+        serializer = CommentSerializer(comment)
+        return CustomResponse.success(message="Comment Updated", data=serializer.data)
+
+    def get_permissions(self):
+        permissions = []
+        if self.request.method != "GET":
+            permissions = [
+                IsAuthenticatedCustom(),
+            ]
+        return permissions
