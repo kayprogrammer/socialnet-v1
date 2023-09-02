@@ -11,15 +11,21 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ("author", "slug", "created_at", "updated_at")
     list_filter = ("author", "slug", "created_at", "updated_at")
 
+    readonly_fields = ("slug",)
+
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ("author", "created_at", "updated_at")
     list_filter = ("author", "created_at", "updated_at")
 
+    readonly_fields = ("slug",)
+
 
 class ReplyAdmin(admin.ModelAdmin):
     list_display = ("author", "created_at", "updated_at")
     list_filter = ("author", "created_at", "updated_at")
+
+    readonly_fields = ("slug",)
 
 
 admin.site.register(Reaction, ReactionAdmin)

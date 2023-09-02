@@ -132,3 +132,7 @@ class CommentResponseSerializer(SuccessResponseSerializer):
 
 class CommentWithRepliesResponseSerializer(SuccessResponseSerializer):
     data = CommentWithRepliesSerializer()
+
+
+class ReplyResponseSerializer(SuccessResponseSerializer):
+    data = ReplySerializer()

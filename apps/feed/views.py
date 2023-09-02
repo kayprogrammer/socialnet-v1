@@ -20,6 +20,8 @@ from .serializers import (
     PostCreateResponseDataSerializer,
     ReactionSerializer,
     ReactionsResponseSerializer,
+    ReplyResponseSerializer,
+    ReplySerializer,
 )
 
 from apps.common.models import File
@@ -541,7 +543,7 @@ class CommentView(APIView):
         """,
         parameters=common_param,
         tags=tags,
-        responses=SuccessResponseSerializer,
+        responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
         comment = await self.get_object(kwargs.get("slug"))
@@ -553,6 +555,97 @@ class CommentView(APIView):
             )
         await comment.adelete()
         return CustomResponse.success(message="Comment deleted")
+
+    def get_permissions(self):
+        permissions = []
+        if self.request.method != "GET":
+            permissions = [
+                IsAuthenticatedCustom(),
+            ]
+        return permissions
+
+
+class ReplyView(APIView):
+    serializer_class = ReplySerializer
+    common_param = [
+        OpenApiParameter(
+            name="slug",
+            description="""
+                Enter the slug of the reply
+            """,
+            required=True,
+            type=str,
+            location="path",
+        ),
+    ]
+
+    async def get_object(self, slug):
+        reply = await Reply.objects.select_related("author").aget_or_none(slug=slug)
+        if not reply:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="Reply does not exist",
+                status_code=404,
+            )
+        return reply
+
+    @extend_schema(
+        summary="Retrieve Reply",
+        description="""
+            This endpoint retrieves a reply.
+        """,
+        tags=tags,
+        responses=ReplyResponseSerializer,
+        parameters=common_param,
+    )
+    async def get(self, request, *args, **kwargs):
+        reply = await self.get_object(kwargs.get("slug"))
+        serializer = self.serializer_class(reply)
+        return CustomResponse.success(message="Reply Fetched", data=serializer.data)
+
+    @extend_schema(
+        summary="Update Reply",
+        description="""
+            This endpoint updates a particular reply.
+        """,
+        parameters=common_param,
+        tags=tags,
+        responses=ReplyResponseSerializer,
+    )
+    async def put(self, request, *args, **kwargs):
+        reply = await self.get_object(kwargs.get("slug"))
+        if reply.author_id != request.user.id:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_OWNER,
+                err_msg="Not yours to edit",
+                status_code=401,
+            )
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        reply.text = serializer.validated_data["text"]
+        await reply.asave()
+        serializer = self.serializer_class(reply)
+        return CustomResponse.success(message="Reply Updated", data=serializer.data)
+
+    @extend_schema(
+        summary="Delete reply",
+        description="""
+            This endpoint deletes a reply.
+        """,
+        parameters=common_param,
+        tags=tags,
+        responses={200: SuccessResponseSerializer},
+    )
+    async def delete(self, request, *args, **kwargs):
+        reply = await self.get_object(kwargs.get("slug"))
+        if request.user.id != reply.author_id:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_OWNER,
+                err_msg="Not yours to delete",
+                status_code=401,
+            )
+        await reply.adelete()
+        return CustomResponse.success(message="Reply deleted")
 
     def get_permissions(self):
         permissions = []
