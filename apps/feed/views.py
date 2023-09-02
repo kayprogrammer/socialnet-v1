@@ -452,6 +452,17 @@ class CommentsView(APIView):
 class CommentView(APIView):
     serializer_class = CommentWithRepliesSerializer
     paginator_class = PageNumberPagination()
+    common_param = [
+        OpenApiParameter(
+            name="slug",
+            description="""
+                Enter the slug of the comment
+            """,
+            required=True,
+            type=str,
+            location="path",
+        ),
+    ]
 
     async def get_object(self, slug):
         comment = (
@@ -474,16 +485,8 @@ class CommentView(APIView):
         """,
         tags=tags,
         responses=CommentWithRepliesResponseSerializer,
-        parameters=[
-            OpenApiParameter(
-                name="slug",
-                description="""
-                    Enter the slug of the comment
-                """,
-                required=True,
-                type=str,
-                location="path",
-            ),
+        parameters=common_param
+        + [
             OpenApiParameter(
                 name="page",
                 description="""
@@ -511,6 +514,7 @@ class CommentView(APIView):
         description="""
             This endpoint updates a particular comment.
         """,
+        parameters=common_param,
         tags=tags,
         request=CommentSerializer,
         responses=CommentResponseSerializer,
@@ -529,6 +533,26 @@ class CommentView(APIView):
         await comment.asave()
         serializer = CommentSerializer(comment)
         return CustomResponse.success(message="Comment Updated", data=serializer.data)
+
+    @extend_schema(
+        summary="Delete Comment",
+        description="""
+            This endpoint deletes a comment.
+        """,
+        parameters=common_param,
+        tags=tags,
+        responses=SuccessResponseSerializer,
+    )
+    async def delete(self, request, *args, **kwargs):
+        comment = await self.get_object(kwargs.get("slug"))
+        if request.user.id != comment.author_id:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_OWNER,
+                err_msg="Not yours to delete",
+                status_code=401,
+            )
+        await comment.adelete()
+        return CustomResponse.success(message="Comment deleted")
 
     def get_permissions(self):
         permissions = []
