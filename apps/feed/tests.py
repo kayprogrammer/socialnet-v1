@@ -10,6 +10,7 @@ class TestFeed(APITestCase):
     posts_url = "/api/v1/feed/posts/"
     reactions_url = "/api/v1/feed/reactions/"
     comment_url = "/api/v1/feed/comments/"
+    reply_url = "/api/v1/feed/replies/"
 
     maxDiff = None
 
@@ -648,5 +649,41 @@ class TestFeed(APITestCase):
             {
                 "status": "success",
                 "message": "Comment Deleted",
+            },
+        )
+
+    def test_retrieve_reply(self):
+        reply = self.reply
+        user = self.verified_user
+
+        # Test for invalid reply slug
+        response = self.client.get(f"{self.reply_url}invalid_slug/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Reply does not exist",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for valid values
+        response = self.client.get(f"{self.reply_url}{reply.slug}/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Reply Fetched",
+                "data": {
+                    "author": {
+                        "name": user.full_name,
+                        "slug": user.username,
+                        "avatar": user.get_avatar,
+                    },
+                    "slug": reply.slug,
+                    "text": reply.text,
+                },
             },
         )
