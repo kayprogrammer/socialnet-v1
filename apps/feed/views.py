@@ -578,7 +578,7 @@ class CommentView(APIView):
                 status_code=401,
             )
         await comment.adelete()
-        return CustomResponse.success(message="Comment deleted")
+        return CustomResponse.success(message="Comment Deleted")
 
     def get_permissions(self):
         permissions = []
