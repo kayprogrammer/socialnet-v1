@@ -669,7 +669,7 @@ class ReplyView(APIView):
                 status_code=401,
             )
         await reply.adelete()
-        return CustomResponse.success(message="Reply deleted")
+        return CustomResponse.success(message="Reply Deleted")
 
     def get_permissions(self):
         permissions = []
