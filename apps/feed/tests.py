@@ -687,3 +687,61 @@ class TestFeed(APITestCase):
                 },
             },
         )
+
+    def test_update_reply(self):
+        reply = self.reply
+        user = self.verified_user
+
+        reply_data = {"text": "New updated reply"}
+
+        # Test for invalid reply slug
+        response = self.client.put(
+            f"{self.reply_url}invalid_slug/", data=reply_data, **self.bearer
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Reply does not exist",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for invalid reply owner
+        response = self.client.put(
+            f"{self.reply_url}{reply.slug}/",
+            data=reply_data,
+            **self.other_user_bearer,
+        )
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Not yours to edit",
+                "code": ErrorCode.INVALID_OWNER,
+            },
+        )
+
+        # Test for valid values
+        response = self.client.put(
+            f"{self.reply_url}{reply.slug}/", data=reply_data, **self.bearer
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Reply Updated",
+                "data": {
+                    "author": {
+                        "name": user.full_name,
+                        "slug": user.username,
+                        "avatar": user.get_avatar,
+                    },
+                    "slug": mock.ANY,
+                    "text": reply_data["text"],
+                },
+            },
+        )
