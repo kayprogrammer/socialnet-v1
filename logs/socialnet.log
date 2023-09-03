@@ -2070,3 +2070,17 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-09-03 11:38:07,720 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-03 11:38:09,371 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2023-09-03 11:38:26,766 django.request ERROR    Internal Server Error: /api/v1/feed/comments/kenechi-ifeanyi-e4cd4805-a1b0-465b-b3a2-90acd6c8d5/
+2023-09-03 11:52:46,974 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2023-09-03 11:52:48,497 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-847c7812-f676-4082-b078-7c691bb55630/
+2023-09-03 11:52:48,503 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-09-03 11:52:49,276 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-09-03 11:52:49,287 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-4a77fb00-ffc4-4fa1-862b-89d0cf1da3cc/
+2023-09-03 11:52:50,041 django.request WARNING  Not Found: /api/v1/feed/reactions/4e1066c5-5eea-4d56-a927-a0e8ab00c1d5/
+2023-09-03 11:52:50,047 django.request WARNING  Unauthorized: /api/v1/feed/reactions/87a18346-4fa3-4ebc-80bb-9ee6ec4df438/
+2023-09-03 11:52:50,773 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2023-09-03 11:52:51,540 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2023-09-03 11:52:52,266 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-09-03 11:52:53,843 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-d4423269-a485-43ce-a4d8-7c9ff1068ee8/
+2023-09-03 11:52:53,846 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-09-03 11:52:54,578 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-09-03 11:52:54,587 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-e1afb072-4e83-418f-9e48-60c3ca5ecab4/

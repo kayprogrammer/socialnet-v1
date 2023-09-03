@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase
 from unittest import mock
-from apps.feed.models import Post, Reaction, Comment
+from apps.feed.models import Post, Reaction, Comment, Reply
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
 import uuid
@@ -9,21 +9,29 @@ import uuid
 class TestFeed(APITestCase):
     posts_url = "/api/v1/feed/posts/"
     reactions_url = "/api/v1/feed/reactions/"
+    comment_url = "/api/v1/feed/comments/"
 
     maxDiff = None
 
     def setUp(self):
+        # user
         verified_user = TestUtil.verified_user()
+        another_verified_user = TestUtil.another_verified_user()
         self.verified_user = verified_user
+
+        # post
         post = Post.objects.create(
             author=verified_user, text="This is a nice new platform"
         )
         self.post = post
+
+        # auth
         auth_token = TestUtil.auth_token(verified_user)
         self.bearer = {"HTTP_AUTHORIZATION": f"Bearer {auth_token}"}
-        another_verified_user = TestUtil.another_verified_user()
         auth_token = TestUtil.auth_token(another_verified_user)
         self.other_user_bearer = {"HTTP_AUTHORIZATION": f"Bearer {auth_token}"}
+
+        # reaction
         self.reaction = Reaction.objects.create(
             user=verified_user, rtype="LIKE", post=post
         )
@@ -33,6 +41,11 @@ class TestFeed(APITestCase):
             author=verified_user, post=post, text="Just a comment"
         )
         self.comment = comment
+
+        # reply
+        self.reply = Reply.objects.create(
+            author=verified_user, comment=comment, text="Simple reply"
+        )
 
     def test_retrieve_posts(self):
         post = self.post
@@ -438,6 +451,57 @@ class TestFeed(APITestCase):
                     "slug": mock.ANY,
                     "text": comment_data["text"],
                     "replies_count": 0,
+                },
+            },
+        )
+
+    def test_retrieve_comment_with_replies(self):
+        reply = self.reply
+        comment = reply.comment
+        user = self.verified_user
+
+        # Test for invalid comment slug
+        response = self.client.get(f"{self.comment_url}invalid_slug/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Comment does not exist",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for valid values
+        response = self.client.get(f"{self.comment_url}{comment.slug}/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Comment and Replies Fetched",
+                "data": {
+                    "comment": {
+                        "author": {
+                            "name": user.full_name,
+                            "slug": user.username,
+                            "avatar": user.get_avatar,
+                        },
+                        "slug": comment.slug,
+                        "text": comment.text,
+                        "replies_count": comment.replies.count(),
+                    },
+                    "replies": [
+                        {
+                            "author": {
+                                "name": user.full_name,
+                                "slug": user.username,
+                                "avatar": user.get_avatar,
+                            },
+                            "slug": reply.slug,
+                            "text": reply.text,
+                        }
+                    ],
                 },
             },
         )
