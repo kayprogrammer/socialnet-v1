@@ -512,6 +512,30 @@ class CommentView(APIView):
         )
 
     @extend_schema(
+        summary="Create Reply",
+        description="""
+            This endpoint creates a reply for a comment.
+        """,
+        tags=tags,
+        request=ReplySerializer,
+        responses=ReplySerializer,
+        parameters=common_param,
+    )
+    async def post(self, request, *args, **kwargs):
+        comment = await self.get_object(kwargs.get("slug"))
+        serializer = ReplySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        data["author"] = request.user
+        data["comment"] = comment
+
+        reply = await Reply.objects.acreate(**data)
+        serializer = ReplySerializer(reply)
+        return CustomResponse.success(
+            message="Reply Created", data=serializer.data, status_code=201
+        )
+
+    @extend_schema(
         summary="Update Comment",
         description="""
             This endpoint updates a particular comment.
