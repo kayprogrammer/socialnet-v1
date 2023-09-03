@@ -2084,3 +2084,18 @@ django.template.exceptions.TemplateDoesNotExist: debug_toolbar/base.html
 2023-09-03 11:52:53,846 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
 2023-09-03 11:52:54,578 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
 2023-09-03 11:52:54,587 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-e1afb072-4e83-418f-9e48-60c3ca5ecab4/
+2023-09-03 11:57:30,766 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2023-09-03 11:57:32,295 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-10c6385c-4184-4d9b-aefb-d77dd04358b6/
+2023-09-03 11:57:32,301 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-09-03 11:57:33,039 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2023-09-03 11:57:33,778 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-09-03 11:57:33,787 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-cf1910f8-c5e7-40b4-93a3-e87c500725dc/
+2023-09-03 11:57:34,521 django.request WARNING  Not Found: /api/v1/feed/reactions/2d9c15cc-1c67-4767-9ad6-7e980ba577c9/
+2023-09-03 11:57:34,528 django.request WARNING  Unauthorized: /api/v1/feed/reactions/53f921cd-a3f3-4459-82c9-3fd6a71726aa/
+2023-09-03 11:57:35,253 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2023-09-03 11:57:36,023 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2023-09-03 11:57:36,750 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-09-03 11:57:38,260 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-f79a66ec-38f2-4d11-b8d0-d1acebfd2a51/
+2023-09-03 11:57:38,264 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2023-09-03 11:57:39,032 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2023-09-03 11:57:39,040 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-834c7fc9-1f3a-4dfd-9764-b795a0f81bfd/
