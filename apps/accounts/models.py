@@ -22,7 +22,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     username = AutoSlugField(
-        _("Username"), populate_from=slugify_two_fields, unique=True
+        _("Username"), populate_from=slugify_two_fields, unique=True, always_update=True
     )
     email = models.EmailField(verbose_name=(_("Email address")), unique=True)
     avatar = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     city = models.ForeignKey(
         "cities_light.City", on_delete=models.SET_NULL, null=True, blank=True
     )
-    dob = models.DateTimeField(verbose_name=(_("Date of Birth")), null=True, blank=True)
+    dob = models.DateField(verbose_name=(_("Date of Birth")), null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
