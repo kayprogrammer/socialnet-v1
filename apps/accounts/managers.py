@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
 
+from apps.common.managers import GetOrNoneQuerySet
+
 
 class CustomUserManager(BaseUserManager):
     def email_validator(self, email):
@@ -82,14 +84,11 @@ class CustomUserManager(BaseUserManager):
         )
         return user
 
+    def get_queryset(self):
+        return GetOrNoneQuerySet(self.model, using=self._db)
+
     def get_or_none(self, **kwargs):
-        try:
-            return self.get(**kwargs)
-        except self.model.DoesNotExist:
-            return None
+        return self.get_queryset().get_or_none(**kwargs)
 
     async def aget_or_none(self, **kwargs):
-        try:
-            return await self.aget(**kwargs)
-        except self.model.DoesNotExist:
-            return None
+        return await self.get_queryset().aget_or_none(**kwargs)

@@ -30,7 +30,9 @@ class PostSerializer(serializers.Serializer):
     reactions_count = serializers.IntegerField(default=0, read_only=True)
     comments_count = serializers.IntegerField(default=0, read_only=True)
 
-    image = serializers.SerializerMethodField(default="https://img.url")
+    image = serializers.CharField(
+        source="get_image", default="https://img.url", read_only=True
+    )
     file_type = serializers.CharField(
         write_only=True, required=False, validators=[validate_image_type]
     )
@@ -43,9 +45,6 @@ class PostSerializer(serializers.Serializer):
 
     def get_author(self, obj) -> dict:
         return get_user(obj.author)
-
-    def get_image(self, obj) -> str:
-        return obj.get_image
 
 
 # RESPONSE SERIALIZERS

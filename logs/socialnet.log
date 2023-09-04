@@ -2712,3 +2712,32 @@ Traceback (most recent call last):
     raise ex.with_traceback(None)
 django.db.utils.OperationalError: connection failed: Connection refused
 	Is the server running on that host and accepting TCP/IP connections?
+2023-09-04 23:05:16,437 django.request ERROR    Internal Server Error: /api/v1/general/site-detail/
+2023-09-04 23:16:05,369 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:16:24,883 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:16:33,187 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:16:51,587 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:22:43,738 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:32:03,617 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:40:21,663 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:40:45,425 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:42:02,145 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:42:36,460 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-04 23:42:37,113 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-04 23:43:00,951 jazzmin.utils WARNING  listings not found when generating links
+2023-09-04 23:43:00,954 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-04 23:43:01,699 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-04 23:43:13,989 jazzmin.utils WARNING  listings not found when generating links
+2023-09-04 23:43:13,991 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-04 23:43:15,342 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-04 23:43:24,118 jazzmin.utils WARNING  listings not found when generating links
+2023-09-04 23:43:24,120 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-04 23:43:33,591 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-04 23:45:11,965 jazzmin.utils WARNING  listings not found when generating links
+2023-09-04 23:45:11,967 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-04 23:45:13,078 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-04 23:45:17,428 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-04 23:46:04,026 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-05 00:06:11,952 jazzmin.utils WARNING  listings not found when generating links
+2023-09-05 00:06:11,955 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-05 00:06:13,378 django.request WARNING  Not Found: /static/media/banner2-icon3.png
