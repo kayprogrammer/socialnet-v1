@@ -53,8 +53,6 @@ class UserAdmin(BaseUserAdmin):
                     "last_name",
                     "username",
                     "bio",
-                    "country",
-                    "state",
                     "city",
                     "dob",
                     "avatar",

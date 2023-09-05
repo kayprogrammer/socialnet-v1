@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, F, Q
 from adrf.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema, OpenApiParameter
@@ -11,27 +11,53 @@ from apps.common.responses import CustomResponse
 from apps.common.file_types import ALLOWED_IMAGE_TYPES
 from apps.accounts.models import User
 from apps.common.utils import set_dict_attr
-from .serializers import ProfileResponseSerializer, ProfileSerializer
+from .serializers import (
+    CitiesResponseSerializer,
+    CitySerializer,
+    ProfileResponseSerializer,
+    ProfileSerializer,
+)
 from cities_light.models import Country, Region, City
+import re
 
 tags = ["Profiles"]
 
 
-class CountriesView(APIView):
-    async def get(self, request):
-        countries = await sync_to_async(list)(
-            Country.objects.values("name", "slug", "code")
-        )
-
-
-class StatesView(APIView):
-    async def get(self, request):
-        states = await sync_to_async(list)(Region.objects.all())
-
-
 class CitiesView(APIView):
+    serializer_class = CitySerializer
+
+    @extend_schema(
+        summary="Retrieve cities based on query params",
+        description="This endpoint retrieves a first 10 cities that matches the query params",
+        tags=tags,
+        responses=CitiesResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="name",
+                description="""
+                    Enter the name of the city
+                """,
+                required=False,
+                type=str,
+                location="query",
+            ),
+        ],
+    )
     async def get(self, request):
-        regions = await sync_to_async(list)(City.objects.all())
+        search_term = request.GET.get("name")
+        cities = []
+        message = "Cities Fetched"
+        if search_term:
+            search_term = re.sub(r"[^\w\s]", "", search_term)  # Remove special chars
+            cities = await sync_to_async(list)(
+                City.objects.filter(name__startswith=search_term).select_related(
+                    "region", "country"
+                )[:10]
+            )
+            cities = self.serializer_class(cities, many=True).data
+        if len(cities) == 0:
+            message = "No match found"
+        return CustomResponse.success(message=message, data=cities)
 
 
 class ProfileView(APIView):
@@ -49,9 +75,7 @@ class ProfileView(APIView):
     ]
 
     async def get_object(self, username):
-        user = await User.objects.select_related(
-            "country", "state", "city"
-        ).aget_or_none(username=username)
+        user = await User.objects.select_related("city").aget_or_none(username=username)
         if not user:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,

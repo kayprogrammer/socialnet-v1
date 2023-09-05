@@ -13,7 +13,15 @@ def get_user(user):
     }
 
 
-# POSTS
+class CitySerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    region = serializers.CharField(source="region.name")
+    country = serializers.CharField(source="country.name")
+
+
+class CitiesResponseSerializer(SuccessResponseSerializer):
+    data = CitySerializer(many=True)
 
 
 class ProfileSerializer(serializers.Serializer):
@@ -24,8 +32,6 @@ class ProfileSerializer(serializers.Serializer):
     avatar = serializers.CharField(source="get_avatar", default="https://img.url")
     bio = serializers.CharField(max_length=200)
     dob = serializers.DateField()
-    country = serializers.CharField(source="country.name", allow_null=True)
-    state = serializers.CharField(source="state.name", allow_null=True)
     city = serializers.CharField(source="city.name", allow_null=True)
 
     created_at = serializers.DateTimeField(default_timezone=pytz.timezone("UTC"))
