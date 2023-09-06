@@ -2968,3 +2968,15 @@ TypeError: attribute name must be string, not 'list'
 2023-09-06 01:52:37,118 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/tester-admin/
 2023-09-06 01:52:38,159 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/tester-admin/
 2023-09-06 01:52:47,025 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-07 00:38:26,231 jazzmin.utils WARNING  listings not found when generating links
+2023-09-07 00:38:26,233 jazzmin.utils WARNING  listings not found when generating links
+2023-09-07 00:38:26,318 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-07 00:38:26,320 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-07 00:38:43,336 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-07 00:38:43,932 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-07 00:39:44,158 jazzmin.utils WARNING  listings not found when generating links
+2023-09-07 00:39:44,163 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-07 00:39:45,554 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-07 00:40:07,874 jazzmin.utils WARNING  listings not found when generating links
+2023-09-07 00:40:07,882 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-07 00:40:09,297 django.request WARNING  Not Found: /static/media/banner2-icon3.png
