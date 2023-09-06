@@ -3,6 +3,7 @@ from rest_framework import serializers
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
+from apps.common.schema_examples import file_upload_data, user_data
 from .models import REACTION_CHOICES
 
 
@@ -16,9 +17,7 @@ def get_user(user):
 
 # POSTS
 
-user_field = serializers.SerializerMethodField(
-    default={"name": "John Doe", "slug": "john-doe", "avatar": "https://img.url"}
-)
+user_field = serializers.SerializerMethodField(default=user_data)
 
 
 class PostSerializer(serializers.Serializer):
@@ -49,13 +48,7 @@ class PostSerializer(serializers.Serializer):
 
 # RESPONSE SERIALIZERS
 class PostCreateResponseDataSerializer(PostSerializer):
-    file_upload_data = serializers.SerializerMethodField(
-        default={
-            "public_id": "d23dde64-a242-4ed0-bd75-4c759624b3a6",
-            "signature": "djsdsjAushsh",
-            "timestamp": "16272637829",
-        }
-    )
+    file_upload_data = serializers.SerializerMethodField(default=file_upload_data)
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)

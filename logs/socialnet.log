@@ -2913,3 +2913,47 @@ TypeError: attribute name must be string, not 'list'
 2023-09-05 04:41:28,978 django.request ERROR    Internal Server Error: /api/v1/profiles/cities/
 2023-09-05 04:54:43,487 django.request ERROR    Internal Server Error: /api/v1/profiles/cities/
 2023-09-05 04:56:46,130 django.request ERROR    Internal Server Error: /api/v1/profiles/cities/
+2023-09-06 00:36:31,875 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 00:36:31,917 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 00:36:34,914 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 00:36:35,567 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-06 01:07:52,892 django.request WARNING  Unauthorized: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-06 01:08:32,066 django.request WARNING  Unauthorized: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-06 01:08:34,504 django.request WARNING  Unauthorized: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-06 01:09:21,302 django.request WARNING  Unauthorized: /api/v1/profiles/profile/kenechi-ifeanyi/
+2023-09-06 01:09:35,005 django.request WARNING  Not Found: /api/v1/profiles/profile/test-admin/
+2023-09-06 01:10:30,865 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/fire/
+2023-09-06 01:11:03,195 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/fire/
+2023-09-06 01:12:22,415 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/fire/
+2023-09-06 01:12:47,223 django.request WARNING  Not Found: /api/v1/profiles/profile/fire/
+2023-09-06 01:14:22,582 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:14:22,587 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:14:23,639 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:14:27,782 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:14:27,786 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:14:32,880 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:14:44,104 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:14:44,107 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:14:45,170 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:14:51,529 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:16:00,221 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:16:00,230 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:16:01,388 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:16:04,009 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:16:04,016 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:16:09,462 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:16:17,223 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:16:17,225 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:16:22,182 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:18:09,798 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:19:38,445 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:19:38,454 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:19:43,762 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:19:50,003 jazzmin.utils WARNING  listings not found when generating links
+2023-09-06 01:19:50,007 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-06 01:19:54,853 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-06 01:22:12,005 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:22:22,871 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:30:48,339 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:32:26,814 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:32:52,313 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/

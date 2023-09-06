@@ -5,15 +5,18 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
+from apps.common.models import File
 from apps.common.serializers import ErrorResponseSerializer, SuccessResponseSerializer
 from apps.common.responses import CustomResponse
 
 from apps.common.file_types import ALLOWED_IMAGE_TYPES
 from apps.accounts.models import User
-from apps.common.utils import set_dict_attr
+from apps.common.utils import IsAuthenticatedCustom, set_dict_attr
 from .serializers import (
     CitiesResponseSerializer,
     CitySerializer,
+    ProfileCreateResponseDataSerializer,
+    ProfileCreateResponseSerializer,
     ProfileResponseSerializer,
     ProfileSerializer,
 )
@@ -62,6 +65,7 @@ class CitiesView(APIView):
 
 class ProfileView(APIView):
     serializer_class = ProfileSerializer
+    post_resp_serializer_class = ProfileCreateResponseDataSerializer
     common_param = [
         OpenApiParameter(
             name="username",
@@ -75,7 +79,9 @@ class ProfileView(APIView):
     ]
 
     async def get_object(self, username):
-        user = await User.objects.select_related("city").aget_or_none(username=username)
+        user = await User.objects.select_related("city", "avatar").aget_or_none(
+            username=username
+        )
         if not user:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
@@ -102,14 +108,47 @@ class ProfileView(APIView):
         summary="Update user's profile",
         description="This endpoint updates a particular user profile",
         tags=tags,
-        responses=ProfileResponseSerializer,
+        responses=ProfileCreateResponseSerializer,
         parameters=common_param,
     )
     async def patch(self, request, *args, **kwargs):
         user = await self.get_object(kwargs.get("username"))
+        if user.id != request.user.id:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_OWNER,
+                err_msg="Not yours to edit",
+                status_code=401,
+            )
         serializer = self.serializer_class(data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
+
+        # Handle file upload
+        image_upload_status = False
+        file_type = data.get("file_type")
+        if file_type:
+            image_upload_status = True
+            avatar = user.avatar
+            if avatar:
+                avatar.resource_type = file_type
+                await avatar.asave()
+            else:
+                avatar = await File.objects.acreate(resource_type=file_type)
+            data.pop("file_type")
+            data["avatar"] = avatar
+
+        # Set attributes from data to user object
         user = set_dict_attr(user, data)
-        serializer = self.serializer_class(user)
+        await user.asave()
+        serializer = self.post_resp_serializer_class(
+            user, context={"image_upload_status": image_upload_status}
+        )
         return CustomResponse.success(message="User updated", data=serializer.data)
+
+    def get_permissions(self):
+        permissions = []
+        if self.request.method != "GET":
+            permissions = [
+                IsAuthenticatedCustom(),
+            ]
+        return permissions

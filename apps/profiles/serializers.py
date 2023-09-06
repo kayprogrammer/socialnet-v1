@@ -3,7 +3,8 @@ from rest_framework import serializers
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
-
+from apps.common.schema_examples import file_upload_data
+from cities_light.models import City
 
 def get_user(user):
     return {
@@ -27,20 +28,41 @@ class CitiesResponseSerializer(SuccessResponseSerializer):
 class ProfileSerializer(serializers.Serializer):
     first_name = serializers.CharField(max_length=50)
     last_name = serializers.CharField(max_length=50)
-    username = serializers.CharField()
-    email = serializers.EmailField()
-    avatar = serializers.CharField(source="get_avatar", default="https://img.url")
+    username = serializers.CharField(read_only=True)
+    email = serializers.EmailField(read_only=True)
+    avatar = serializers.CharField(
+        source="get_avatar", default="https://img.url", read_only=True
+    )
     bio = serializers.CharField(max_length=200)
     dob = serializers.DateField()
-    city = serializers.CharField(source="city.name", allow_null=True)
+    city = serializers.CharField(source="city.name", allow_null=True, read_only=True)
+    city_id = serializers.PrimaryKeyRelatedField(queryset=City.objects.all(), source="city", write_only=True)
+    created_at = serializers.DateTimeField(
+        default_timezone=pytz.timezone("UTC"), read_only=True
+    )
+    updated_at = serializers.DateTimeField(
+        default_timezone=pytz.timezone("UTC"), read_only=True
+    )
+    file_type = serializers.CharField(validators=[validate_image_type], write_only=True)
 
-    created_at = serializers.DateTimeField(default_timezone=pytz.timezone("UTC"))
-    updated_at = serializers.DateTimeField(default_timezone=pytz.timezone("UTC"))
 
-    class Meta:
-        read_only_fields = ("created_at", "updated_at", "username", "avatar")
+class ProfileCreateResponseDataSerializer(ProfileSerializer):
+    file_upload_data = serializers.SerializerMethodField(default=file_upload_data)
+
+    def get_file_upload_data(self, obj) -> dict:
+        image_upload_status = self.context.get("image_upload_status")
+        if image_upload_status:
+            return FileProcessor.generate_file_signature(
+                key=obj.avatar_id,
+                folder="avatars",
+            )
+        return None
 
 
 # RESPONSE SERIALIZERS
 class ProfileResponseSerializer(SuccessResponseSerializer):
-    data = ProfileSerializer
+    data = ProfileSerializer()
+
+
+class ProfileCreateResponseSerializer(SuccessResponseSerializer):
+    data = ProfileCreateResponseDataSerializer()
