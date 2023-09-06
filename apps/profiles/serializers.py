@@ -4,10 +4,6 @@ from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
 from apps.common.schema_examples import file_upload_data
-from cities_light.models import City
-
-from apps.profiles.validators import validate_city
-
 
 def get_user(user):
     return {

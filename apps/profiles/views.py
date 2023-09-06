@@ -135,6 +135,7 @@ class ProfileView(APIView):
                     status_code=422,
                 )
             data["city"] = city
+            
         # Handle file upload
         image_upload_status = False
         file_type = data.get("file_type")
