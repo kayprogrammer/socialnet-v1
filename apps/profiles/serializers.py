@@ -6,6 +6,9 @@ from apps.common.validators import validate_image_type
 from apps.common.schema_examples import file_upload_data
 from cities_light.models import City
 
+from apps.profiles.validators import validate_city
+
+
 def get_user(user):
     return {
         "name": user.full_name,
@@ -36,7 +39,7 @@ class ProfileSerializer(serializers.Serializer):
     bio = serializers.CharField(max_length=200)
     dob = serializers.DateField()
     city = serializers.CharField(source="city.name", allow_null=True, read_only=True)
-    city_id = serializers.PrimaryKeyRelatedField(queryset=City.objects.all(), source="city", write_only=True)
+    city_id = serializers.IntegerField(write_only=True)
     created_at = serializers.DateTimeField(
         default_timezone=pytz.timezone("UTC"), read_only=True
     )

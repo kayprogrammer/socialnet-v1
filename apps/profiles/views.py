@@ -123,6 +123,18 @@ class ProfileView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
+        # Validate City ID Entry
+        city_id = data.pop("city_id", None)
+        if city_id:
+            city = await City.objects.filter(id=city_id).afirst()
+            if not city:
+                raise RequestError(
+                    err_code=ErrorCode.INVALID_ENTRY,
+                    err_msg="Invalid Entry",
+                    data={"city_id": "No city with that ID"},
+                    status_code=422,
+                )
+            data["city"] = city
         # Handle file upload
         image_upload_status = False
         file_type = data.get("file_type")

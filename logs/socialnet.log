@@ -2957,3 +2957,14 @@ TypeError: attribute name must be string, not 'list'
 2023-09-06 01:30:48,339 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
 2023-09-06 01:32:26,814 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
 2023-09-06 01:32:52,313 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:34:34,898 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:37:12,926 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:39:31,801 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:39:50,243 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:46:07,549 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:47:09,992 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:51:02,027 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:52:33,459 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:52:37,118 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:52:38,159 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/tester-admin/
+2023-09-06 01:52:47,025 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/tester-admin/
