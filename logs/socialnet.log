@@ -2980,3 +2980,7 @@ TypeError: attribute name must be string, not 'list'
 2023-09-07 00:40:07,874 jazzmin.utils WARNING  listings not found when generating links
 2023-09-07 00:40:07,882 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-07 00:40:09,297 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-08 00:21:50,795 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-08 00:22:57,171 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-08 00:26:54,762 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-08 00:27:33,614 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/

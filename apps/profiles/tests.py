@@ -62,3 +62,41 @@ class TestProfile(APITestCase):
                 ],
             },
         )
+
+    def test_retrieve_profile(self):
+        user = self.verified_user
+
+        # Test for valid response for non-existent username
+        response = self.client.get(f"{self.profile_url}invalid_username/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "No user with that username",
+                "code": ErrorCode.NON_EXISTENT,
+            },
+        )
+
+        # Test for valid response for existent city name query
+        response = self.client.get(f"{self.profile_url}{user.username}/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "User details fetched",
+                "data": {
+                    "first_name": user.first_name,
+                    "last_name": user.last_name,
+                    "username": user.username,
+                    "email": user.email,
+                    "bio": user.bio,
+                    "avatar": user.get_avatar,
+                    "dob": user.dob,
+                    "city": None,
+                    "created_at": user.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    "updated_at": user.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                },
+            },
+        )
