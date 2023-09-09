@@ -19,6 +19,7 @@ from .serializers import (
     ProfileCreateResponseSerializer,
     ProfileResponseSerializer,
     ProfileSerializer,
+    DeleteUserSerializer,
 )
 from cities_light.models import City
 import re
@@ -65,7 +66,7 @@ class CitiesView(APIView):
 
 class ProfileView(APIView):
     serializer_class = ProfileSerializer
-    post_resp_serializer_class = ProfileCreateResponseDataSerializer
+
     common_param = [
         OpenApiParameter(
             name="username",
@@ -104,21 +105,20 @@ class ProfileView(APIView):
             message="User details fetched", data=serializer.data
         )
 
+
+class ProfileUpdateDeleteView(APIView):
+    permission_classes = (IsAuthenticatedCustom,)
+    serializer_class = ProfileSerializer
+    post_resp_serializer_class = ProfileCreateResponseDataSerializer
+
     @extend_schema(
         summary="Update user's profile",
         description="This endpoint updates a particular user profile",
         tags=tags,
         responses=ProfileCreateResponseSerializer,
-        parameters=common_param,
     )
-    async def patch(self, request, *args, **kwargs):
-        user = await self.get_object(kwargs.get("username"))
-        if user.id != request.user.id:
-            raise RequestError(
-                err_code=ErrorCode.INVALID_OWNER,
-                err_msg="Not yours to edit",
-                status_code=401,
-            )
+    async def patch(self, request):
+        user = request.user
         serializer = self.serializer_class(data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
@@ -158,10 +158,28 @@ class ProfileView(APIView):
         )
         return CustomResponse.success(message="User updated", data=serializer.data)
 
-    def get_permissions(self):
-        permissions = []
-        if self.request.method != "GET":
-            permissions = [
-                IsAuthenticatedCustom(),
-            ]
-        return permissions
+    @extend_schema(
+        summary="Delete user's account",
+        description="This endpoint deletes a particular user's account",
+        tags=tags,
+        request=DeleteUserSerializer,
+        responses={200: SuccessResponseSerializer},
+    )
+    async def post(self, request):
+        user = request.user
+        serializer = DeleteUserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        password = serializer.validated_data["password"]
+
+        # Check if password is valid
+        if not user.check_password(password):
+            raise RequestError(
+                err_code=ErrorCode.INVALID_CREDENTIALS,
+                err_msg="Invalid Entry",
+                status_code=422,
+                data={"password": "Incorrect password"},
+            )
+
+        # Delete user
+        await user.adelete()
+        return CustomResponse.success(message="User deleted")

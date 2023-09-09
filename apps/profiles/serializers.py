@@ -59,6 +59,10 @@ class ProfileCreateResponseDataSerializer(ProfileSerializer):
         return None
 
 
+class DeleteUserSerializer(serializers.Serializer):
+    password = serializers.CharField()
+
+
 # RESPONSE SERIALIZERS
 class ProfileResponseSerializer(SuccessResponseSerializer):
     data = ProfileSerializer()

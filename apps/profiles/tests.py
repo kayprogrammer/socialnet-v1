@@ -111,40 +111,8 @@ class TestProfile(APITestCase):
             "bio": "Updated my bio",
         }
 
-        # Test for valid response for non-existent username
-        response = self.client.patch(
-            f"{self.profile_url}invalid_username/", data=user_data, **self.bearer
-        )
-        self.assertEqual(response.status_code, 404)
-        self.assertEqual(
-            response.json(),
-            {
-                "status": "failure",
-                "message": "No user with that username",
-                "code": ErrorCode.NON_EXISTENT,
-            },
-        )
-
-        # Test for valid response for invalid owner
-        response = self.client.patch(
-            f"{self.profile_url}{user.username}/",
-            data=user_data,
-            **self.other_user_bearer,
-        )
-        self.assertEqual(response.status_code, 401)
-        self.assertEqual(
-            response.json(),
-            {
-                "status": "failure",
-                "message": "Not yours to edit",
-                "code": ErrorCode.INVALID_OWNER,
-            },
-        )
-
         # Test for valid response for valid entry
-        response = self.client.patch(
-            f"{self.profile_url}{user.username}/", data=user_data, **self.bearer
-        )
+        response = self.client.patch(self.profile_url, data=user_data, **self.bearer)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.json(),
@@ -166,5 +134,33 @@ class TestProfile(APITestCase):
                     "updated_at": mock.ANY,
                     "file_upload_data": None,
                 },
+            },
+        )
+
+    def test_delete_profile(self):
+        user_data = {"password": "invalid_pass"}
+
+        # Test for valid response for invalid entry
+        response = self.client.post(self.profile_url, data=user_data, **self.bearer)
+        self.assertEqual(response.status_code, 422)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "message": "Invalid Entry",
+                "code": ErrorCode.INVALID_CREDENTIALS,
+                "data": {"password": "Incorrect password"},
+            },
+        )
+
+        # Test for valid response for valid entry
+        user_data["password"] = "testpassword"
+        response = self.client.post(self.profile_url, data=user_data, **self.bearer)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "User deleted",
             },
         )

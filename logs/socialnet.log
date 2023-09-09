@@ -3010,3 +3010,27 @@ TypeError: attribute name must be string, not 'list'
 2023-09-09 00:42:23,201 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
 2023-09-09 00:42:23,929 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
 2023-09-09 00:42:23,936 django.request WARNING  Unauthorized: /api/v1/profiles/profile/test-verified/
+2023-09-09 00:58:05,407 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-09 00:58:06,198 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 00:59:23,588 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-09 00:59:24,327 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:00:39,221 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-09 01:05:12,574 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:08:09,240 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:08:45,390 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:08:45,744 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/
+2023-09-09 01:09:11,664 django.request WARNING  Unauthorized: /api/v1/profiles/profile/
+2023-09-09 01:09:59,631 django.request WARNING  Unauthorized: /api/v1/profiles/profile/
+2023-09-09 01:24:50,691 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:24:51,048 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/
+2023-09-09 01:25:04,035 django.request WARNING  Unauthorized: /api/v1/profiles/profile/
+2023-09-09 01:25:50,470 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:25:55,440 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:25:58,112 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:25:59,642 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:26:14,152 django.request ERROR    Internal Server Error: /api/v1/profiles/profile/
+2023-09-09 01:26:46,396 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:28:07,570 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-09 01:28:09,516 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-09 01:28:58,843 django.request WARNING  Unauthorized: /api/v1/profiles/profile/
+2023-09-09 01:29:27,081 django.request WARNING  Unauthorized: /api/v1/auth/login/
