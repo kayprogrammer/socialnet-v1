@@ -43,7 +43,9 @@ class Authentication:
         decoded = Authentication.decode_jwt(token[7:])
         if not decoded:
             return None
-        jwt_obj = Jwt.objects.get_or_none(user_id=decoded["user_id"])
+        jwt_obj = Jwt.objects.select_related(
+            "user", "user__city", "user__city__region", "user__city__country"
+        ).get_or_none(user_id=decoded["user_id"])
         if not jwt_obj:
             return None
         return jwt_obj.user

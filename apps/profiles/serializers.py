@@ -64,6 +64,10 @@ class DeleteUserSerializer(serializers.Serializer):
 
 
 # RESPONSE SERIALIZERS
+class ProfilesResponseSerializer(SuccessResponseSerializer):
+    data = ProfileSerializer(many=True)
+
+
 class ProfileResponseSerializer(SuccessResponseSerializer):
     data = ProfileSerializer()
 

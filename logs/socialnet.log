@@ -3034,3 +3034,85 @@ TypeError: attribute name must be string, not 'list'
 2023-09-09 01:28:09,516 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
 2023-09-09 01:28:58,843 django.request WARNING  Unauthorized: /api/v1/profiles/profile/
 2023-09-09 01:29:27,081 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-09-09 01:33:04,136 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 01:33:04,395 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-09 16:18:47,870 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:19:08,599 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:19:12,974 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:19:48,398 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:20:24,533 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:22:22,292 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:22:22,474 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-09 16:22:27,334 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:22:53,347 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:22:53,350 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:22:54,713 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:35:02,803 django.request WARNING  Forbidden: /api/v1/profiles/
+2023-09-09 16:35:11,034 django.request WARNING  Forbidden: /api/v1/profiles/
+2023-09-09 16:36:45,673 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:37:06,719 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:37:20,026 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:38:43,378 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:41:03,860 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:41:03,863 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:41:05,426 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:41:07,616 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:41:07,619 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:41:13,421 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:41:56,992 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:41:56,994 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:42:02,029 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:42:09,709 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:42:09,711 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:42:10,805 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:42:13,794 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:42:13,797 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:42:19,196 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:42:40,788 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:42:40,791 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:42:45,923 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:42:47,648 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:42:47,651 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:42:48,750 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:42:50,813 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:42:50,816 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:42:56,079 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:43:18,597 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 16:52:13,322 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:52:13,325 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:52:18,861 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:53:23,756 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:53:23,759 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:53:25,034 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 16:53:51,096 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 16:53:51,100 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 16:53:56,211 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 17:05:44,941 jazzmin.utils WARNING  listings not found when generating links
+2023-09-09 17:05:44,944 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-09 17:05:50,555 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-09 17:06:36,773 django.request WARNING  Not Found: /favicon.ico
+2023-09-09 17:07:15,598 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:07:45,512 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:07:47,409 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:08:21,891 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:09:56,446 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:10:21,013 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:10:30,787 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:10:43,231 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:10:55,142 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:11:17,157 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:11:28,826 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:12:01,076 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:12:15,255 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:12:41,918 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:14:14,380 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:15:01,637 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:15:44,488 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:16:20,998 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:16:38,294 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:22:48,982 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:25:31,016 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:25:41,322 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:26:19,100 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:28:56,653 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-09-09 17:32:32,696 django.request ERROR    Internal Server Error: /api/v1/profiles/

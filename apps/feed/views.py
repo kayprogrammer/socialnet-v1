@@ -1,10 +1,10 @@
 from django.db.models import Count
 from adrf.views import APIView
-from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 
 from apps.common.file_types import ALLOWED_IMAGE_TYPES
+from apps.common.paginators import CustomPagination
 
 from .models import Post, Comment, Reply, Reaction, REACTION_CHOICES
 from .serializers import (
@@ -41,7 +41,7 @@ tags = ["Feed"]
 class PostsView(APIView):
     serializer_class = PostSerializer
     post_resp_serializer_class = PostCreateResponseDataSerializer
-    paginator_class = PageNumberPagination()
+    paginator_class = CustomPagination()
 
     @extend_schema(
         operation_id="posts_list",
@@ -228,7 +228,7 @@ reactions_params = [
 
 class ReactionsView(APIView):
     serializer_class = ReactionSerializer
-    paginator_class = PageNumberPagination()
+    paginator_class = CustomPagination()
     reaction_for = {"POST": Post, "COMMENT": Comment, "REPLY": Reply}
     params = reactions_params
     get_params = params + [
@@ -380,7 +380,7 @@ class RemoveReaction(APIView):
 # COMMENTS
 class CommentsView(APIView):
     serializer_class = CommentSerializer
-    paginator_class = PageNumberPagination()
+    paginator_class = CustomPagination()
 
     async def get_object(self, slug):
         post = await Post.objects.aget_or_none(slug=slug)
@@ -453,7 +453,7 @@ class CommentsView(APIView):
 
 class CommentView(APIView):
     serializer_class = CommentWithRepliesSerializer
-    paginator_class = PageNumberPagination()
+    paginator_class = CustomPagination()
     common_param = [
         OpenApiParameter(
             name="slug",
