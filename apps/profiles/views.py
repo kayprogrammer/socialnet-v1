@@ -113,7 +113,10 @@ class ProfileUpdateDeleteView(APIView):
 
     @extend_schema(
         summary="Update user's profile",
-        description="This endpoint updates a particular user profile",
+        description=f"""
+            This endpoint updates a particular user profile
+            ALLOWED FILE TYPES: {", ".join(ALLOWED_IMAGE_TYPES)}
+        """,
         tags=tags,
         responses=ProfileCreateResponseSerializer,
     )
