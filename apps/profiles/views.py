@@ -1,4 +1,4 @@
-from django.db.models import Count, F, Q, Case, When, Value, BooleanField
+from django.db.models import Count, F, Q, Case, When, Value, BooleanField, ForeignKey
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
@@ -16,6 +16,7 @@ from apps.common.utils import (
     set_dict_attr,
 )
 from apps.common.paginators import CustomPagination
+from apps.profiles.models import Friend
 from .serializers import (
     CitiesResponseSerializer,
     CitySerializer,
@@ -255,3 +256,46 @@ class ProfileUpdateDeleteView(APIView):
         # Delete user
         await user.adelete()
         return CustomResponse.success(message="User deleted")
+
+
+class FriendsView(APIView):
+    serializer_class = ProfileSerializer
+    paginator_class = CustomPagination()
+    paginator_class.page_size = 20
+    permission_classes = (IsAuthenticatedCustom,)
+
+    async def get_queryset(self, user):
+        friends = (
+            Friend.objects.filter(Q(requester=user) | Q(requestee=user))
+            .filter(status="ACCEPTED")
+            .select_related("requester", "requestee")
+        )
+        friend_ids = friends.annotate(
+            friend_id=Case(
+                When(requester=user, then=F("requestee")),
+                When(requestee=user, then=F("requester")),
+            )
+        ).values_list("friend_id", flat=True)
+        users = User.objects.filter(id__in=friend_ids).select_related("avatar", "city")
+        return await sync_to_async(list)(users)
+
+    @extend_schema(
+        summary="Retrieve Friends",
+        description="This endpoint retrieves friends of a user",
+        tags=tags,
+        responses=ProfilesResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="page",
+                description="Retrieve a particular page of friends. Defaults to 1",
+                required=False,
+                type=int,
+            )
+        ],
+    )
+    async def get(self, request):
+        user = request.user
+        friends = await self.get_queryset(user)
+        paginated_friends = self.paginator_class.paginate_queryset(friends, request)
+        serializer = self.serializer_class(paginated_friends, many=True)
+        return CustomResponse.success(message="Friends fetched", data=serializer.data)
