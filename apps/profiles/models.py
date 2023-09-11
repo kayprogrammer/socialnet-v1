@@ -1,4 +1,11 @@
 from django.db import models
+from django.db.models import (
+    Q,
+    F,
+    UniqueConstraint,
+    CheckConstraint,
+)
+from django.db.models.functions import Least, Greatest
 from apps.accounts.models import User
 
 from apps.common.models import BaseModel
@@ -30,15 +37,17 @@ class Friend(BaseModel):
 
     class Meta:
         constraints = [
-            # UniqueConstraint to prevent duplicate combinations of requester and requestee
-            models.UniqueConstraint(
-                name="unique_user_combination",
-                fields=["requester", "requestee"],
-                condition=models.Q(requester__lt=models.F("requestee")),
+            # UniqueConstraint to prevent duplicate combinations of requester and requestee bidirectionally
+            UniqueConstraint(
+                Least("requester", "requestee"),
+                Greatest("requester", "requestee"),
+                name="bidirectional_unique_user_combination",
+                violation_error_message="Friend with similar users already exists",
             ),
             # Check constraint to prevent requester and requestee from being the same user
-            models.CheckConstraint(
-                check=~models.Q(requester=models.F("requestee")),
+            CheckConstraint(
+                check=~Q(requester=F("requestee")),
                 name="different_users",
+                violation_error_message="Requester and Requestee cannot be the same",
             ),
         ]

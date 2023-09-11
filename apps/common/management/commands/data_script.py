@@ -3,6 +3,7 @@ from apps.accounts.models import User
 from apps.general.models import SiteDetail
 from django.contrib.auth.hashers import make_password
 
+
 class CreateData(object):
     def __init__(self) -> None:
         pass

@@ -16,6 +16,7 @@ from apps.common.utils import (
     set_dict_attr,
 )
 from apps.common.paginators import CustomPagination
+from apps.feed.models import Post
 from apps.profiles.models import Friend
 from .serializers import (
     CitiesResponseSerializer,

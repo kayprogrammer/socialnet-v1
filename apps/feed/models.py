@@ -18,7 +18,7 @@ REACTION_CHOICES = (
 )
 
 
-def slugify_two_fields(self):
+def slugify_three_fields(self):
     author = self.author
     return f"{author.first_name}-{author.last_name}-{self.id}"
 
@@ -26,7 +26,7 @@ def slugify_two_fields(self):
 class Post(BaseModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     text = models.TextField()
-    slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
+    slug = AutoSlugField(_("slug"), populate_from=slugify_three_fields, unique=True)
     image = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
@@ -51,7 +51,7 @@ class Comment(BaseModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     text = models.TextField()
-    slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
+    slug = AutoSlugField(_("slug"), populate_from=slugify_three_fields, unique=True)
 
     def __str__(self):
         return f"{self.author.full_name} ------ {self.text[:10]}..."
@@ -63,7 +63,7 @@ class Reply(BaseModel):
         Comment, on_delete=models.CASCADE, related_name="replies"
     )
     text = models.TextField()
-    slug = AutoSlugField(_("slug"), populate_from=slugify_two_fields, unique=True)
+    slug = AutoSlugField(_("slug"), populate_from=slugify_three_fields, unique=True)
 
     def __str__(self):
         return f"{self.author.full_name} ------ {self.text[:10]}..."
