@@ -9,24 +9,34 @@ class CreateData(object):
 
     async def initialize(self) -> None:
         await self.create_superuser()
+        await self.create_clientuser()
         await self.create_sitedetail()
 
     async def create_superuser(self) -> User:
-        superuser = await User.objects.aget_or_none(
-            email=settings.FIRST_SUPERUSER_EMAIL
-        )
         user_dict = {
             "first_name": "Test",
             "last_name": "Admin",
-            "email": settings.FIRST_SUPERUSER_EMAIL,
             "password": settings.FIRST_SUPERUSER_PASSWORD,
             "is_superuser": True,
             "is_staff": True,
             "is_email_verified": True,
         }
-        if not superuser:
-            superuser = await User.objects.acreate_user(**user_dict)
+        superuser, created = await User.objects.aget_or_create(
+            email=settings.FIRST_SUPERUSER_EMAIL, defaults=user_dict
+        )
         return superuser
+
+    async def create_clientuser(self) -> User:
+        user_dict = {
+            "first_name": "Test",
+            "last_name": "Client",
+            "password": settings.FIRST_CLIENT_PASSWORD,
+            "is_email_verified": True,
+        }
+        client, created = await User.objects.aget_or_create(
+            email=settings.FIRST_CLIENT_EMAIL, defaults=user_dict
+        )
+        return client
 
     async def create_sitedetail(self) -> SiteDetail:
         sitedetail, created = await SiteDetail.objects.aget_or_create()
