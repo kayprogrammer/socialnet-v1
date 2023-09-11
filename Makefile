@@ -34,6 +34,9 @@ mig: # run with "make mig" or "make mig app='app'"
 		python manage.py migrate "$(app)"; \
 	fi
 
+cities:
+	python manage.py cities_light
+	
 init:
 	python manage.py initial_data
 	

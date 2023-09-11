@@ -1,7 +1,7 @@
 from django.conf import settings
 from apps.accounts.models import User
 from apps.general.models import SiteDetail
-
+from django.contrib.auth.hashers import make_password
 
 class CreateData(object):
     def __init__(self) -> None:
@@ -16,7 +16,7 @@ class CreateData(object):
         user_dict = {
             "first_name": "Test",
             "last_name": "Admin",
-            "password": settings.FIRST_SUPERUSER_PASSWORD,
+            "password": make_password(settings.FIRST_SUPERUSER_PASSWORD),
             "is_superuser": True,
             "is_staff": True,
             "is_email_verified": True,
@@ -30,7 +30,7 @@ class CreateData(object):
         user_dict = {
             "first_name": "Test",
             "last_name": "Client",
-            "password": settings.FIRST_CLIENT_PASSWORD,
+            "password": make_password(settings.FIRST_CLIENT_PASSWORD),
             "is_email_verified": True,
         }
         client, created = await User.objects.aget_or_create(
