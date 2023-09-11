@@ -3786,3 +3786,71 @@ LINE 1: ...ounts_user"."city_id", "accounts_user"."dob" FROM "profiles_...
 2023-09-11 16:21:40,110 jazzmin.utils WARNING  listings not found when generating links
 2023-09-11 16:21:40,114 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-11 16:21:41,227 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:26:28,329 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+2023-09-11 16:26:28,329 cities_light INFO     Forced import of countryInfo.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:26:28,329 cities_light INFO     Importing countryInfo.txt
+2023-09-11 16:26:34,553 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+2023-09-11 16:26:34,553 cities_light INFO     Forced import of admin1CodesASCII.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:26:34,554 cities_light INFO     Importing admin1CodesASCII.txt
+2023-09-11 16:28:04,941 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+2023-09-11 16:28:04,942 cities_light INFO     Forced import of admin2Codes.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:28:04,942 cities_light INFO     Importing admin2Codes.txt
+2023-09-11 16:34:49,023 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:34:49,027 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:34:50,242 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:34:50,248 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:34:50,978 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:34:51,950 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:34:58,271 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:34:58,274 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:34:59,461 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:35:07,447 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:35:07,449 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:35:08,585 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:37:02,145 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:37:02,148 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:37:03,569 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:38:34,281 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:38:34,285 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:38:35,536 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:38:42,987 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:38:42,990 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:38:44,257 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:38:45,767 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:38:45,769 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:38:46,985 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:38:51,607 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:38:51,610 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:38:53,022 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:38:57,063 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:38:57,066 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:38:58,335 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:39:01,235 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:39:01,238 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:39:02,261 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:39:13,179 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+2023-09-11 16:39:13,180 cities_light INFO     Forced import of countryInfo.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:39:13,180 cities_light INFO     Importing countryInfo.txt
+2023-09-11 16:39:20,834 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+2023-09-11 16:39:20,834 cities_light INFO     Forced import of admin1CodesASCII.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:39:20,834 cities_light INFO     Importing admin1CodesASCII.txt
+2023-09-11 16:39:26,057 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+2023-09-11 16:39:26,057 cities_light INFO     Forced import of admin2Codes.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:39:26,057 cities_light INFO     Importing admin2Codes.txt
+2023-09-11 16:40:40,938 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:40:40,940 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:40:42,297 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:40:47,239 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:40:47,244 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:40:48,439 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:43:29,725 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:43:29,728 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:43:30,957 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:45:17,348 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:45:17,350 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:45:18,853 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:45:22,693 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:45:22,696 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:45:23,588 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:46:18,747 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-11 16:46:21,721 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/

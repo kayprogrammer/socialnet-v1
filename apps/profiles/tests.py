@@ -3,6 +3,7 @@ from unittest import mock
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
 import uuid
+from apps.profiles.models import Friend
 from cities_light.models import City, Country, Region
 from django.utils.text import slugify
 
@@ -10,6 +11,8 @@ from django.utils.text import slugify
 class TestProfile(APITestCase):
     cities_url = "/api/v1/profiles/cities/"
     profile_url = "/api/v1/profiles/profile/"
+    friends_url = "/api/v1/profiles/friends/"
+
     maxDiff = None
 
     def setUp(self):
@@ -33,6 +36,11 @@ class TestProfile(APITestCase):
             name="Test City", display_name="testcit", region=region, country=country
         )
         self.city = city
+
+        # Friend
+        self.friend = Friend.objects.create(
+            requester=verified_user, requestee=another_verified_user, status="ACCEPTED"
+        )
 
     def test_retrieve_cities(self):
         city = self.city
@@ -162,5 +170,33 @@ class TestProfile(APITestCase):
             {
                 "status": "success",
                 "message": "User deleted",
+            },
+        )
+
+    def test_retrieve_friends(self):
+        friend = self.friend.requestee
+
+        # Test for valid response for non-existent city name query
+        response = self.client.get(self.friends_url, **self.bearer)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Friends fetched",
+                "data": [
+                    {
+                        "first_name": friend.first_name,
+                        "last_name": friend.last_name,
+                        "username": friend.username,
+                        "email": friend.email,
+                        "bio": friend.bio,
+                        "avatar": friend.get_avatar,
+                        "dob": friend.dob,
+                        "city": None,
+                        "created_at": mock.ANY,
+                        "updated_at": mock.ANY,
+                    }
+                ],
             },
         )
