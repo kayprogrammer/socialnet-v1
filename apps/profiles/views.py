@@ -19,6 +19,7 @@ from apps.common.paginators import CustomPagination
 from apps.feed.models import Post
 from apps.profiles.models import Friend
 from .serializers import (
+    AcceptFriendRequestSerializer,
     CitiesResponseSerializer,
     CitySerializer,
     ProfileCreateResponseDataSerializer,
@@ -302,6 +303,25 @@ class FriendsView(APIView):
         serializer = self.serializer_class(paginated_friends, many=True)
         return CustomResponse.success(message="Friends fetched", data=serializer.data)
 
+    async def get_other_user_and_friend(self, user, username, status=None):
+        # Get and validate username existence
+        other_user = await User.objects.aget_or_none(username=username)
+        if not other_user:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="User does not exist!",
+                status_code=404,
+            )
+
+        friend = Friend.objects.filter(
+            Q(requester=user, requestee=other_user)
+            | Q(requester=other_user, requestee=user)
+        )
+        if status:
+            friend = friend.filter(status=status)
+        friend = await friend.aget_or_none()
+        return other_user, friend
+
     @extend_schema(
         summary="Send Or Delete Friend Request",
         description="This endpoint sends or delete friend requests",
@@ -314,21 +334,9 @@ class FriendsView(APIView):
         serializer = SendFriendRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # Get and validate username existence
-        other_user = await User.objects.aget_or_none(
-            username=serializer.validated_data["username"]
+        other_user, friend = await self.get_other_user_and_friend(
+            user, serializer.validated_data["username"]
         )
-        if not other_user:
-            raise RequestError(
-                err_code=ErrorCode.NON_EXISTENT,
-                err_msg="User does not exist!",
-                status_code=404,
-            )
-
-        friend = await Friend.objects.filter(
-            Q(requester=user, requestee=other_user)
-            | Q(requester=other_user, requestee=user)
-        ).aget_or_none()
         message = "Friend Request sent"
         status_code = 201
         if friend:
@@ -346,3 +354,42 @@ class FriendsView(APIView):
             await Friend.objects.acreate(requester=user, requestee=other_user)
 
         return CustomResponse.success(message=message, status_code=status_code)
+
+    @extend_schema(
+        summary="Accept Or Reject a Friend Request",
+        description="""
+            This endpoint accepts or reject a friend request
+            status choices:
+            - ACCEPTED
+            - REJECTED
+        """,
+        tags=tags,
+        request=AcceptFriendRequestSerializer,
+        responses=SuccessResponseSerializer,
+    )
+    async def put(self, request):
+        user = request.user
+        serializer = AcceptFriendRequestSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        _, friend = await self.get_other_user_and_friend(
+            user, serializer.validated_data["username"], "PENDING"
+        )
+        if not friend:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="No pending friend request exist between you and that user",
+                status_code=401,
+            )
+        if friend.requester_id == user.id:
+            raise RequestError(
+                err_code=ErrorCode.NOT_ALLOWED,
+                err_msg="You cannot accept or reject a friend request you sent ",
+                status_code=403,
+            )
+        status = serializer.validated_data["status"]
+        friend.status = status
+        await friend.asave()
+        return CustomResponse.success(
+            message=f"Friend Request {status.capitalize()}", status_code=200
+        )

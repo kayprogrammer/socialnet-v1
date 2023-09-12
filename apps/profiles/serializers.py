@@ -5,6 +5,7 @@ from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
 from apps.common.schema_examples import file_upload_data
+from apps.profiles.models import REQUEST_STATUS_CHOICES
 
 
 def get_user(user):
@@ -65,7 +66,11 @@ class DeleteUserSerializer(serializers.Serializer):
 
 
 class SendFriendRequestSerializer(serializers.Serializer):
-    username = serializers.SlugField()
+    username = serializers.CharField()
+
+
+class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
+    status = serializers.ChoiceField(choices=REQUEST_STATUS_CHOICES[1:3])
 
 
 # RESPONSE SERIALIZERS

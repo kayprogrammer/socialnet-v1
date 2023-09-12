@@ -3954,3 +3954,51 @@ LINE 1: ...ounts_user"."city_id", "accounts_user"."dob" FROM "profiles_...
 2023-09-12 16:16:42,152 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2023-09-12 16:21:08,149 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
 2023-09-12 16:21:37,116 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:31:13,847 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:31:13,850 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:31:14,980 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:50:37,881 django.request WARNING  Unauthorized: /api/v1/profiles/friends/
+2023-09-12 16:50:49,826 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-09-12 16:50:56,713 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:50:56,715 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:50:57,970 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:51:08,875 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:52:09,573 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:52:09,577 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:52:10,760 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:52:34,204 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:53:47,253 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:53:47,256 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:53:48,550 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:55:02,170 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:55:13,369 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 16:55:16,502 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 16:55:29,659 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:55:29,661 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:55:30,930 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:55:41,986 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:55:41,988 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:55:43,236 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:55:53,482 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:55:53,484 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:55:54,595 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:56:03,246 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:56:03,248 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:56:04,362 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:56:08,399 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 17:02:19,079 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 17:02:39,596 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 17:02:47,893 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 17:03:03,762 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 17:03:03,765 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 17:03:05,034 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 17:03:49,096 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 17:03:50,138 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 17:04:00,081 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 17:04:00,084 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 17:04:01,286 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 17:04:04,516 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 17:04:04,519 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 17:04:05,794 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 17:04:11,265 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 17:04:25,028 django.request WARNING  Unauthorized: /api/v1/profiles/friends/
