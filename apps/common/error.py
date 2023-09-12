@@ -14,3 +14,4 @@ class ErrorCode:
     INVALID_OWNER = "invalid_owner"
     INVALID_PAGE = "invalid_page"
     INVALID_VALUE = "invalid_value"
+    NOT_ALLOWED = "not_allowed"

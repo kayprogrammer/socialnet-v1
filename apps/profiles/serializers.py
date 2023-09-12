@@ -1,5 +1,6 @@
 import pytz
 from rest_framework import serializers
+from apps.accounts.models import User
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
@@ -61,6 +62,10 @@ class ProfileCreateResponseDataSerializer(ProfileSerializer):
 
 class DeleteUserSerializer(serializers.Serializer):
     password = serializers.CharField()
+
+
+class SendFriendRequestSerializer(serializers.Serializer):
+    username = serializers.SlugField()
 
 
 # RESPONSE SERIALIZERS

@@ -3854,3 +3854,103 @@ LINE 1: ...ounts_user"."city_id", "accounts_user"."dob" FROM "profiles_...
 2023-09-11 16:45:23,588 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2023-09-11 16:46:18,747 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
 2023-09-11 16:46:21,721 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-11 16:48:55,302 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/cities15000.zip
+2023-09-11 16:48:55,302 cities_light INFO     Forced import of cities15000.zip because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:48:55,303 cities_light INFO     Importing cities15000.zip
+2023-09-11 16:50:16,192 cities_light WARNING  Saving Zhonghe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, zhonghe) already exists.')
+2023-09-11 16:50:18,525 cities_light WARNING  Saving Xinglong, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, xinglong) already exists.')
+2023-09-11 16:50:24,624 cities_light WARNING  Saving Longtan, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, longtan) already exists.')
+2023-09-11 16:50:25,125 cities_light WARNING  Saving Linjiang, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, linjiang) already exists.')
+2023-09-11 16:50:29,013 cities_light WARNING  Saving Guandu, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, guandu) already exists.')
+2023-09-11 16:50:31,088 cities_light WARNING  Saving Longxing, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, longxing) already exists.')
+2023-09-11 16:50:31,959 cities_light WARNING  Saving Shuanglong, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, shuanglong) already exists.')
+2023-09-11 16:50:33,087 cities_light WARNING  Saving Sanjiao, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, sanjiao) already exists.')
+2023-09-11 16:50:33,498 cities_light WARNING  Saving Shima, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, shima) already exists.')
+2023-09-11 16:50:33,676 cities_light WARNING  Saving Taiping, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, taiping) already exists.')
+2023-09-11 16:50:37,032 cities_light WARNING  Saving E’zhou, Hubei, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(627, 9789, ezhou) already exists.')
+2023-09-11 16:50:38,064 cities_light WARNING  Saving Wushan, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, wushan) already exists.')
+2023-09-11 16:50:38,088 cities_light WARNING  Saving Zhuxi, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, zhuxi) already exists.')
+2023-09-11 16:50:38,298 cities_light WARNING  Saving Tai’an, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, taian) already exists.')
+2023-09-11 16:50:38,398 cities_light WARNING  Saving Xinmin, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, xinmin) already exists.')
+2023-09-11 16:50:38,422 cities_light WARNING  Saving Yong’an, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, yongan) already exists.')
+2023-09-11 16:50:38,456 cities_light WARNING  Saving Gaofeng, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, gaofeng) already exists.')
+2023-09-11 16:50:38,598 cities_light WARNING  Saving Xinsheng, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, xinsheng) already exists.')
+2023-09-11 16:50:38,809 cities_light WARNING  Saving Tonggu, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, tonggu) already exists.')
+2023-09-11 16:50:38,893 cities_light WARNING  Saving Sanhe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, sanhe) already exists.')
+2023-09-11 16:50:38,898 cities_light WARNING  Saving Xintian, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, xintian) already exists.')
+2023-09-11 16:50:39,020 cities_light WARNING  Saving Yihe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, yihe) already exists.')
+2023-09-11 16:50:39,076 cities_light WARNING  Saving Longhe, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, longhe) already exists.')
+2023-09-11 16:50:39,131 cities_light WARNING  Saving Gulu, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, gulu) already exists.')
+2023-09-11 16:50:39,364 cities_light WARNING  Saving Longfeng, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, longfeng) already exists.')
+2023-09-11 16:50:39,369 cities_light WARNING  Saving Longxing, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, longxing) already exists.')
+2023-09-11 16:50:40,776 cities_light WARNING  Saving Shizuishan, Ningxia Hui Autonomous Region, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(623, 9697, shizuishan) already exists.')
+2023-09-11 16:50:42,286 cities_light WARNING  Saving Liangping, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, liangping) already exists.')
+2023-09-11 16:50:42,293 cities_light WARNING  Saving Xinglong, Chongqing, China failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(636, 9924, xinglong) already exists.')
+2023-09-11 16:50:46,842 cities_light WARNING  Saving Buenaventura, Valle del Cauca, Colombia failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(645, 10949, buenaventura) already exists.')
+2023-09-11 16:50:47,321 cities_light WARNING  Saving Bosconia, Cesar, Colombia failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(664, 10906, bosconia) already exists.')
+2023-09-11 16:51:43,725 cities_light WARNING  Saving Hayes, England, United Kingdom failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(1028, 13468, hayes) already exists.')
+2023-09-11 16:53:44,546 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:53:44,550 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:53:47,176 cities_light WARNING  Saving Panauti, Bagmati Province, Nepal failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(2414, 27926, panauti) already exists.')
+2023-09-11 16:53:47,515 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:53:50,899 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:53:50,901 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:53:53,517 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:55:54,623 cities_light WARNING  Saving Vincent, California, United States failed: IntegrityError('duplicate key value violates unique constraint "cities_light_city_region_id_subregion_id_slug_efb2e768_uniq"\nDETAIL:  Key (region_id, subregion_id, slug)=(3637, 42275, vincent) already exists.')
+2023-09-11 16:56:28,544 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+2023-09-11 16:56:28,544 cities_light INFO     Forced import of countryInfo.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:56:28,544 cities_light INFO     Importing countryInfo.txt
+2023-09-11 16:56:31,029 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:56:31,032 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:56:32,515 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+2023-09-11 16:56:32,515 cities_light INFO     Forced import of admin1CodesASCII.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:56:32,515 cities_light INFO     Importing admin1CodesASCII.txt
+2023-09-11 16:56:34,447 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:56:37,338 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:56:37,341 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:56:37,876 cities_light WARNING  Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+2023-09-11 16:56:37,876 cities_light INFO     Forced import of admin2Codes.txt because data do not seem to have installed successfuly yet, note that this is equivalent to --force-import-all.
+2023-09-11 16:56:37,876 cities_light INFO     Importing admin2Codes.txt
+2023-09-11 16:56:40,628 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-11 16:56:45,904 jazzmin.utils WARNING  listings not found when generating links
+2023-09-11 16:56:45,907 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-11 16:56:48,547 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 15:24:51,320 django.request WARNING  Unauthorized: /api/v1/profiles/friends/
+2023-09-12 15:25:16,145 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 15:25:16,148 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 15:25:18,413 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 15:25:19,871 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-12 15:25:22,945 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 15:25:22,949 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 15:25:25,543 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 15:25:32,320 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 15:25:32,322 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 15:25:33,471 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 15:26:22,006 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-09-12 15:26:27,051 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-09-12 15:26:41,657 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-09-12 15:26:49,163 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 15:30:11,053 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 15:30:22,099 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 15:30:23,194 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 15:31:05,585 django.request WARNING  Forbidden: /api/v1/profiles/friends/
+2023-09-12 15:31:48,842 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 15:31:48,846 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 15:31:49,941 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 15:33:26,719 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 15:33:26,721 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 15:33:27,927 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 15:33:28,666 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 15:33:28,668 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 15:33:29,595 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:03:41,665 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:11:40,696 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:11:54,434 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:12:27,048 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:14:54,560 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:16:31,461 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:16:41,023 jazzmin.utils WARNING  listings not found when generating links
+2023-09-12 16:16:41,027 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-12 16:16:42,152 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-12 16:21:08,149 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/
+2023-09-12 16:21:37,116 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/

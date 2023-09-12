@@ -27,6 +27,7 @@ from .serializers import (
     ProfileSerializer,
     DeleteUserSerializer,
     ProfilesResponseSerializer,
+    SendFriendRequestSerializer,
 )
 from cities_light.models import City
 import re
@@ -300,3 +301,48 @@ class FriendsView(APIView):
         paginated_friends = self.paginator_class.paginate_queryset(friends, request)
         serializer = self.serializer_class(paginated_friends, many=True)
         return CustomResponse.success(message="Friends fetched", data=serializer.data)
+
+    @extend_schema(
+        summary="Send Or Delete Friend Request",
+        description="This endpoint sends or delete friend requests",
+        tags=tags,
+        request=SendFriendRequestSerializer,
+        responses=SuccessResponseSerializer,
+    )
+    async def post(self, request):
+        user = request.user
+        serializer = SendFriendRequestSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Get and validate username existence
+        other_user = await User.objects.aget_or_none(
+            username=serializer.validated_data["username"]
+        )
+        if not other_user:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="User does not exist!",
+                status_code=404,
+            )
+
+        friend = await Friend.objects.filter(
+            Q(requester=user, requestee=other_user)
+            | Q(requester=other_user, requestee=user)
+        ).aget_or_none()
+        message = "Friend Request sent"
+        status_code = 201
+        if friend:
+            status_code = 200
+            message = "Friend Request removed"
+            if user.id != friend.requester_id:
+                raise RequestError(
+                    err_code=ErrorCode.NOT_ALLOWED,
+                    err_msg="The user already sent you a friend request!",
+                    status_code=403,
+                )
+
+            await friend.adelete()
+        else:
+            await Friend.objects.acreate(requester=user, requestee=other_user)
+
+        return CustomResponse.success(message=message, status_code=status_code)
