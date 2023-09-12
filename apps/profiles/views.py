@@ -1,11 +1,11 @@
-from django.db.models import Count, F, Q, Case, When, Value, BooleanField, ForeignKey
+from django.db.models import Count, F, Q, Case, When, Value, BooleanField
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
 from apps.common.models import File
-from apps.common.serializers import ErrorResponseSerializer, SuccessResponseSerializer
+from apps.common.serializers import SuccessResponseSerializer
 from apps.common.responses import CustomResponse
 
 from apps.common.file_types import ALLOWED_IMAGE_TYPES
@@ -360,8 +360,8 @@ class FriendsView(APIView):
         description="""
             This endpoint accepts or reject a friend request
             status choices:
-            - ACCEPTED
-            - REJECTED
+            - true - accepted
+            - false - rejected
         """,
         tags=tags,
         request=AcceptFriendRequestSerializer,
@@ -387,9 +387,17 @@ class FriendsView(APIView):
                 err_msg="You cannot accept or reject a friend request you sent ",
                 status_code=403,
             )
+        
+        # Update or delete friend request based on status
         status = serializer.validated_data["status"]
-        friend.status = status
-        await friend.asave()
+        if status:
+            msg = "Accepted"
+            friend.status = "ACCEPTED"
+            await friend.asave()
+        else:
+            msg = "Rejected"
+            await friend.adelete()
+
         return CustomResponse.success(
-            message=f"Friend Request {status.capitalize()}", status_code=200
+            message=f"Friend Request {msg}", status_code=200
         )

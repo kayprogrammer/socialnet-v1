@@ -70,7 +70,7 @@ class SendFriendRequestSerializer(serializers.Serializer):
 
 
 class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
-    status = serializers.ChoiceField(choices=REQUEST_STATUS_CHOICES[1:3])
+    status = serializers.BooleanField()
 
 
 # RESPONSE SERIALIZERS

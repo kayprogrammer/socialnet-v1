@@ -15,7 +15,6 @@ from apps.common.models import BaseModel
 REQUEST_STATUS_CHOICES = (
     ("PENDING", "PENDING"),
     ("ACCEPTED", "ACCEPTED"),
-    ("REJECTED", "REJECTED"),
 )
 
 
