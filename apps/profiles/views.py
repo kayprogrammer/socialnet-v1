@@ -387,7 +387,7 @@ class FriendsView(APIView):
                 err_msg="You cannot accept or reject a friend request you sent ",
                 status_code=403,
             )
-        
+
         # Update or delete friend request based on status
         status = serializer.validated_data["status"]
         if status:
@@ -398,6 +398,4 @@ class FriendsView(APIView):
             msg = "Rejected"
             await friend.adelete()
 
-        return CustomResponse.success(
-            message=f"Friend Request {msg}", status_code=200
-        )
+        return CustomResponse.success(message=f"Friend Request {msg}", status_code=200)

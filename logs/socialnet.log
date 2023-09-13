@@ -4022,3 +4022,10 @@ LINE 1: ...ounts_user"."city_id", "accounts_user"."dob" FROM "profiles_...
 2023-09-12 17:15:11,241 jazzmin.utils WARNING  listings not found when generating links
 2023-09-12 17:15:11,243 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-12 17:15:12,172 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-13 16:45:54,519 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-13 16:45:57,175 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-13 16:45:58,251 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-09-13 16:51:08,190 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-09-13 16:51:09,395 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-09-13 16:51:11,937 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-09-13 16:51:13,130 django.request WARNING  Not Found: /api/v1/profiles/friends/

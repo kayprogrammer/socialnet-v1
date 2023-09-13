@@ -1,5 +1,6 @@
 from rest_framework.test import APITestCase
 from unittest import mock
+from apps.accounts.models import User
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
 import uuid
@@ -200,3 +201,68 @@ class TestProfile(APITestCase):
                 ],
             },
         )
+
+    def test_send_friend_request(self):
+        user = User.objects.create_user(
+            first_name="Friend",
+            last_name="User",
+            email="friend_user@email.com",
+            password="password",
+        )
+
+        data = {"username": "invalid_username"}
+
+        # Test for valid response for non-existent user name
+        response = self.client.post(self.friends_url, data=data, **self.bearer)
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User does not exist!",
+            },
+        )
+
+        # Test for valid response for valid inputs
+        data["username"] = user.username
+        response = self.client.post(self.friends_url, data=data, **self.bearer)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(
+            response.json(), {"status": "success", "message": "Friend Request sent"}
+        )
+
+        # You can test for other error responses yourself.....
+
+    def test_accept_or_reject_friend_request(self):
+        friend = self.friend
+        friend.status = "PENDING"
+        friend.save()
+
+        data = {"username": "invalid_username", "status": True}
+
+        # Test for valid response for non-existent user name
+        response = self.client.put(
+            self.friends_url, data=data, **self.other_user_bearer
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User does not exist!",
+            },
+        )
+
+        # Test for valid response for valid inputs
+        data["username"] = friend.requester.username
+        response = self.client.put(
+            self.friends_url, data=data, **self.other_user_bearer
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(), {"status": "success", "message": "Friend Request Accepted"}
+        )
+
+        # You can test for other error responses yourself.....
