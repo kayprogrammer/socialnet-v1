@@ -38,25 +38,25 @@ class Chat(BaseModel):
         ordering = ["-updated_at"]
         constraints = [
             CheckConstraint(
-                check=(Q(ctype="DM", name=None, description=None, image=None)) |
-                Q(ctype="GROUP"),
+                check=(Q(ctype="DM", name=None, description=None, image=None))
+                | Q(ctype="GROUP"),
                 name="dm_chat_constraints",
-                violation_error_message="Chat with type 'DM' must have 'name', 'image' and 'description' as None"
+                violation_error_message="Chat with type 'DM' must have 'name', 'image' and 'description' as None",
             )
         ]
 
     # def clean(self):
     #     users = self.users
-    #     print(users)
-    #     if users.count() == 0:
+    #     print(users.all())
+    #     if not users.exists():
     #         raise ValidationError("Chat must have at least one user.")
     #     elif users.count() > 1 and self.ctype == "DM":
     #         raise ValidationError("You can't assign more than 1 user")
-    #     elif self.owner in users:
+    #     elif self.owner in users.all():
     #         raise ValidationError("Owner cannot be in users")
 
     # def save(self, *args, **kwargs):
-    #     print(self.users.all())
+    #     self.full_clean()
     #     return super(Chat, self).save(*args, **kwargs)
 
 
@@ -73,3 +73,21 @@ def users_changed(sender, **kwargs):
 
 
 m2m_changed.connect(users_changed, sender=Chat.users.through)
+
+
+class Message(BaseModel):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="messages")
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages")
+    text = models.TextField()
+    file = models.ForeignKey(File, on_delete=models.SET_NULL, null=True)
+
+    @property
+    def get_file(self):
+        file = self.file
+        if file:
+            return FileProcessor.generate_file_url(
+                key=self.file_id,
+                folder="messages",
+                content_type=file.resource_type,
+            )
+        return None
