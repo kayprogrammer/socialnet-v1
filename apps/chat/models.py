@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import CheckConstraint, Q
 from django.db.models.signals import m2m_changed
 from apps.accounts.models import User
+from apps.chat.validators import validate_chat_users_m2m
 from apps.common.file_processors import FileProcessor
 from django.core.exceptions import ValidationError
 
@@ -16,7 +17,7 @@ class Chat(BaseModel):
     name = models.CharField(max_length=100, null=True, blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="chats")
     ctype = models.CharField(default="DM", max_length=10, choices=CHAT_TYPES)
-    users = models.ManyToManyField(User, blank=True)
+    users = models.ManyToManyField(User)
     description = models.CharField(max_length=1000, null=True, blank=True)
     image = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -41,17 +42,19 @@ class Chat(BaseModel):
                 check=(Q(ctype="DM", name=None, description=None, image=None))
                 | Q(ctype="GROUP"),
                 name="dm_chat_constraints",
-                violation_error_message="Chat with type 'DM' must have 'name', 'image' and 'description' as None",
-            )
+                violation_error_message="DMs cannot have name, image and description",
+            ),
+            CheckConstraint(
+                check=Q(ctype="GROUP", name__isnull=False) | (Q(ctype="DM")),
+                name="group_chat_constraints",
+                violation_error_message="Enter name for group chat",
+            ),
         ]
 
 
 def users_changed(sender, instance, **kwargs):
     users = instance.users
-    if users.count() > 1 and instance.ctype == "DM":
-        raise ValidationError("You can't assign more than 1 user")
-    elif instance.owner in users.all():
-        raise ValidationError("Owner cannot be in users")
+    validate_chat_users_m2m(users, instance.ctype, instance.owner)
 
 
 m2m_changed.connect(users_changed, sender=Chat.users.through)
