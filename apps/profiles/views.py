@@ -1,4 +1,4 @@
-from django.db.models import Count, F, Q, Case, When, Value, BooleanField
+from django.db.models import F, Q, Case, When, Value, BooleanField
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
@@ -16,7 +16,6 @@ from apps.common.utils import (
     set_dict_attr,
 )
 from apps.common.paginators import CustomPagination
-from apps.feed.models import Post
 from apps.profiles.models import Friend
 from .serializers import (
     AcceptFriendRequestSerializer,
