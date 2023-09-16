@@ -5164,3 +5164,1190 @@ Traceback (most recent call last):
   File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 68, in users_changed
     raise ValidationError("Chat must have at least one user.")
 django.core.exceptions.ValidationError: ['Chat must have at least one user.']
+2023-09-15 17:02:18,240 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1422, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 68, in users_changed
+    raise ValidationError("Chat must have at least one user.")
+django.core.exceptions.ValidationError: ['Chat must have at least one user.']
+2023-09-15 17:02:18,941 django.request WARNING  Not Found: /favicon.ico
+2023-09-15 17:02:23,863 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:02:23,866 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:02:25,564 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:02:25,749 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-15 17:02:27,653 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:02:27,656 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:02:28,766 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:02:30,207 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:02:30,210 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:02:31,597 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:02:39,882 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:02:39,885 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:02:41,290 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:06:10,581 django.request ERROR    Internal Server Error: /admin/chat/chat/a4f01bbc-3cca-4f01-bc5f-4dbdc82a7cc6/delete/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/psycopg/cursor.py", line 723, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "chat_message" does not exist
+LINE 1: ..._chat"."description", "chat_chat"."image_id" FROM "chat_mess...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2106, in delete_view
+    return self._delete_view(request, object_id, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2133, in _delete_view
+    ) = self.get_deleted_objects([obj], request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2101, in get_deleted_objects
+    return get_deleted_objects(objs, request, self.admin_site)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 121, in get_deleted_objects
+    collector.collect(objs)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 187, in collect
+    return super().collect(objs, source_attr=source_attr, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/deletion.py", line 348, in collect
+    if getattr(on_delete, "lazy_sub_objs", False) or sub_objs:
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 412, in __bool__
+    self._fetch_all()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/debug_toolbar/panels/sql/tracking.py", line 252, in execute
+    return self._record(super().execute, sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/debug_toolbar/panels/sql/tracking.py", line 177, in _record
+    return method(sql, params)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/psycopg/cursor.py", line 723, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: relation "chat_message" does not exist
+LINE 1: ..._chat"."description", "chat_chat"."image_id" FROM "chat_mess...
+                                                             ^
+2023-09-15 17:06:29,441 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:06:29,444 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:06:30,492 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:06:32,324 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:06:32,327 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:06:33,611 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:06:35,474 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:06:35,478 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:06:36,993 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:06:45,208 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:06:45,210 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:06:46,594 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:10:03,715 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:10:03,718 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:10:04,938 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:10:09,165 django.request ERROR    Internal Server Error: /admin/chat/chat/4c0724d9-1fec-4f37-8dba-9b0d3e8328ca/change/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1889, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1422, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 67, in users_changed
+    raise ValidationError("Chat must have at least one user.")
+django.core.exceptions.ValidationError: ['Chat must have at least one user.']
+2023-09-15 17:10:10,733 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:10:10,735 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:10:12,859 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:10:12,861 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:10:13,938 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:10:15,430 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:10:15,433 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:10:16,597 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:10:18,148 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:10:18,150 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:10:19,151 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:10:23,656 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:10:23,659 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:10:24,647 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:20:46,555 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:20:46,558 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:20:47,545 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:20:48,974 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:20:48,977 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:20:49,963 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:20:51,560 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:20:51,564 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:20:52,699 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:20:57,239 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:20:57,241 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:20:58,369 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:21:01,886 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:21:01,888 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:21:02,928 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:21:07,392 django.request ERROR    Internal Server Error: /admin/chat/chat/7c1e2075-3edd-416e-8d9f-7fee825f4612/change/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1889, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1422, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 68, in users_changed
+    raise ValidationError("Chat must have at least one user.")
+django.core.exceptions.ValidationError: ['Chat must have at least one user.']
+2023-09-15 17:21:09,556 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:21:09,559 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:21:09,766 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:21:11,260 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:21:11,263 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:21:12,220 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:21:13,526 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:21:13,528 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:21:14,673 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:21:46,871 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:21:46,873 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:21:48,179 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:21:52,179 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:21:52,182 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:21:53,637 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:22:02,616 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:22:02,622 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:22:03,619 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:22:05,208 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:22:05,212 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:22:06,403 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:24:55,079 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:24:55,082 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:24:56,512 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:29:24,804 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:29:24,808 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:29:25,927 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:29:27,179 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:29:27,182 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:29:28,217 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:29:29,368 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:29:29,371 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:29:30,584 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:29:42,762 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 68, in users_changed
+    raise ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-15 17:30:20,204 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:30:20,209 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:30:20,546 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:30:21,541 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:30:21,544 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:30:22,718 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:30:34,764 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:30:34,768 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:30:35,893 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:30:50,478 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:30:50,480 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:30:51,551 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:30:52,678 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:30:52,680 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:30:53,742 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:31:32,786 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:31:32,788 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:31:34,109 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:31:42,461 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 53, in users_changed
+    raise ValidationError("Owner cannot be in users")
+django.core.exceptions.ValidationError: ['Owner cannot be in users']
+2023-09-15 17:33:25,192 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:33:25,195 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:33:25,463 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:33:28,733 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:33:28,736 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:33:29,944 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:37:00,349 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:37:00,352 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:37:01,337 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:37:03,386 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:37:03,389 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:37:04,714 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:37:17,621 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-15 17:38:13,019 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise forms.ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-15 17:39:03,834 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:39:03,838 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:39:05,231 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:39:15,105 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:39:15,109 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:39:16,098 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:39:16,997 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:39:17,000 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:39:18,321 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:39:57,741 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:39:57,744 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:39:58,836 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:40:06,344 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:40:06,347 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:40:07,276 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:40:09,047 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:40:09,049 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:40:09,925 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:44:08,708 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:44:08,711 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:44:09,896 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:44:11,395 jazzmin.utils WARNING  listings not found when generating links
+2023-09-15 17:44:11,397 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-15 17:44:12,450 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-15 17:44:26,682 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-15 17:44:37,656 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-15 17:44:40,932 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-15 17:46:11,381 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise forms.ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-15 17:48:55,783 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-16 19:05:25,447 django.request ERROR    Internal Server Error: /admin/chat/chat/add/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1886, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1799, in _changeform_view
+    self.save_related(request, form, formsets, not add)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1253, in save_related
+    form.save_m2m()
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/forms/models.py", line 524, in _save_m2m
+    f.save_form_data(self.instance, cleaned_data[f.name])
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related.py", line 1956, in save_form_data
+    getattr(instance, self.attname).set(data)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1236, in set
+    self.add(*new_objs, through_defaults=through_defaults)
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1137, in add
+    self._add_items(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 1447, in _add_items
+    signals.m2m_changed.send(
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 176, in send
+    return [
+           ^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/apps/chat/models.py", line 51, in users_changed
+    raise ValidationError("You can't assign more than 1 user")
+django.core.exceptions.ValidationError: ["You can't assign more than 1 user"]
+2023-09-16 19:05:26,286 django.request WARNING  Not Found: /favicon.ico
+2023-09-16 19:05:28,663 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:05:28,667 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:05:30,021 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:05:30,813 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-16 19:07:12,013 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:07:12,015 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:07:13,247 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:07:14,574 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:07:14,577 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:07:16,290 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:11:00,052 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:11:00,055 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:11:01,290 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:13:44,096 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:13:44,100 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:13:45,598 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:13:47,655 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:13:47,658 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:13:48,708 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:14:14,276 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:14:14,279 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:14:15,458 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:15:47,447 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:15:47,450 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:15:48,733 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:18:14,034 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:18:14,037 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:18:15,131 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:18:38,552 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:18:38,556 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:18:39,685 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:19:17,123 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:19:17,126 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:19:18,356 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:20:05,595 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:20:05,597 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:20:06,703 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:20:29,891 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:20:29,895 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:20:30,960 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 19:20:32,023 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 19:20:32,025 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 19:20:33,009 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 20:10:31,810 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 20:10:31,849 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 20:10:33,277 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 20:10:33,583 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-16 20:10:36,473 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 20:10:36,476 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 20:10:37,622 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-16 20:12:12,594 jazzmin.utils WARNING  listings not found when generating links
+2023-09-16 20:12:12,597 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-16 20:12:13,871 django.request WARNING  Not Found: /static/media/banner2-icon3.png

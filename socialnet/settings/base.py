@@ -352,6 +352,8 @@ JAZZMIN_SETTINGS = {
         "feed.comment": "fas fa-comments",
         "feed.reply": "fas fa-comments",
         "feed.reaction": "fas fa-thumbs-up",
+        "chat.chat": "fas fa-envelope",
+        "chat.message": "fas fa-comment-alt",
         "sites.site": "fas fa-globe",
     },
     # Icons that are used when one is not manually specified

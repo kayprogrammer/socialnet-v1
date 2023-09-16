@@ -20,8 +20,8 @@ class Chat(BaseModel):
     description = models.CharField(max_length=1000, null=True, blank=True)
     image = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
-    # def __str__(self):
-    #     return self.name if self.name else self.users.all()[0].full_name
+    def __str__(self):
+        return str(self.id)
 
     @property
     def get_image(self):
@@ -45,28 +45,10 @@ class Chat(BaseModel):
             )
         ]
 
-    # def clean(self):
-    #     users = self.users
-    #     print(users.all())
-    #     if not users.exists():
-    #         raise ValidationError("Chat must have at least one user.")
-    #     elif users.count() > 1 and self.ctype == "DM":
-    #         raise ValidationError("You can't assign more than 1 user")
-    #     elif self.owner in users.all():
-    #         raise ValidationError("Owner cannot be in users")
 
-    # def save(self, *args, **kwargs):
-    #     self.full_clean()
-    #     return super(Chat, self).save(*args, **kwargs)
-
-
-def users_changed(sender, **kwargs):
-    instance = kwargs["instance"]
+def users_changed(sender, instance, **kwargs):
     users = instance.users
-    print(users.all())
-    if users.count() == 0:
-        raise ValidationError("Chat must have at least one user.")
-    elif users.count() > 1 and instance.ctype == "DM":
+    if users.count() > 1 and instance.ctype == "DM":
         raise ValidationError("You can't assign more than 1 user")
     elif instance.owner in users.all():
         raise ValidationError("Owner cannot be in users")
