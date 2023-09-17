@@ -15,8 +15,7 @@ def get_user(user):
         "slug": user.username,
         "avatar": user.get_avatar,
     }
-
-
+    
 class ChatSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)
     owner = serializers.SerializerMethodField()
@@ -26,6 +25,7 @@ class ChatSerializer(serializers.Serializer):
     image = serializers.CharField(
         source="get_image", default="https://img.url", read_only=True
     )
+    latest_message = serializers.SerializerMethodField()
 
     def get_owner(self, obj):
         return get_user(obj.owner)
@@ -33,6 +33,15 @@ class ChatSerializer(serializers.Serializer):
     def get_users(self, obj) -> list:
         return [get_user(user) for user in obj.users.all()]
 
+
+class MessageSerializer(serializers.Serializer):
+    chat = ChatSerializer()
+    sender = serializers.SerializerMethodField()
+    text = serializers.CharField()
+    file = serializers.URLField(source="get_file")
+
+    def get_sender(self, obj):
+        return get_user(obj.sender)
 
 class ChatsResponseSerializer(SuccessResponseSerializer):
     data = ChatSerializer(many=True)

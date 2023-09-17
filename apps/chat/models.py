@@ -34,6 +34,11 @@ class Chat(BaseModel):
                 content_type=image.resource_type,
             )
         return None
+    
+    @property
+    def latest_message(self):
+        message = self.messages.latest()
+        return message
 
     class Meta:
         ordering = ["-updated_at"]
@@ -76,3 +81,6 @@ class Message(BaseModel):
                 content_type=file.resource_type,
             )
         return None
+
+    class Meta:
+        get_latest_by = 'created_at'
