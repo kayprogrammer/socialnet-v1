@@ -54,6 +54,7 @@ urlpatterns = [
     path("api/v1/auth/", include("apps.accounts.urls")),
     path("api/v1/profiles/", include("apps.profiles.urls")),
     path("api/v1/feed/", include("apps.feed.urls")),
+    path("api/v1/chats/", include("apps.chat.urls")),
     path("api/v1/healthcheck/", HealthCheckView.as_view()),
     path("__debug__/", include(debug_toolbar.urls)),
 ]

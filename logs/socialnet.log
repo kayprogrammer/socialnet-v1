@@ -7255,3 +7255,271 @@ TypeError: 'NoneType' object is not iterable
 2023-09-16 23:18:18,966 jazzmin.utils WARNING  listings not found when generating links
 2023-09-16 23:18:18,970 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-16 23:18:20,178 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 17:11:04,654 django.request WARNING  Unauthorized: /api/v1/chats/
+2023-09-17 17:15:07,482 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 17:15:33,288 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 17:16:02,527 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 18:12:52,983 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:26:22,072 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 19:26:22,224 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 19:26:28,853 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 19:26:30,191 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-17 19:30:31,997 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 19:30:32,000 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 19:30:33,002 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 19:30:37,979 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:37:03,111 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:37:44,109 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:40:34,256 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:41:50,825 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:43:16,623 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:47:09,397 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:49:02,989 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:49:25,343 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:51:52,930 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:53:03,083 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:53:18,902 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:57:14,754 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:57:53,475 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:58:05,337 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:59:05,810 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:59:27,273 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 19:59:47,127 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:00:14,512 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:00:33,823 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:04:31,079 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:07:49,439 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:08:02,984 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:08:29,081 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:23:30,790 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:24:16,104 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:24:37,780 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:24:45,827 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:25:46,574 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:29:59,170 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:53:55,210 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:55:12,531 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 20:56:03,671 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:07:37,196 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:07:37,198 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:07:38,405 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:07:48,643 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:07:58,158 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:08:36,638 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:12:01,213 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:12:20,108 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:21:54,310 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:22:59,895 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:23:08,989 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:25:14,071 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:27:33,473 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:30:52,881 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:30:52,885 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:30:54,514 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:31:22,198 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:31:22,201 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:31:23,338 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:31:34,060 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:31:34,062 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:31:35,183 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:31:55,797 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:32:45,087 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:34:52,054 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:34:52,059 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:34:53,446 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:34:56,574 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:34:56,576 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:34:57,831 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:35:06,866 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:36:24,422 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:37:08,066 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:37:58,293 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:39:04,952 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:42:04,413 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:42:04,416 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:42:05,782 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:42:07,109 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:42:07,112 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:42:08,060 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:42:18,799 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:42:18,802 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:42:19,841 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:42:27,201 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:43:32,405 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:43:32,408 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:43:33,614 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:43:36,458 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:43:36,461 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:43:37,513 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:43:41,237 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:43:41,240 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:43:42,346 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:43:43,335 jazzmin.utils WARNING  listings not found when generating links
+2023-09-17 21:43:43,339 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-17 21:43:44,219 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-17 21:43:53,715 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:43:58,078 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:45:00,455 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:47:20,695 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:47:59,197 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:48:17,989 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:48:37,824 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:50:31,306 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:51:44,005 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:52:21,006 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:52:58,367 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:56:03,953 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:56:12,364 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:56:29,351 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:56:43,886 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:56:58,336 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:57:06,670 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:57:19,500 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:57:52,441 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 21:58:03,677 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:04:28,101 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:04:51,030 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:05:07,150 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:05:19,476 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:06:58,942 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:07:42,188 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:08:00,620 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:11:05,786 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:11:39,596 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:12:08,157 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:16:45,614 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:17:31,461 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:17:58,426 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:18:17,952 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:35:13,926 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:36:17,346 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:36:33,052 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:36:54,623 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:38:50,316 django.request ERROR    Internal Server Error: /api/v1/chats/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/renderers.py", line 99, in render
+    ret = json.dumps(
+          ^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/utils/json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/utils/encoders.py", line 67, in default
+    return super().default(obj)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type coroutine is not JSON serializable
+2023-09-17 22:41:02,657 django.request ERROR    Internal Server Error: /api/v1/chats/
+Traceback (most recent call last):
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 534, in thread_handler
+    raise exc_info[1]
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/renderers.py", line 99, in render
+    ret = json.dumps(
+          ^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/utils/json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/kayprogrammer/Documents/Projects/Django/socialnet-v1/env/lib/python3.11/site-packages/rest_framework/utils/encoders.py", line 67, in default
+    return super().default(obj)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type coroutine is not JSON serializable
+2023-09-17 22:41:12,279 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:41:30,057 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:41:40,152 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:41:52,205 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:42:04,162 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:44:48,393 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:46:29,124 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:46:44,853 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:47:05,949 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:47:26,387 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:47:37,375 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:47:52,518 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:48:21,551 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:48:47,315 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:51:45,624 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:52:01,277 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:53:32,462 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:56:40,911 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-17 22:56:48,815 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 19:31:27,430 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 19:31:27,473 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 19:31:29,729 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 19:31:31,666 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-18 19:35:52,210 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 19:36:48,566 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 19:46:37,032 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 19:48:32,073 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 19:48:47,425 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 20:05:21,730 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 20:06:43,756 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 20:07:03,967 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 20:10:57,058 django.request ERROR    Internal Server Error: /api/v1/chats/

@@ -9,4 +9,3 @@ def validate_chat_users_m2m(users, ctype, owner):
         raise ValidationError("Owner cannot be in users")
     elif users_count > 100:
         raise ValidationError("Cannot have more than 100 users in a group")
-        

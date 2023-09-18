@@ -34,10 +34,11 @@ class Chat(BaseModel):
                 content_type=image.resource_type,
             )
         return None
-    
+
     @property
     def latest_message(self):
-        message = self.messages.latest()
+        message = self.messages.last()
+        print(message)
         return message
 
     class Meta:
@@ -69,7 +70,7 @@ class Message(BaseModel):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="messages")
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages")
     text = models.TextField()
-    file = models.ForeignKey(File, on_delete=models.SET_NULL, null=True)
+    file = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
     @property
     def get_file(self):
@@ -83,4 +84,4 @@ class Message(BaseModel):
         return None
 
     class Meta:
-        get_latest_by = 'created_at'
+        get_latest_by = "created_at"
