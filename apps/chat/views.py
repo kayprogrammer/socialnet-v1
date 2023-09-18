@@ -1,4 +1,4 @@
-from django.db.models import F, Q, OuterRef, Subquery
+from django.db.models import F, Q, Prefetch
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
@@ -35,15 +35,17 @@ class ChatsView(APIView):
             Chat.objects.filter(Q(owner=user) | Q(users__id=user.id))
             .select_related("owner", "owner__avatar", "image")
             .prefetch_related(
-                "messages",
-                "messages__sender",
-                "messages__sender__avatar",
-                "messages__file",
+                Prefetch(
+                    "messages",
+                    queryset=Message.objects.select_related(
+                        "sender", "sender__avatar", "file"
+                    ).order_by("-created_at"),
+                    to_attr="latest_messages",
+                )
             )
+            .distinct()
         )
         chats = await sync_to_async(list)(chats)
-        lm = await chats[0].messages.alast()
-        print(lm)
         return chats
 
     @extend_schema(

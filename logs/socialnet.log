@@ -7523,3 +7523,70 @@ TypeError: Object of type coroutine is not JSON serializable
 2023-09-18 20:06:43,756 django.request ERROR    Internal Server Error: /api/v1/chats/
 2023-09-18 20:07:03,967 django.request ERROR    Internal Server Error: /api/v1/chats/
 2023-09-18 20:10:57,058 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 20:59:47,172 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:04:45,622 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:05:17,607 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:28:29,235 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:29:11,662 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:31:37,134 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:32:47,486 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:33:15,497 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:36:01,478 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:36:04,739 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:42:55,213 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:44:04,830 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:44:33,957 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:44:59,980 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:45:12,591 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:52:48,370 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:53:44,994 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:54:02,133 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:57:39,581 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 21:57:52,100 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:08:49,438 django.request WARNING  Not Found: /favicon.ico
+2023-09-18 22:17:23,328 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:25:17,814 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:26:31,551 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:26:59,192 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:39:34,143 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:39:59,447 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:40:36,350 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:50:14,587 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:51:25,552 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 22:58:16,482 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-18 23:02:48,685 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:02:48,688 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:02:50,155 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:03:03,908 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:03:03,910 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:03:05,205 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:03:06,929 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:03:06,932 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:03:07,720 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:03:35,702 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:03:35,705 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:03:36,801 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:03:50,731 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:03:50,734 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:03:51,831 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:03:52,771 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:03:52,773 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:03:54,125 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:04:30,520 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:04:30,522 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:04:31,836 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:04:38,546 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:04:38,549 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:04:39,725 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:04:41,805 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:04:41,808 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:04:42,943 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:04:44,235 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:04:44,237 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:04:45,546 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:04:57,328 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:04:57,331 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:04:58,471 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-18 23:05:08,669 jazzmin.utils WARNING  listings not found when generating links
+2023-09-18 23:05:08,673 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-18 23:05:09,805 django.request WARNING  Not Found: /static/media/banner2-icon3.png

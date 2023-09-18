@@ -35,12 +35,6 @@ class Chat(BaseModel):
             )
         return None
 
-    @property
-    def latest_message(self):
-        message = self.messages.last()
-        print(message)
-        return message
-
     class Meta:
         ordering = ["-updated_at"]
         constraints = [

@@ -24,7 +24,7 @@ class ChatSerializer(serializers.Serializer):
     image = serializers.CharField(
         source="get_image", default="https://img.url", read_only=True
     )
-    # latest_message = serializers.SerializerMethodField()
+    latest_message = serializers.SerializerMethodField()
     created_at = serializers.DateTimeField(
         default_timezone=pytz.timezone("UTC"), read_only=True
     )
@@ -36,9 +36,9 @@ class ChatSerializer(serializers.Serializer):
         return get_user(obj.owner)
 
     def get_latest_message(self, obj) -> dict:
-        message = obj.latest_message
-        print(message)
-        if message:
+        lmessages = obj.latest_messages
+        if len(lmessages) > 0:
+            message = lmessages[0]
             return {
                 "sender": get_user(message.sender),
                 "text": message.text,
