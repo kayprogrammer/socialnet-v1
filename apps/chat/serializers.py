@@ -5,7 +5,7 @@ from apps.chat.models import CHAT_TYPES
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
-from apps.common.schema_examples import file_upload_data
+from apps.common.schema_examples import file_upload_data, user_data, latest_message_data
 
 
 def get_user(user):
@@ -17,14 +17,15 @@ def get_user(user):
 
 
 class ChatSerializer(serializers.Serializer):
+    id = serializers.UUIDField()
     name = serializers.CharField(max_length=100)
-    owner = serializers.SerializerMethodField()
+    owner = serializers.SerializerMethodField(default=user_data)
     ctype = serializers.ChoiceField(choices=CHAT_TYPES)
     description = serializers.CharField(max_length=1000)
     image = serializers.CharField(
         source="get_image", default="https://img.url", read_only=True
     )
-    latest_message = serializers.SerializerMethodField()
+    latest_message = serializers.SerializerMethodField(default=latest_message_data)
     created_at = serializers.DateTimeField(
         default_timezone=pytz.timezone("UTC"), read_only=True
     )
@@ -32,11 +33,11 @@ class ChatSerializer(serializers.Serializer):
         default_timezone=pytz.timezone("UTC"), read_only=True
     )
 
-    def get_owner(self, obj):
+    def get_owner(self, obj) -> dict:
         return get_user(obj.owner)
 
     def get_latest_message(self, obj) -> dict:
-        lmessages = obj.latest_messages
+        lmessages = obj.lmessages
         if len(lmessages) > 0:
             message = lmessages[0]
             return {
@@ -47,16 +48,8 @@ class ChatSerializer(serializers.Serializer):
         return None
 
 
-class ChatDetailSerializer(ChatSerializer):
-    users = serializers.SerializerMethodField()
-
-    def get_users(self, obj) -> list:
-        return [get_user(user) for user in obj.users.all()]
-
-
 class MessageSerializer(serializers.Serializer):
-    chat = ChatSerializer()
-    sender = serializers.SerializerMethodField()
+    sender = serializers.SerializerMethodField(default=user_data)
     text = serializers.CharField()
     file = serializers.URLField(source="get_file")
     created_at = serializers.DateTimeField(
@@ -66,12 +59,25 @@ class MessageSerializer(serializers.Serializer):
         default_timezone=pytz.timezone("UTC"), read_only=True
     )
 
-    def get_sender(self, obj):
+    def get_sender(self, obj) -> dict:
         return get_user(obj.sender)
+
+
+class MessagesSerializer(serializers.Serializer):
+    chat = ChatSerializer()
+    messages = MessageSerializer(many=True)
+    users = serializers.SerializerMethodField(default=[user_data])
+
+    def get_users(self, obj) -> list:
+        return [get_user(user) for user in obj["chat"].recipients]
 
 
 class ChatsResponseSerializer(SuccessResponseSerializer):
     data = ChatSerializer(many=True)
+
+
+class ChatResponseSerializer(SuccessResponseSerializer):
+    data = MessagesSerializer()
 
 
 # class ProfileCreateResponseDataSerializer(ProfileSerializer):

@@ -4,7 +4,6 @@ from django.db.models.signals import m2m_changed
 from apps.accounts.models import User
 from apps.chat.validators import validate_chat_users_m2m
 from apps.common.file_processors import FileProcessor
-from django.core.exceptions import ValidationError
 
 from apps.common.models import BaseModel, File
 

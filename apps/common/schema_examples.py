@@ -5,3 +5,9 @@ file_upload_data = {
 }
 
 user_data = {"name": "John Doe", "slug": "john-doe", "avatar": "https://img.url"}
+
+latest_message_data = {
+    "sender": user_data,
+    "text": "Cool text",
+    "file": "https://img.url",
+}

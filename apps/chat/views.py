@@ -1,4 +1,4 @@
-from django.db.models import F, Q, Prefetch
+from django.db.models import Q, Prefetch
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
@@ -17,8 +17,10 @@ from apps.common.utils import (
 )
 from apps.common.paginators import CustomPagination
 from .serializers import (
+    ChatResponseSerializer,
     ChatSerializer,
     ChatsResponseSerializer,
+    MessagesSerializer,
 )
 
 tags = ["Chats"]
@@ -40,7 +42,7 @@ class ChatsView(APIView):
                     queryset=Message.objects.select_related(
                         "sender", "sender__avatar", "file"
                     ).order_by("-created_at"),
-                    to_attr="latest_messages",
+                    to_attr="lmessages",
                 )
             )
             .distinct()
@@ -50,7 +52,10 @@ class ChatsView(APIView):
 
     @extend_schema(
         summary="Retrieve User Chats",
-        description="This endpoint retrieves a paginated list of the current user chats",
+        description="""
+            This endpoint retrieves a paginated list of the current user chats
+            Only chat with type "GROUP" have name, image and description.
+        """,
         tags=tags,
         responses=ChatsResponseSerializer,
         parameters=[
@@ -68,3 +73,50 @@ class ChatsView(APIView):
         paginated_chats = self.paginator_class.paginate_queryset(chats, request)
         serializer = self.serializer_class(paginated_chats, many=True)
         return CustomResponse.success(message="Chats fetched", data=serializer.data)
+
+
+class ChatView(APIView):
+    serializer_class = MessagesSerializer
+
+    async def get_object(self, user, chat_id):
+        chat = (
+            await Chat.objects.filter(Q(owner=user) | Q(users__id=user.id))
+            .select_related("owner", "owner__avatar", "image")
+            .prefetch_related(
+                Prefetch(
+                    "messages",
+                    queryset=Message.objects.select_related(
+                        "sender", "sender__avatar", "file"
+                    ).order_by("-created_at"),
+                    to_attr="lmessages",
+                ),
+                Prefetch(
+                    "users",
+                    queryset=User.objects.select_related("avatar"),
+                    to_attr="recipients",
+                ),
+            )
+            .aget_or_none(id=chat_id)
+        )
+        if not chat:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="User has not chat with that ID",
+                status_code=404,
+            )
+        return chat
+
+    @extend_schema(
+        summary="Retrieve messages from a Chat",
+        description="""
+            This endpoint retrieves all messages in a chat.
+        """,
+        tags=tags,
+        responses=ChatResponseSerializer,
+    )
+    async def get(self, request, *args, **kwargs):
+        user = request.user
+        chat = await self.get_object(user, kwargs.get("chat_id"))
+        messages = await sync_to_async(list)(chat.lmessages)
+        serializer = self.serializer_class({"chat": chat, "messages": messages})
+        return CustomResponse.success(message="Messages fetched", data=serializer.data)
