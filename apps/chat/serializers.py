@@ -48,7 +48,9 @@ class ChatSerializer(serializers.Serializer):
         return None
 
 
+# For reading and creating messages
 class MessageSerializer(serializers.Serializer):
+    id = serializers.UUIDField(read_only=True)
     chat_id = serializers.UUIDField(write_only=True, required=False)
     username = serializers.CharField(write_only=True, required=False)
     sender = serializers.SerializerMethodField(default=user_data)
@@ -83,6 +85,19 @@ class MessageSerializer(serializers.Serializer):
         return attrs
 
 
+# Update message serializer
+class UpdateMessageSerializer(serializers.Serializer):
+    text = serializers.CharField(required=False)
+    file_type = serializers.CharField(
+        write_only=True, validators=[validate_file_type], required=False
+    )
+
+    def validate(self, attrs):
+        if not attrs.get("text") and not attrs.get("file_type"):
+            raise serializers.ValidationError({"text": "You must enter a text"})
+        return attrs
+
+
 class MessagesSerializer(serializers.Serializer):
     chat = ChatSerializer()
     messages = MessageSerializer(many=True)
@@ -90,6 +105,9 @@ class MessagesSerializer(serializers.Serializer):
 
     def get_users(self, obj) -> list:
         return [get_user(user) for user in obj["chat"].recipients]
+
+
+# RESPONSE SERIALIZERS
 
 
 class ChatsResponseSerializer(SuccessResponseSerializer):
@@ -115,24 +133,3 @@ class MessageCreateResponseDataSerializer(MessageSerializer):
 
 class MessageCreateResponseSerializer(SuccessResponseSerializer):
     data = MessageCreateResponseDataSerializer()
-
-
-# class DeleteUserSerializer(serializers.Serializer):
-#     password = serializers.CharField()
-
-
-# class SendFriendRequestSerializer(serializers.Serializer):
-#     username = serializers.CharField()
-
-
-# class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
-#     status = serializers.BooleanField()
-
-
-# # RESPONSE SERIALIZERS
-# class ProfilesResponseSerializer(SuccessResponseSerializer):
-#     data = ProfileSerializer(many=True)
-
-
-# class ProfileResponseSerializer(SuccessResponseSerializer):
-#     data = ProfileSerializer()

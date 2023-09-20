@@ -25,6 +25,7 @@ from .serializers import (
     MessageCreateResponseSerializer,
     MessageSerializer,
     MessagesSerializer,
+    UpdateMessageSerializer,
 )
 
 tags = ["Chats"]
@@ -83,6 +84,10 @@ class ChatsView(APIView):
         summary="Send a  message",
         description="""
             This endpoint sends a message.
+            You must either send a text or a file or both.
+            If there's no chat_id, then its a new chat and you must set username and leave chat_id
+            If chat_id is available, then ignore username and set the correct chat_id
+            The file_upload_data in the response is what is used for uploading the file to cloudinary from client
         """,
         tags=tags,
         responses={201: MessageCreateResponseSerializer},
@@ -156,6 +161,7 @@ class ChatsView(APIView):
 
 class ChatView(APIView):
     serializer_class = MessagesSerializer
+    permission_classes = (IsAuthenticatedCustom,)
 
     async def get_object(self, user, chat_id):
         chat = (
@@ -199,3 +205,58 @@ class ChatView(APIView):
         messages = await sync_to_async(list)(chat.lmessages)
         serializer = self.serializer_class({"chat": chat, "messages": messages})
         return CustomResponse.success(message="Messages fetched", data=serializer.data)
+
+
+class MessageView(APIView):
+    permission_classes = (IsAuthenticatedCustom,)
+    serializer_class = UpdateMessageSerializer
+
+    async def get_object(self, message_id, user):
+        message = await Message.objects.select_related(
+            "sender", "sender__avatar", "file"
+        ).aget_or_none(id=message_id, sender=user)
+        if not message:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="User has no message with that ID",
+                status_code=404,
+            )
+        return message
+
+    @extend_schema(
+        summary="Update a  message",
+        description="""
+            This endpoint updates a message.
+            You must either send a text or a file or both.
+            The file_upload_data in the response is what is used for uploading the file to cloudinary from client
+        """,
+        tags=tags,
+        responses={200: MessageCreateResponseSerializer},
+    )
+    async def put(self, request, *args, **kwargs):
+        user = request.user
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        file_type = data.get("file_type")
+
+        message = await self.get_object(kwargs.get("message_id"), user)
+        # Handle File Upload
+        file_upload_status = False
+        data.pop("file_type", None)
+        if file_type:
+            file_upload_status = True
+            if message.file:
+                message.file.resource_type = file_type
+                await message.file.asave()
+            else:
+                file = await create_file(data.get("file_type"))
+                data["file"] = file
+
+        message = set_dict_attr(message, data)
+        await message.asave()
+
+        serializer = MessageCreateResponseDataSerializer(
+            message, context={"file_upload_status": file_upload_status}
+        )
+        return CustomResponse.success(message="Message updated", data=serializer.data)
