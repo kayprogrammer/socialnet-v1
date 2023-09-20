@@ -1,11 +1,11 @@
 import pytz
 from rest_framework import serializers
-from apps.accounts.models import User
 from apps.chat.models import CHAT_TYPES
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
-from apps.common.validators import validate_file_type
+from apps.common.validators import validate_file_type, validate_image_type
 from apps.common.schema_examples import file_upload_data, user_data, latest_message_data
+from django.utils.translation import gettext_lazy as _
 
 
 def get_user(user):
@@ -98,6 +98,7 @@ class UpdateMessageSerializer(serializers.Serializer):
         return attrs
 
 
+# For a single chat
 class MessagesSerializer(serializers.Serializer):
     chat = ChatSerializer()
     messages = MessageSerializer(many=True)
@@ -105,6 +106,31 @@ class MessagesSerializer(serializers.Serializer):
 
     def get_users(self, obj) -> list:
         return [get_user(user) for user in obj["chat"].recipients]
+
+
+class UserTouchSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    action = serializers.ChoiceField(choices=(("ADD", "ADD"), ("REMOVE", "REMOVE")))
+
+
+class GroupChatSerializer(serializers.Serializer):
+    name = serializers.CharField(
+        max_length=100, error_messages={"max_length": _("{max_length} characters max.")}
+    )
+    users_entry = UserTouchSerializer(many=True, write_only=True)
+    description = serializers.CharField(
+        required=False,
+        max_length=1000,
+        error_messages={"max_length": _("{max_length} characters max.")},
+    )
+    file_type = serializers.CharField(required=False, validators=[validate_image_type], write_only=True)
+    image = serializers.CharField(
+        source="get_image", default="https://img.url", read_only=True
+    )
+    users = serializers.SerializerMethodField(default=[user_data])
+
+    def get_users(self, obj) -> list:
+        return [get_user(user) for user in obj.recipients]
 
 
 # RESPONSE SERIALIZERS
@@ -133,3 +159,20 @@ class MessageCreateResponseDataSerializer(MessageSerializer):
 
 class MessageCreateResponseSerializer(SuccessResponseSerializer):
     data = MessageCreateResponseDataSerializer()
+
+
+class GroupChatCreateResponseDataSerializer(GroupChatSerializer):
+    file_upload_data = serializers.SerializerMethodField(default=file_upload_data)
+
+    def get_file_upload_data(self, obj) -> dict:
+        file_upload_status = self.context.get("file_upload_status")
+        if file_upload_status:
+            return FileProcessor.generate_file_signature(
+                key=obj.file_id,
+                folder="groups",
+            )
+        return None
+
+
+class GroupChatCreateResponseSerializer(SuccessResponseSerializer):
+    data = GroupChatCreateResponseDataSerializer()

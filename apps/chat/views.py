@@ -3,14 +3,13 @@ from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 from apps.chat.models import Chat, Message
-from apps.chat.utils import create_file
+from apps.chat.utils import create_file, sort_users_entry
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
-from apps.common.models import File
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.responses import CustomResponse
 
-from apps.common.file_types import ALLOWED_IMAGE_TYPES
+from apps.common.file_types import ALLOWED_FILE_TYPES
 from apps.accounts.models import User
 from apps.common.utils import (
     IsAuthenticatedCustom,
@@ -21,6 +20,9 @@ from .serializers import (
     ChatResponseSerializer,
     ChatSerializer,
     ChatsResponseSerializer,
+    GroupChatCreateResponseDataSerializer,
+    GroupChatCreateResponseSerializer,
+    GroupChatSerializer,
     MessageCreateResponseDataSerializer,
     MessageCreateResponseSerializer,
     MessageSerializer,
@@ -81,13 +83,14 @@ class ChatsView(APIView):
         return CustomResponse.success(message="Chats fetched", data=serializer.data)
 
     @extend_schema(
-        summary="Send a  message",
-        description="""
+        summary="Send a message",
+        description=f"""
             This endpoint sends a message.
             You must either send a text or a file or both.
             If there's no chat_id, then its a new chat and you must set username and leave chat_id
             If chat_id is available, then ignore username and set the correct chat_id
             The file_upload_data in the response is what is used for uploading the file to cloudinary from client
+            ALLOWED FILE TYPES: {", ".join(ALLOWED_FILE_TYPES)}
         """,
         tags=tags,
         responses={201: MessageCreateResponseSerializer},
@@ -186,7 +189,7 @@ class ChatView(APIView):
         if not chat:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
-                err_msg="User has not chat with that ID",
+                err_msg="User has no chat with that ID",
                 status_code=404,
             )
         return chat
@@ -205,6 +208,87 @@ class ChatView(APIView):
         messages = await sync_to_async(list)(chat.lmessages)
         serializer = self.serializer_class({"chat": chat, "messages": messages})
         return CustomResponse.success(message="Messages fetched", data=serializer.data)
+
+    @extend_schema(
+        summary="Update a Group Chat",
+        description="""
+            This endpoint updates a group chat.
+            Field "action" can only be of two choices: ADD, REMOVE
+        """,
+        tags=tags,
+        request=GroupChatSerializer,
+        responses={200: GroupChatCreateResponseSerializer},
+    )
+    async def patch(self, request, *args, **kwargs):
+        user = request.user
+        chat = await Chat.objects.select_related("image").aget_or_none(
+            owner=user, id=kwargs.get("chat_id"), ctype="GROUP"
+        )
+        if not chat:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="User owns no group chat with that ID",
+                status_code=404,
+            )
+
+        serializer = GroupChatSerializer(data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        # Handle File Upload
+        file_type = data.pop("file_type", None)
+        file_upload_status = False
+        if file_type:
+            file_upload_status = True
+            if chat.image:
+                chat.image.resource_type = file_type
+                await chat.image.asave()
+            else:
+                file = await create_file(data.get("file_type"))
+                data["image"] = file
+
+        # Handle Users Upload or Remove
+        users_entry = data.pop("users_entry", None)
+        if users_entry:
+            usernames_to_add, usernames_to_remove = await sort_users_entry(users_entry)
+            users_to_add = await sync_to_async(list)(
+                User.objects.filter(username__in=usernames_to_add)
+            )
+            users_to_remove = await sync_to_async(list)(
+                User.objects.filter(username__in=usernames_to_remove)
+            )
+            chat.users.set(users_to_add)
+            chat.users.remove(users_to_remove)
+
+        chat = set_dict_attr(chat, data)
+        await chat.asave()
+
+        serializer = GroupChatCreateResponseDataSerializer(
+            chat, context={"file_upload_status": file_upload_status}
+        )
+        return CustomResponse.success(message="Chat updated", data=serializer.data)
+
+    @extend_schema(
+        summary="Delete a Group Chat",
+        description="""
+            This endpoint deletes a group chat.
+        """,
+        tags=tags,
+        responses={200: SuccessResponseSerializer},
+    )
+    async def delete(self, request, *args, **kwargs):
+        user = request.user
+        chat = await Chat.objects.aget_or_none(
+            owner=user, id=kwargs.get("chat_id"), ctype="GROUP"
+        )
+        if not chat:
+            raise RequestError(
+                err_code=ErrorCode.NON_EXISTENT,
+                err_msg="User owns no group chat with that ID",
+                status_code=404,
+            )
+        await chat.adelete()
+        return CustomResponse.success(message="Group Chat Deleted")
 
 
 class MessageView(APIView):
@@ -225,10 +309,11 @@ class MessageView(APIView):
 
     @extend_schema(
         summary="Update a message",
-        description="""
+        description=f"""
             This endpoint updates a message.
             You must either send a text or a file or both.
             The file_upload_data in the response is what is used for uploading the file to cloudinary from client
+            ALLOWED FILE TYPES: {", ".join(ALLOWED_FILE_TYPES)}
         """,
         tags=tags,
         responses={200: MessageCreateResponseSerializer},
@@ -238,12 +323,11 @@ class MessageView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
-        file_type = data.get("file_type")
 
         message = await self.get_object(kwargs.get("message_id"), user)
         # Handle File Upload
         file_upload_status = False
-        data.pop("file_type", None)
+        file_type = data.pop("file_type", None)
         if file_type:
             file_upload_status = True
             if message.file:
@@ -274,3 +358,16 @@ class MessageView(APIView):
         message = await self.get_object(kwargs.get("message_id"), user)
         await message.adelete()
         return CustomResponse.success(message="Message deleted")
+
+
+class ChatGroupCreateView(APIView):
+    @extend_schema(
+        summary="Create a group chat",
+        description="""
+            This endpoint creates a group chat.
+        """,
+        tags=tags,
+        responses={200: SuccessResponseSerializer},
+    )
+    async def post(self, request):
+        pass
