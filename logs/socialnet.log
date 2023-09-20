@@ -7784,3 +7784,7 @@ TypeError: Object of type coroutine is not JSON serializable
 2023-09-20 15:00:39,557 jazzmin.utils WARNING  listings not found when generating links
 2023-09-20 15:00:39,560 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-20 15:00:40,553 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 15:04:05,689 django.request WARNING  Unauthorized: /api/v1/chats/messages/e6061992-d9b0-49d9-8522-e8c3c104e5d2/
+2023-09-20 15:04:21,660 django.request WARNING  Not Found: /api/v1/chats/messages/e6061992-d9b0-49d9-8522-e8c3c104e5d2/
+2023-09-20 15:04:29,941 django.request WARNING  Not Found: /api/v1/chats/messages/e6061992-d9b0-49d9-8522-e8c3c104e5d2/
+2023-09-20 15:04:36,453 django.request WARNING  Not Found: /api/v1/chats/messages/e6061992-d9b0-49d9-8522-e8c3c104e5d5/

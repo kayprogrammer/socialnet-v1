@@ -224,7 +224,7 @@ class MessageView(APIView):
         return message
 
     @extend_schema(
-        summary="Update a  message",
+        summary="Update a message",
         description="""
             This endpoint updates a message.
             You must either send a text or a file or both.
@@ -260,3 +260,17 @@ class MessageView(APIView):
             message, context={"file_upload_status": file_upload_status}
         )
         return CustomResponse.success(message="Message updated", data=serializer.data)
+
+    @extend_schema(
+        summary="Delete a message",
+        description="""
+            This endpoint deletes a message.
+        """,
+        tags=tags,
+        responses={200: SuccessResponseSerializer},
+    )
+    async def delete(self, request, *args, **kwargs):
+        user = request.user
+        message = await self.get_object(kwargs.get("message_id"), user)
+        await message.adelete()
+        return CustomResponse.success(message="Message deleted")
