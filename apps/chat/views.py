@@ -3,6 +3,7 @@ from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 from apps.chat.models import Chat, Message
+from apps.chat.utils import create_file
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
 from apps.common.models import File
@@ -20,6 +21,9 @@ from .serializers import (
     ChatResponseSerializer,
     ChatSerializer,
     ChatsResponseSerializer,
+    MessageCreateResponseDataSerializer,
+    MessageCreateResponseSerializer,
+    MessageSerializer,
     MessagesSerializer,
 )
 
@@ -28,6 +32,7 @@ tags = ["Chats"]
 
 class ChatsView(APIView):
     serializer_class = ChatSerializer
+    post_serializer_class = MessageSerializer
     paginator_class = CustomPagination()
     paginator_class.page_size = 200
     permission_classes = (IsAuthenticatedCustom,)
@@ -73,6 +78,80 @@ class ChatsView(APIView):
         paginated_chats = self.paginator_class.paginate_queryset(chats, request)
         serializer = self.serializer_class(paginated_chats, many=True)
         return CustomResponse.success(message="Chats fetched", data=serializer.data)
+
+    @extend_schema(
+        summary="Send a  message",
+        description="""
+            This endpoint sends a message.
+        """,
+        tags=tags,
+        responses={201: MessageCreateResponseSerializer},
+    )
+    async def post(self, request, *args, **kwargs):
+        user = request.user
+        serializer = self.post_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        chat_id = data.get("chat_id")
+        username = data.get("username")
+
+        # For sending
+        chat = None
+        if not chat_id:
+            # Create a new chat dm with current user and recipient user
+            recipient_user = await User.objects.aget_or_none(username=username)
+            if not recipient_user:
+                raise RequestError(
+                    err_code=ErrorCode.INVALID_ENTRY,
+                    err_msg="Invalid entry",
+                    status_code=422,
+                    data={"username": "No user with that username"},
+                )
+
+            chat = (
+                await Chat.objects.filter(ctype="DM")
+                .filter(
+                    Q(owner=user, users__id=recipient_user.id)
+                    | Q(owner=recipient_user, users__id=user.id)
+                )
+                .aget_or_none()
+            )
+            # Check if a chat already exists between both users
+            if chat:
+                raise RequestError(
+                    err_code=ErrorCode.INVALID_ENTRY,
+                    err_msg="Invalid entry",
+                    status_code=422,
+                    data={
+                        "username": "A chat already exist between you and the recipient"
+                    },
+                )
+            chat = await Chat.objects.acreate(owner=user, ctype="DM")
+            await chat.users.aadd(recipient_user)
+        else:
+            # Get the chat with chat id and check if the current user is the owner or the recipient
+            chat = await Chat.objects.filter(
+                Q(owner=user) | Q(users__id=user.id)
+            ).aget_or_none(id=chat_id)
+            if not chat:
+                raise RequestError(
+                    err_code=ErrorCode.NON_EXISTENT,
+                    err_msg="User has not chat with that ID",
+                    status_code=404,
+                )
+
+        # Create Message
+        file = await create_file(data.get("file_type"))
+        file_upload_status = True if file else False
+        message = await Message.objects.acreate(
+            chat=chat, sender=user, text=data.get("text"), file=file
+        )
+        serializer = MessageCreateResponseDataSerializer(
+            message, context={"file_upload_status": file_upload_status}
+        )
+        return CustomResponse.success(
+            message="Message sent", data=serializer.data, status_code=201
+        )
 
 
 class ChatView(APIView):

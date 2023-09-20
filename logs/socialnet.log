@@ -7687,3 +7687,82 @@ TypeError: Object of type coroutine is not JSON serializable
 2023-09-19 19:04:38,288 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2023-09-19 19:04:50,211 django.request WARNING  Not Found: /api/v1/chats/5163f9fb-2187-4533-b5f0-f975980d648f/
 2023-09-19 19:04:52,272 django.request WARNING  Not Found: /api/v1/chats/5163f9fb-2187-4533-b5f0-f975980d648f/
+2023-09-20 13:50:04,705 django.request WARNING  Unauthorized: /api/v1/chats/
+2023-09-20 13:50:53,518 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:50:56,754 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:52:23,698 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:53:10,706 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:55:19,183 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:58:01,874 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:58:11,796 django.request WARNING  Bad Request: /api/v1/chats/
+2023-09-20 13:58:17,985 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:58:51,609 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 13:59:06,277 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:01:34,186 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:01:37,378 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:01:44,351 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-20 14:02:15,587 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-20 14:05:50,430 django.request WARNING  Not Found: /api/v1/chats/
+2023-09-20 14:05:53,202 django.request WARNING  Not Found: /api/v1/chats/
+2023-09-20 14:05:59,960 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:06:00,651 django.request WARNING  Not Found: /static/media/logo.png
+2023-09-20 14:06:05,157 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:06:05,161 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:06:06,623 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:06:09,632 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:06:09,634 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:06:10,840 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:06:15,895 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:06:15,899 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:06:17,171 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:06:32,453 django.request WARNING  Forbidden: /api/v1/chats/
+2023-09-20 14:07:26,806 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-20 14:07:32,821 django.request ERROR    Internal Server Error: /api/v1/chats/
+2023-09-20 14:08:07,240 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:08:07,243 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:08:08,423 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:08:13,609 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:08:13,613 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:08:14,829 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:08:22,981 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:08:22,983 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:08:23,195 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:08:24,497 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:08:24,499 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:08:26,349 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:08:26,351 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:08:27,507 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:08:28,801 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:08:28,804 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:09:01,386 django.request WARNING  Bad Request: /api/v1/chats/
+2023-09-20 14:09:07,703 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:09:55,230 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:10:12,367 django.request WARNING  Bad Request: /api/v1/chats/
+2023-09-20 14:10:17,857 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:10:34,784 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:11:09,790 django.request WARNING  Unprocessable Entity: /api/v1/chats/
+2023-09-20 14:11:18,099 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:11:18,102 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:11:19,280 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:11:26,031 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:11:26,033 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:11:27,129 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:11:28,890 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:11:28,893 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:11:31,013 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:11:31,016 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:11:32,215 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:11:55,089 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:11:55,091 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:11:56,306 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:12:00,525 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:12:00,528 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:12:01,629 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:12:03,848 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:12:03,851 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:12:09,390 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:12:09,392 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:12:10,449 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-20 14:12:16,323 jazzmin.utils WARNING  listings not found when generating links
+2023-09-20 14:12:16,326 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-09-20 14:12:17,561 django.request WARNING  Not Found: /static/media/banner2-icon3.png

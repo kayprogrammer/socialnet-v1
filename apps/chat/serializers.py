@@ -4,7 +4,7 @@ from apps.accounts.models import User
 from apps.chat.models import CHAT_TYPES
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
-from apps.common.validators import validate_image_type
+from apps.common.validators import validate_file_type
 from apps.common.schema_examples import file_upload_data, user_data, latest_message_data
 
 
@@ -49,9 +49,14 @@ class ChatSerializer(serializers.Serializer):
 
 
 class MessageSerializer(serializers.Serializer):
+    chat_id = serializers.UUIDField(write_only=True, required=False)
+    username = serializers.CharField(write_only=True, required=False)
     sender = serializers.SerializerMethodField(default=user_data)
-    text = serializers.CharField()
-    file = serializers.URLField(source="get_file")
+    text = serializers.CharField(required=False)
+    file_type = serializers.CharField(
+        write_only=True, validators=[validate_file_type], required=False
+    )
+    file = serializers.URLField(source="get_file", read_only=True)
     created_at = serializers.DateTimeField(
         default_timezone=pytz.timezone("UTC"), read_only=True
     )
@@ -61,6 +66,21 @@ class MessageSerializer(serializers.Serializer):
 
     def get_sender(self, obj) -> dict:
         return get_user(obj.sender)
+
+    def validate(self, attrs):
+        chat_id = attrs.get("chat_id")
+        username = attrs.get("username")
+        if not chat_id and not username:
+            raise serializers.ValidationError(
+                {"username": "You must enter the recipient's username"}
+            )
+        elif chat_id and username:
+            raise serializers.ValidationError(
+                {"username": "Can't enter username when chat_id is set"}
+            )
+        if not attrs.get("text") and not attrs.get("file_type"):
+            raise serializers.ValidationError({"text": "You must enter a text"})
+        return attrs
 
 
 class MessagesSerializer(serializers.Serializer):
@@ -80,17 +100,21 @@ class ChatResponseSerializer(SuccessResponseSerializer):
     data = MessagesSerializer()
 
 
-# class ProfileCreateResponseDataSerializer(ProfileSerializer):
-#     file_upload_data = serializers.SerializerMethodField(default=file_upload_data)
+class MessageCreateResponseDataSerializer(MessageSerializer):
+    file_upload_data = serializers.SerializerMethodField(default=file_upload_data)
 
-#     def get_file_upload_data(self, obj) -> dict:
-#         image_upload_status = self.context.get("image_upload_status")
-#         if image_upload_status:
-#             return FileProcessor.generate_file_signature(
-#                 key=obj.avatar_id,
-#                 folder="avatars",
-#             )
-#         return None
+    def get_file_upload_data(self, obj) -> dict:
+        file_upload_status = self.context.get("file_upload_status")
+        if file_upload_status:
+            return FileProcessor.generate_file_signature(
+                key=obj.file_id,
+                folder="messages",
+            )
+        return None
+
+
+class MessageCreateResponseSerializer(SuccessResponseSerializer):
+    data = MessageCreateResponseDataSerializer()
 
 
 # class DeleteUserSerializer(serializers.Serializer):
@@ -112,7 +136,3 @@ class ChatResponseSerializer(SuccessResponseSerializer):
 
 # class ProfileResponseSerializer(SuccessResponseSerializer):
 #     data = ProfileSerializer()
-
-
-# class ProfileCreateResponseSerializer(SuccessResponseSerializer):
-#     data = ProfileCreateResponseDataSerializer()

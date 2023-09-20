@@ -62,7 +62,7 @@ m2m_changed.connect(users_changed, sender=Chat.users.through)
 class Message(BaseModel):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="messages")
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages")
-    text = models.TextField()
+    text = models.TextField(null=True, blank=True)
     file = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
     @property
