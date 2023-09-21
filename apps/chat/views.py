@@ -361,13 +361,56 @@ class MessageView(APIView):
 
 
 class ChatGroupCreateView(APIView):
+    permission_classes = (IsAuthenticatedCustom,)
+    serializer_class = GroupChatSerializer
+
     @extend_schema(
         summary="Create a group chat",
         description="""
             This endpoint creates a group chat.
+            The users_entry field should be a list of usernames you want to add to the group.
+            Note: You cannot add more than 99 users in a group (1 owner + 99 other users = 100 users total)
         """,
         tags=tags,
-        responses={200: SuccessResponseSerializer},
+        responses={201: GroupChatCreateResponseSerializer},
     )
     async def post(self, request):
-        pass
+        user = request.user
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        data.update({"owner": user, "ctype": "GROUP"})
+        # Handle File Upload
+        file_type = data.pop("file_type", None)
+        file_upload_status = False
+        if file_type:
+            file_upload_status = True
+            file = await create_file(data.get("file_type"))
+            data["image"] = file
+
+        # Handle Users Upload or Remove
+        usernames_to_add = data.pop("users_entry")
+        users_to_add = await sync_to_async(list)(
+            User.objects.filter(username__in=usernames_to_add)
+        )
+        if len(users_to_add) < 1:
+            raise RequestError(
+                err_code=ErrorCode.INVALID_ENTRY,
+                err_msg="Invalid Entry",
+                data={"users_entry": "All the usernames entered is invalid"},
+                status_code=422,
+            )
+
+        # Create Chat
+        chat = await Chat.objects.acreate(**data)
+        chat.users.set(users_to_add)
+
+        serializer = GroupChatCreateResponseDataSerializer(
+            chat, context={"file_upload_status": file_upload_status}
+        )
+        return CustomResponse.success(
+            message="Chat created", data=serializer.data, status_code=201
+        )

@@ -123,7 +123,9 @@ class GroupChatSerializer(serializers.Serializer):
         max_length=1000,
         error_messages={"max_length": _("{max_length} characters max.")},
     )
-    file_type = serializers.CharField(required=False, validators=[validate_image_type], write_only=True)
+    file_type = serializers.CharField(
+        required=False, validators=[validate_image_type], write_only=True
+    )
     image = serializers.CharField(
         source="get_image", default="https://img.url", read_only=True
     )
@@ -131,6 +133,17 @@ class GroupChatSerializer(serializers.Serializer):
 
     def get_users(self, obj) -> list:
         return [get_user(user) for user in obj.recipients]
+
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        if self.context["request"].method == "POST":
+            fields["users_entry"] = serializers.ListField(
+                child=serializers.CharField(),
+                write_only=True,
+                max_length=99,
+                error_messages={"max_length": _("{max_length} users max.")},
+            )
+        return fields
 
 
 # RESPONSE SERIALIZERS
