@@ -306,7 +306,7 @@ class MessageView(APIView):
 
     async def get_object(self, message_id, user):
         message = await Message.objects.select_related(
-            "sender", "sender__avatar", "file"
+            "sender", "chat", "sender__avatar", "file"
         ).aget_or_none(id=message_id, sender=user)
         if not message:
             raise RequestError(
@@ -365,7 +365,14 @@ class MessageView(APIView):
     async def delete(self, request, *args, **kwargs):
         user = request.user
         message = await self.get_object(kwargs["message_id"], user)
-        await message.adelete()
+        chat = message.chat
+        messages_count = await chat.messages.acount()
+
+        # Delete message and chat if its the last message in the dm being deleted
+        if messages_count == 1 and chat.ctype == "DM":
+            await chat.adelete()  # Message deletes if chat gets deleted (CASCADE)
+        else:
+            await message.adelete()
         return CustomResponse.success(message="Message deleted")
 
 
