@@ -171,7 +171,7 @@ class ProfileView(APIView):
         parameters=common_param,
     )
     async def get(self, request, *args, **kwargs):
-        user = await self.get_object(kwargs.get("username"))
+        user = await self.get_object(kwargs["username"])
         serializer = self.serializer_class(user)
         return CustomResponse.success(
             message="User details fetched", data=serializer.data
@@ -213,7 +213,7 @@ class ProfileUpdateDeleteView(APIView):
 
         # Handle file upload
         image_upload_status = False
-        file_type = data.get("file_type")
+        file_type = data.pop("file_type", None)
         if file_type:
             image_upload_status = True
             avatar = user.avatar
@@ -222,7 +222,6 @@ class ProfileUpdateDeleteView(APIView):
                 await avatar.asave()
             else:
                 avatar = await File.objects.acreate(resource_type=file_type)
-            data.pop("file_type")
             data["avatar"] = avatar
 
         # Set attributes from data to user object

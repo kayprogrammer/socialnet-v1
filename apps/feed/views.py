@@ -84,12 +84,11 @@ class PostsView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
-        file_type = data.get("file_type")
+        file_type = data.pop("file_type", None)
         image_upload_status = False
         if file_type:
             file = await File.objects.acreate(resource_type=file_type)
             data["image_id"] = file.id
-            data.pop("file_type")
             image_upload_status = True
 
         data["author"] = request.user
@@ -135,7 +134,7 @@ class PostDetailView(APIView):
         responses={200: PostResponseSerializer, 404: ErrorResponseSerializer},
     )
     async def get(self, request, *args, **kwargs):
-        post = await self.get_object(kwargs.get("slug"))
+        post = await self.get_object(kwargs["slug"])
         serializer = self.serializer_class(post)
         return CustomResponse.success(
             message="Post Detail fetched", data=serializer.data
@@ -148,7 +147,7 @@ class PostDetailView(APIView):
         responses={200: PostCreateResponseSerializer},
     )
     async def put(self, request, *args, **kwargs):
-        post = await self.get_object(kwargs.get("slug"))
+        post = await self.get_object(kwargs["slug"])
         if post.author != request.user:
             raise RequestError(
                 err_code=ErrorCode.INVALID_OWNER,
@@ -158,7 +157,7 @@ class PostDetailView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
-        file_type = data.get("file_type")
+        file_type = data.pop("file_type", None)
         image_upload_status = False
         if file_type:
             file = post.image
@@ -168,7 +167,6 @@ class PostDetailView(APIView):
                 file.resource_type = file_type
                 await file.asave()
             data["image_id"] = file.id
-            data.pop("file_type")
             image_upload_status = True
 
         for attr, value in data.items():
@@ -187,7 +185,7 @@ class PostDetailView(APIView):
         responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
-        post = await self.get_object(kwargs.get("slug"))
+        post = await self.get_object(kwargs["slug"])
         if post.author != request.user:
             raise RequestError(
                 err_code=ErrorCode.INVALID_OWNER,
@@ -300,9 +298,7 @@ class ReactionsView(APIView):
                 err_msg="Invalid reaction type",
                 status_code=404,
             )
-        reactions = await self.get_queryset(
-            kwargs.get("for"), kwargs.get("slug"), rtype
-        )
+        reactions = await self.get_queryset(kwargs["for"], kwargs["slug"], rtype)
         paginated_reactions = self.paginator_class.paginate_queryset(reactions, request)
         serializer = self.serializer_class(paginated_reactions, many=True)
         return CustomResponse.success(message="Reactions fetched", data=serializer.data)
@@ -322,8 +318,8 @@ class ReactionsView(APIView):
         parameters=params,
     )
     async def post(self, request, *args, **kwargs):
-        for_val = kwargs.get("for")
-        obj = await self.get_object(for_val, kwargs.get("slug"))
+        for_val = kwargs["for"]
+        obj = await self.get_object(for_val, kwargs["slug"])
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
@@ -360,7 +356,7 @@ class RemoveReaction(APIView):
         responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
-        reaction = await Reaction.objects.aget_or_none(id=kwargs.get("id"))
+        reaction = await Reaction.objects.aget_or_none(id=kwargs["id"])
         if not reaction:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
@@ -411,7 +407,7 @@ class CommentsView(APIView):
         ],
     )
     async def get(self, request, *args, **kwargs):
-        post = await self.get_object(kwargs.get("slug"))
+        post = await self.get_object(kwargs["slug"])
         comments = await sync_to_async(list)(
             Comment.objects.filter(post_id=post.id)
             .select_related("author")
@@ -430,7 +426,7 @@ class CommentsView(APIView):
         responses={201: CommentResponseSerializer},
     )
     async def post(self, request, *args, **kwargs):
-        post = await self.get_object(kwargs.get("slug"))
+        post = await self.get_object(kwargs["slug"])
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
@@ -500,7 +496,7 @@ class CommentView(APIView):
         ],
     )
     async def get(self, request, *args, **kwargs):
-        comment = await self.get_object(kwargs.get("slug"))
+        comment = await self.get_object(kwargs["slug"])
         replies = await sync_to_async(list)(
             Reply.objects.filter(comment_id=comment.id).select_related("author")
         )
@@ -522,7 +518,7 @@ class CommentView(APIView):
         parameters=common_param,
     )
     async def post(self, request, *args, **kwargs):
-        comment = await self.get_object(kwargs.get("slug"))
+        comment = await self.get_object(kwargs["slug"])
         serializer = ReplySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
@@ -546,7 +542,7 @@ class CommentView(APIView):
         responses=CommentResponseSerializer,
     )
     async def put(self, request, *args, **kwargs):
-        comment = await self.get_object(kwargs.get("slug"))
+        comment = await self.get_object(kwargs["slug"])
         if comment.author_id != request.user.id:
             raise RequestError(
                 err_code=ErrorCode.INVALID_OWNER,
@@ -570,7 +566,7 @@ class CommentView(APIView):
         responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
-        comment = await self.get_object(kwargs.get("slug"))
+        comment = await self.get_object(kwargs["slug"])
         if request.user.id != comment.author_id:
             raise RequestError(
                 err_code=ErrorCode.INVALID_OWNER,
@@ -623,7 +619,7 @@ class ReplyView(APIView):
         parameters=common_param,
     )
     async def get(self, request, *args, **kwargs):
-        reply = await self.get_object(kwargs.get("slug"))
+        reply = await self.get_object(kwargs["slug"])
         serializer = self.serializer_class(reply)
         return CustomResponse.success(message="Reply Fetched", data=serializer.data)
 
@@ -637,7 +633,7 @@ class ReplyView(APIView):
         responses=ReplyResponseSerializer,
     )
     async def put(self, request, *args, **kwargs):
-        reply = await self.get_object(kwargs.get("slug"))
+        reply = await self.get_object(kwargs["slug"])
         if reply.author_id != request.user.id:
             raise RequestError(
                 err_code=ErrorCode.INVALID_OWNER,
@@ -661,7 +657,7 @@ class ReplyView(APIView):
         responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
-        reply = await self.get_object(kwargs.get("slug"))
+        reply = await self.get_object(kwargs["slug"])
         if request.user.id != reply.author_id:
             raise RequestError(
                 err_code=ErrorCode.INVALID_OWNER,

@@ -8,12 +8,27 @@ async def create_file(file_type=None):
     return file
 
 
-async def sort_users_entry(users_entry: list):
-    add_usernames = []
-    remove_usernames = []
-    for user in users_entry:
-        if user["action"] == "ADD":
-            add_usernames.append(user["username"])
+def update_group_chat_users(instance, action, data):
+    if len(data) > 0:
+        if action == "add":
+            instance.users.add(*data)
+        elif action == "remove":
+            instance.users.remove(*data)
         else:
-            remove_usernames.append(user["username"])
-    return add_usernames, remove_usernames
+            raise ValueError("Invalid Action")
+
+
+def handle_lerrors(err):
+    errA = err.get("usernames_to_add")
+    errR = err.get("usernames_to_remove")
+    errors = {}
+    if errA:
+        if isinstance(errA, dict):
+            first_key = list(errA)[0]
+            errors["usernames_to_add"] = [errA[first_key][0]]
+
+    if errR:
+        if isinstance(errR, dict):
+            first_key = list(errR)[0]
+            errors["usernames_to_remove"] = [errR[first_key][0]]
+    return errors

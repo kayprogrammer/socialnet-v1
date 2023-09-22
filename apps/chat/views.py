@@ -1,9 +1,10 @@
+import asyncio
 from django.db.models import Q, Prefetch
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 from apps.chat.models import Chat, Message
-from apps.chat.utils import create_file, sort_users_entry
+from apps.chat.utils import create_file, update_group_chat_users
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
 from apps.common.serializers import SuccessResponseSerializer
@@ -204,7 +205,7 @@ class ChatView(APIView):
     )
     async def get(self, request, *args, **kwargs):
         user = request.user
-        chat = await self.get_object(user, kwargs.get("chat_id"))
+        chat = await self.get_object(user, kwargs["chat_id"])
         messages = await sync_to_async(list)(chat.lmessages)
         serializer = self.serializer_class({"chat": chat, "messages": messages})
         return CustomResponse.success(message="Messages fetched", data=serializer.data)
@@ -213,7 +214,6 @@ class ChatView(APIView):
         summary="Update a Group Chat",
         description="""
             This endpoint updates a group chat.
-            Field "action" can only be of two choices: ADD, REMOVE
         """,
         tags=tags,
         request=GroupChatSerializer,
@@ -222,7 +222,7 @@ class ChatView(APIView):
     async def patch(self, request, *args, **kwargs):
         user = request.user
         chat = await Chat.objects.select_related("image").aget_or_none(
-            owner=user, id=kwargs.get("chat_id"), ctype="GROUP"
+            owner=user, id=kwargs["chat_id"], ctype="GROUP"
         )
         if not chat:
             raise RequestError(
@@ -231,7 +231,9 @@ class ChatView(APIView):
                 status_code=404,
             )
 
-        serializer = GroupChatSerializer(data=request.data, partial=True)
+        serializer = GroupChatSerializer(
+            data=request.data, partial=True, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
@@ -244,27 +246,34 @@ class ChatView(APIView):
                 chat.image.resource_type = file_type
                 await chat.image.asave()
             else:
-                file = await create_file(data.get("file_type"))
+                file = await create_file(file_type)
                 data["image"] = file
 
         # Handle Users Upload or Remove
-        users_entry = data.pop("users_entry", None)
-        if users_entry:
-            usernames_to_add, usernames_to_remove = await sort_users_entry(users_entry)
+        usernames_to_add = data.pop("usernames_to_add", None)
+        usernames_to_remove = data.pop("usernames_to_remove", None)
+
+        if usernames_to_add:
             users_to_add = await sync_to_async(list)(
-                User.objects.filter(username__in=usernames_to_add)
+                User.objects.filter(username__in=usernames_to_add).select_related(
+                    "avatar"
+                )
             )
+            await sync_to_async(update_group_chat_users)(chat, "add", users_to_add)
+        if usernames_to_remove:
             users_to_remove = await sync_to_async(list)(
                 User.objects.filter(username__in=usernames_to_remove)
             )
-            chat.users.set(users_to_add)
-            chat.users.remove(users_to_remove)
+            await sync_to_async(update_group_chat_users)(
+                chat, "remove", users_to_remove
+            )
 
         chat = set_dict_attr(chat, data)
         await chat.asave()
+        chat.recipients = await sync_to_async(list)(chat.users.select_related("avatar"))
 
         serializer = GroupChatCreateResponseDataSerializer(
-            chat, context={"file_upload_status": file_upload_status}
+            chat, context={"file_upload_status": file_upload_status, "request": request}
         )
         return CustomResponse.success(message="Chat updated", data=serializer.data)
 
@@ -279,7 +288,7 @@ class ChatView(APIView):
     async def delete(self, request, *args, **kwargs):
         user = request.user
         chat = await Chat.objects.aget_or_none(
-            owner=user, id=kwargs.get("chat_id"), ctype="GROUP"
+            owner=user, id=kwargs["chat_id"], ctype="GROUP"
         )
         if not chat:
             raise RequestError(
@@ -324,7 +333,7 @@ class MessageView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
-        message = await self.get_object(kwargs.get("message_id"), user)
+        message = await self.get_object(kwargs["message_id"], user)
         # Handle File Upload
         file_upload_status = False
         file_type = data.pop("file_type", None)
@@ -334,7 +343,7 @@ class MessageView(APIView):
                 message.file.resource_type = file_type
                 await message.file.asave()
             else:
-                file = await create_file(data.get("file_type"))
+                file = await create_file(file_type)
                 data["file"] = file
 
         message = set_dict_attr(message, data)
@@ -355,7 +364,7 @@ class MessageView(APIView):
     )
     async def delete(self, request, *args, **kwargs):
         user = request.user
-        message = await self.get_object(kwargs.get("message_id"), user)
+        message = await self.get_object(kwargs["message_id"], user)
         await message.adelete()
         return CustomResponse.success(message="Message deleted")
 
@@ -388,28 +397,31 @@ class ChatGroupCreateView(APIView):
         file_upload_status = False
         if file_type:
             file_upload_status = True
-            file = await create_file(data.get("file_type"))
+            file = await create_file(file_type)
             data["image"] = file
 
         # Handle Users Upload or Remove
-        usernames_to_add = data.pop("users_entry")
+        usernames_to_add = data.pop("usernames_to_add")
         users_to_add = await sync_to_async(list)(
             User.objects.filter(username__in=usernames_to_add)
+            .exclude(id=user.id)
+            .select_related("avatar")
         )
         if len(users_to_add) < 1:
             raise RequestError(
                 err_code=ErrorCode.INVALID_ENTRY,
                 err_msg="Invalid Entry",
-                data={"users_entry": "All the usernames entered is invalid"},
+                data={"users_entry": "Enter at least one valid username"},
                 status_code=422,
             )
 
         # Create Chat
         chat = await Chat.objects.acreate(**data)
-        chat.users.set(users_to_add)
+        chat.recipients = users_to_add
+        await sync_to_async(update_group_chat_users)(chat, "add", users_to_add)
 
         serializer = GroupChatCreateResponseDataSerializer(
-            chat, context={"file_upload_status": file_upload_status}
+            chat, context={"file_upload_status": file_upload_status, "request": request}
         )
         return CustomResponse.success(
             message="Chat created", data=serializer.data, status_code=201

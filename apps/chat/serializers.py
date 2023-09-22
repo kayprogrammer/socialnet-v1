@@ -1,11 +1,13 @@
 import pytz
 from rest_framework import serializers
 from apps.chat.models import CHAT_TYPES
+from apps.chat.utils import handle_lerrors
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_file_type, validate_image_type
 from apps.common.schema_examples import file_upload_data, user_data, latest_message_data
 from django.utils.translation import gettext_lazy as _
+from rest_framework.exceptions import ValidationError
 
 
 def get_user(user):
@@ -108,16 +110,27 @@ class MessagesSerializer(serializers.Serializer):
         return [get_user(user) for user in obj["chat"].recipients]
 
 
-class UserTouchSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    action = serializers.ChoiceField(choices=(("ADD", "ADD"), ("REMOVE", "REMOVE")))
-
-
 class GroupChatSerializer(serializers.Serializer):
     name = serializers.CharField(
         max_length=100, error_messages={"max_length": _("{max_length} characters max.")}
     )
-    users_entry = UserTouchSerializer(many=True, write_only=True)
+    usernames_to_add = serializers.ListField(
+        child=serializers.CharField(
+            error_messages={"invalid": _("One of the usernames is an invalid string")}
+        ),
+        write_only=True,
+        max_length=99,
+        error_messages={"max_length": _("{max_length} users max.")},
+    )
+    usernames_to_remove = serializers.ListField(
+        child=serializers.CharField(
+            error_messages={"invalid": _("One of the usernames is an invalid string")}
+        ),
+        write_only=True,
+        max_length=99,
+        error_messages={"max_length": _("{max_length} users max.")},
+    )
+
     description = serializers.CharField(
         required=False,
         max_length=1000,
@@ -137,13 +150,18 @@ class GroupChatSerializer(serializers.Serializer):
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
         if self.context["request"].method == "POST":
-            fields["users_entry"] = serializers.ListField(
-                child=serializers.CharField(),
-                write_only=True,
-                max_length=99,
-                error_messages={"max_length": _("{max_length} users max.")},
-            )
+            fields.pop("usernames_to_remove")
         return fields
+
+    def to_internal_value(self, data):
+        try:
+            return super().to_internal_value(data)
+        except ValidationError as exc:
+            err = exc.detail
+            errors = handle_lerrors(err)
+            if len(errors) > 0:
+                raise serializers.ValidationError(errors)
+            raise
 
 
 # RESPONSE SERIALIZERS
@@ -181,7 +199,7 @@ class GroupChatCreateResponseDataSerializer(GroupChatSerializer):
         file_upload_status = self.context.get("file_upload_status")
         if file_upload_status:
             return FileProcessor.generate_file_signature(
-                key=obj.file_id,
+                key=obj.image_id,
                 folder="groups",
             )
         return None

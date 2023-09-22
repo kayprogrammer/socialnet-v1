@@ -45,7 +45,11 @@ def custom_exception_handler(exc, context):
         elif isinstance(exc, ValidationError):
             errors = exc.detail
             for key in errors:
-                errors[key] = str(errors[key][0]).replace('"', "")
+                err_val = str(errors[key][0]).replace('"', "")
+                errors[key] = err_val
+                if isinstance(err_val, list):
+                    errors[key] = err_val
+
             return CustomResponse.error(
                 message="Invalid Entry",
                 data=errors,
@@ -64,8 +68,8 @@ def custom_exception_handler(exc, context):
                 status_code=response.status_code,
                 err_code=ErrorCode.SERVER_ERROR,
             )
-    except:
-        print(exc)
+    except APIException as e:
+        print("Server Error: ", e)
         return CustomResponse.error(
             message="Server Error", status_code=500, err_code=ErrorCode.SERVER_ERROR
         )
