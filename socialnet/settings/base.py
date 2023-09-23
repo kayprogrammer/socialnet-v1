@@ -37,6 +37,7 @@ REST_FRAMEWORK = {
 # Application definition
 
 DJANGO_APPS = [
+    "channels",
     "django.contrib.contenttypes",
     "jazzmin",
     "django.contrib.admin",
@@ -144,7 +145,7 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = "socialnet.wsgi.application"
-
+ASGI_APPLICATION = "socialnet.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

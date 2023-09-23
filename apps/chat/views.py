@@ -1,4 +1,3 @@
-import asyncio
 from django.db.models import Q, Prefetch
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter

@@ -10623,3 +10623,6 @@ TypeError: Object of type ValueError is not JSON serializable
 2023-09-22 05:50:15,293 jazzmin.utils WARNING  listings not found when generating links
 2023-09-22 05:50:15,295 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-09-22 05:50:16,289 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-09-23 18:34:04,935 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-09-23 18:34:21,675 django.request WARNING  Not Found: /api/v1/ws/chat/iddd/
+2023-09-23 18:34:35,413 django.request WARNING  Not Found: /api/v1/ws/chat/iddd/
