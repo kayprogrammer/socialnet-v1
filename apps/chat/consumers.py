@@ -20,7 +20,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json
-        print(message)
+        # Message must be the exact serializer data and status of type; created or updated
+        print("Receiving", message)
 
         await self.channel_layer.group_send(
             self.room_group_name, {"type": "chat_message", "message": message}
@@ -28,6 +29,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def chat_message(self, event):
         message = event["message"]
+        print("Sending", message)
+        # Add a validation to only allow socket messages to be sent from inside
         await self.send(text_data=json.dumps(message))
 
 

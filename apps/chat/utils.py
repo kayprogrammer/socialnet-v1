@@ -41,11 +41,16 @@ def handle_lerrors(err):
 
 
 # Send message in websocket
-async def send_message_in_socket(host: str, id: UUID, message: dict):
-    uri = f"ws://{host}/api/v1/ws/chat/{id}/"
+async def send_message_in_socket(
+    secured: bool, host: str, id: UUID, message: dict, status: str = "CREATED"
+):
+    websocket_scheme = "wss://" if secured else "ws://"
+    uri = f"{websocket_scheme}{host}/api/v1/ws/chat/{id}/"
+    message = message | {"status": status}
 
     async with websockets.connect(uri) as websocket:
         # Send a message to the WebSocket server
+        print(f"To Send: {message_to_send}")
         message_to_send = json.dumps(message)
         await websocket.send(message_to_send)
         print(f"Sent: {message_to_send}")
