@@ -12,5 +12,5 @@ urlpatterns = [
 ]
 
 chatsocket_urlpatterns = [
-    path("api/v1/ws/chat/<str:id>/", consumers.ChatConsumer.as_asgi())
+    path("api/v1/ws/chat/<uuid:id>/", consumers.ChatConsumer.as_asgi())
 ]

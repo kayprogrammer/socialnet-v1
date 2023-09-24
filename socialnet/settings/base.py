@@ -386,5 +386,3 @@ CLOUDINARY_API_SECRET = config("CLOUDINARY_API_SECRET")
 SOCKET_SECRET = config("SOCKET_SECRET")
 
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgyMTQyMjcsInVzZXJfaWQiOiI4NjNlMDZiMi0xMzcxLTQxOWYtOTc1NC01YjA0OGM3NjA0M2YiLCJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.n4e_27vQ_9nag072FFLZNjLvCBT2pnavoIapNnREd3o
-# wscat -c ws://127.0.0.1:8000/api/v1/ws/chat/173271/
-# Remember to add the ws url to api desc of the endpoint

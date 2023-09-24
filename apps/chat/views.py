@@ -91,8 +91,15 @@ class ChatsView(APIView):
             If chat_id is available, then ignore username and set the correct chat_id
             The file_upload_data in the response is what is used for uploading the file to cloudinary from client
             ALLOWED FILE TYPES: {", ".join(ALLOWED_FILE_TYPES)}
+
+            WEBSOCKET ENDPOINT: /api/v1/ws/chat/:id/ e.g (ws://127.0.0.1:8000/api/v1/ws/chat/b7e23862-a1d8-4e31-8c63-9829b09ea595/) 
+            NOTE:
+            * Use chat_id as the ID for existing chat or current user id if that user is receiving the first message from another user.
+            * The ws endpoint is only for reading realtime messages and not sending. (Sending has been handled.)
+            
         """,
         tags=tags,
+        request=MessageSerializer,
         responses={201: MessageCreateResponseSerializer},
     )
     async def post(self, request, *args, **kwargs):
@@ -163,7 +170,10 @@ class ChatsView(APIView):
         # Send message in socket
         room_id = recipient_id if recipient_id else chat_id
         await send_message_in_socket(
-            request.is_secure(), request.get_host(), room_id, message_data
+            request.is_secure(),
+            request.get_host(),
+            room_id,
+            message_data | {"file": file},
         )
 
         return CustomResponse.success(
@@ -331,6 +341,11 @@ class MessageView(APIView):
             You must either send a text or a file or both.
             The file_upload_data in the response is what is used for uploading the file to cloudinary from client
             ALLOWED FILE TYPES: {", ".join(ALLOWED_FILE_TYPES)}
+
+            WEBSOCKET ENDPOINT: /api/v1/ws/chat/:id/ e.g (ws://127.0.0.1:8000/api/v1/ws/chat/b7e23862-a1d8-4e31-8c63-9829b09ea595/) 
+            NOTE:
+            * Use chat_id as the ID
+            * The ws endpoint is only for reading realtime messages and not sending. (Sending has been handled.)
         """,
         tags=tags,
         responses={200: MessageCreateResponseSerializer},
@@ -368,7 +383,7 @@ class MessageView(APIView):
             request.is_secure(),
             request.get_host(),
             room_id,
-            message_data,
+            message_data | {"file": message.file},
             status="UPDATED",
         )
         return CustomResponse.success(message="Message updated", data=message_data)
@@ -377,6 +392,11 @@ class MessageView(APIView):
         summary="Delete a message",
         description="""
             This endpoint deletes a message.
+
+            WEBSOCKET ENDPOINT: /api/v1/ws/chat/:id/ e.g (ws://127.0.0.1:8000/api/v1/ws/chat/b7e23862-a1d8-4e31-8c63-9829b09ea595/) 
+            NOTE:
+            * Use chat_id as the ID.
+            * The ws endpoint is only for reading realtime messages and not sending. (Sending has been handled.)
         """,
         tags=tags,
         responses={200: SuccessResponseSerializer},
@@ -394,7 +414,7 @@ class MessageView(APIView):
         else:
             await message.adelete()
 
-        message_data = {"id": message_id}
+        message_data = {"id": str(message_id)}
         # Send message in socket
         room_id = message.chat_id
         await send_message_in_socket(

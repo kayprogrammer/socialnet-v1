@@ -1,6 +1,8 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 
+from django.conf import settings
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -20,16 +22,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json
-        # Message must be the exact serializer data and status of type; created or updated
-        print("Receiving", message)
 
-        await self.channel_layer.group_send(
-            self.room_group_name, {"type": "chat_message", "message": message}
-        )
+        # To ensure that sending message in socket can only be made by the app itself.
+        key = message.pop("key")
+        if key and key == settings.SOCKET_SECRET:
+            await self.channel_layer.group_send(
+                self.room_group_name, {"type": "chat_message", "message": message}
+            )
 
     async def chat_message(self, event):
         message = event["message"]
-        print("Sending", message)
         # Add a validation to only allow socket messages to be sent from inside
         await self.send(text_data=json.dumps(message))
 

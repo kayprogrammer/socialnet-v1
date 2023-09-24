@@ -53,7 +53,7 @@ class ChatSerializer(serializers.Serializer):
 # For reading and creating messages
 class MessageSerializer(serializers.Serializer):
     id = serializers.UUIDField(read_only=True)
-    chat_id = serializers.UUIDField(write_only=True, required=False)
+    chat_id = serializers.UUIDField(required=False)
     username = serializers.CharField(write_only=True, required=False)
     sender = serializers.SerializerMethodField(default=user_data)
     text = serializers.CharField(required=False)

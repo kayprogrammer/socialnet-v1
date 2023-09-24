@@ -44,7 +44,11 @@ class Authentication:
         if not decoded:
             return None
         jwt_obj = Jwt.objects.select_related(
-            "user", "user__city", "user__city__region", "user__city__country"
+            "user",
+            "user__city",
+            "user__city__region",
+            "user__city__country",
+            "user__avatar",
         ).get_or_none(user_id=decoded["user_id"])
         if not jwt_obj:
             return None
