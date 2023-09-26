@@ -43,6 +43,7 @@ def handle_lerrors(err):
 
 
 # Send message in websocket
+# Use this later for notifications only.
 async def send_message_in_socket(
     secured: bool, host: str, id: UUID, message: dict, status: str = "CREATED"
 ):
