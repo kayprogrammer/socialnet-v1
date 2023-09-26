@@ -386,6 +386,9 @@ CLOUDINARY_API_SECRET = config("CLOUDINARY_API_SECRET")
 SOCKET_SECRET = config("SOCKET_SECRET")
 
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgyMTQyMjcsInVzZXJfaWQiOiI4NjNlMDZiMi0xMzcxLTQxOWYtOTc1NC01YjA0OGM3NjA0M2YiLCJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.n4e_27vQ_9nag072FFLZNjLvCBT2pnavoIapNnREd3o
-# End user will probably not see image before upload, cos we've sent the url to realtime before confirming the upload done in the frontend
-# Add security to your websocket so that someone will not go and listening to other user messages when he's not authorized to. So take note of the auth middleware for channels
 # You can set a file limit to your cloudinary so that the presigned data can only accept a particular file size range to upload image. You can also add file type validations
+# Create a serializer to validate message data being passed through the socket
+
+# To ensure that sending message in socket can only be made by the app itself. (move to notifications endpoint later)
+# key = message.pop("key", None)
+# if key and key == settings.SOCKET_SECRET:
