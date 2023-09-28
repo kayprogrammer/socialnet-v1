@@ -3,7 +3,7 @@ from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 from apps.chat.models import Chat, Message
-from apps.chat.utils import create_file, send_message_in_socket, update_group_chat_users
+from apps.chat.utils import create_file, update_group_chat_users
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
 from apps.common.serializers import SuccessResponseSerializer
@@ -112,7 +112,6 @@ class ChatsView(APIView):
 
         # For sending
         chat = None
-        recipient_id = None
         if not chat_id:
             # Create a new chat dm with current user and recipient user
             recipient_user = await User.objects.aget_or_none(username=username)
@@ -144,7 +143,6 @@ class ChatsView(APIView):
                 )
             chat = await Chat.objects.acreate(owner=user, ctype="DM")
             await chat.users.aadd(recipient_user)
-            recipient_id = recipient_user.id
         else:
             # Get the chat with chat id and check if the current user is the owner or the recipient
             chat = await Chat.objects.filter(
@@ -166,18 +164,8 @@ class ChatsView(APIView):
         serializer = MessageCreateResponseDataSerializer(
             message, context={"file_upload_status": file_upload_status}
         )
-        message_data = serializer.data
-        # Send message in socket
-        room_id = recipient_id if recipient_id else chat_id
-        await send_message_in_socket(
-            request.is_secure(),
-            request.get_host(),
-            room_id,
-            message_data | {"file": file},
-        )
-
         return CustomResponse.success(
-            message="Message sent", data=message_data, status_code=201
+            message="Message sent", data=serializer.data, status_code=201
         )
 
 
@@ -375,18 +363,7 @@ class MessageView(APIView):
         serializer = MessageCreateResponseDataSerializer(
             message, context={"file_upload_status": file_upload_status}
         )
-
-        message_data = serializer.data
-        # Send message in socket
-        room_id = message.chat_id
-        await send_message_in_socket(
-            request.is_secure(),
-            request.get_host(),
-            room_id,
-            message_data | {"file": message.file},
-            status="UPDATED",
-        )
-        return CustomResponse.success(message="Message updated", data=message_data)
+        return CustomResponse.success(message="Message updated", data=serializer.data)
 
     @extend_schema(
         summary="Delete a message",
@@ -413,17 +390,6 @@ class MessageView(APIView):
             await chat.adelete()  # Message deletes if chat gets deleted (CASCADE)
         else:
             await message.adelete()
-
-        message_data = {"id": str(message_id)}
-        # Send message in socket
-        room_id = message.chat_id
-        await send_message_in_socket(
-            request.is_secure(),
-            request.get_host(),
-            room_id,
-            message_data,
-            status="DELETED",
-        )
         return CustomResponse.success(message="Message deleted")
 
 
