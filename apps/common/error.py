@@ -15,3 +15,4 @@ class ErrorCode:
     INVALID_PAGE = "invalid_page"
     INVALID_VALUE = "invalid_value"
     NOT_ALLOWED = "not_allowed"
+    INVALID_DATA_TYPE = "invalid_data_type"

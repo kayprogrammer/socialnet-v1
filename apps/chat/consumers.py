@@ -1,8 +1,10 @@
-import json
-
-from apps.chat.models import Chat
+from apps.chat.models import Chat, Message
 from apps.accounts.models import User
+from apps.chat.serializers import MessageSerializer
+from apps.chat.socket_serializers import SocketMessageSerializer
 from apps.common.consumers import BaseConsumer
+from apps.common.error import ErrorCode
+import json
 
 
 class ChatConsumer(BaseConsumer):
@@ -15,25 +17,51 @@ class ChatConsumer(BaseConsumer):
         self.room_group_name = f"chat_{id}"
         await self.accept()
 
-        if not err.get("message"):  # Check for auth errors
-            # Validate chat membership
-            await self.validate_chat_membership(id)
-        else:
+        if err.get("message"):  # Check for auth errors
             await self.send_error_message(err)
-            await self.close(code=4001)
+            return await self.close(code=4001)
+
+        # Validate chat membership
+        await self.validate_chat_membership(id)
 
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive(self, text_data):
+        user_id = self.scope["user"].id
+
         # Validate entry
-        data, validated = await self.validate_entry(text_data)
-        if validated:
-            await self.channel_layer.group_send(
-                self.room_group_name, {"type": "chat_message", "message": data}
-            )
-        else:
-            await self.send_error_message(data)
+        data, validated = await self.validate_entry(text_data, SocketMessageSerializer)
+        if not validated:
+            return await self.send_error_message(data)
+
+        status = data["status"]
+        message_data = data
+        if status != "DELETED":
+            message = await Message.objects.select_related(
+                "sender", "sender__avatar", "file"
+            ).aget_or_none(id=data["id"])
+            if not message:
+                return await self.send_error_message(
+                    {
+                        "type": ErrorCode.NON_EXISTENT,
+                        "message": "Invalid message ID",
+                    }
+                )
+            if message.sender_id != user_id:
+                return await self.send_error_message(
+                    {
+                        "type": ErrorCode.INVALID_OWNER,
+                        "message": "Message isn't yours",
+                    }
+                )
+            data = MessageSerializer(message).data
+            data.pop("id")
+            message_data = message_data | data
+
+        await self.channel_layer.group_send(
+            self.room_group_name, {"type": "chat_message", "message": message_data}
+        )
 
     async def get_objects(self, id):
         # Retrieve a chat or user based on ID in the path
@@ -58,8 +86,8 @@ class ChatConsumer(BaseConsumer):
             await self.send_error_message(
                 {"type": "invalid_input", "message": "Invalid ID"}
             )
-            await self.close(code=1001)
-        elif (
+            return await self.close(code=1001)
+        if (
             chat and user not in chat.users.all() and user.id != chat.owner_id
         ):  # If chat but user is not a member
             await self.send_error_message(
@@ -68,9 +96,9 @@ class ChatConsumer(BaseConsumer):
                     "message": "You're not a member of this chat",
                 }
             )
-            await self.close(code=1001)
-        else:  # Add group and channel name to channel layer
-            await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+            return await self.close(code=1001)
+        # Add group and channel name to channel layer
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
 
     async def chat_message(self, event):
         message = event["message"]
