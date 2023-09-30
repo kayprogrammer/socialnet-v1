@@ -342,6 +342,7 @@ JAZZMIN_SETTINGS = {
         "accounts.Group": "fas fa-users",
         "accounts.user": "fas fa-user-cog",
         "profiles.friend": "fas fa-user-friends",
+        "profiles.notification": "fas fa-bell",
         "common.file": "fas fa-image",
         "cities_light.country": "fas fa-flag",
         "cities_light.region": "fas fa-city",

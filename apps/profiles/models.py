@@ -9,6 +9,7 @@ from django.db.models.functions import Least, Greatest
 from apps.accounts.models import User
 
 from apps.common.models import BaseModel
+from apps.feed.models import Comment, Post, Reply
 
 # Create your models here.
 
@@ -50,3 +51,22 @@ class Friend(BaseModel):
                 violation_error_message="Requester and Requestee cannot be the same",
             ),
         ]
+
+
+class Notification(BaseModel):
+    """Notification model for notifications sent by system or other users."""
+
+    sender = models.ForeignKey(
+        User, related_name="notifications_from", null=True, on_delete=models.SET_NULL
+    )
+    receivers = models.ManyToManyField(User)
+
+    post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True)
+    reply = models.ForeignKey(Reply, on_delete=models.SET_NULL, null=True)
+
+    text = models.TextField()
+    read_by = models.ManyToManyField(User, related_name="notifications_read")
+
+    def __str__(self):
+        return str(self.id)

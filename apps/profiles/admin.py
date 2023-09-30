@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.profiles.models import Friend
+from apps.profiles.models import Friend, Notification
 
 
 class FriendAdmin(admin.ModelAdmin):
@@ -8,4 +8,10 @@ class FriendAdmin(admin.ModelAdmin):
     list_filter = ("requester", "requestee", "status", "created_at", "updated_at")
 
 
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ("id", "sender", "created_at", "updated_at")
+    list_filter = ("sender", "receivers", "read_by", "created_at", "updated_at")
+
+
 admin.site.register(Friend, FriendAdmin)
+admin.site.register(Notification, NotificationAdmin)
