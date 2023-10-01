@@ -9,8 +9,15 @@ class FriendAdmin(admin.ModelAdmin):
 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ("id", "sender", "created_at", "updated_at")
-    list_filter = ("sender", "receivers", "read_by", "created_at", "updated_at")
+    list_display = ("id", "sender", "ntype", "created_at", "updated_at")
+    list_filter = (
+        "sender",
+        "receivers",
+        "ntype",
+        "read_by",
+        "created_at",
+        "updated_at",
+    )
 
 
 admin.site.register(Friend, FriendAdmin)

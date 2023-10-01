@@ -112,3 +112,11 @@ class Reaction(BaseModel):
 
     def __str__(self):
         return f"{self.user.full_name} ------ {self.rtype}"
+
+    @property
+    def targeted_obj(self):
+        # Return object the reaction object is targeted to (post, comment, or reply)
+        obj = self.post
+        if not obj:
+            obj = self.comment if self.comment else self.reply
+        return obj

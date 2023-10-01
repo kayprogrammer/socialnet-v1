@@ -5,6 +5,7 @@ from asgiref.sync import sync_to_async
 
 from apps.common.file_types import ALLOWED_IMAGE_TYPES
 from apps.common.paginators import CustomPagination
+from apps.profiles.models import Notification
 
 from .models import Post, Comment, Reply, Reaction, REACTION_CHOICES
 from .serializers import (
@@ -318,19 +319,31 @@ class ReactionsView(APIView):
         parameters=params,
     )
     async def post(self, request, *args, **kwargs):
+        user = request.user
         for_val = kwargs["for"]
         obj = await self.get_object(for_val, kwargs["slug"])
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
-        data["user"] = request.user
+        data["user"] = user
         rtype = data.pop("rtype")
-        data[f"{for_val.lower()}_id"] = obj.id
-        reaction, created = await Reaction.objects.select_related(
-            "user"
-        ).aupdate_or_create(**data, defaults={"rtype": rtype})
+        obj_field = for_val.lower()
+        data[f"{obj_field}_id"] = obj.id
+        reaction, created = (
+            await Reaction.objects.select_related("user", "user__avatar")
+            .exclude(user__avatar=None)
+            .aupdate_or_create(**data, defaults={"rtype": rtype})
+        )
         serializer = self.serializer_class(reaction)
+
+        # Create and Send Notification
+        if obj.author_id != user.id:
+            ndata = {obj_field: obj}
+            notification, created = await Notification.objects.aget_or_create(
+                sender=user, ntype="REACTION", **ndata
+            )
+
         return CustomResponse.success(
             message="Reaction created", data=serializer.data, status_code=201
         )
@@ -356,7 +369,10 @@ class RemoveReaction(APIView):
         responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
-        reaction = await Reaction.objects.aget_or_none(id=kwargs["id"])
+        user = request.user
+        reaction = await Reaction.objects.select_related(
+            "post", "comment", "reply"
+        ).aget_or_none(id=kwargs["id"])
         if not reaction:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
@@ -369,6 +385,20 @@ class RemoveReaction(APIView):
                 err_msg="Not yours to delete",
                 status_code=401,
             )
+
+        # Remove Reaction Notification
+        targeted_obj = reaction.targeted_obj
+        targeted_field = f"{targeted_obj.__class__.__name__.lower()}_id"  # (post_id, comment_id or reply_id)
+        data = {
+            "sender": user,
+            "ntype": "REACTION",
+            targeted_field: targeted_obj.id,
+        }
+
+        notification = await Notification.objects.aget_or_none(**data)
+        if notification:
+            await notification.adelete()
+
         await reaction.adelete()
         return CustomResponse.success(message="Reaction deleted")
 
@@ -426,6 +456,7 @@ class CommentsView(APIView):
         responses={201: CommentResponseSerializer},
     )
     async def post(self, request, *args, **kwargs):
+        user = request.user
         post = await self.get_object(kwargs["slug"])
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -434,6 +465,13 @@ class CommentsView(APIView):
 
         comment = await Comment.objects.acreate(**data)
         serializer = self.serializer_class(comment)
+
+        # Create and Send Notification
+        if user.id != post.author_id:
+            notification, created = Notification.objects.aget_or_create(
+                sender=user, ntype="COMMENT", comment_id=comment.id
+            )
+
         return CustomResponse.success(
             message="Comment Created", data=serializer.data, status_code=201
         )
@@ -518,6 +556,7 @@ class CommentView(APIView):
         parameters=common_param,
     )
     async def post(self, request, *args, **kwargs):
+        user = request.user
         comment = await self.get_object(kwargs["slug"])
         serializer = ReplySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -527,6 +566,13 @@ class CommentView(APIView):
 
         reply = await Reply.objects.acreate(**data)
         serializer = ReplySerializer(reply)
+
+        # Create and Send Notification
+        if user.id != comment.author_id:
+            notification, created = Notification.objects.aget_or_create(
+                sender=user, ntype="REPLY", reply_id=reply.id
+            )
+
         return CustomResponse.success(
             message="Reply Created", data=serializer.data, status_code=201
         )
@@ -566,6 +612,7 @@ class CommentView(APIView):
         responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
+        user = request.user
         comment = await self.get_object(kwargs["slug"])
         if request.user.id != comment.author_id:
             raise RequestError(
@@ -573,6 +620,14 @@ class CommentView(APIView):
                 err_msg="Not yours to delete",
                 status_code=401,
             )
+
+        # Remove Comment Notification
+        notification = await Notification.objects.aget_or_none(
+            sender=user, ntype="COMMENT", comment_id=comment.id
+        )
+        if notification:
+            await notification.adelete()
+
         await comment.adelete()
         return CustomResponse.success(message="Comment Deleted")
 
@@ -657,6 +712,7 @@ class ReplyView(APIView):
         responses={200: SuccessResponseSerializer},
     )
     async def delete(self, request, *args, **kwargs):
+        user = request.user
         reply = await self.get_object(kwargs["slug"])
         if request.user.id != reply.author_id:
             raise RequestError(
@@ -664,6 +720,14 @@ class ReplyView(APIView):
                 err_msg="Not yours to delete",
                 status_code=401,
             )
+
+        # Remove Reply Notification
+        notification = await Notification.objects.aget_or_none(
+            sender=user, ntype="REPLY", comment_id=reply.id
+        )
+        if notification:
+            await notification.adelete()
+
         await reply.adelete()
         return CustomResponse.success(message="Reply Deleted")
 

@@ -10,6 +10,7 @@ from apps.accounts.models import User
 
 from apps.common.models import BaseModel
 from apps.feed.models import Comment, Post, Reply
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
@@ -53,20 +54,42 @@ class Friend(BaseModel):
         ]
 
 
+NOTIFICATION_STATUS_CHOICES = (
+    ("REACTION", "REACTION"),
+    ("COMMENT", "COMMENT"),
+    ("REPLY", "REPLY"),
+    ("ADMIN", "ADMIN"),
+)
+
+
 class Notification(BaseModel):
     """Notification model for notifications sent by system or other users."""
 
     sender = models.ForeignKey(
         User, related_name="notifications_from", null=True, on_delete=models.SET_NULL
     )
-    receivers = models.ManyToManyField(User)
+    receivers = models.ManyToManyField(User)  # For admin notifications only
+    ntype = models.CharField(
+        max_length=100,
+        verbose_name=_("Type"),
+        choices=NOTIFICATION_STATUS_CHOICES,
+        null=True,
+        blank=True,
+    )
+    post = models.ForeignKey(
+        Post, on_delete=models.SET_NULL, null=True, blank=True
+    )  # For reactions only
+    comment = models.ForeignKey(
+        Comment, on_delete=models.SET_NULL, null=True, blank=True
+    )  # For comments and reactions
+    reply = models.ForeignKey(
+        Reply, on_delete=models.SET_NULL, null=True, blank=True
+    )  # For replies and reactions
 
-    post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True)
-    comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True)
-    reply = models.ForeignKey(Reply, on_delete=models.SET_NULL, null=True)
-
-    text = models.TextField()
+    text = models.TextField()  # For admin notifications only
     read_by = models.ManyToManyField(User, related_name="notifications_read")
 
     def __str__(self):
         return str(self.id)
+
+    # Set constraints
