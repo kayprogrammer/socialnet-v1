@@ -8,4 +8,5 @@ urlpatterns = [
     path("profile/<str:username>/", views.ProfileView.as_view()),
     path("profile/", views.ProfileUpdateDeleteView.as_view()),
     path("friends/", views.FriendsView.as_view()),
+    path("notifications/", views.NotificationsView.as_view()),
 ]

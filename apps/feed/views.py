@@ -343,6 +343,7 @@ class ReactionsView(APIView):
             notification, created = await Notification.objects.aget_or_create(
                 sender=user, ntype="REACTION", **ndata
             )
+            notification.receivers.add(obj.author)
 
         return CustomResponse.success(
             message="Reaction created", data=serializer.data, status_code=201
@@ -471,6 +472,7 @@ class CommentsView(APIView):
             notification, created = Notification.objects.aget_or_create(
                 sender=user, ntype="COMMENT", comment_id=comment.id
             )
+            notification.receivers.add(post.author)
 
         return CustomResponse.success(
             message="Comment Created", data=serializer.data, status_code=201
@@ -572,6 +574,7 @@ class CommentView(APIView):
             notification, created = Notification.objects.aget_or_create(
                 sender=user, ntype="REPLY", reply_id=reply.id
             )
+            notification.receivers.add(comment.author)
 
         return CustomResponse.success(
             message="Reply Created", data=serializer.data, status_code=201

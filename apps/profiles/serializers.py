@@ -3,7 +3,8 @@ from rest_framework import serializers
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
-from apps.common.schema_examples import file_upload_data
+from apps.common.schema_examples import file_upload_data, user_data
+from apps.profiles.models import NOTIFICATION_TYPE_CHOICES
 
 
 def get_user(user):
@@ -71,6 +72,32 @@ class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
     status = serializers.BooleanField()
 
 
+async def async_check_is_read(instance, user_id):
+    if await instance.read_by.filter(id=user_id).aexists():
+        return True
+    return False
+
+
+class NotificationSerializer(serializers.Serializer):
+    sender = serializers.SerializerMethodField(default=user_data)
+    ntype = serializers.ChoiceField(choices=NOTIFICATION_TYPE_CHOICES)
+    message = serializers.CharField(default="John Doe reacted to your post")
+    post_slug = serializers.CharField(
+        default="john-doe-d23dde64-a242-4ed0-bd75-4c759624b3a6"
+    )
+    comment_slug = serializers.CharField(
+        default="john-doe-a23dde64-a242-4ed0-bd75-4c759624b3a9"
+    )
+    reply_slug = serializers.CharField(
+        default="john-doe-a45dde64-a242-4ed0-bd75-4c759624b3a1"
+    )
+    is_read = serializers.BooleanField(default=False)
+
+    def get_sender(self, obj) -> dict:
+        sender = obj.sender
+        return get_user(sender) if sender else None
+
+
 # RESPONSE SERIALIZERS
 class ProfilesResponseSerializer(SuccessResponseSerializer):
     data = ProfileSerializer(many=True)
@@ -82,3 +109,7 @@ class ProfileResponseSerializer(SuccessResponseSerializer):
 
 class ProfileCreateResponseSerializer(SuccessResponseSerializer):
     data = ProfileCreateResponseDataSerializer()
+
+
+class NotificationsResponseSerializer(SuccessResponseSerializer):
+    data = NotificationSerializer()

@@ -1,4 +1,5 @@
-from django.db.models import F, Q, Case, When, Value, BooleanField
+from django.db.models import F, Q, Case, When, Value, BooleanField, CharField
+from django.db.models.functions import Coalesce
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
@@ -16,11 +17,13 @@ from apps.common.utils import (
     set_dict_attr,
 )
 from apps.common.paginators import CustomPagination
-from apps.profiles.models import Friend
+from apps.profiles.models import Friend, Notification
 from .serializers import (
     AcceptFriendRequestSerializer,
     CitiesResponseSerializer,
     CitySerializer,
+    NotificationSerializer,
+    NotificationsResponseSerializer,
     ProfileCreateResponseDataSerializer,
     ProfileCreateResponseSerializer,
     ProfileResponseSerializer,
@@ -397,3 +400,93 @@ class FriendsView(APIView):
             await friend.adelete()
 
         return CustomResponse.success(message=f"Friend Request {msg}", status_code=200)
+
+
+class NotificationsView(APIView):
+    serializer_class = NotificationSerializer
+    paginator_class = CustomPagination()
+    paginator_class.page_size = 50
+    permission_classes = (IsAuthenticatedCustom,)
+
+    async def get_queryset(self, current_user):
+        from django.db.models import Exists, OuterRef
+
+        current_user_id = current_user.id
+        # Fetch current user notifications and set and is_read attribute for each notifications
+        notifications = await sync_to_async(list)(
+            Notification.objects.filter(receivers__id=current_user_id)
+            .select_related(
+                "sender",
+                "sender__avatar",
+            )
+            .annotate(
+                is_read=Exists(
+                    Notification.objects.filter(id=OuterRef("pk"), read_by=current_user)
+                ),
+                post_slug=Coalesce(
+                    Case(
+                        When(post__isnull=False, then=F("post__slug")),
+                        When(comment__isnull=False, then=F("comment__post__slug")),
+                        When(reply__isnull=False, then=F("reply__comment__post__slug")),
+                        default=None,
+                        output_field=CharField(),
+                    ),
+                    Value(
+                        None, output_field=CharField()
+                    ),  # If none of the relations exist
+                ),
+                comment_slug=Coalesce(
+                    Case(
+                        When(comment__isnull=False, then=F("comment__slug")),
+                        When(reply__isnull=False, then=F("reply__comment__slug")),
+                        default=None,
+                        output_field=CharField(),
+                    ),
+                    Value(
+                        None, output_field=CharField()
+                    ),  # If none of the relations exist
+                ),
+                reply_slug=Coalesce(
+                    Case(
+                        When(reply__isnull=False, then=F("reply__slug")),
+                        default=None,
+                        output_field=CharField(),
+                    ),
+                    Value(
+                        None, output_field=CharField()
+                    ),  # If 'reply' relation does not exist
+                ),
+            )
+        )
+        return notifications
+
+    @extend_schema(
+        summary="Retrieve Auth User Notifications",
+        description="""
+            This endpoint retrieves a paginated list of auth user's notifications
+            Note:
+                - Use post slug to navigate to the post.
+                - Use comment slug to navigate to the comment.
+                - Use reply slug to navigate to the reply.
+        """,
+        tags=tags,
+        responses=NotificationsResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="page",
+                description="Retrieve a particular page of notifications. Defaults to 1",
+                required=False,
+                type=int,
+            )
+        ],
+    )
+    async def get(self, request, *args, **kwargs):
+        user = request.user
+        notifications = await self.get_queryset(user)
+        paginated_notifications = self.paginator_class.paginate_queryset(
+            notifications, request
+        )
+        serializer = self.serializer_class(paginated_notifications, many=True)
+        return CustomResponse.success(
+            message="Notifications fetched", data=serializer.data
+        )

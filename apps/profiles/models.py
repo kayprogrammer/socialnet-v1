@@ -12,6 +12,8 @@ from apps.common.models import BaseModel
 from apps.feed.models import Comment, Post, Reply
 from django.utils.translation import gettext_lazy as _
 
+from apps.profiles.utils import get_notification_message
+
 # Create your models here.
 
 REQUEST_STATUS_CHOICES = (
@@ -54,7 +56,7 @@ class Friend(BaseModel):
         ]
 
 
-NOTIFICATION_STATUS_CHOICES = (
+NOTIFICATION_TYPE_CHOICES = (
     ("REACTION", "REACTION"),
     ("COMMENT", "COMMENT"),
     ("REPLY", "REPLY"),
@@ -68,17 +70,15 @@ class Notification(BaseModel):
     sender = models.ForeignKey(
         User, related_name="notifications_from", null=True, on_delete=models.SET_NULL
     )
-    receivers = models.ManyToManyField(User)  # For admin notifications only
+    receivers = models.ManyToManyField(User)
     ntype = models.CharField(
         max_length=100,
         verbose_name=_("Type"),
-        choices=NOTIFICATION_STATUS_CHOICES,
-        null=True,
-        blank=True,
+        choices=NOTIFICATION_TYPE_CHOICES,
     )
     post = models.ForeignKey(
         Post, on_delete=models.SET_NULL, null=True, blank=True
-    )  # For reactions only
+    )  # For reactions only or admin reference to a post
     comment = models.ForeignKey(
         Comment, on_delete=models.SET_NULL, null=True, blank=True
     )  # For comments and reactions
@@ -86,10 +86,19 @@ class Notification(BaseModel):
         Reply, on_delete=models.SET_NULL, null=True, blank=True
     )  # For replies and reactions
 
-    text = models.TextField()  # For admin notifications only
-    read_by = models.ManyToManyField(User, related_name="notifications_read")
+    text = models.TextField(blank=True, null=True)  # For admin notifications only
+    read_by = models.ManyToManyField(
+        User, related_name="notifications_read", blank=True
+    )
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def message(self):
+        text = self.text
+        if not text:
+            text = get_notification_message(self)
+        return text
 
     # Set constraints
