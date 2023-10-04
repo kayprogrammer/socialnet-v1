@@ -262,7 +262,7 @@ class ReactionsView(APIView):
     async def get_object(self, value, slug):
         value = self.validate_for(value)
         model = self.reaction_for[value]
-        obj = await model.objects.aget_or_none(slug=slug)
+        obj = await model.objects.select_related("author").aget_or_none(slug=slug)
         if not obj:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
@@ -343,7 +343,7 @@ class ReactionsView(APIView):
             notification, created = await Notification.objects.aget_or_create(
                 sender=user, ntype="REACTION", **ndata
             )
-            notification.receivers.add(obj.author)
+            await notification.receivers.aadd(obj.author)
 
         return CustomResponse.success(
             message="Reaction created", data=serializer.data, status_code=201
@@ -410,7 +410,7 @@ class CommentsView(APIView):
     paginator_class = CustomPagination()
 
     async def get_object(self, slug):
-        post = await Post.objects.aget_or_none(slug=slug)
+        post = await Post.objects.select_related("author").aget_or_none(slug=slug)
         if not post:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
@@ -472,7 +472,7 @@ class CommentsView(APIView):
             notification, created = Notification.objects.aget_or_create(
                 sender=user, ntype="COMMENT", comment_id=comment.id
             )
-            notification.receivers.add(post.author)
+            await notification.receivers.aadd(post.author)
 
         return CustomResponse.success(
             message="Comment Created", data=serializer.data, status_code=201
@@ -574,7 +574,7 @@ class CommentView(APIView):
             notification, created = Notification.objects.aget_or_create(
                 sender=user, ntype="REPLY", reply_id=reply.id
             )
-            notification.receivers.add(comment.author)
+            await notification.receivers.aadd(comment.author)
 
         return CustomResponse.success(
             message="Reply Created", data=serializer.data, status_code=201

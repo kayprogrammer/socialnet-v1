@@ -64,8 +64,10 @@ def custom_exception_handler(exc, context):
             )
         else:
             return CustomResponse.error(
-                message=exc.detail if hasattr(exc, "detail") else exc,
-                status_code=response.status_code,
+                message=exc.detail if hasattr(exc, "detail") else str(exc),
+                status_code=response.status_code
+                if hasattr(response, "status_code")
+                else 500,
                 err_code=ErrorCode.SERVER_ERROR,
             )
     except APIException as e:
