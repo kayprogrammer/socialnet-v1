@@ -457,6 +457,7 @@ class NotificationsView(APIView):
                     ),  # If 'reply' relation does not exist
                 ),
             )
+            .order_by("-created_at")
         )
         return notifications
 

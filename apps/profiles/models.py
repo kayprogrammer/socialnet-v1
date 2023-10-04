@@ -68,7 +68,11 @@ class Notification(BaseModel):
     """Notification model for notifications sent by system or other users."""
 
     sender = models.ForeignKey(
-        User, related_name="notifications_from", null=True, on_delete=models.SET_NULL
+        User,
+        related_name="notifications_from",
+        null=True,
+        on_delete=models.SET_NULL,
+        blank=True,
     )
     receivers = models.ManyToManyField(User)
     ntype = models.CharField(
@@ -78,7 +82,7 @@ class Notification(BaseModel):
     )
     post = models.ForeignKey(
         Post, on_delete=models.SET_NULL, null=True, blank=True
-    )  # For reactions only or admin reference to a post
+    )  # For reactions or admin reference to a post
     comment = models.ForeignKey(
         Comment, on_delete=models.SET_NULL, null=True, blank=True
     )  # For comments and reactions
@@ -86,7 +90,9 @@ class Notification(BaseModel):
         Reply, on_delete=models.SET_NULL, null=True, blank=True
     )  # For replies and reactions
 
-    text = models.TextField(blank=True, null=True)  # For admin notifications only
+    text = models.CharField(
+        max_length=100, blank=True, null=True
+    )  # For admin notifications only
     read_by = models.ManyToManyField(
         User, related_name="notifications_read", blank=True
     )
@@ -102,3 +108,23 @@ class Notification(BaseModel):
         return text
 
     # Set constraints
+
+    class Meta:
+        constraints = [
+            CheckConstraint(
+                check=(Q(post__isnull=False, comment=None, reply=None))
+                | (Q(post=None, comment__isnull=False, reply=None))
+                | (Q(post=None, comment=None, reply__isnull=False))
+                | (Q(post=None, comment=None, reply=None, ntype="ADMIN")),
+                name="selected_object_constraints",
+                violation_error_message="Cannot have cannot have post, comment, reply or any two of the three simultaneously. If the three are None, then it must be of type 'ADMIN'",
+            ),
+            CheckConstraint(
+                check=(Q(sender=None, ntype="ADMIN", text__isnull=False))
+                | (Q(~Q(ntype="ADMIN"), sender__isnull=False, text=None)),
+                name="sender_text_type_constraints",
+                violation_error_message="""
+                    If No Sender, type must be ADMIN and text must not be empty and vice versa.
+                """,
+            ),
+        ]
