@@ -389,9 +389,6 @@ SOCKET_SECRET = config("SOCKET_SECRET")
 # You can set a file limit to your cloudinary so that the presigned data can only accept a particular file size range to upload image. You can also add file type validations
 # wscat -c ws://127.0.0.1:8000/api/v1/ws/chat/6028e0dc-7d0d-477e-9f6f-89806f112968/ -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg3NjY3NzYsInVzZXJfaWQiOiI2MDI4ZTBkYy03ZDBkLTQ3N2UtOWY2Zi04OTgwNmYxMTI5NjgiLCJ1c2VybmFtZSI6ImtlbmVjaGktaWZlYW55aSJ9.HJW_7C5bUA33NxBSeuGl9B66Ox_RPSpj1v_gNwxWT_Y"
 
-# To ensure that sending message in socket can only be made by the app itself. (move to notifications endpoint later)
-# key = message.pop("key", None)
-# if key and key == settings.SOCKET_SECRET:
 
 # await send_message_in_socket(
 #     request.is_secure(),

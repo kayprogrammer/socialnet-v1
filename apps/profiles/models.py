@@ -146,3 +146,5 @@ class Notification(BaseModel):
                 ),
             ),
         ]
+
+        # Validations later to ensure the read_by users are part of the receivers

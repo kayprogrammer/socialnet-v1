@@ -20,13 +20,16 @@ os.environ.setdefault(
 django_asgi_app = get_asgi_application()
 
 from apps.chat.urls import chatsocket_urlpatterns
+from apps.profiles.urls import notification_socket_urlpatterns
 from apps.common.socket_auth import SocketAuthMiddleware
+
+socket_urlpatterns = chatsocket_urlpatterns + notification_socket_urlpatterns
 
 # AllowedHostsOriginValidator
 application = ProtocolTypeRouter(
     {
         "http": django_asgi_app,
         # Just HTTP for now. (We can add other protocols later.)
-        "websocket": SocketAuthMiddleware(URLRouter(chatsocket_urlpatterns)),
+        "websocket": SocketAuthMiddleware(URLRouter(socket_urlpatterns)),
     }
 )

@@ -15435,3 +15435,9 @@ TypeError: Object of type SynchronousOnlyOperation is not JSON serializable
 2023-10-04 16:17:11,971 jazzmin.utils WARNING  listings not found when generating links
 2023-10-04 16:17:11,978 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2023-10-04 16:17:13,721 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-04 16:19:42,485 jazzmin.utils WARNING  listings not found when generating links
+2023-10-04 16:19:42,491 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-04 16:19:43,158 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-04 16:28:27,585 jazzmin.utils WARNING  listings not found when generating links
+2023-10-04 16:28:27,595 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-04 16:28:28,317 django.request WARNING  Not Found: /static/media/banner2-icon3.png

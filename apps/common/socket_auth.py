@@ -1,4 +1,6 @@
 import json
+
+from django.conf import settings
 from apps.accounts.auth import Authentication
 from asgiref.sync import sync_to_async
 
@@ -19,10 +21,15 @@ class SocketAuthMiddleware:
         if not token:
             error["message"] = "Auth bearer not set"
         else:
-            user = await sync_to_async(Authentication.decodeAuthorization)(token)
-            scope["user"] = user
-            if not user:
-                error["message"] = "Auth token is invalid or expired"
+            if (
+                token == settings.SOCKET_SECRET
+            ):  # If the app is making the connection itself
+                scope["user"] = token
+            else:
+                user = await sync_to_async(Authentication.decodeAuthorization)(token)
+                scope["user"] = user
+                if not user:
+                    error["message"] = "Auth token is invalid or expired"
 
         scope["error"] = error
         return await self.app(scope, receive, send)
