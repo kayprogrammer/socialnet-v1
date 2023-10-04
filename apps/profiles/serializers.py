@@ -72,12 +72,6 @@ class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
     status = serializers.BooleanField()
 
 
-async def async_check_is_read(instance, user_id):
-    if await instance.read_by.filter(id=user_id).aexists():
-        return True
-    return False
-
-
 class NotificationSerializer(serializers.Serializer):
     sender = serializers.SerializerMethodField(default=user_data)
     ntype = serializers.ChoiceField(choices=NOTIFICATION_TYPE_CHOICES)
