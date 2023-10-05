@@ -20,14 +20,15 @@ def get_notification_message(obj):
 
 
 async def sort_notification_slugs(notification):
-    if notification.post:
+    if notification.post_id:
         notification.post_slug = notification.post.slug
-    elif notification.comment:
+    elif notification.comment_id:
         notification.comment_slug = notification.comment.slug
         notification.post_slug = notification.comment.post.slug
-    elif notification.reply:
+    elif notification.reply_id:
         notification.reply_slug = notification.reply.slug
         notification.comment_slug = notification.reply.comment.slug
+        print("haa")
         notification.post_slug = notification.reply.comment.post.slug
     return notification
 
@@ -38,7 +39,7 @@ async def send_notification_in_socket(
 ):
     websocket_scheme = "wss://" if secured else "ws://"
     uri = f"{websocket_scheme}{host}/api/v1/ws/notifications/"
-    notification_data = {"id": notification.id, "status": status}
+    notification_data = {"id": str(notification.id), "status": status}
     if status == "CREATED":
         notification = await sort_notification_slugs(notification)
 

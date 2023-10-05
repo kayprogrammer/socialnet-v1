@@ -263,7 +263,10 @@ class ReactionsView(APIView):
     async def get_object(self, value, slug):
         value = self.validate_for(value)
         model = self.reaction_for[value]
-        obj = await model.objects.select_related("author").aget_or_none(slug=slug)
+        related = ["author"]
+        if model == Comment:
+            related.append("post")
+        obj = await model.objects.select_related(*related).aget_or_none(slug=slug)
         if not obj:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
@@ -345,8 +348,16 @@ class ReactionsView(APIView):
         if obj.author_id != user.id:
             ndata = {obj_field: obj}
             notification, created = await Notification.objects.select_related(
-                "sender", "sender__avatar", "post", "comment", "reply"
+                "sender",
+                "sender__avatar",
+                "post",
+                "comment",
+                "comment__post",
+                "reply",
+                "reply__comment",
+                "reply__comment__post",
             ).aget_or_create(sender=user, ntype="REACTION", **ndata)
+            # if created:
             await notification.receivers.aadd(obj.author)
 
             # Send to websocket
@@ -487,14 +498,15 @@ class CommentsView(APIView):
             notification, created = await Notification.objects.select_related(
                 "sender", "sender__avatar", "comment", "comment__post"
             ).aget_or_create(sender=user, ntype="COMMENT", comment_id=comment.id)
-            await notification.receivers.aadd(post.author)
+            if created:
+                await notification.receivers.aadd(post.author)
 
-            # Send to websocket
-            await send_notification_in_socket(
-                request.is_secure(),
-                request.get_host(),
-                notification,
-            )
+                # Send to websocket
+                await send_notification_in_socket(
+                    request.is_secure(),
+                    request.get_host(),
+                    notification,
+                )
 
         return CustomResponse.success(
             message="Comment Created", data=serializer.data, status_code=201
@@ -600,14 +612,15 @@ class CommentView(APIView):
                 "reply__comment",
                 "reply__comment__post",
             ).aget_or_create(sender=user, ntype="REPLY", reply_id=reply.id)
-            await notification.receivers.aadd(comment.author)
+            if created:
+                await notification.receivers.aadd(comment.author)
 
-            # Send to websocket
-            await send_notification_in_socket(
-                request.is_secure(),
-                request.get_host(),
-                notification,
-            )
+                # Send to websocket
+                await send_notification_in_socket(
+                    request.is_secure(),
+                    request.get_host(),
+                    notification,
+                )
 
         return CustomResponse.success(
             message="Reply Created", data=serializer.data, status_code=201
