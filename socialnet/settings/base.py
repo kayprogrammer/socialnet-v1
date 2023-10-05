@@ -387,7 +387,5 @@ SOCKET_SECRET = config("SOCKET_SECRET")
 # TODO
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgyMTQyMjcsInVzZXJfaWQiOiI4NjNlMDZiMi0xMzcxLTQxOWYtOTc1NC01YjA0OGM3NjA0M2YiLCJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.n4e_27vQ_9nag072FFLZNjLvCBT2pnavoIapNnREd3o
 # You can set a file limit to your cloudinary so that the presigned data can only accept a particular file size range to upload image. You can also add file type validations
-# wscat -c ws://127.0.0.1:8000/api/v1/ws/notifications/ -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgyMTQyMjcsInVzZXJfaWQiOiI4NjNlMDZiMi0xMzcxLTQxOWYtOTc1NC01YjA0OGM3NjA0M2YiLCJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.n4e_27vQ_9nag072FFLZNjLvCBT2pnavoIapNnREd3o"
-# wscat -c ws://127.0.0.1:8000/api/v1/ws/notifications/ -H "Authorization: socialnet_socket_secret_RDrWedB60c8EUw1UKo1vT33QiDLMgCbVLn7G1tRS8oQWE93vNfvH6qlLJDiqR5KQYVxCZIr7dfk7SL0ShhN3EpAn7iFNsW2nQh2R"
-
-# test-admin-f8950845-8ed1-4017-8f9f-cfb8ddce29b1
+# Only create notifications for recent comments and replies after 1 hour
+# Send notifications in socket for admin notifications

@@ -28,7 +28,6 @@ async def sort_notification_slugs(notification):
     elif notification.reply_id:
         notification.reply_slug = notification.reply.slug
         notification.comment_slug = notification.reply.comment.slug
-        print("haa")
         notification.post_slug = notification.reply.comment.post.slug
     return notification
 
