@@ -3,9 +3,6 @@ from apps.accounts.models import User
 from apps.common.consumers import BaseConsumer
 from apps.common.error import ErrorCode
 import json
-from apps.profiles.models import Notification
-
-from apps.profiles.serializers import NotificationSerializer
 
 
 class NotificationConsumer(BaseConsumer):
@@ -37,12 +34,14 @@ class NotificationConsumer(BaseConsumer):
         data = json.loads(text_data)
 
         # Send notification data
+        print(data)
         await self.channel_layer.group_send(
             self.room_group_name,
             {"type": "notification_message", "notification_data": data},
         )
 
     async def notification_message(self, event):
+        print(event)
         notification_data = event["notification_data"]
         user = self.scope["user"]
         if isinstance(user, User):

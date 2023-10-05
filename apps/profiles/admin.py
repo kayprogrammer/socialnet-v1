@@ -1,4 +1,5 @@
 from django.contrib import admin
+from apps.accounts.models import User
 
 from apps.profiles.models import Friend, Notification
 
@@ -18,6 +19,14 @@ class NotificationAdmin(admin.ModelAdmin):
         "created_at",
         "updated_at",
     )
+
+    readonly_fields = ("receivers", "read_by", "ntype", "comment", "reply", "sender")
+
+    def save_model(self, request, obj, form, change):
+        obj.ntype = "ADMIN"
+        obj.host = request.get_host()
+        obj.secured = request.is_secure()
+        super().save_model(request, obj, form, change)
 
 
 admin.site.register(Friend, FriendAdmin)

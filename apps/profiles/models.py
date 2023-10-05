@@ -1,3 +1,4 @@
+import asyncio
 from django.db import models
 from django.db.models import (
     Q,
@@ -12,8 +13,9 @@ from apps.common.models import BaseModel
 from apps.feed.models import Comment, Post, Reply
 from django.utils.translation import gettext_lazy as _
 
-from apps.profiles.utils import get_notification_message
+from apps.profiles.utils import get_notification_message, send_notification_in_socket
 from django.utils.safestring import mark_safe
+from django.db.models.signals import post_save
 
 # Create your models here.
 REQUEST_STATUS_CHOICES = (
@@ -97,6 +99,10 @@ class Notification(BaseModel):
         User, related_name="notifications_read", blank=True
     )
 
+    # For admin use only
+    host = models.CharField(max_length=300, null=True, editable=False)
+    secured = models.BooleanField(default=False, editable=False)
+
     def __str__(self):
         return str(self.id)
 
@@ -108,7 +114,6 @@ class Notification(BaseModel):
         return text
 
     # Set constraints
-
     class Meta:
         _space = "&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;"
         constraints = [
@@ -148,3 +153,23 @@ class Notification(BaseModel):
         ]
 
         # Validations later to ensure the read_by users are part of the receivers
+
+
+def set_receivers_m2m(sender, instance, created, *args, **kwargs):
+    if instance.ntype == "ADMIN":
+        instance.receivers.set(User.objects.all())
+
+        # Send socket notification
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+        loop.run_until_complete(
+            send_notification_in_socket(
+                instance.secured,
+                instance.host,
+                instance,
+            )
+        )
+
+
+post_save.connect(set_receivers_m2m, sender=Notification)
