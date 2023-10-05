@@ -387,13 +387,7 @@ SOCKET_SECRET = config("SOCKET_SECRET")
 # TODO
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgyMTQyMjcsInVzZXJfaWQiOiI4NjNlMDZiMi0xMzcxLTQxOWYtOTc1NC01YjA0OGM3NjA0M2YiLCJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.n4e_27vQ_9nag072FFLZNjLvCBT2pnavoIapNnREd3o
 # You can set a file limit to your cloudinary so that the presigned data can only accept a particular file size range to upload image. You can also add file type validations
-# wscat -c ws://127.0.0.1:8000/api/v1/ws/chat/6028e0dc-7d0d-477e-9f6f-89806f112968/ -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg3NjY3NzYsInVzZXJfaWQiOiI2MDI4ZTBkYy03ZDBkLTQ3N2UtOWY2Zi04OTgwNmYxMTI5NjgiLCJ1c2VybmFtZSI6ImtlbmVjaGktaWZlYW55aSJ9.HJW_7C5bUA33NxBSeuGl9B66Ox_RPSpj1v_gNwxWT_Y"
+# wscat -c ws://127.0.0.1:8000/api/v1/ws/notifications/ -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgyMTQyMjcsInVzZXJfaWQiOiI4NjNlMDZiMi0xMzcxLTQxOWYtOTc1NC01YjA0OGM3NjA0M2YiLCJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.n4e_27vQ_9nag072FFLZNjLvCBT2pnavoIapNnREd3o"
+# wscat -c ws://127.0.0.1:8000/api/v1/ws/notifications/ -H "Authorization: socialnet_socket_secret_RDrWedB60c8EUw1UKo1vT33QiDLMgCbVLn7G1tRS8oQWE93vNfvH6qlLJDiqR5KQYVxCZIr7dfk7SL0ShhN3EpAn7iFNsW2nQh2R"
 
-
-# await send_message_in_socket(
-#     request.is_secure(),
-#     request.get_host(),
-#     room_id,
-#     message_data,
-#     status="DELETED",
-# )
+# test-admin-f8950845-8ed1-4017-8f9f-cfb8ddce29b1

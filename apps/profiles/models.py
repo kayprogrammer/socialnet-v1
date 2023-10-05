@@ -71,23 +71,23 @@ class Notification(BaseModel):
         User,
         related_name="notifications_from",
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         blank=True,
     )
-    receivers = models.ManyToManyField(User)
+    receivers = models.ManyToManyField(User, related_name="notifications")
     ntype = models.CharField(
         max_length=100,
         verbose_name=_("Type"),
         choices=NOTIFICATION_TYPE_CHOICES,
     )
     post = models.ForeignKey(
-        Post, on_delete=models.SET_NULL, null=True, blank=True
+        Post, on_delete=models.CASCADE, null=True, blank=True
     )  # For reactions or admin reference to a post
     comment = models.ForeignKey(
-        Comment, on_delete=models.SET_NULL, null=True, blank=True
+        Comment, on_delete=models.CASCADE, null=True, blank=True
     )  # For comments and reactions
     reply = models.ForeignKey(
-        Reply, on_delete=models.SET_NULL, null=True, blank=True
+        Reply, on_delete=models.CASCADE, null=True, blank=True
     )  # For replies and reactions
 
     text = models.CharField(

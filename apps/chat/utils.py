@@ -1,9 +1,4 @@
-from django.conf import settings
-from uuid import UUID
-from apps.common.file_processors import FileProcessor
 from apps.common.models import File
-import websockets
-import json
 
 
 # Create file object
@@ -40,30 +35,3 @@ def handle_lerrors(err):
             first_key = list(errR)[0]
             errors["usernames_to_remove"] = [errR[first_key][0]]
     return errors
-
-
-# Send message in websocket
-# Use this later for notifications only.
-async def send_message_in_socket(
-    secured: bool, host: str, id: UUID, message: dict, status: str = "CREATED"
-):
-    websocket_scheme = "wss://" if secured else "ws://"
-    uri = f"{websocket_scheme}{host}/api/v1/ws/chat/{id}/"
-
-    # Convert file upload data to file url
-    file_upload_data = message.pop("file_upload_data", None)
-    if file_upload_data:
-        file = message["file"]
-        message["file"] = FileProcessor.generate_file_url(
-            key=file.id,
-            folder="messages",
-            content_type=file.resource_type,
-        )
-
-    message = message | {"status": status} | {"key": settings.SOCKET_SECRET}
-
-    async with websockets.connect(uri) as websocket:
-        # Send a message to the WebSocket server
-        message_to_send = json.dumps(message)
-        await websocket.send(message_to_send)
-        await websocket.close()

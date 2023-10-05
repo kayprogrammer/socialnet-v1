@@ -6,6 +6,7 @@ from asgiref.sync import sync_to_async
 from apps.common.file_types import ALLOWED_IMAGE_TYPES
 from apps.common.paginators import CustomPagination
 from apps.profiles.models import Notification
+from apps.profiles.utils import send_notification_in_socket
 
 from .models import Post, Comment, Reply, Reaction, REACTION_CHOICES
 from .serializers import (
@@ -329,21 +330,31 @@ class ReactionsView(APIView):
         data["user"] = user
         rtype = data.pop("rtype")
         obj_field = for_val.lower()
-        data[f"{obj_field}_id"] = obj.id
-        reaction, created = (
-            await Reaction.objects.select_related("user", "user__avatar")
-            .exclude(user__avatar=None)
-            .aupdate_or_create(**data, defaults={"rtype": rtype})
-        )
+        data[obj_field] = obj
+
+        reaction = await Reaction.objects.select_related(
+            "user", "user__avatar"
+        ).aget_or_none(**data)
+        if not reaction:
+            data["rtype"] = rtype
+            reaction = await Reaction.objects.acreate(**data)
+
         serializer = self.serializer_class(reaction)
 
         # Create and Send Notification
         if obj.author_id != user.id:
             ndata = {obj_field: obj}
-            notification, created = await Notification.objects.aget_or_create(
-                sender=user, ntype="REACTION", **ndata
-            )
+            notification, created = await Notification.objects.select_related(
+                "sender", "sender__avatar", "post", "comment", "reply"
+            ).aget_or_create(sender=user, ntype="REACTION", **ndata)
             await notification.receivers.aadd(obj.author)
+
+            # Send to websocket
+            await send_notification_in_socket(
+                request.is_secure(),
+                request.get_host(),
+                notification,
+            )
 
         return CustomResponse.success(
             message="Reaction created", data=serializer.data, status_code=201
@@ -398,6 +409,10 @@ class RemoveReaction(APIView):
 
         notification = await Notification.objects.aget_or_none(**data)
         if notification:
+            # Send to websocket and delete notification
+            await send_notification_in_socket(
+                request.is_secure(), request.get_host(), notification, status="DELETED"
+            )
             await notification.adelete()
 
         await reaction.adelete()
@@ -469,10 +484,17 @@ class CommentsView(APIView):
 
         # Create and Send Notification
         if user.id != post.author_id:
-            notification, created = Notification.objects.aget_or_create(
-                sender=user, ntype="COMMENT", comment_id=comment.id
-            )
+            notification, created = await Notification.objects.select_related(
+                "sender", "sender__avatar", "comment", "comment__post"
+            ).aget_or_create(sender=user, ntype="COMMENT", comment_id=comment.id)
             await notification.receivers.aadd(post.author)
+
+            # Send to websocket
+            await send_notification_in_socket(
+                request.is_secure(),
+                request.get_host(),
+                notification,
+            )
 
         return CustomResponse.success(
             message="Comment Created", data=serializer.data, status_code=201
@@ -571,10 +593,21 @@ class CommentView(APIView):
 
         # Create and Send Notification
         if user.id != comment.author_id:
-            notification, created = Notification.objects.aget_or_create(
-                sender=user, ntype="REPLY", reply_id=reply.id
-            )
+            notification, created = await Notification.objects.select_related(
+                "sender",
+                "sender__avatar",
+                "reply",
+                "reply__comment",
+                "reply__comment__post",
+            ).aget_or_create(sender=user, ntype="REPLY", reply_id=reply.id)
             await notification.receivers.aadd(comment.author)
+
+            # Send to websocket
+            await send_notification_in_socket(
+                request.is_secure(),
+                request.get_host(),
+                notification,
+            )
 
         return CustomResponse.success(
             message="Reply Created", data=serializer.data, status_code=201
@@ -629,6 +662,10 @@ class CommentView(APIView):
             sender=user, ntype="COMMENT", comment_id=comment.id
         )
         if notification:
+            # Send to websocket and delete notification
+            await send_notification_in_socket(
+                request.is_secure(), request.get_host(), notification, status="DELETED"
+            )
             await notification.adelete()
 
         await comment.adelete()
@@ -729,6 +766,10 @@ class ReplyView(APIView):
             sender=user, ntype="REPLY", comment_id=reply.id
         )
         if notification:
+            # Send to websocket and delete notification
+            await send_notification_in_socket(
+                request.is_secure(), request.get_host(), notification, status="DELETED"
+            )
             await notification.adelete()
 
         await reply.adelete()

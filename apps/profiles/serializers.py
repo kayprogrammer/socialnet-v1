@@ -73,18 +73,13 @@ class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
 
 
 class NotificationSerializer(serializers.Serializer):
+    id = serializers.UUIDField()
     sender = serializers.SerializerMethodField(default=user_data)
     ntype = serializers.ChoiceField(choices=NOTIFICATION_TYPE_CHOICES)
     message = serializers.CharField(default="John Doe reacted to your post")
-    post_slug = serializers.CharField(
-        default="john-doe-d23dde64-a242-4ed0-bd75-4c759624b3a6"
-    )
-    comment_slug = serializers.CharField(
-        default="john-doe-a23dde64-a242-4ed0-bd75-4c759624b3a9"
-    )
-    reply_slug = serializers.CharField(
-        default="john-doe-a45dde64-a242-4ed0-bd75-4c759624b3a1"
-    )
+    post_slug = serializers.CharField(allow_null=True)
+    comment_slug = serializers.CharField(allow_null=True)
+    reply_slug = serializers.CharField(allow_null=True)
     is_read = serializers.BooleanField(default=False)
 
     def get_sender(self, obj) -> dict:
