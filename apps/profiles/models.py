@@ -92,9 +92,7 @@ class Notification(BaseModel):
         Reply, on_delete=models.CASCADE, null=True, blank=True
     )  # For replies and reactions
 
-    text = models.CharField(
-        max_length=100, blank=True, null=True
-    )  # For admin notifications only
+    text = models.CharField(max_length=100, null=True)  # For admin notifications only
     read_by = models.ManyToManyField(
         User, related_name="notifications_read", blank=True
     )
@@ -156,9 +154,8 @@ class Notification(BaseModel):
 
 
 def set_receivers_m2m(sender, instance, created, *args, **kwargs):
-    if instance.ntype == "ADMIN":
+    if created and instance.ntype == "ADMIN":
         instance.receivers.set(User.objects.all())
-
         # Send socket notification
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)

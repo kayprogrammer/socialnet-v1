@@ -412,7 +412,7 @@ class NotificationsView(APIView):
         from django.db.models import Exists, OuterRef
 
         current_user_id = current_user.id
-        # Fetch current user notifications and set and is_read attribute for each notifications
+        # Fetch current user notifications and set and post_slug, comment_slug is_read attribute for each notifications
         notifications = await sync_to_async(list)(
             Notification.objects.filter(receivers__id=current_user_id)
             .select_related(
@@ -475,7 +475,13 @@ class NotificationsView(APIView):
         parameters=[
             OpenApiParameter(
                 name="page",
-                description="Retrieve a particular page of notifications. Defaults to 1",
+                description="""
+                    Retrieve a particular page of notifications. Defaults to 1
+                    WEBSOCKET ENDPOINT: /api/v1/ws/notifications/ e.g (ws://{host}/api/v1/ws/notifications/) 
+                    NOTE:
+                    * This endpoint requires authorization, so pass in the Authorization header with Bearer and its value.
+                    * You can only read and not send notification messages into this socket.
+                """,
                 required=False,
                 type=int,
             )

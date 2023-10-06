@@ -38,7 +38,11 @@ async def send_notification_in_socket(
 ):
     websocket_scheme = "wss://" if secured else "ws://"
     uri = f"{websocket_scheme}{host}/api/v1/ws/notifications/"
-    notification_data = {"id": str(notification.id), "status": status}
+    notification_data = {
+        "id": str(notification.id),
+        "status": status,
+        "ntype": notification.ntype,
+    }
     if status == "CREATED":
         notification = await sort_notification_slugs(notification)
 

@@ -34,17 +34,19 @@ class NotificationConsumer(BaseConsumer):
         data = json.loads(text_data)
 
         # Send notification data
-        print(data)
         await self.channel_layer.group_send(
             self.room_group_name,
             {"type": "notification_message", "notification_data": data},
         )
 
     async def notification_message(self, event):
-        print(event)
+        print("Hala")
         notification_data = event["notification_data"]
         user = self.scope["user"]
-        if isinstance(user, User):
-            if await user.notifications.filter(id=notification_data["id"]).aexists():
-                # Ensure that only receivers of the notification can read it.
-                await self.send(text_data=json.dumps(notification_data))
+
+        if isinstance(user, User) and (
+            notification_data["ntype"] == "ADMIN"
+            or await user.notifications.filter(id=notification_data["id"]).aexists()
+        ):
+            # Ensure that only receivers of the notification can read it.
+            await self.send(text_data=json.dumps(notification_data))
