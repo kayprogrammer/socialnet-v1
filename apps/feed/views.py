@@ -338,7 +338,10 @@ class ReactionsView(APIView):
         reaction = await Reaction.objects.select_related(
             "user", "user__avatar"
         ).aget_or_none(**data)
-        if not reaction:
+        if reaction:
+            reaction.rtype = rtype
+            await reaction.asave()
+        else:
             data["rtype"] = rtype
             reaction = await Reaction.objects.acreate(**data)
 
