@@ -63,3 +63,43 @@ class TestFeed(APITestCase):
                 ],
             },
         )
+
+    def test_send_message(self):
+        chat = self.chat
+        message_data = {"chat_id": uuid.uuid4(), "text": "JESUS is KING"}
+
+        # Verify the requests fails with invalid chat id
+        response = self.client.post(self.chats_url, data=message_data, **self.bearer)
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User has no chat with that ID",
+            },
+        )
+
+        # Verify the requests suceeds with valid chat id
+        message_data["chat_id"] = chat.id
+        response = self.client.post(self.chats_url, data=message_data, **self.bearer)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Message sent",
+                "data": {
+                    "id": mock.ANY,
+                    "chat_id": str(chat.id),
+                    "sender": mock.ANY,
+                    "text": message_data["text"],
+                    "file": None,
+                    "created_at": mock.ANY,
+                    "updated_at": mock.ANY,
+                    "file_upload_data": None,
+                },
+            },
+        )
+
+        # You can test for other error responses yourself

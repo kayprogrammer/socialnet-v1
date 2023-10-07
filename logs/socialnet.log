@@ -17096,3 +17096,5 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-07 21:37:35,435 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
 2023-10-07 21:37:35,442 django.request WARNING  Unauthorized: /api/v1/feed/replies/test-verified-0ce0b2f9-1690-4746-8e3c-a68466c83791/
 2023-10-07 22:00:35,242 django.request WARNING  Unauthorized: /api/v1/chats/
+2023-10-07 22:19:28,972 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-07 22:20:27,342 django.request WARNING  Not Found: /api/v1/chats/
