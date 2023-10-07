@@ -1,6 +1,7 @@
 from rest_framework.test import APITestCase
 from unittest import mock
 from apps.chat.models import Chat, Message
+from apps.chat.utils import get_user
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
 import uuid
@@ -18,6 +19,7 @@ class TestFeed(APITestCase):
         verified_user = TestUtil.verified_user()
         another_verified_user = TestUtil.another_verified_user()
         self.verified_user = verified_user
+        self.another_verified_user = another_verified_user
 
         # chat & message
         chat = Chat.objects.create(owner=verified_user)
@@ -103,3 +105,60 @@ class TestFeed(APITestCase):
         )
 
         # You can test for other error responses yourself
+
+    def test_retrieve_chat_messages(self):
+        chat = self.chat
+        message = self.message
+        other_user = self.another_verified_user
+
+        # Verify the request fails with invalid chat ID
+        response = self.client.get(f"{self.chats_url}{uuid.uuid4()}/", **self.bearer)
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User has no chat with that ID",
+            },
+        )
+
+        # Verify the request succeeds with valid chat ID
+        response = self.client.get(f"{self.chats_url}{chat.id}/", **self.bearer)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Messages fetched",
+                "data": {
+                    "chat": {
+                        "id": str(chat.id),
+                        "name": chat.name,
+                        "owner": mock.ANY,
+                        "ctype": chat.ctype,
+                        "description": chat.description,
+                        "image": chat.get_image,
+                        "latest_message": {
+                            "sender": mock.ANY,
+                            "text": message.text,
+                            "file": message.get_file,
+                        },
+                        "created_at": mock.ANY,
+                        "updated_at": mock.ANY,
+                    },
+                    "messages": [
+                        {
+                            "id": str(message.id),
+                            "chat_id": str(chat.id),
+                            "sender": mock.ANY,
+                            "text": message.text,
+                            "file": message.get_file,
+                            "created_at": mock.ANY,
+                            "updated_at": mock.ANY,
+                        }
+                    ],
+                    "users": [get_user(other_user)],
+                },
+            },
+        )

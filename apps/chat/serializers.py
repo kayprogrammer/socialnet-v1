@@ -1,21 +1,13 @@
 import pytz
 from rest_framework import serializers
 from apps.chat.models import CHAT_TYPES
-from apps.chat.utils import handle_lerrors
+from apps.chat.utils import handle_lerrors, get_user
 from apps.common.serializers import SuccessResponseSerializer
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_file_type, validate_image_type
 from apps.common.schema_examples import file_upload_data, user_data, latest_message_data
 from django.utils.translation import gettext_lazy as _
 from rest_framework.exceptions import ValidationError
-
-
-def get_user(user):
-    return {
-        "name": user.full_name,
-        "slug": user.username,
-        "avatar": user.get_avatar,
-    }
 
 
 class ChatSerializer(serializers.Serializer):

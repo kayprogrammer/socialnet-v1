@@ -35,3 +35,11 @@ def handle_lerrors(err):
             first_key = list(errR)[0]
             errors["usernames_to_remove"] = [errR[first_key][0]]
     return errors
+
+
+def get_user(user):
+    return {
+        "name": user.full_name,
+        "slug": user.username,
+        "avatar": user.get_avatar,
+    }

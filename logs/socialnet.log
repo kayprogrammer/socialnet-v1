@@ -17098,3 +17098,5 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-07 22:00:35,242 django.request WARNING  Unauthorized: /api/v1/chats/
 2023-10-07 22:19:28,972 django.request WARNING  Not Found: /api/v1/chats/
 2023-10-07 22:20:27,342 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-07 22:34:22,772 django.request WARNING  Not Found: /api/v1/chats/9dec0b64-0f42-4fae-942c-c082a14f07c2/
+2023-10-07 22:34:24,269 django.request WARNING  Not Found: /api/v1/chats/
