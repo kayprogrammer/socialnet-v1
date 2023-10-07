@@ -17100,3 +17100,12 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-07 22:20:27,342 django.request WARNING  Not Found: /api/v1/chats/
 2023-10-07 22:34:22,772 django.request WARNING  Not Found: /api/v1/chats/9dec0b64-0f42-4fae-942c-c082a14f07c2/
 2023-10-07 22:34:24,269 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-07 23:16:19,732 django.request WARNING  Not Found: /api/v1/chats/25ee1cdb-33d8-47c1-9f3f-51de1873f722/
+2023-10-07 23:17:39,728 django.request WARNING  Not Found: /api/v1/chats/892ab154-ff66-4edc-be2b-5dd0b139b20b/
+2023-10-07 23:17:41,255 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-07 23:23:54,236 django.request WARNING  Not Found: /api/v1/chats/cd75fbe5-c496-42cd-af5e-497426061bec/
+2023-10-07 23:26:23,221 django.request WARNING  Not Found: /api/v1/chats/40dec85d-caa9-46ab-adc0-83cb9330505a/
+2023-10-07 23:28:30,297 django.request WARNING  Not Found: /api/v1/chats/7eb2b30a-a327-49ef-8a2f-09f10b4b7b47/
+2023-10-07 23:31:44,717 django.request WARNING  Not Found: /api/v1/chats/03769889-f0d5-4683-a04c-5a8b9f2f8a50/
+2023-10-07 23:31:46,299 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-07 23:31:47,059 django.request WARNING  Not Found: /api/v1/chats/d933fc20-5e60-467a-999e-3526508d27ab/
