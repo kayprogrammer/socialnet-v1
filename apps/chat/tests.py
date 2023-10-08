@@ -195,3 +195,29 @@ class TestFeed(APITestCase):
         )
 
         # You can test for other error responses yourself
+
+    def test_delete_group_chat(self):
+        chat = self.group_chat
+
+        # Verify the requests fails with invalid chat id
+        response = self.client.delete(f"{self.chats_url}{uuid.uuid4()}/", **self.bearer)
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User owns no group chat with that ID",
+            },
+        )
+
+        # Verify the requests suceeds with valid chat id
+        response = self.client.delete(f"{self.chats_url}{chat.id}/", **self.bearer)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Group Chat Deleted",
+            },
+        )

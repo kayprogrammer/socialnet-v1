@@ -17109,3 +17109,7 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-07 23:31:44,717 django.request WARNING  Not Found: /api/v1/chats/03769889-f0d5-4683-a04c-5a8b9f2f8a50/
 2023-10-07 23:31:46,299 django.request WARNING  Not Found: /api/v1/chats/
 2023-10-07 23:31:47,059 django.request WARNING  Not Found: /api/v1/chats/d933fc20-5e60-467a-999e-3526508d27ab/
+2023-10-08 20:19:34,603 django.request WARNING  Not Found: /api/v1/chats/db2e40ac-3ca5-496d-bb00-fd0af2c98a9a/
+2023-10-08 20:19:35,437 django.request WARNING  Not Found: /api/v1/chats/4323c730-9189-49d0-9257-83086d86b71d/
+2023-10-08 20:19:37,014 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-08 20:19:37,812 django.request WARNING  Not Found: /api/v1/chats/65da0a38-41bd-4e8d-908a-dacda31374b9/
