@@ -228,7 +228,7 @@ class TestFeed(APITestCase):
             "text": "Jesus is Lord",
         }
 
-        # Verify the requests fails with invalid chat id
+        # Verify the requests fails with invalid message id
         response = self.client.put(
             f"{self.messages_url}{uuid.uuid4()}/", data=message_data, **self.bearer
         )
@@ -242,7 +242,7 @@ class TestFeed(APITestCase):
             },
         )
 
-        # Verify the requests suceeds with valid chat id
+        # Verify the requests suceeds with valid message id
         response = self.client.put(
             f"{self.messages_url}{message.id}/", data=message_data, **self.bearer
         )
@@ -262,5 +262,35 @@ class TestFeed(APITestCase):
                     "updated_at": mock.ANY,
                     "file_upload_data": None,
                 },
+            },
+        )
+
+    def test_delete_message(self):
+        message = self.message
+
+        # Verify the requests fails with invalid message id
+        response = self.client.delete(
+            f"{self.messages_url}{uuid.uuid4()}/", **self.bearer
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User has no message with that ID",
+            },
+        )
+
+        # Verify the requests suceeds with valid message id
+        response = self.client.delete(
+            f"{self.messages_url}{message.id}/", **self.bearer
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Message deleted",
             },
         )
