@@ -221,3 +221,46 @@ class TestFeed(APITestCase):
                 "message": "Group Chat Deleted",
             },
         )
+
+    def test_update_message(self):
+        message = self.message
+        message_data = {
+            "text": "Jesus is Lord",
+        }
+
+        # Verify the requests fails with invalid chat id
+        response = self.client.put(
+            f"{self.messages_url}{uuid.uuid4()}/", data=message_data, **self.bearer
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User has no message with that ID",
+            },
+        )
+
+        # Verify the requests suceeds with valid chat id
+        response = self.client.put(
+            f"{self.messages_url}{message.id}/", data=message_data, **self.bearer
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Message updated",
+                "data": {
+                    "id": str(message.id),
+                    "chat_id": str(message.chat.id),
+                    "sender": mock.ANY,
+                    "text": message_data["text"],
+                    "file": None,
+                    "created_at": mock.ANY,
+                    "updated_at": mock.ANY,
+                    "file_upload_data": None,
+                },
+            },
+        )
