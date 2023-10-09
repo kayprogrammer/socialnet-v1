@@ -17137,3 +17137,50 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-09 21:32:31,768 django.request WARNING  Not Found: /api/v1/chats/
 2023-10-09 21:32:32,590 django.request WARNING  Not Found: /api/v1/chats/da188088-93ea-46af-b89c-6d848898b0de/
 2023-10-09 21:32:33,408 django.request WARNING  Not Found: /api/v1/chats/messages/c72c9370-8ba1-4ba1-8250-5f620a1cb736/
+2023-10-09 21:47:31,409 django.request WARNING  Unprocessable Entity: /api/v1/chats/groups/group/
+2023-10-09 21:47:32,297 django.request WARNING  Not Found: /api/v1/chats/dff4d1e7-8446-4b58-8202-ebfb977fbbcd/
+2023-10-09 21:47:33,057 django.request WARNING  Not Found: /api/v1/chats/messages/211e1213-67a2-4bd9-924a-8f99727a1275/
+2023-10-09 21:47:33,946 django.request WARNING  Not Found: /api/v1/chats/c1319da2-5fd8-40c3-875a-e14e3e851565/
+2023-10-09 21:47:35,535 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-09 21:47:36,348 django.request WARNING  Not Found: /api/v1/chats/8234ef46-6a8e-4020-8bf2-406ceffd1767/
+2023-10-09 21:47:37,225 django.request WARNING  Not Found: /api/v1/chats/messages/61b8b220-fad7-440a-a703-148feff32436/
+2023-10-09 22:11:43,333 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-10-09 22:11:44,436 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-09 22:15:27,671 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-10-09 22:15:28,883 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-09 22:31:23,328 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-10-09 22:31:24,406 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-09 22:34:08,696 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-10-09 22:34:09,765 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-09 22:34:42,234 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:34:42,304 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:34:43,555 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:34:44,414 django.request WARNING  Not Found: /static/media/logo.png
+2023-10-09 22:35:01,628 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:35:01,634 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:35:02,849 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:35:11,846 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:35:11,851 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:35:13,504 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:35:23,166 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:35:23,173 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:35:24,312 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:37:36,829 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:37:36,837 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:37:37,817 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:37:39,447 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:37:39,452 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:37:40,339 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:37:41,762 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:37:41,768 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:37:42,921 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:37:48,107 jazzmin.utils WARNING  listings not found when generating links
+2023-10-09 22:37:48,112 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-09 22:37:49,065 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-09 22:38:52,722 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-10-09 22:38:53,793 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-09 22:38:56,328 django.request WARNING  Unauthorized: /api/v1/profiles/notifications/
+2023-10-09 22:39:33,545 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-10-09 22:39:34,619 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-09 22:39:37,889 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-10-09 22:39:38,954 django.request WARNING  Not Found: /api/v1/profiles/friends/

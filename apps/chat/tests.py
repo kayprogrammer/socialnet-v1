@@ -45,9 +45,6 @@ class TestFeed(APITestCase):
         self.other_user_bearer = {"HTTP_AUTHORIZATION": f"Bearer {auth_token}"}
 
     def test_retrieve_chats(self):
-        chat = self.chat
-        group_chat = self.group_chat
-        message = self.message
         response = self.client.get(self.chats_url, **self.bearer)
         self.assertEqual(response.status_code, 200)
         resp = response.json()

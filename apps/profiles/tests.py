@@ -3,8 +3,7 @@ from unittest import mock
 from apps.accounts.models import User
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
-import uuid
-from apps.profiles.models import Friend
+from apps.profiles.models import Friend, Notification
 from cities_light.models import City, Country, Region
 from django.utils.text import slugify
 
@@ -13,6 +12,7 @@ class TestProfile(APITestCase):
     cities_url = "/api/v1/profiles/cities/"
     profile_url = "/api/v1/profiles/profile/"
     friends_url = "/api/v1/profiles/friends/"
+    notifications_url = "/api/v1/profiles/notifications/"
 
     maxDiff = None
 
@@ -266,3 +266,32 @@ class TestProfile(APITestCase):
         )
 
         # You can test for other error responses yourself.....
+
+    def test_retrieve_notifications(self):
+        notification = Notification.objects.create(
+            ntype="ADMIN", text="A new update is coming!"
+        )
+        notification.receivers.add(self.verified_user)
+
+        # Test for valid response
+        response = self.client.get(self.notifications_url, **self.bearer)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Notifications fetched",
+                "data": [
+                    {
+                        "id": str(notification.id),
+                        "sender": None,
+                        "ntype": notification.ntype,
+                        "message": notification.message,
+                        "post_slug": None,
+                        "comment_slug": None,
+                        "reply_slug": None,
+                        "is_read": False,
+                    }
+                ],
+            },
+        )

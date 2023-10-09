@@ -26,6 +26,7 @@ class NotificationAdmin(admin.ModelAdmin):
     readonly_fields = ("receivers", "read_by", "ntype", "comment", "reply", "sender")
 
     def save_model(self, request, obj, form, change):
+        obj.from_admin_site = True
         obj.ntype = "ADMIN"
         obj.host = request.get_host()
         obj.secured = request.is_secure()

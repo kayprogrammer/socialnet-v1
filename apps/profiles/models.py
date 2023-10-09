@@ -97,10 +97,6 @@ class Notification(BaseModel):
         User, related_name="notifications_read", blank=True
     )
 
-    # For admin use only
-    host = models.CharField(max_length=300, null=True, editable=False)
-    secured = models.BooleanField(default=False, editable=False)
-
     def __str__(self):
         return str(self.id)
 
@@ -156,17 +152,18 @@ class Notification(BaseModel):
 def set_receivers_m2m(sender, instance, created, *args, **kwargs):
     if created and instance.ntype == "ADMIN":
         instance.receivers.set(User.objects.all())
-        # Send socket notification
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        if hasattr(instance, "from_admin_site"):
+            # Send socket notification
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
 
-        loop.run_until_complete(
-            send_notification_in_socket(
-                instance.secured,
-                instance.host,
-                instance,
+            loop.run_until_complete(
+                send_notification_in_socket(
+                    instance.secured,
+                    instance.host,
+                    instance,
+                )
             )
-        )
 
 
 post_save.connect(set_receivers_m2m, sender=Notification)
