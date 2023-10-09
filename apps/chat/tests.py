@@ -7,7 +7,7 @@ from apps.common.error import ErrorCode
 import uuid
 
 
-class TestFeed(APITestCase):
+class TestChat(APITestCase):
     chats_url = "/api/v1/chats/"
     messages_url = "/api/v1/chats/messages/"
     groups_url = "/api/v1/chats/groups/group/"
