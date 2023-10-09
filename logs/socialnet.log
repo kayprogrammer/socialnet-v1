@@ -17129,3 +17129,11 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-08 20:31:32,538 django.request WARNING  Not Found: /api/v1/chats/
 2023-10-08 20:31:33,349 django.request WARNING  Not Found: /api/v1/chats/089e902a-2fd0-4d4a-8433-813c5a61772a/
 2023-10-08 20:31:34,245 django.request WARNING  Not Found: /api/v1/chats/messages/16b9db4c-0718-4bcd-bc3a-d18a3c250485/
+2023-10-09 21:25:25,954 django.request WARNING  Unprocessable Entity: /api/v1/chats/groups/group/
+2023-10-09 21:32:28,045 django.request WARNING  Unprocessable Entity: /api/v1/chats/groups/group/
+2023-10-09 21:32:28,790 django.request WARNING  Not Found: /api/v1/chats/1f9a695b-b6ef-41f2-8420-b6ecd7dbbffd/
+2023-10-09 21:32:29,532 django.request WARNING  Not Found: /api/v1/chats/messages/9b2f65b5-0b04-4546-9445-4015cc0c2e87/
+2023-10-09 21:32:30,275 django.request WARNING  Not Found: /api/v1/chats/8c0394fb-76af-4ab2-9083-0ada457810dd/
+2023-10-09 21:32:31,768 django.request WARNING  Not Found: /api/v1/chats/
+2023-10-09 21:32:32,590 django.request WARNING  Not Found: /api/v1/chats/da188088-93ea-46af-b89c-6d848898b0de/
+2023-10-09 21:32:33,408 django.request WARNING  Not Found: /api/v1/chats/messages/c72c9370-8ba1-4ba1-8250-5f620a1cb736/

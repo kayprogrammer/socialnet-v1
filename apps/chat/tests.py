@@ -294,3 +294,43 @@ class TestFeed(APITestCase):
                 "message": "Message deleted",
             },
         )
+
+    def test_create_group_chat(self):
+        other_user = self.another_verified_user
+        chat_data = {
+            "name": "New Group Chat",
+            "description": "JESUS is KING",
+            "usernames_to_add": ["invalid_username"],
+        }
+
+        # Verify the requests fails with invalid username id
+        response = self.client.post(self.groups_url, data=chat_data, **self.bearer)
+        self.assertEqual(response.status_code, 422)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.INVALID_ENTRY,
+                "message": "Invalid Entry",
+                "data": {"users_entry": "Enter at least one valid username"},
+            },
+        )
+
+        # Verify the requests suceeds with valid chat id
+        chat_data["usernames_to_add"] = [other_user.username]
+        response = self.client.post(self.groups_url, data=chat_data, **self.bearer)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "success",
+                "message": "Chat created",
+                "data": {
+                    "name": chat_data["name"],
+                    "description": chat_data["description"],
+                    "image": None,
+                    "users": [get_user(other_user)],
+                    "file_upload_data": None,
+                },
+            },
+        )
