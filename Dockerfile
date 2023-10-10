@@ -17,7 +17,7 @@ ENV PYTHONUNBUFFERED 1
 # We create folder named build for our app.
 WORKDIR $APP_HOME
 
-COPY ./initials ./initials
+COPY ./docker ./docker
 COPY ./.env .
 COPY ./requirements.txt .
 
@@ -25,11 +25,11 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY ./initials/entrypoint /entrypoint
+COPY ./docker/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 
-COPY ./initials/start /start
+COPY ./docker/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
