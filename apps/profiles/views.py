@@ -1,4 +1,14 @@
-from django.db.models import F, Q, Case, When, Value, BooleanField, CharField
+from django.db.models import (
+    F,
+    Q,
+    Case,
+    When,
+    Value,
+    BooleanField,
+    CharField,
+    Exists,
+    OuterRef,
+)
 from django.db.models.functions import Coalesce
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
@@ -409,8 +419,6 @@ class NotificationsView(APIView):
     permission_classes = (IsAuthenticatedCustom,)
 
     async def get_queryset(self, current_user):
-        from django.db.models import Exists, OuterRef
-
         current_user_id = current_user.id
         # Fetch current user notifications and set and post_slug, comment_slug is_read attribute for each notifications
         notifications = await sync_to_async(list)(
@@ -469,6 +477,11 @@ class NotificationsView(APIView):
                 - Use post slug to navigate to the post.
                 - Use comment slug to navigate to the comment.
                 - Use reply slug to navigate to the reply.
+
+            WEBSOCKET ENDPOINT: /api/v1/ws/notifications/ e.g (ws://{host}/api/v1/ws/notifications/) 
+                NOTE:
+                * This endpoint requires authorization, so pass in the Authorization header with Bearer and its value.
+                * You can only read and not send notification messages into this socket.
         """,
         tags=tags,
         responses=NotificationsResponseSerializer,
@@ -477,10 +490,6 @@ class NotificationsView(APIView):
                 name="page",
                 description="""
                     Retrieve a particular page of notifications. Defaults to 1
-                    WEBSOCKET ENDPOINT: /api/v1/ws/notifications/ e.g (ws://{host}/api/v1/ws/notifications/) 
-                    NOTE:
-                    * This endpoint requires authorization, so pass in the Authorization header with Bearer and its value.
-                    * You can only read and not send notification messages into this socket.
                 """,
                 required=False,
                 type=int,
@@ -497,3 +506,42 @@ class NotificationsView(APIView):
         return CustomResponse.success(
             message="Notifications fetched", data=serializer.data
         )
+
+    @extend_schema(
+        summary="Read Notification",
+        description="""
+            This endpoint reads a notification
+        """,
+        tags=tags,
+        responses=SuccessResponseSerializer,
+    )
+    async def post(self, request, *args, **kwargs):
+        user = request.user
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        id = data.get("id")
+        mark_all_as_read = data["mark_all_as_read"]
+
+        resp_message = "Notifications read"
+        if mark_all_as_read:
+            # Mark all notifications as read
+            notifications = await sync_to_async(list)(
+                Notification.objects.filter(receivers__id=user.id)
+            )
+            await user.notifications_read.aadd(*notifications)
+        elif id:
+            # Mark single notification as read
+            notification = await Notification.objects.filter(
+                receivers__id=user.id
+            ).aget_or_none(id=id)
+            if not notification:
+                raise RequestError(
+                    err_code=ErrorCode.NON_EXISTENT,
+                    err_msg="User has no notification with that ID",
+                    status_code=404,
+                )
+            await notification.read_by.aadd(user)
+            resp_message = "Notification read"
+
+        return CustomResponse.success(message=resp_message)

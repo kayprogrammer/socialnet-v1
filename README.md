@@ -1,4 +1,4 @@
-# SOCIALNET V1 (WORK IN PROGRESS)
+# SOCIALNET V1
 
 ![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/drf.png?raw=true)
 

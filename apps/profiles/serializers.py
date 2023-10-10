@@ -73,18 +73,31 @@ class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
 
 
 class NotificationSerializer(serializers.Serializer):
-    id = serializers.UUIDField()
+    id = serializers.UUIDField(required=False)
     sender = serializers.SerializerMethodField(default=user_data)
-    ntype = serializers.ChoiceField(choices=NOTIFICATION_TYPE_CHOICES)
-    message = serializers.CharField(default="John Doe reacted to your post")
-    post_slug = serializers.CharField(allow_null=True)
-    comment_slug = serializers.CharField(allow_null=True)
-    reply_slug = serializers.CharField(allow_null=True)
-    is_read = serializers.BooleanField(default=False)
+    ntype = serializers.ChoiceField(choices=NOTIFICATION_TYPE_CHOICES, read_only=True)
+    message = serializers.CharField(
+        default="John Doe reacted to your post", read_only=True
+    )
+    post_slug = serializers.CharField(allow_null=True, read_only=True)
+    comment_slug = serializers.CharField(allow_null=True, read_only=True)
+    reply_slug = serializers.CharField(allow_null=True, read_only=True)
+    is_read = serializers.BooleanField(default=False, read_only=True)
+    mark_all_as_read = serializers.BooleanField(write_only=True, default=False)
 
     def get_sender(self, obj) -> dict:
         sender = obj.sender
         return get_user(sender) if sender else None
+
+    def validate(self, attrs):
+        id = attrs.get("id")
+        mark_all_as_read = attrs.get("mark_all_as_read")
+
+        if not id and not mark_all_as_read:
+            raise serializers.ValidationError(
+                {"id": "Set ID or mark all as read as True"}
+            )
+        return attrs
 
 
 # RESPONSE SERIALIZERS
