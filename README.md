@@ -50,10 +50,10 @@ OR
 ```
 
 ## Docs
-#### API Url: [Socialnet Docs](http://127.0.0.1:8000/) 
+<!-- #### API Url: [Socialnet Docs](http://127.0.0.1:8000/)  -->
 #### Swagger: [Documentation](https://swagger.io/docs/)
 
-<!-- ![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display1.png?raw=true)
+![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display1.png?raw=true)
 
 ![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display2.png?raw=true)
 
@@ -63,5 +63,15 @@ OR
 
 ![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display5.png?raw=true)
 
-## ADMIN PAGE
+![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display6.png?raw=true)
+
+![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display7.png?raw=true)
+
+![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display8.png?raw=true)
+
+![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display9.png?raw=true)
+
+![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/display10.png?raw=true)
+
+<!-- ## ADMIN PAGE
 ![alt text](https://github.com/kayprogrammer/socialnet-v1/blob/main/display/admin.png?raw=true) -->

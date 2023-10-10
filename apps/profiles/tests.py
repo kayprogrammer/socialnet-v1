@@ -6,6 +6,7 @@ from apps.common.error import ErrorCode
 from apps.profiles.models import Friend, Notification
 from cities_light.models import City, Country, Region
 from django.utils.text import slugify
+import uuid
 
 
 class TestProfile(APITestCase):
@@ -294,4 +295,32 @@ class TestProfile(APITestCase):
                     }
                 ],
             },
+        )
+
+    def test_read_notification(self):
+        notification = Notification.objects.create(
+            ntype="ADMIN", text="A new update is coming!"
+        )
+        notification.receivers.add(self.verified_user)
+
+        data = {"id": uuid.uuid4(), "mark_all_as_read": False}
+
+        # Test for invalid response for non-existent id
+        response = self.client.post(self.notifications_url, data=data, **self.bearer)
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json(),
+            {
+                "status": "failure",
+                "code": ErrorCode.NON_EXISTENT,
+                "message": "User has no notification with that ID",
+            },
+        )
+
+        # Test for valid response for valid inputs
+        data["id"] = notification.id
+        response = self.client.post(self.notifications_url, data=data, **self.bearer)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(), {"status": "success", "message": "Notification read"}
         )
