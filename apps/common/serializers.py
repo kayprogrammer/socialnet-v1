@@ -12,3 +12,9 @@ class ErrorResponseSerializer(SuccessResponseSerializer):
 
 class ErrorDataResponseSerializer(ErrorResponseSerializer):
     data = serializers.DictField()
+
+
+class PaginatedResponseDataSerializer(serializers.Serializer):
+    per_page = serializers.IntegerField()
+    current_page = serializers.IntegerField()
+    last_page = serializers.IntegerField()

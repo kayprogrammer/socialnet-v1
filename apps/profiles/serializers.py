@@ -1,6 +1,9 @@
 import pytz
 from rest_framework import serializers
-from apps.common.serializers import SuccessResponseSerializer
+from apps.common.serializers import (
+    PaginatedResponseDataSerializer,
+    SuccessResponseSerializer,
+)
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
 from apps.common.schema_examples import file_upload_data, user_data
@@ -69,7 +72,7 @@ class SendFriendRequestSerializer(serializers.Serializer):
 
 
 class AcceptFriendRequestSerializer(SendFriendRequestSerializer):
-    status = serializers.BooleanField()
+    accepted = serializers.BooleanField()
 
 
 class NotificationSerializer(serializers.Serializer):
@@ -101,8 +104,12 @@ class NotificationSerializer(serializers.Serializer):
 
 
 # RESPONSE SERIALIZERS
+class ProfilesResponseDataSerializer(PaginatedResponseDataSerializer):
+    users = ProfileSerializer(source="items", many=True)
+
+
 class ProfilesResponseSerializer(SuccessResponseSerializer):
-    data = ProfileSerializer(many=True)
+    data = ProfilesResponseDataSerializer()
 
 
 class ProfileResponseSerializer(SuccessResponseSerializer):
@@ -113,5 +120,9 @@ class ProfileCreateResponseSerializer(SuccessResponseSerializer):
     data = ProfileCreateResponseDataSerializer()
 
 
+class NotificationsResponseDataSerializer(PaginatedResponseDataSerializer):
+    notifications = NotificationSerializer(source="items", many=True)
+
+
 class NotificationsResponseSerializer(SuccessResponseSerializer):
-    data = NotificationSerializer()
+    data = NotificationsResponseDataSerializer()

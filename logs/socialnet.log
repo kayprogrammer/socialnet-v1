@@ -17381,3 +17381,39 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-10 14:28:54,292 django.request WARNING  Not Found: /api/v1/profiles/notifications/
 2023-10-10 14:28:57,308 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
 2023-10-10 14:28:58,510 django.request WARNING  Not Found: /api/v1/profiles/friends/
+2023-10-15 22:15:19,617 django.request WARNING  Unauthorized: /api/v1/profiles/friends/requests/
+2023-10-15 22:15:36,778 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/requests/
+2023-10-15 22:23:08,656 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 22:23:40,940 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 22:57:18,642 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 22:57:48,613 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 22:58:04,221 django.request WARNING  Not Found: /api/v1/profiles/
+2023-10-15 22:58:08,581 django.request WARNING  Not Found: /api/v1/profiles/
+2023-10-15 22:58:13,734 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 22:59:28,270 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:00:38,103 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:01:13,562 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:01:40,083 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:02:19,926 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:02:37,077 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:02:56,264 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:04:06,388 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:05:30,785 django.request ERROR    Internal Server Error: /api/v1/profiles/
+2023-10-15 23:12:09,977 django.request ERROR    Internal Server Error: /api/v1/profiles/friends/requests/
+2023-10-15 23:12:45,044 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-15 23:12:52,930 jazzmin.utils WARNING  listings not found when generating links
+2023-10-15 23:12:52,936 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-15 23:12:53,708 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-15 23:13:29,155 jazzmin.utils WARNING  listings not found when generating links
+2023-10-15 23:13:29,160 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-15 23:13:30,269 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-15 23:13:32,984 jazzmin.utils WARNING  listings not found when generating links
+2023-10-15 23:13:32,990 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-15 23:13:34,014 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-15 23:13:42,267 jazzmin.utils WARNING  listings not found when generating links
+2023-10-15 23:13:42,273 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-15 23:13:43,243 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-15 23:14:30,231 jazzmin.utils WARNING  listings not found when generating links
+2023-10-15 23:14:30,237 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2023-10-15 23:14:31,345 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2023-10-15 23:15:14,836 django.request ERROR    Internal Server Error: /api/v1/profiles/notifications/

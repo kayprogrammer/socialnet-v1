@@ -1,7 +1,6 @@
 import asyncio
 from django.contrib import admin
 from django.http.request import HttpRequest
-from apps.accounts.models import User
 
 from apps.profiles.models import Friend, Notification
 from apps.profiles.utils import send_notification_in_socket

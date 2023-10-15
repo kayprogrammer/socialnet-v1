@@ -33,12 +33,14 @@ from .serializers import (
     CitiesResponseSerializer,
     CitySerializer,
     NotificationSerializer,
+    NotificationsResponseDataSerializer,
     NotificationsResponseSerializer,
     ProfileCreateResponseDataSerializer,
     ProfileCreateResponseSerializer,
     ProfileResponseSerializer,
     ProfileSerializer,
     DeleteUserSerializer,
+    ProfilesResponseDataSerializer,
     ProfilesResponseSerializer,
     SendFriendRequestSerializer,
 )
@@ -49,7 +51,7 @@ tags = ["Profiles"]
 
 
 class ProfilesView(APIView):
-    serializer_class = ProfileSerializer
+    serializer_class = ProfilesResponseDataSerializer
     paginator_class = CustomPagination()
     paginator_class.page_size = 15
     permission_classes = (IsAuthenticatedOrGuestCustom,)
@@ -107,8 +109,8 @@ class ProfilesView(APIView):
     async def get(self, request, *args, **kwargs):
         user = request.user
         users = await self.get_queryset(user)
-        paginated_users = self.paginator_class.paginate_queryset(users, request)
-        serializer = self.serializer_class(paginated_users, many=True)
+        paginated_data = self.paginator_class.paginate_queryset(users, request)
+        serializer = self.serializer_class(paginated_data)
         return CustomResponse.success(message="Users fetched", data=serializer.data)
 
 
@@ -273,7 +275,7 @@ class ProfileUpdateDeleteView(APIView):
 
 
 class FriendsView(APIView):
-    serializer_class = ProfileSerializer
+    serializer_class = ProfilesResponseDataSerializer
     paginator_class = CustomPagination()
     paginator_class.page_size = 20
     permission_classes = (IsAuthenticatedCustom,)
@@ -310,9 +312,46 @@ class FriendsView(APIView):
     async def get(self, request):
         user = request.user
         friends = await self.get_queryset(user)
-        paginated_friends = self.paginator_class.paginate_queryset(friends, request)
-        serializer = self.serializer_class(paginated_friends, many=True)
+        paginated_data = self.paginator_class.paginate_queryset(friends, request)
+        serializer = self.serializer_class(paginated_data)
         return CustomResponse.success(message="Friends fetched", data=serializer.data)
+
+
+class FriendRequestsView(APIView):
+    serializer_class = ProfilesResponseDataSerializer
+    paginator_class = CustomPagination()
+    paginator_class.page_size = 20
+    permission_classes = (IsAuthenticatedCustom,)
+
+    @extend_schema(
+        summary="Retrieve Friend Requests",
+        description="This endpoint retrieves friend requests sent to a user",
+        tags=tags,
+        responses=ProfilesResponseSerializer,
+        parameters=[
+            OpenApiParameter(
+                name="page",
+                description="Retrieve a particular page of friend requests. Defaults to 1",
+                required=False,
+                type=int,
+            )
+        ],
+    )
+    async def get(self, request):
+        user = request.user
+        friend_ids = Friend.objects.filter(
+            requestee_id=user.id, status="PENDING"
+        ).values_list("requester_id", flat=True)
+        friends = await sync_to_async(list)(
+            User.objects.filter(id__in=friend_ids)
+            .annotate(city_name=F("city__name"))
+            .select_related("avatar")
+        )
+        paginated_data = self.paginator_class.paginate_queryset(friends, request)
+        serializer = self.serializer_class(paginated_data)
+        return CustomResponse.success(
+            message="Friend requests fetched", data=serializer.data
+        )
 
     async def get_other_user_and_friend(self, user, username, status=None):
         # Get and validate username existence
@@ -370,7 +409,7 @@ class FriendsView(APIView):
         summary="Accept Or Reject a Friend Request",
         description="""
             This endpoint accepts or reject a friend request
-            status choices:
+            accepted choices:
             - true - accepted
             - false - rejected
         """,
@@ -400,8 +439,8 @@ class FriendsView(APIView):
             )
 
         # Update or delete friend request based on status
-        status = serializer.validated_data["status"]
-        if status:
+        accepted = serializer.validated_data["accepted"]
+        if accepted:
             msg = "Accepted"
             friend.status = "ACCEPTED"
             await friend.asave()
@@ -496,13 +535,11 @@ class NotificationsView(APIView):
             )
         ],
     )
-    async def get(self, request, *args, **kwargs):
+    async def get(self, request):
         user = request.user
         notifications = await self.get_queryset(user)
-        paginated_notifications = self.paginator_class.paginate_queryset(
-            notifications, request
-        )
-        serializer = self.serializer_class(paginated_notifications, many=True)
+        paginated_data = self.paginator_class.paginate_queryset(notifications, request)
+        serializer = NotificationsResponseDataSerializer(paginated_data)
         return CustomResponse.success(
             message="Notifications fetched", data=serializer.data
         )

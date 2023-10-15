@@ -56,15 +56,10 @@ def custom_exception_handler(exc, context):
                 status_code=422,
                 err_code=ErrorCode.INVALID_ENTRY,
             )
-        elif isinstance(exc, NotFound) and exc.detail == "Invalid page.":
-            return CustomResponse.error(
-                message="Invalid page",
-                status_code=response.status_code,
-                err_code=ErrorCode.INVALID_PAGE,
-            )
         else:
+            print(exc)
             return CustomResponse.error(
-                message=exc.detail if hasattr(exc, "detail") else str(exc),
+                message="Something went wrong!",
                 status_code=response.status_code
                 if hasattr(response, "status_code")
                 else 500,
