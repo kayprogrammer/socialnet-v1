@@ -13,6 +13,7 @@ class TestProfile(APITestCase):
     cities_url = "/api/v1/profiles/cities/"
     profile_url = "/api/v1/profiles/profile/"
     friends_url = "/api/v1/profiles/friends/"
+    friend_requests_url = "/api/v1/profiles/friends/requests/"
     notifications_url = "/api/v1/profiles/notifications/"
 
     maxDiff = None
@@ -214,7 +215,7 @@ class TestProfile(APITestCase):
         data = {"username": "invalid_username"}
 
         # Test for valid response for non-existent user name
-        response = self.client.post(self.friends_url, data=data, **self.bearer)
+        response = self.client.post(self.friend_requests_url, data=data, **self.bearer)
         self.assertEqual(response.status_code, 404)
         self.assertEqual(
             response.json(),
@@ -227,7 +228,7 @@ class TestProfile(APITestCase):
 
         # Test for valid response for valid inputs
         data["username"] = user.username
-        response = self.client.post(self.friends_url, data=data, **self.bearer)
+        response = self.client.post(self.friend_requests_url, data=data, **self.bearer)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(
             response.json(), {"status": "success", "message": "Friend Request sent"}
@@ -240,11 +241,11 @@ class TestProfile(APITestCase):
         friend.status = "PENDING"
         friend.save()
 
-        data = {"username": "invalid_username", "status": True}
+        data = {"username": "invalid_username", "accepted": True}
 
         # Test for valid response for non-existent user name
         response = self.client.put(
-            self.friends_url, data=data, **self.other_user_bearer
+            self.friend_requests_url, data=data, **self.other_user_bearer
         )
         self.assertEqual(response.status_code, 404)
         self.assertEqual(
@@ -259,7 +260,7 @@ class TestProfile(APITestCase):
         # Test for valid response for valid inputs
         data["username"] = friend.requester.username
         response = self.client.put(
-            self.friends_url, data=data, **self.other_user_bearer
+            self.friend_requests_url, data=data, **self.other_user_bearer
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
@@ -282,18 +283,23 @@ class TestProfile(APITestCase):
             {
                 "status": "success",
                 "message": "Notifications fetched",
-                "data": [
-                    {
-                        "id": str(notification.id),
-                        "sender": None,
-                        "ntype": notification.ntype,
-                        "message": notification.message,
-                        "post_slug": None,
-                        "comment_slug": None,
-                        "reply_slug": None,
-                        "is_read": False,
-                    }
-                ],
+                "data": {
+                    "per_page": 50,
+                    "current_page": 1,
+                    "last_page": 1,
+                    "notifications": [
+                        {
+                            "id": str(notification.id),
+                            "sender": None,
+                            "ntype": notification.ntype,
+                            "message": notification.message,
+                            "post_slug": None,
+                            "comment_slug": None,
+                            "reply_slug": None,
+                            "is_read": False,
+                        }
+                    ],
+                },
             },
         )
 
