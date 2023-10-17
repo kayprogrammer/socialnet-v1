@@ -62,7 +62,7 @@ class PostsView(APIView):
     )
     async def get(self, request):
         posts = await sync_to_async(list)(
-            Post.objects.select_related("author", "image")
+            Post.objects.select_related("author", "author__avatar", "image")
             .annotate(
                 reactions_count=Count("reactions"), comments_count=Count("comments")
             )
@@ -117,8 +117,10 @@ class PostDetailView(APIView):
 
     async def get_object(self, slug):
         post = (
-            await Post.objects.select_related("author", "image")
-            .prefetch_related("reactions")
+            await Post.objects.select_related("author", "author__avatar", "image")
+            .annotate(
+                reactions_count=Count("reactions"), comments_count=Count("comments")
+            )
             .aget_or_none(slug=slug)
         )
         if not post:
