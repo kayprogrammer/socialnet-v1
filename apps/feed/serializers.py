@@ -1,6 +1,9 @@
 import pytz
 from rest_framework import serializers
-from apps.common.serializers import SuccessResponseSerializer
+from apps.common.serializers import (
+    PaginatedResponseDataSerializer,
+    SuccessResponseSerializer,
+)
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_image_type
 from apps.common.schema_examples import file_upload_data, user_data
@@ -67,8 +70,12 @@ class PostCreateResponseDataSerializer(PostSerializer):
         return None
 
 
+class PostsResponseDataSerializer(PaginatedResponseDataSerializer):
+    posts = PostSerializer(source="items", many=True)
+
+
 class PostsResponseSerializer(SuccessResponseSerializer):
-    data = PostSerializer(many=True)
+    data = PostsResponseDataSerializer()
 
 
 class PostResponseSerializer(SuccessResponseSerializer):
@@ -91,8 +98,12 @@ class ReactionSerializer(serializers.Serializer):
         return get_user(obj.user)
 
 
+class ReactionsResponseDataSerializer(PaginatedResponseDataSerializer):
+    reactions = ReactionSerializer(source="items", many=True)
+
+
 class ReactionsResponseSerializer(SuccessResponseSerializer):
-    data = ReactionSerializer(many=True)
+    data = ReactionsResponseDataSerializer()
 
 
 # COMMENTS & REPLIES
@@ -109,13 +120,21 @@ class CommentSerializer(ReplySerializer):
     replies_count = serializers.IntegerField(default=0, read_only=True)
 
 
+class CommentWithRepliesResponseDataSerializer(PaginatedResponseDataSerializer):
+    items = ReplySerializer(many=True)
+
+
 class CommentWithRepliesSerializer(serializers.Serializer):
     comment = CommentSerializer()
-    replies = ReplySerializer(many=True)
+    replies = CommentWithRepliesResponseDataSerializer()
+
+
+class CommentsResponseDataSerializer(PaginatedResponseDataSerializer):
+    comments = CommentSerializer(source="items", many=True)
 
 
 class CommentsResponseSerializer(SuccessResponseSerializer):
-    data = CommentSerializer(many=True)
+    data = CommentsResponseDataSerializer(many=True)
 
 
 class CommentResponseSerializer(SuccessResponseSerializer):

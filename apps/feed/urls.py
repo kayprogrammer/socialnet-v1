@@ -8,6 +8,6 @@ urlpatterns = [
     path("posts/<slug:slug>/comments/", views.CommentsView.as_view()),
     path("comments/<slug:slug>/", views.CommentView.as_view()),
     path("replies/<slug:slug>/", views.ReplyView.as_view()),
-    path("reactions/<str:for>/<slug:slug>/", views.ReactionsView.as_view()),
+    path("reactions/<str:focus>/<slug:slug>/", views.ReactionsView.as_view()),
     path("reactions/<uuid:id>/", views.RemoveReaction.as_view()),
 ]

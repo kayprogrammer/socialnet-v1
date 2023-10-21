@@ -14,13 +14,16 @@ from .serializers import (
     CommentSerializer,
     CommentWithRepliesResponseSerializer,
     CommentWithRepliesSerializer,
+    CommentsResponseDataSerializer,
     CommentsResponseSerializer,
     PostSerializer,
+    PostsResponseDataSerializer,
     PostsResponseSerializer,
     PostResponseSerializer,
     PostCreateResponseSerializer,
     PostCreateResponseDataSerializer,
     ReactionSerializer,
+    ReactionsResponseDataSerializer,
     ReactionsResponseSerializer,
     ReplyResponseSerializer,
     ReplySerializer,
@@ -68,8 +71,8 @@ class PostsView(APIView):
             )
             .order_by("-created_at")
         )
-        paginated_posts = self.paginator_class.paginate_queryset(posts, request)
-        serializer = self.serializer_class(paginated_posts, many=True)
+        paginated_data = self.paginator_class.paginate_queryset(posts, request)
+        serializer = PostsResponseDataSerializer(paginated_data)
         return CustomResponse.success(message="Posts fetched", data=serializer.data)
 
     @extend_schema(
@@ -210,7 +213,7 @@ class PostDetailView(APIView):
 # REACTIONS
 reactions_params = [
     OpenApiParameter(
-        name="for",
+        name="focus",
         description="""
             Specify the usage. Use any of the three: POST, COMMENT, FEED
         """,
@@ -231,11 +234,11 @@ reactions_params = [
 class ReactionsView(APIView):
     serializer_class = ReactionSerializer
     paginator_class = CustomPagination()
-    reaction_for = {"POST": Post, "COMMENT": Comment, "REPLY": Reply}
+    reaction_focus = {"POST": Post, "COMMENT": Comment, "REPLY": Reply}
     params = reactions_params
     get_params = params + [
         OpenApiParameter(
-            name="type",
+            name="reaction_type",
             description="""
                 Retrieve a particular type of reactions. Use any of the six (all uppercase):
                 LIKE, LOVE, HAHA, WOW, SAD, ANGRY
@@ -253,18 +256,18 @@ class ReactionsView(APIView):
         ),
     ]
 
-    def validate_for(self, value):
-        if not value in list(self.reaction_for.keys()):
+    def validate_focus(self, value):
+        if not value in list(self.reaction_focus.keys()):
             raise RequestError(
                 err_code=ErrorCode.INVALID_VALUE,
-                err_msg="Invalid 'for' value",
+                err_msg="Invalid 'focus' value",
                 status_code=404,
             )
         return value
 
     async def get_object(self, value, slug):
-        value = self.validate_for(value)
-        model = self.reaction_for[value]
+        value = self.validate_focus(value)
+        model = self.reaction_focus[value]
         related = ["author"]
         if model == Comment:
             related.append("post")
@@ -284,7 +287,7 @@ class ReactionsView(APIView):
         if rtype:
             filter["rtype"] = rtype
         reactions = await sync_to_async(list)(
-            Reaction.objects.filter(**filter).select_related("user")
+            Reaction.objects.filter(**filter).select_related("user", "avatar")
         )
         return reactions
 
@@ -298,16 +301,16 @@ class ReactionsView(APIView):
         parameters=get_params,
     )
     async def get(self, request, *args, **kwargs):
-        rtype = request.GET.get("type")
+        rtype = request.GET.get("reaction_type")
         if rtype and rtype not in set(item[0] for item in REACTION_CHOICES):
             raise RequestError(
                 err_code=ErrorCode.INVALID_VALUE,
                 err_msg="Invalid reaction type",
                 status_code=404,
             )
-        reactions = await self.get_queryset(kwargs["for"], kwargs["slug"], rtype)
-        paginated_reactions = self.paginator_class.paginate_queryset(reactions, request)
-        serializer = self.serializer_class(paginated_reactions, many=True)
+        reactions = await self.get_queryset(kwargs["focus"], kwargs["slug"], rtype)
+        paginated_data = self.paginator_class.paginate_queryset(reactions, request)
+        serializer = ReactionsResponseDataSerializer(paginated_data)
         return CustomResponse.success(message="Reactions fetched", data=serializer.data)
 
     @extend_schema(
@@ -407,7 +410,7 @@ class RemoveReaction(APIView):
                 err_msg="Reaction does not exist",
                 status_code=404,
             )
-        if request.user.id != reaction.user_id:
+        if user.id != reaction.user_id:
             raise RequestError(
                 err_code=ErrorCode.INVALID_OWNER,
                 err_msg="Not yours to delete",
@@ -441,7 +444,9 @@ class CommentsView(APIView):
     paginator_class = CustomPagination()
 
     async def get_object(self, slug):
-        post = await Post.objects.select_related("author").aget_or_none(slug=slug)
+        post = await Post.objects.select_related(
+            "author", "author__avatar"
+        ).aget_or_none(slug=slug)
         if not post:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
@@ -472,11 +477,12 @@ class CommentsView(APIView):
         post = await self.get_object(kwargs["slug"])
         comments = await sync_to_async(list)(
             Comment.objects.filter(post_id=post.id)
-            .select_related("author")
+            .select_related("author", "author__avatar")
             .annotate(replies_count=Count("replies"))
         )
-        paginated_comments = self.paginator_class.paginate_queryset(comments, request)
-        serializer = self.serializer_class(paginated_comments, many=True)
+        paginated_data = self.paginator_class.paginate_queryset(comments, request)
+        serializer = CommentsResponseDataSerializer(paginated_data)
+
         return CustomResponse.success(message="Comments Fetched", data=serializer.data)
 
     @extend_schema(
@@ -493,7 +499,7 @@ class CommentsView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
-        data.update({"post": post, "author": request.user})
+        data.update({"post": post, "author": user})
 
         comment = await Comment.objects.acreate(**data)
         serializer = self.serializer_class(comment)
@@ -542,7 +548,7 @@ class CommentView(APIView):
 
     async def get_object(self, slug):
         comment = (
-            await Comment.objects.select_related("author", "post")
+            await Comment.objects.select_related("author", "author__avatar", "post")
             .annotate(replies_count=Count("replies"))
             .aget_or_none(slug=slug)
         )
@@ -576,10 +582,12 @@ class CommentView(APIView):
     async def get(self, request, *args, **kwargs):
         comment = await self.get_object(kwargs["slug"])
         replies = await sync_to_async(list)(
-            Reply.objects.filter(comment_id=comment.id).select_related("author")
+            Reply.objects.filter(comment_id=comment.id).select_related(
+                "author", "author__avatar"
+            )
         )
-        paginated_replies = self.paginator_class.paginate_queryset(replies, request)
-        data = {"comment": comment, "replies": paginated_replies}
+        paginated_data = self.paginator_class.paginate_queryset(replies, request)
+        data = {"comment": comment, "replies": paginated_data}
         serializer = self.serializer_class(data)
         return CustomResponse.success(
             message="Comment and Replies Fetched", data=serializer.data
@@ -707,7 +715,9 @@ class ReplyView(APIView):
     ]
 
     async def get_object(self, slug):
-        reply = await Reply.objects.select_related("author").aget_or_none(slug=slug)
+        reply = await Reply.objects.select_related(
+            "author", "author__avatar"
+        ).aget_or_none(slug=slug)
         if not reply:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
