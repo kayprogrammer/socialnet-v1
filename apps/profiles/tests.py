@@ -187,20 +187,25 @@ class TestProfile(APITestCase):
             {
                 "status": "success",
                 "message": "Friends fetched",
-                "data": [
-                    {
-                        "first_name": friend.first_name,
-                        "last_name": friend.last_name,
-                        "username": friend.username,
-                        "email": friend.email,
-                        "bio": friend.bio,
-                        "avatar": friend.get_avatar,
-                        "dob": friend.dob,
-                        "city": None,
-                        "created_at": mock.ANY,
-                        "updated_at": mock.ANY,
-                    }
-                ],
+                "data": {
+                    "per_page": 20,
+                    "current_page": 1,
+                    "last_page": 1,
+                    "users": [
+                        {
+                            "first_name": friend.first_name,
+                            "last_name": friend.last_name,
+                            "username": friend.username,
+                            "email": friend.email,
+                            "bio": friend.bio,
+                            "avatar": friend.get_avatar,
+                            "dob": friend.dob,
+                            "city": None,
+                            "created_at": mock.ANY,
+                            "updated_at": mock.ANY,
+                        }
+                    ],
+                },
             },
         )
 

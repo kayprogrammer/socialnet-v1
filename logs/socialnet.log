@@ -17558,3 +17558,22 @@ DETAIL:  Failing row contains (0b223c63-7faf-4de1-9650-cc2cc631996b, 2023-10-06 
 2023-10-23 14:08:31,425 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-5a32cfca-9749-4f3a-8673-a3ac6bb69fee/
 2023-10-23 14:08:32,182 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
 2023-10-23 14:08:32,192 django.request WARNING  Unauthorized: /api/v1/feed/replies/test-verified-3eb35210-59fc-4c3c-8c0b-3fcf6179dbef/
+2023-10-23 14:09:26,197 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2023-10-23 14:09:26,934 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-10-23 14:09:27,305 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2023-10-23 14:09:28,444 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2023-10-23 14:09:29,191 django.request WARNING  Not Found: /api/v1/auth/refresh/
+2023-10-23 14:09:29,197 django.request WARNING  Unauthorized: /api/v1/auth/refresh/
+2023-10-23 14:09:30,322 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2023-10-23 14:09:31,074 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2023-10-23 14:09:31,815 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-10-23 14:09:31,820 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2023-10-23 14:09:32,945 django.request WARNING  Not Found: /api/v1/auth/verify-email/
+2023-10-23 14:09:56,906 django.request WARNING  Not Found: /api/v1/profiles/friends/requests/
+2023-10-23 14:09:58,044 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-23 14:09:59,194 django.request WARNING  Not Found: /api/v1/profiles/notifications/
+2023-10-23 14:15:58,251 django.request WARNING  Not Found: /api/v1/profiles/friends/requests/
+2023-10-23 14:15:59,423 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2023-10-23 14:16:00,567 django.request WARNING  Not Found: /api/v1/profiles/notifications/
+2023-10-23 14:16:03,588 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2023-10-23 14:16:04,698 django.request WARNING  Not Found: /api/v1/profiles/friends/requests/

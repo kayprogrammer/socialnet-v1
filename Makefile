@@ -41,7 +41,7 @@ init:
 	python manage.py initial_data
 	
 test:
-	pytest apps/feed/tests.py --disable-warnings -vv -x
+	pytest apps/profiles/tests.py --disable-warnings -vv -x
 
 shell:
 	python manage.py shell
