@@ -21,10 +21,10 @@ class Authentication:
         return encoded_jwt
 
     # generate random refresh token
-    def create_refresh_token(
-        expire=datetime.utcnow()
-        + timedelta(minutes=int(settings.REFRESH_TOKEN_EXPIRE_MINUTES)),
-    ):
+    def create_refresh_token():
+        expire = datetime.utcnow() + timedelta(
+            minutes=int(settings.REFRESH_TOKEN_EXPIRE_MINUTES)
+        )
         return jwt.encode(
             {"exp": expire, "data": Authentication.get_random(10)},
             settings.SECRET_KEY,

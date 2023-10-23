@@ -57,18 +57,23 @@ class TestFeed(APITestCase):
             {
                 "status": "success",
                 "message": "Posts fetched",
-                "data": [
-                    {
-                        "author": mock.ANY,
-                        "text": post.text,
-                        "slug": post.slug,
-                        "reactions_count": mock.ANY,
-                        "comments_count": mock.ANY,
-                        "image": None,
-                        "created_at": mock.ANY,
-                        "updated_at": mock.ANY,
-                    }
-                ],
+                "data": {
+                    "per_page": 50,
+                    "current_page": 1,
+                    "last_page": 1,
+                    "posts": [
+                        {
+                            "author": mock.ANY,
+                            "text": post.text,
+                            "slug": post.slug,
+                            "reactions_count": mock.ANY,
+                            "comments_count": mock.ANY,
+                            "image": None,
+                            "created_at": mock.ANY,
+                            "updated_at": mock.ANY,
+                        }
+                    ],
+                },
             },
         )
 
@@ -231,7 +236,7 @@ class TestFeed(APITestCase):
             response.json(),
             {
                 "status": "failure",
-                "message": "Invalid 'for' value",
+                "message": "Invalid 'focus' value",
                 "code": ErrorCode.INVALID_VALUE,
             },
         )
@@ -256,17 +261,22 @@ class TestFeed(APITestCase):
             {
                 "status": "success",
                 "message": "Reactions fetched",
-                "data": [
-                    {
-                        "id": str(reaction.id),
-                        "user": {
-                            "name": user.full_name,
-                            "slug": user.username,
-                            "avatar": user.get_avatar,
-                        },
-                        "rtype": reaction.rtype,
-                    }
-                ],
+                "data": {
+                    "per_page": 50,
+                    "current_page": 1,
+                    "last_page": 1,
+                    "reactions": [
+                        {
+                            "id": str(reaction.id),
+                            "user": {
+                                "name": user.full_name,
+                                "username": user.username,
+                                "avatar": user.get_avatar,
+                            },
+                            "rtype": reaction.rtype,
+                        }
+                    ],
+                },
             },
         )
 
@@ -287,7 +297,7 @@ class TestFeed(APITestCase):
             response.json(),
             {
                 "status": "failure",
-                "message": "Invalid 'for' value",
+                "message": "Invalid 'focus' value",
                 "code": ErrorCode.INVALID_VALUE,
             },
         )
@@ -320,7 +330,7 @@ class TestFeed(APITestCase):
                     "id": mock.ANY,
                     "user": {
                         "name": user.full_name,
-                        "slug": user.username,
+                        "username": user.username,
                         "avatar": user.get_avatar,
                     },
                     "rtype": reaction_data["rtype"],
@@ -398,18 +408,23 @@ class TestFeed(APITestCase):
             {
                 "status": "success",
                 "message": "Comments Fetched",
-                "data": [
-                    {
-                        "author": {
-                            "name": user.full_name,
-                            "slug": user.username,
-                            "avatar": user.get_avatar,
-                        },
-                        "slug": comment.slug,
-                        "text": comment.text,
-                        "replies_count": comment.replies.count(),
-                    }
-                ],
+                "data": {
+                    "per_page": 50,
+                    "current_page": 1,
+                    "last_page": 1,
+                    "comments": [
+                        {
+                            "author": {
+                                "name": user.full_name,
+                                "username": user.username,
+                                "avatar": user.get_avatar,
+                            },
+                            "slug": comment.slug,
+                            "text": comment.text,
+                            "replies_count": comment.replies.count(),
+                        }
+                    ],
+                },
             },
         )
 
@@ -446,7 +461,7 @@ class TestFeed(APITestCase):
                 "data": {
                     "author": {
                         "name": user.full_name,
-                        "slug": user.username,
+                        "username": user.username,
                         "avatar": user.get_avatar,
                     },
                     "slug": mock.ANY,
@@ -485,24 +500,29 @@ class TestFeed(APITestCase):
                     "comment": {
                         "author": {
                             "name": user.full_name,
-                            "slug": user.username,
+                            "username": user.username,
                             "avatar": user.get_avatar,
                         },
                         "slug": comment.slug,
                         "text": comment.text,
                         "replies_count": comment.replies.count(),
                     },
-                    "replies": [
-                        {
-                            "author": {
-                                "name": user.full_name,
-                                "slug": user.username,
-                                "avatar": user.get_avatar,
-                            },
-                            "slug": reply.slug,
-                            "text": reply.text,
-                        }
-                    ],
+                    "replies": {
+                        "per_page": 50,
+                        "current_page": 1,
+                        "last_page": 1,
+                        "items": [
+                            {
+                                "author": {
+                                    "name": user.full_name,
+                                    "username": user.username,
+                                    "avatar": user.get_avatar,
+                                },
+                                "slug": reply.slug,
+                                "text": reply.text,
+                            }
+                        ],
+                    },
                 },
             },
         )
@@ -540,7 +560,7 @@ class TestFeed(APITestCase):
                 "data": {
                     "author": {
                         "name": user.full_name,
-                        "slug": user.username,
+                        "username": user.username,
                         "avatar": user.get_avatar,
                     },
                     "slug": mock.ANY,
@@ -598,7 +618,7 @@ class TestFeed(APITestCase):
                 "data": {
                     "author": {
                         "name": user.full_name,
-                        "slug": user.username,
+                        "username": user.username,
                         "avatar": user.get_avatar,
                     },
                     "slug": mock.ANY,
@@ -678,7 +698,7 @@ class TestFeed(APITestCase):
                 "data": {
                     "author": {
                         "name": user.full_name,
-                        "slug": user.username,
+                        "username": user.username,
                         "avatar": user.get_avatar,
                     },
                     "slug": reply.slug,
@@ -736,7 +756,7 @@ class TestFeed(APITestCase):
                 "data": {
                     "author": {
                         "name": user.full_name,
-                        "slug": user.username,
+                        "username": user.username,
                         "avatar": user.get_avatar,
                     },
                     "slug": mock.ANY,

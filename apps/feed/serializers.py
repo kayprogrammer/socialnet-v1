@@ -13,7 +13,7 @@ from .models import REACTION_CHOICES
 def get_user(user):
     return {
         "name": user.full_name,
-        "slug": user.username,
+        "username": user.username,
         "avatar": user.get_avatar,
     }
 

@@ -287,7 +287,7 @@ class ReactionsView(APIView):
         if rtype:
             filter["rtype"] = rtype
         reactions = await sync_to_async(list)(
-            Reaction.objects.filter(**filter).select_related("user", "avatar")
+            Reaction.objects.filter(**filter).select_related("user", "user__avatar")
         )
         return reactions
 
@@ -329,7 +329,7 @@ class ReactionsView(APIView):
     )
     async def post(self, request, *args, **kwargs):
         user = request.user
-        for_val = kwargs["for"]
+        for_val = kwargs["focus"]
         obj = await self.get_object(for_val, kwargs["slug"])
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)

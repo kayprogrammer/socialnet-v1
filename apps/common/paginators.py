@@ -6,7 +6,6 @@ from apps.common.exceptions import RequestError
 
 
 class CustomPagination(PageNumberPagination):
-    page_size = 10  # Set the default page size here
     page_size_query_param = (
         "page_size"  # Optional: allow clients to override the page size
     )
