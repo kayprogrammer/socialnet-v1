@@ -19,6 +19,7 @@ from apps.common.paginators import CustomPagination
 from .serializers import (
     ChatResponseSerializer,
     ChatSerializer,
+    ChatsResponseDataSerializer,
     ChatsResponseSerializer,
     GroupChatCreateResponseDataSerializer,
     GroupChatCreateResponseSerializer,
@@ -75,11 +76,11 @@ class ChatsView(APIView):
             )
         ],
     )
-    async def get(self, request, *args, **kwargs):
+    async def get(self, request):
         user = request.user
         chats = await self.get_queryset(user)
-        paginated_chats = self.paginator_class.paginate_queryset(chats, request)
-        serializer = self.serializer_class(paginated_chats, many=True)
+        paginated_data = self.paginator_class.paginate_queryset(chats, request)
+        serializer = ChatsResponseDataSerializer(paginated_data)
         return CustomResponse.success(message="Chats fetched", data=serializer.data)
 
     @extend_schema(
@@ -106,7 +107,7 @@ class ChatsView(APIView):
         request=MessageSerializer,
         responses={201: MessageCreateResponseSerializer},
     )
-    async def post(self, request, *args, **kwargs):
+    async def post(self, request):
         user = request.user
         serializer = self.post_serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -176,6 +177,8 @@ class ChatsView(APIView):
 class ChatView(APIView):
     serializer_class = MessagesSerializer
     permission_classes = (IsAuthenticatedCustom,)
+    paginator_class = CustomPagination()
+    paginator_class.page_size = 400
 
     async def get_object(self, user, chat_id):
         chat = (
@@ -217,7 +220,8 @@ class ChatView(APIView):
         user = request.user
         chat = await self.get_object(user, kwargs["chat_id"])
         messages = await sync_to_async(list)(chat.lmessages)
-        serializer = self.serializer_class({"chat": chat, "messages": messages})
+        paginated_data = self.paginator_class.paginate_queryset(messages, request)
+        serializer = self.serializer_class({"chat": chat, "messages": paginated_data})
         return CustomResponse.success(message="Messages fetched", data=serializer.data)
 
     @extend_schema(
@@ -447,7 +451,7 @@ class ChatGroupCreateView(APIView):
             raise RequestError(
                 err_code=ErrorCode.INVALID_ENTRY,
                 err_msg="Invalid Entry",
-                data={"users_entry": "Enter at least one valid username"},
+                data={"usernames_to_add": "Enter at least one valid username"},
                 status_code=422,
             )
 

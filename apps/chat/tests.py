@@ -50,7 +50,7 @@ class TestChat(APITestCase):
         resp = response.json()
         self.assertEqual(resp["status"], "success")
         self.assertEqual(resp["message"], "Chats fetched")
-        self.assertTrue(len(resp["data"]) > 0)
+        self.assertTrue(len(resp["data"]["chats"]) > 0)
 
     def test_send_message(self):
         chat = self.chat
@@ -133,17 +133,22 @@ class TestChat(APITestCase):
                         "created_at": mock.ANY,
                         "updated_at": mock.ANY,
                     },
-                    "messages": [
-                        {
-                            "id": str(message.id),
-                            "chat_id": str(chat.id),
-                            "sender": mock.ANY,
-                            "text": message.text,
-                            "file": message.get_file,
-                            "created_at": mock.ANY,
-                            "updated_at": mock.ANY,
-                        }
-                    ],
+                    "messages": {
+                        "per_page": 400,
+                        "current_page": 1,
+                        "last_page": 1,
+                        "items": [
+                            {
+                                "id": str(message.id),
+                                "chat_id": str(chat.id),
+                                "sender": mock.ANY,
+                                "text": message.text,
+                                "file": message.get_file,
+                                "created_at": mock.ANY,
+                                "updated_at": mock.ANY,
+                            }
+                        ],
+                    },
                     "users": [get_user(other_user)],
                 },
             },
@@ -182,6 +187,7 @@ class TestChat(APITestCase):
                 "status": "success",
                 "message": "Chat updated",
                 "data": {
+                    "id": str(chat.id),
                     "name": chat_data["name"],
                     "description": chat_data["description"],
                     "image": chat.get_image,
@@ -309,7 +315,7 @@ class TestChat(APITestCase):
                 "status": "failure",
                 "code": ErrorCode.INVALID_ENTRY,
                 "message": "Invalid Entry",
-                "data": {"users_entry": "Enter at least one valid username"},
+                "data": {"usernames_to_add": "Enter at least one valid username"},
             },
         )
 
@@ -323,6 +329,7 @@ class TestChat(APITestCase):
                 "status": "success",
                 "message": "Chat created",
                 "data": {
+                    "id": mock.ANY,
                     "name": chat_data["name"],
                     "description": chat_data["description"],
                     "image": None,

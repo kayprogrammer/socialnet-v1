@@ -2,7 +2,10 @@ import pytz
 from rest_framework import serializers
 from apps.chat.models import CHAT_TYPES
 from apps.chat.utils import handle_lerrors, get_user
-from apps.common.serializers import SuccessResponseSerializer
+from apps.common.serializers import (
+    PaginatedResponseDataSerializer,
+    SuccessResponseSerializer,
+)
 from apps.common.file_processors import FileProcessor
 from apps.common.validators import validate_file_type, validate_image_type
 from apps.common.schema_examples import file_upload_data, user_data, latest_message_data
@@ -93,9 +96,13 @@ class UpdateMessageSerializer(serializers.Serializer):
 
 
 # For a single chat
+class MessagesResponseDataSchema(PaginatedResponseDataSerializer):
+    items = MessageSerializer(many=True)
+
+
 class MessagesSerializer(serializers.Serializer):
     chat = ChatSerializer()
-    messages = MessageSerializer(many=True)
+    messages = MessagesResponseDataSchema()
     users = serializers.SerializerMethodField(default=[user_data])
 
     def get_users(self, obj) -> list:
@@ -103,6 +110,7 @@ class MessagesSerializer(serializers.Serializer):
 
 
 class GroupChatSerializer(serializers.Serializer):
+    id = serializers.UUIDField(read_only=True)
     name = serializers.CharField(
         max_length=100, error_messages={"max_length": _("{max_length} characters max.")}
     )
@@ -159,8 +167,12 @@ class GroupChatSerializer(serializers.Serializer):
 # RESPONSE SERIALIZERS
 
 
+class ChatsResponseDataSerializer(PaginatedResponseDataSerializer):
+    chats = ChatSerializer(many=True, source="items")
+
+
 class ChatsResponseSerializer(SuccessResponseSerializer):
-    data = ChatSerializer(many=True)
+    data = ChatsResponseDataSerializer()
 
 
 class ChatResponseSerializer(SuccessResponseSerializer):

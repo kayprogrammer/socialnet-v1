@@ -65,6 +65,11 @@ class Message(BaseModel):
     text = models.TextField(null=True, blank=True)
     file = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.created_at:
+            self.chat.save()
+        super().save(*args, **kwargs)
+
     @property
     def get_file(self):
         file = self.file
