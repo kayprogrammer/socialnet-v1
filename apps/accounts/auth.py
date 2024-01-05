@@ -1,5 +1,5 @@
 from django.conf import settings
-from apps.accounts.models import Jwt
+from apps.accounts.models import User
 from datetime import datetime, timedelta
 import jwt, random, string
 
@@ -40,16 +40,11 @@ class Authentication:
         return decoded
 
     def decodeAuthorization(token: str):
-        decoded = Authentication.decode_jwt(token[7:])
+        token = token[7:]
+        decoded = Authentication.decode_jwt(token)
         if not decoded:
             return None
-        jwt_obj = Jwt.objects.select_related(
-            "user",
-            "user__city",
-            "user__city__region",
-            "user__city__country",
-            "user__avatar",
-        ).get_or_none(user_id=decoded["user_id"])
-        if not jwt_obj:
-            return None
-        return jwt_obj.user
+        user = User.objects.select_related(
+            "city", "city__region", "city__country", "avatar"
+        ).get_or_none(id=decoded["user_id"], access=token)
+        return user

@@ -6,7 +6,7 @@ from apps.common.utils import IsAuthenticatedCustom
 
 from .emails import Util
 
-from .models import Jwt, Otp, User
+from .models import Otp, User
 from .serializers import (
     LoginResponseSerializer,
     LoginSerializer,
@@ -274,17 +274,16 @@ class LoginView(APIView):
                 err_msg="Verify your email first",
                 status_code=401,
             )
-        await Jwt.objects.filter(user_id=user.id).adelete()
 
         # Create tokens and store in jwt model
-        access = Authentication.create_access_token(
+        user.access = Authentication.create_access_token(
             {"user_id": str(user.id), "username": user.username}
         )
-        refresh = Authentication.create_refresh_token()
-        await Jwt.objects.acreate(user_id=user.id, access=access, refresh=refresh)
+        user.refresh = Authentication.create_refresh_token()
+        await user.asave()
         return CustomResponse.success(
             message="Login successful",
-            data={"access": access, "refresh": refresh},
+            data={"access": user.access, "refresh": user.refresh},
             status_code=201,
         )
 
@@ -309,33 +308,23 @@ class RefreshTokensView(APIView):
         data = serializer.validated_data
 
         token = data["refresh"]
-        jwt = await Jwt.objects.select_related("user").aget_or_none(refresh=token)
-
-        if not jwt:
-            raise RequestError(
-                err_code=ErrorCode.INVALID_TOKEN,
-                err_msg="Refresh token does not exist",
-                status_code=404,
-            )
-        if not Authentication.decode_jwt(token):
+        user = await User.objects.aget_or_none(refresh=token)
+        if not user or not Authentication.decode_jwt(token):
             raise RequestError(
                 err_code=ErrorCode.INVALID_TOKEN,
                 err_msg="Refresh token is invalid or expired",
                 status_code=401,
             )
 
-        access = Authentication.create_access_token(
-            {"user_id": str(jwt.user_id), "username": jwt.user.username}
+        user.access = Authentication.create_access_token(
+            {"user_id": str(user.id), "username": user.username}
         )
-        refresh = Authentication.create_refresh_token()
-
-        jwt.access = access
-        jwt.refresh = refresh
-        await jwt.asave()
+        user.refresh = Authentication.create_refresh_token()
+        await user.asave()
 
         return CustomResponse.success(
             message="Tokens refresh successful",
-            data={"access": access, "refresh": refresh},
+            data={"access": user.access, "refresh": user.refresh},
             status_code=201,
         )
 
@@ -354,5 +343,7 @@ class LogoutView(APIView):
         tags=tags,
     )
     async def get(self, request):
-        await Jwt.objects.filter(user_id=request.user.id).adelete()
+        user = request.user
+        user.access = user.refresh = None
+        await user.asave()
         return CustomResponse.success(message="Logout successful")

@@ -1,6 +1,6 @@
 from rest_framework.permissions import BasePermission
 from apps.accounts.auth import Authentication
-from apps.accounts.models import User, Jwt
+from apps.accounts.models import User
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
 
@@ -85,9 +85,9 @@ class TestUtil:
         return user
 
     def auth_token(verified_user):
-        access = Authentication.create_access_token(
+        verified_user.access = Authentication.create_access_token(
             {"user_id": str(verified_user.id), "username": verified_user.username}
         )
-        refresh = Authentication.create_refresh_token()
-        Jwt.objects.create(user_id=verified_user.id, access=access, refresh=refresh)
-        return access
+        verified_user.refresh = Authentication.create_refresh_token()
+        verified_user.save()
+        return verified_user.access

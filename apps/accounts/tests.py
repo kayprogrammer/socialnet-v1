@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 from apps.accounts.auth import Authentication
 from apps.common.utils import TestUtil
-from apps.accounts.models import Jwt, Otp
+from apps.accounts.models import Otp
 from unittest import mock
 
 from apps.common.error import ErrorCode
@@ -273,29 +273,13 @@ class TestAccounts(APITestCase):
 
     def test_refresh_token(self):
         verified_user = self.verified_user
+        verified_user.refresh = Authentication.create_refresh_token()
+        verified_user.save()
 
-        jwt_obj = Jwt.objects.create(
-            user_id=verified_user.id,
-            access="access",
-            refresh="refresh",
-        )
-
-        # Test for invalid refresh token (not found)
+        # Test for invalid refresh token (invalid or expired)
         response = self.client.post(
             self.refresh_url, {"refresh": "invalid_refresh_token"}
         )
-        self.assertEqual(response.status_code, 404)
-        self.assertEqual(
-            response.json(),
-            {
-                "status": "failure",
-                "code": ErrorCode.INVALID_TOKEN,
-                "message": "Refresh token does not exist",
-            },
-        )
-
-        # Test for invalid refresh token (invalid or expired)
-        response = self.client.post(self.refresh_url, {"refresh": jwt_obj.refresh})
         self.assertEqual(response.status_code, 401)
         self.assertEqual(
             response.json(),
@@ -307,11 +291,10 @@ class TestAccounts(APITestCase):
         )
 
         # Test for valid refresh token
-        refresh = Authentication.create_refresh_token()
-        jwt_obj.refresh = refresh
-        jwt_obj.save()
         mock.patch("apps.accounts.auth.Authentication.decode_jwt", return_value=True)
-        response = self.client.post(self.refresh_url, {"refresh": jwt_obj.refresh})
+        response = self.client.post(
+            self.refresh_url, {"refresh": verified_user.refresh}
+        )
         self.assertEqual(response.status_code, 201)
         self.assertEqual(
             response.json(),
