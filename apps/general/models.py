@@ -29,7 +29,7 @@ class SiteDetail(BaseModel):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.pk and SiteDetail.objects.exists():
+        if self._state.adding and SiteDetail.objects.exists():
             raise ValidationError("There can be only one Site Detail instance")
 
         return super(SiteDetail, self).save(*args, **kwargs)

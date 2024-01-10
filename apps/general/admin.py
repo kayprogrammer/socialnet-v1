@@ -11,17 +11,13 @@ class SiteDetailAdmin(admin.ModelAdmin):
     )
 
     def has_add_permission(self, request):
-        return (
-            False
-            if self.model.objects.count() > 0
-            else super().has_add_permission(request)
-        )
+        return False
 
     def has_delete_permission(self, request, obj=None):
         return False
 
     def changelist_view(self, request, extra_context=None):
-        obj = self.model.objects.all()[0]
+        obj, created = self.model.objects.get_or_create()
         return HttpResponseRedirect(
             reverse(
                 "admin:%s_%s_change"
