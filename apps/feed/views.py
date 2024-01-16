@@ -215,7 +215,7 @@ reactions_params = [
     OpenApiParameter(
         name="focus",
         description="""
-            Specify the usage. Use any of the three: POST, COMMENT, FEED
+            Specify the usage. Use any of the three: POST, COMMENT, REPLY
         """,
         required=True,
         type=str,
