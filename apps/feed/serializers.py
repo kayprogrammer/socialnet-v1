@@ -111,6 +111,7 @@ class ReplySerializer(serializers.Serializer):
     author = user_field
     slug = serializers.CharField(read_only=True)
     text = serializers.CharField()
+    reactions_count = serializers.IntegerField(default=0, read_only=True)
 
     def get_author(self, obj) -> dict:
         return get_user(obj.author)

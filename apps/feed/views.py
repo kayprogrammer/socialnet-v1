@@ -478,7 +478,9 @@ class CommentsView(APIView):
         comments = await sync_to_async(list)(
             Comment.objects.filter(post_id=post.id)
             .select_related("author", "author__avatar")
-            .annotate(replies_count=Count("replies"))
+            .annotate(
+                replies_count=Count("replies"), reactions_count=Count("reactions")
+            )
         )
         paginated_data = self.paginator_class.paginate_queryset(comments, request)
         serializer = CommentsResponseDataSerializer(paginated_data)
@@ -549,7 +551,9 @@ class CommentView(APIView):
     async def get_object(self, slug):
         comment = (
             await Comment.objects.select_related("author", "author__avatar", "post")
-            .annotate(replies_count=Count("replies"))
+            .annotate(
+                replies_count=Count("replies"), reactions_count=Count("reactions")
+            )
             .aget_or_none(slug=slug)
         )
         if not comment:
@@ -582,9 +586,9 @@ class CommentView(APIView):
     async def get(self, request, *args, **kwargs):
         comment = await self.get_object(kwargs["slug"])
         replies = await sync_to_async(list)(
-            Reply.objects.filter(comment_id=comment.id).select_related(
-                "author", "author__avatar"
-            )
+            Reply.objects.filter(comment_id=comment.id)
+            .select_related("author", "author__avatar")
+            .annotate(reactions_count=Count("reactions"))
         )
         paginated_data = self.paginator_class.paginate_queryset(replies, request)
         data = {"comment": comment, "replies": paginated_data}
@@ -715,9 +719,11 @@ class ReplyView(APIView):
     ]
 
     async def get_object(self, slug):
-        reply = await Reply.objects.select_related(
-            "author", "author__avatar"
-        ).aget_or_none(slug=slug)
+        reply = (
+            await Reply.objects.select_related("author", "author__avatar")
+            .annotate(reactions_count=Count("reactions"))
+            .aget_or_none(slug=slug)
+        )
         if not reply:
             raise RequestError(
                 err_code=ErrorCode.NON_EXISTENT,
