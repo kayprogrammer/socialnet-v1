@@ -353,7 +353,7 @@ class FriendRequestsView(APIView):
             message="Friend requests fetched", data=serializer.data
         )
 
-    async def get_other_user_and_friend(self, user, username, status=None):
+    async def get_requestee_and_friend_obj(self, user, username, status=None):
         # Get and validate username existence
         other_user = await User.objects.aget_or_none(username=username)
         if not other_user:
@@ -384,7 +384,7 @@ class FriendRequestsView(APIView):
         serializer = SendFriendRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        other_user, friend = await self.get_other_user_and_friend(
+        other_user, friend = await self.get_requestee_and_friend_obj(
             user, serializer.validated_data["username"]
         )
         message = "Friend Request sent"
@@ -399,7 +399,10 @@ class FriendRequestsView(APIView):
                     status_code=403,
                 )
 
-            await friend.adelete()
+            if friend.status == "ACCEPTED":
+                message = "This user is already your friend"
+            else:
+                await friend.adelete()
         else:
             await Friend.objects.acreate(requester=user, requestee=other_user)
 
@@ -422,7 +425,7 @@ class FriendRequestsView(APIView):
         serializer = AcceptFriendRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        _, friend = await self.get_other_user_and_friend(
+        _, friend = await self.get_requestee_and_friend_obj(
             user, serializer.validated_data["username"], "PENDING"
         )
         if not friend:
