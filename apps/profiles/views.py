@@ -392,16 +392,16 @@ class FriendRequestsView(APIView):
         if friend:
             status_code = 200
             message = "Friend Request removed"
-            if user.id != friend.requester_id:
+            if friend.status == "ACCEPTED":
+                message = "This user is already your friend"
+            elif user.id != friend.requester_id:
                 raise RequestError(
                     err_code=ErrorCode.NOT_ALLOWED,
                     err_msg="The user already sent you a friend request!",
                     status_code=403,
                 )
-
-            if friend.status == "ACCEPTED":
-                message = "This user is already your friend"
             else:
+                # Delete request successfully
                 await friend.adelete()
         else:
             await Friend.objects.acreate(requester=user, requestee=other_user)
