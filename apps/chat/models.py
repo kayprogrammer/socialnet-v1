@@ -66,7 +66,7 @@ class Message(BaseModel):
     file = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if not self.created_at:
+        if self._state.adding:
             self.chat.save()
         super().save(*args, **kwargs)
 
