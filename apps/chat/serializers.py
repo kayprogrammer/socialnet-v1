@@ -109,27 +109,36 @@ class MessagesSerializer(serializers.Serializer):
         return [get_user(user) for user in obj["chat"].recipients]
 
 
-username_field = serializers.ListField(
-    child=serializers.CharField(
-        error_messages={"invalid": _("One of the usernames is an invalid string")}
-    ),
-    write_only=True,
-    min_length=1,
-    max_length=99,
-    error_messages={
-        "max_length": _("{max_length} users max."),
-        "min_length": _("{min_length} users min."),
-    },
-)
-
-
 class GroupChatSerializer(serializers.Serializer):
     id = serializers.UUIDField(read_only=True)
     name = serializers.CharField(
         max_length=100, error_messages={"max_length": _("{max_length} characters max.")}
     )
-    usernames_to_add = username_field
-    usernames_to_remove = username_field
+    usernames_to_add = serializers.ListField(
+        child=serializers.CharField(
+            error_messages={"invalid": _("One of the usernames is an invalid string")}
+        ),
+        write_only=True,
+        min_length=1,
+        max_length=99,
+        error_messages={
+            "max_length": _("{max_length} users max."),
+            "min_length": _("{min_length} user min."),
+        },
+    )
+    usernames_to_remove = serializers.ListField(
+        child=serializers.CharField(
+            error_messages={"invalid": _("One of the usernames is an invalid string")}
+        ),
+        write_only=True,
+        min_length=1,
+        max_length=99,
+        error_messages={
+            "max_length": _("{max_length} users max."),
+            "min_length": _("{min_length} user min."),
+        },
+    )
+
     description = serializers.CharField(
         required=False,
         max_length=1000,
