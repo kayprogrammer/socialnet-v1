@@ -3,7 +3,11 @@ from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
 from apps.chat.models import Chat, Message
-from apps.chat.utils import create_file, update_group_chat_users
+from apps.chat.utils import (
+    create_file,
+    update_group_chat_users,
+    usernames_to_add_and_remove_validations,
+)
 from apps.common.exceptions import RequestError
 from apps.common.error import ErrorCode
 from apps.common.serializers import SuccessResponseSerializer
@@ -235,8 +239,10 @@ class ChatView(APIView):
     )
     async def patch(self, request, *args, **kwargs):
         user = request.user
-        chat = await Chat.objects.select_related("image").aget_or_none(
-            owner=user, id=kwargs["chat_id"], ctype="GROUP"
+        chat = (
+            await Chat.objects.select_related("image")
+            .prefetch_related("users")
+            .aget_or_none(owner=user, id=kwargs["chat_id"], ctype="GROUP")
         )
         if not chat:
             raise RequestError(
@@ -266,26 +272,13 @@ class ChatView(APIView):
         # Handle Users Upload or Remove
         usernames_to_add = data.pop("usernames_to_add", None)
         usernames_to_remove = data.pop("usernames_to_remove", None)
-
-        if usernames_to_add:
-            users_to_add = await sync_to_async(list)(
-                User.objects.filter(username__in=usernames_to_add).select_related(
-                    "avatar"
-                )
-            )
-            await sync_to_async(update_group_chat_users)(chat, "add", users_to_add)
-        if usernames_to_remove:
-            users_to_remove = await sync_to_async(list)(
-                User.objects.filter(username__in=usernames_to_remove)
-            )
-            await sync_to_async(update_group_chat_users)(
-                chat, "remove", users_to_remove
-            )
+        chat = await usernames_to_add_and_remove_validations(
+            chat, usernames_to_add, usernames_to_remove
+        )
 
         chat = set_dict_attr(chat, data)
         await chat.asave()
         chat.recipients = await sync_to_async(list)(chat.users.select_related("avatar"))
-
         serializer = GroupChatCreateResponseDataSerializer(
             chat, context={"file_upload_status": file_upload_status, "request": request}
         )
