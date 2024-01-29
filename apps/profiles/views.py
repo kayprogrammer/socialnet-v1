@@ -519,11 +519,6 @@ class NotificationsView(APIView):
                 - Use post slug to navigate to the post.
                 - Use comment slug to navigate to the comment.
                 - Use reply slug to navigate to the reply.
-
-            WEBSOCKET ENDPOINT: /api/v1/ws/notifications/ e.g (ws://{host}/api/v1/ws/notifications/) 
-                NOTE:
-                * This endpoint requires authorization, so pass in the Authorization header with Bearer and its value.
-                * You can only read and not send notification messages into this socket.
         """,
         tags=tags,
         responses=NotificationsResponseSerializer,
