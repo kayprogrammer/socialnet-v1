@@ -18047,3 +18047,10 @@ django.core.exceptions.ValidationError: ['Owner cannot be in users']
 2024-01-29 22:52:11,635 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2024-01-29 22:52:12,945 django.request WARNING  Not Found: /static/media/banner2-icon3.png
 2024-01-29 23:09:24,495 django.request ERROR    Internal Server Error: /api/v1/chats/messages/1fbf5be4-9080-443c-8b51-0c3c46ff6034/
+2024-01-30 02:11:40,076 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2024-01-30 02:11:45,428 jazzmin.utils WARNING  listings not found when generating links
+2024-01-30 02:11:45,483 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2024-01-30 02:11:46,364 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2024-01-30 02:26:43,941 jazzmin.utils WARNING  listings not found when generating links
+2024-01-30 02:26:43,973 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
+2024-01-30 02:26:45,207 django.request WARNING  Not Found: /static/media/banner2-icon3.png

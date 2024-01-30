@@ -115,9 +115,9 @@ SPECTACULAR_SETTINGS = {
                 URL: wss://{host}/api/v1/ws/chats/{id}/
                 * Requires authorization, so pass in the Bearer Authorization header.
                 * Use chat_id as the ID for existing chat or user id if its the first message in a DM.
-                * You cannot read realtime messages from a user_id that doesn't belong to the current user, but you can surely send messages
+                * You cannot read realtime messages from a user id that doesn't belong to the authorized user, but you can surely send messages
                 * Only send message to the socket endpoint after the message has been created or updated, and files has been uploaded.
-                * Fields when sending message through the socket: e.g {{"status": "CREATED", "id": "fe4e0235-80fc-4c94-b15e-3da63226f8ab"}}
+                * Fields when sending message through the socket: e.g {"status": "CREATED", "id": "fe4e0235-80fc-4c94-b15e-3da63226f8ab"}
                     * status - This must be either CREATED or UPDATED (string type)
                     * id - This is the ID of the message (uuid type)
     """,

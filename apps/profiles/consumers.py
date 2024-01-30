@@ -40,7 +40,6 @@ class NotificationConsumer(BaseConsumer):
         )
 
     async def notification_message(self, event):
-        print("Hala")
         notification_data = event["notification_data"]
         user = self.scope["user"]
 
