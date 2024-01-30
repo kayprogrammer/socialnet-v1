@@ -2,7 +2,7 @@ from django.db.models import Q, Prefetch
 from adrf.views import APIView
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from asgiref.sync import sync_to_async
-from apps.chat.consumers import send_chat_deletion_in_socket
+from apps.chat.consumers import send_message_deletion_in_socket
 from apps.chat.models import Chat, Message
 from apps.chat.utils import (
     create_file,
@@ -368,7 +368,7 @@ class MessageView(APIView):
         messages_count = await chat.messages.acount()
 
         # Send message deletion in socket
-        await send_chat_deletion_in_socket(
+        await send_message_deletion_in_socket(
             request.is_secure(), request.get_host(), chat.id, message_id
         )
 
