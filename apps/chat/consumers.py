@@ -81,7 +81,7 @@ class ChatConsumer(BaseConsumer):
         if user.id != id:
             chat = await Chat.objects.prefetch_related("users").aget_or_none(id=id)
             if not chat:
-                obj_user = await User.objects.aget_or_none(id=id)
+                obj_user = await User.objects.aget_or_none(username=id)
         else:
             obj_user = user
 
