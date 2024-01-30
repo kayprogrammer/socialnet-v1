@@ -369,7 +369,7 @@ class MessageView(APIView):
 
         # Send message deletion in socket
         await send_chat_deletion_in_socket(
-            request.is_secure(), request.get_host(), chat.id
+            request.is_secure(), request.get_host(), chat.id, message_id
         )
 
         # Delete message and chat if its the last message in the dm being deleted

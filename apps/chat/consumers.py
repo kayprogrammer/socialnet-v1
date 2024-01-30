@@ -124,11 +124,11 @@ class ChatConsumer(BaseConsumer):
             await self.send(text_data=json.dumps(message))
 
 
-async def send_chat_deletion_in_socket(secured: bool, host: str, chat_id: UUID):
+async def send_chat_deletion_in_socket(secured: bool, host: str, chat_id: UUID, message_id: UUID):
     websocket_scheme = "wss://" if secured else "ws://"
     uri = f"{websocket_scheme}{host}/api/v1/ws/chats/{chat_id}/"
     chat_data = {
-        "id": str(chat_id),
+        "id": str(message_id),
         "status": "DELETED",
     }
     headers = [
