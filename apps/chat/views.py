@@ -248,6 +248,13 @@ class ChatView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
+        # Handle Users Upload or Remove
+        usernames_to_add = data.pop("usernames_to_add", None)
+        usernames_to_remove = data.pop("usernames_to_remove", None)
+        chat = await usernames_to_add_and_remove_validations(
+            chat, usernames_to_add, usernames_to_remove
+        )
+        
         # Handle File Upload
         file_type = data.pop("file_type", None)
         file_upload_status = False
@@ -259,13 +266,6 @@ class ChatView(APIView):
             else:
                 file = await create_file(file_type)
                 data["image"] = file
-
-        # Handle Users Upload or Remove
-        usernames_to_add = data.pop("usernames_to_add", None)
-        usernames_to_remove = data.pop("usernames_to_remove", None)
-        chat = await usernames_to_add_and_remove_validations(
-            chat, usernames_to_add, usernames_to_remove
-        )
 
         chat = set_dict_attr(chat, data)
         await chat.asave()
