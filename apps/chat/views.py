@@ -403,15 +403,8 @@ class ChatGroupCreateView(APIView):
         data = serializer.validated_data
 
         data.update({"owner": user, "ctype": "GROUP"})
-        # Handle File Upload
-        file_type = data.pop("file_type", None)
-        file_upload_status = False
-        if file_type:
-            file_upload_status = True
-            file = await create_file(file_type)
-            data["image"] = file
 
-        # Handle Users Upload or Remove
+        # Handle Users Upload
         usernames_to_add = data.pop("usernames_to_add")
         users_to_add = await sync_to_async(list)(
             User.objects.filter(username__in=usernames_to_add)
@@ -425,6 +418,14 @@ class ChatGroupCreateView(APIView):
                 data={"usernames_to_add": "Enter at least one valid username"},
                 status_code=422,
             )
+        
+        # Handle File Upload
+        file_type = data.pop("file_type", None)
+        file_upload_status = False
+        if file_type:
+            file_upload_status = True
+            file = await create_file(file_type)
+            data["image"] = file
 
         # Create Chat
         chat = await Chat.objects.acreate(**data)
