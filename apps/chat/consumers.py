@@ -135,6 +135,6 @@ async def send_message_deletion_in_socket(secured: bool, host: str, chat_id: UUI
         ("Authorization", settings.SOCKET_SECRET),
     ]
     async with websockets.connect(uri, extra_headers=headers) as websocket:
-        # Send a notification to the WebSocket server
+        # Send the chat to the WebSocket server
         await websocket.send(json.dumps(chat_data))
         await websocket.close()
