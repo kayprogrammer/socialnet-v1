@@ -3,10 +3,11 @@ from unittest import mock
 from apps.feed.models import Post, Reaction, Comment, Reply
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
-import uuid
+import uuid, os
 
 
 class TestFeed(APITestCase):
+    os.environ["ENVIRONMENT"] = "TESTING"
     posts_url = "/api/v1/feed/posts/"
     reactions_url = "/api/v1/feed/reactions/"
     comment_url = "/api/v1/feed/comments/"
@@ -421,6 +422,7 @@ class TestFeed(APITestCase):
                             },
                             "slug": comment.slug,
                             "text": comment.text,
+                            "reactions_count": comment.reactions.count(),
                             "replies_count": comment.replies.count(),
                         }
                     ],
@@ -466,6 +468,7 @@ class TestFeed(APITestCase):
                     },
                     "slug": mock.ANY,
                     "text": comment_data["text"],
+                    "reactions_count": 0,
                     "replies_count": 0,
                 },
             },
@@ -505,6 +508,7 @@ class TestFeed(APITestCase):
                         },
                         "slug": comment.slug,
                         "text": comment.text,
+                        "reactions_count": comment.reactions.count(),
                         "replies_count": comment.replies.count(),
                     },
                     "replies": {
@@ -520,6 +524,7 @@ class TestFeed(APITestCase):
                                 },
                                 "slug": reply.slug,
                                 "text": reply.text,
+                                "reactions_count": 0,
                             }
                         ],
                     },
@@ -565,6 +570,7 @@ class TestFeed(APITestCase):
                     },
                     "slug": mock.ANY,
                     "text": reply_data["text"],
+                    "reactions_count": 0,
                 },
             },
         )
@@ -623,6 +629,7 @@ class TestFeed(APITestCase):
                     },
                     "slug": mock.ANY,
                     "text": comment_data["text"],
+                    "reactions_count": mock.ANY,
                     "replies_count": mock.ANY,
                 },
             },
@@ -703,6 +710,7 @@ class TestFeed(APITestCase):
                     },
                     "slug": reply.slug,
                     "text": reply.text,
+                    "reactions_count": reply.reactions.count(),
                 },
             },
         )
@@ -761,6 +769,7 @@ class TestFeed(APITestCase):
                     },
                     "slug": mock.ANY,
                     "text": reply_data["text"],
+                    "reactions_count": reply.reactions.count(),
                 },
             },
         )

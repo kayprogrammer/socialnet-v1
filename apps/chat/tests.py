@@ -4,10 +4,11 @@ from apps.chat.models import Chat, Message
 from apps.chat.utils import get_user
 from apps.common.utils import TestUtil
 from apps.common.error import ErrorCode
-import uuid
+import uuid, os
 
 
 class TestChat(APITestCase):
+    os.environ["ENVIRONMENT"] = "TESTING"
     chats_url = "/api/v1/chats/"
     messages_url = "/api/v1/chats/messages/"
     groups_url = "/api/v1/chats/groups/group/"

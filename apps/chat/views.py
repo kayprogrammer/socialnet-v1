@@ -254,7 +254,7 @@ class ChatView(APIView):
         chat = await usernames_to_add_and_remove_validations(
             chat, usernames_to_add, usernames_to_remove
         )
-        
+
         # Handle File Upload
         file_type = data.pop("file_type", None)
         file_upload_status = False
@@ -418,7 +418,7 @@ class ChatGroupCreateView(APIView):
                 data={"usernames_to_add": "Enter at least one valid username"},
                 status_code=422,
             )
-        
+
         # Handle File Upload
         file_type = data.pop("file_type", None)
         file_upload_status = False

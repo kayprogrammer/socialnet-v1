@@ -6,8 +6,7 @@ from apps.chat.socket_serializers import SocketMessageSerializer
 from apps.common.consumers import BaseConsumer
 from apps.common.error import ErrorCode
 from uuid import UUID
-import json
-import websockets
+import os, json, websockets
 
 
 class ChatConsumer(BaseConsumer):
@@ -124,7 +123,11 @@ class ChatConsumer(BaseConsumer):
             await self.send(text_data=json.dumps(message))
 
 
-async def send_message_deletion_in_socket(secured: bool, host: str, chat_id: UUID, message_id: UUID):
+async def send_message_deletion_in_socket(
+    secured: bool, host: str, chat_id: UUID, message_id: UUID
+):
+    if os.environ.get("ENVIRONMENT") == "TESTING":
+        return
     websocket_scheme = "wss://" if secured else "ws://"
     uri = f"{websocket_scheme}{host}/api/v1/ws/chats/{chat_id}/"
     chat_data = {

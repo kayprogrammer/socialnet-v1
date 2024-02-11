@@ -18054,3 +18054,74 @@ django.core.exceptions.ValidationError: ['Owner cannot be in users']
 2024-01-30 02:26:43,941 jazzmin.utils WARNING  listings not found when generating links
 2024-01-30 02:26:43,973 jazzmin.templatetags.jazzmin WARNING  avatar field must be an ImageField/URLField on the user model, or a callable
 2024-01-30 02:26:45,207 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2024-02-11 13:38:56,216 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2024-02-11 13:42:41,003 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2024-02-11 13:42:42,478 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-78b9ee8a-900d-4f58-9512-a58d4f993806/
+2024-02-11 13:42:42,486 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2024-02-11 13:42:43,247 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:42:43,992 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:42:44,004 django.request WARNING  Unauthorized: /api/v1/feed/comments/test-verified-189b5773-eaa2-48cb-a6e9-fc0d5eb83b73/
+2024-02-11 13:42:44,749 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2024-02-11 13:42:44,758 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-05a045ba-2bad-470a-a328-2dffab919462/
+2024-02-11 13:42:45,504 django.request WARNING  Not Found: /api/v1/feed/reactions/7159b01a-cd88-42f6-bf77-655d6e66af9f/
+2024-02-11 13:42:45,512 django.request WARNING  Unauthorized: /api/v1/feed/reactions/11e242e0-258f-464b-bd22-9a8835925823/
+2024-02-11 13:42:46,282 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
+2024-02-11 13:42:46,290 django.request WARNING  Unauthorized: /api/v1/feed/replies/test-verified-3a6a97c3-ebd3-4704-826b-defb87f448a6/
+2024-02-11 13:42:47,024 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:42:47,770 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2024-02-11 13:42:48,505 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2024-02-11 13:42:50,112 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-8bcf8e21-32bf-4aee-8b9f-26de8cc9ec2b/
+2024-02-11 13:42:50,116 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2024-02-11 13:42:50,843 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
+2024-02-11 13:42:51,581 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:42:51,593 django.request WARNING  Unauthorized: /api/v1/feed/comments/test-verified-2590ebec-de9b-40e0-a3da-58df0f905a96/
+2024-02-11 13:42:52,344 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2024-02-11 13:42:52,356 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-2708092b-b7a3-479b-a273-95a014676511/
+2024-02-11 13:42:53,097 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
+2024-02-11 13:42:53,106 django.request WARNING  Unauthorized: /api/v1/feed/replies/test-verified-3b25d3e0-69f0-45a0-a48b-916050a9856b/
+2024-02-11 13:43:19,457 django.request WARNING  Not Found: /api/v1/auth/send-password-reset-otp/
+2024-02-11 13:43:20,180 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2024-02-11 13:43:20,537 django.request WARNING  Unauthorized: /api/v1/auth/login/
+2024-02-11 13:43:21,674 django.request WARNING  Unauthorized: /api/v1/auth/logout/
+2024-02-11 13:43:22,547 django.request WARNING  Unauthorized: /api/v1/auth/refresh/
+2024-02-11 13:43:23,748 django.request WARNING  Unprocessable Entity: /api/v1/auth/register/
+2024-02-11 13:43:24,538 django.request WARNING  Not Found: /api/v1/auth/resend-verification-email/
+2024-02-11 13:43:25,339 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2024-02-11 13:43:25,347 django.request WARNING  Not Found: /api/v1/auth/set-new-password/
+2024-02-11 13:43:26,615 django.request WARNING  Not Found: /api/v1/auth/verify-email/
+2024-02-11 13:43:27,876 django.request WARNING  Unprocessable Entity: /api/v1/chats/groups/group/
+2024-02-11 13:43:28,743 django.request WARNING  Not Found: /api/v1/chats/1552ce06-4bdd-45e1-9171-95a56fdf0e83/
+2024-02-11 13:43:29,658 django.request WARNING  Not Found: /api/v1/chats/messages/9e44e9d6-6418-47ec-8d60-850dfa39e6cf/
+2024-02-11 13:43:30,687 django.request WARNING  Not Found: /api/v1/chats/6bcde4e5-fce7-4751-b2cb-b6f3e481f02b/
+2024-02-11 13:43:32,377 django.request WARNING  Not Found: /api/v1/chats/
+2024-02-11 13:43:33,477 django.request WARNING  Not Found: /api/v1/chats/acd046ec-4194-43b2-b367-f21cc793cc86/
+2024-02-11 13:43:34,291 django.request WARNING  Not Found: /api/v1/chats/messages/c124b17a-7bc9-4a47-8661-303c168990ec/
+2024-02-11 13:43:35,151 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2024-02-11 13:43:36,697 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-1d6d0fac-e211-4e20-8de7-d59d2ef730c1/
+2024-02-11 13:43:36,705 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2024-02-11 13:43:37,487 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:43:38,264 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:43:38,275 django.request WARNING  Unauthorized: /api/v1/feed/comments/test-verified-826a31b8-9e90-4226-b08b-33006524be83/
+2024-02-11 13:43:39,141 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2024-02-11 13:43:39,154 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-4fa34e41-d9ef-4d2c-ae3f-f9452d2fc40c/
+2024-02-11 13:43:40,038 django.request WARNING  Not Found: /api/v1/feed/reactions/0d69c0a4-71ad-4227-af45-947a74a533af/
+2024-02-11 13:43:40,047 django.request WARNING  Unauthorized: /api/v1/feed/reactions/3bb50f9c-5dc5-4060-80f1-8e796b2b0cbc/
+2024-02-11 13:43:41,062 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
+2024-02-11 13:43:41,074 django.request WARNING  Unauthorized: /api/v1/feed/replies/test-verified-863b9cd7-d97c-48c4-879f-ae25158238e2/
+2024-02-11 13:43:41,986 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:43:42,910 django.request WARNING  Not Found: /api/v1/feed/posts/invalid_slug/comments/
+2024-02-11 13:43:43,779 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2024-02-11 13:43:45,327 django.request WARNING  Not Found: /api/v1/feed/reactions/invalid_for/test-verified-6caaa35c-0372-46ec-aa35-dde11b86dbbe/
+2024-02-11 13:43:45,332 django.request WARNING  Not Found: /api/v1/feed/reactions/POST/invalid_slug/
+2024-02-11 13:43:46,154 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
+2024-02-11 13:43:46,981 django.request WARNING  Not Found: /api/v1/feed/comments/invalid_slug/
+2024-02-11 13:43:46,992 django.request WARNING  Unauthorized: /api/v1/feed/comments/test-verified-3f8970ba-00c6-40e2-ae74-279df803017c/
+2024-02-11 13:43:47,969 django.request WARNING  Not Found: /api/v1/feed/posts/invalid-slug/
+2024-02-11 13:43:47,981 django.request WARNING  Bad Request: /api/v1/feed/posts/test-verified-944ed598-edcd-4772-9dee-19a5344642ad/
+2024-02-11 13:43:48,796 django.request WARNING  Not Found: /api/v1/feed/replies/invalid_slug/
+2024-02-11 13:43:48,805 django.request WARNING  Unauthorized: /api/v1/feed/replies/test-verified-d63a7139-7240-4f63-862a-f8613db0cf51/
+2024-02-11 13:43:49,758 django.request WARNING  Not Found: /api/v1/profiles/friends/requests/
+2024-02-11 13:43:50,979 django.request WARNING  Unprocessable Entity: /api/v1/profiles/profile/
+2024-02-11 13:43:52,230 django.request WARNING  Not Found: /api/v1/profiles/notifications/
+2024-02-11 13:43:55,593 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
+2024-02-11 13:43:56,738 django.request WARNING  Not Found: /api/v1/profiles/friends/requests/

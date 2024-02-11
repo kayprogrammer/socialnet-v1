@@ -1,6 +1,5 @@
 from django.conf import settings
-import websockets
-import json
+import json, os, websockets
 
 
 def get_notification_message(obj):
@@ -36,6 +35,8 @@ async def sort_notification_slugs(notification):
 async def send_notification_in_socket(
     secured: bool, host: str, notification: object, status: str = "CREATED"
 ):
+    if os.environ.get("ENVIRONMENT") == "TESTING":
+        return
     websocket_scheme = "wss://" if secured else "ws://"
     uri = f"{websocket_scheme}{host}/api/v1/ws/notifications/"
     notification_data = {
