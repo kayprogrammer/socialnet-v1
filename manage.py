@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
-from decouple import config
 import os, sys
 
 
@@ -9,7 +8,7 @@ def main():
 
     os.environ.setdefault(
         "DJANGO_SETTINGS_MODULE",
-        f"socialnet.settings.{config('SETTINGS')}",
+        "socialnet.settings.dev",
     )
 
     try:

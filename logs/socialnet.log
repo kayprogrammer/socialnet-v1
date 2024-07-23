@@ -18125,3 +18125,294 @@ django.core.exceptions.ValidationError: ['Owner cannot be in users']
 2024-02-11 13:43:52,230 django.request WARNING  Not Found: /api/v1/profiles/notifications/
 2024-02-11 13:43:55,593 django.request WARNING  Not Found: /api/v1/profiles/profile/invalid_username/
 2024-02-11 13:43:56,738 django.request WARNING  Not Found: /api/v1/profiles/friends/requests/
+2024-07-23 22:26:28,145 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2024-07-23 22:26:57,260 django.request ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 187, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "django_session" does not exist
+LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/rest_framework/renderers.py", line 166, in render
+    return template.render(context, request=request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/template/base.py", line 173, in render
+    with context.bind_template(self):
+  File "/usr/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/debug_toolbar/panels/templates/panel.py", line 45, in _request_context_bind_template
+    context = processor(self.request)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/auth/context_processors.py", line 57, in auth
+    if hasattr(request, "user"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/rest_framework/authentication.py", line 127, in authenticate
+    if not user or not user.is_active:
+           ^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/utils/functional.py", line 266, in inner
+    self._setup()
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/utils/functional.py", line 419, in _setup
+    self._wrapped = self._setupfunc()
+                    ^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 25, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 11, in get_user
+    request._cached_user = auth.get_user(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 191, in get_user
+    user_id = _get_user_session_key(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 60, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 53, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 192, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 42, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 252, in execute
+    return self._record(super().execute, sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/debug_toolbar/panels/sql/tracking.py", line 177, in _record
+    return method(sql, params)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: relation "django_session" does not exist
+LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
+                                                             ^
+2024-07-23 22:26:57,343 django.request ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 187, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "django_session" does not exist
+LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/debug_toolbar/middleware.py", line 69, in __call__
+    panel.generate_stats(request, response)
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/debug_toolbar/panels/request.py", line 64, in generate_stats
+    (k, request.session.get(k)) for k in sorted(request.session.keys())
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 123, in keys
+    return self._session.keys()
+           ^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 192, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 42, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: relation "django_session" does not exist
+LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
+                                                             ^
+2024-07-23 22:26:57,652 django.request ERROR    Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 187, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "django_session" does not exist
+LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/debug_toolbar/middleware.py", line 69, in __call__
+    panel.generate_stats(request, response)
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/debug_toolbar/panels/request.py", line 64, in generate_stats
+    (k, request.session.get(k)) for k in sorted(request.session.keys())
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 123, in keys
+    return self._session.keys()
+           ^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 192, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 42, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: relation "django_session" does not exist
+LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
+                                                             ^
+2024-07-23 22:28:03,380 django.utils.autoreload INFO     Watching for file changes with StatReloader
