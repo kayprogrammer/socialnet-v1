@@ -12,6 +12,7 @@ cloudinary==1.33.0
 coreschema==0.0.4
 cryptography==41.0.4
 Django==4.2.3
+django-after-response==0.2.2
 django-autoslug==1.9.9
 django-cities-light==3.9.2
 django-cors-headers==4.2.0
