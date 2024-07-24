@@ -18416,3 +18416,18 @@ django.db.utils.ProgrammingError: relation "django_session" does not exist
 LINE 1: ...ession_data", "django_session"."expire_date" FROM "django_se...
                                                              ^
 2024-07-23 22:28:03,380 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2024-07-24 13:13:09,358 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 13:14:54,481 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 13:22:20,973 asyncio      ERROR    Task exception was never retrieved
+future: <Task finished name='Task-6' coro=<mail_send() done, defined at /home/kene/Documents/Projects/Django/socialnet-v1/apps/accounts/emails.py:16> exception=AttributeError("'coroutine' object has no attribute 'content_subtype'")>
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/apps/accounts/emails.py", line 20, in mail_send
+    email_message.content_subtype = "html"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'content_subtype'
+2024-07-24 13:27:46,489 asyncio      ERROR    Task exception was never retrieved
+future: <Task finished name='Task-6' coro=<mail_send() done, defined at /home/kene/Documents/Projects/Django/socialnet-v1/apps/accounts/emails.py:16> exception=TypeError("object SyncToAsync can't be used in 'await' expression")>
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/apps/accounts/emails.py", line 20, in mail_send
+    await sync_to_async(email_message.send)
+TypeError: object SyncToAsync can't be used in 'await' expression

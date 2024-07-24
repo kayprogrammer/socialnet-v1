@@ -1,7 +1,8 @@
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
+from asgiref.sync import sync_to_async
 from . import models as accounts_models
-import random, threading, after_response
+import random, threading, asyncio
 
 
 class EmailThread(threading.Thread):
@@ -12,9 +13,10 @@ class EmailThread(threading.Thread):
     def run(self):
         self.email.send()
 
-@after_response.enable
-def mail_send(email):
-    email.send()
+async def mail_send(subject, body, to):
+    email_message = EmailMessage(subject=subject, body=body, to=to)
+    email_message.content_subtype = "html"
+    await sync_to_async(email_message.send)()
 
 class Util:
     async def send_activation_otp(user):
@@ -33,10 +35,7 @@ class Util:
         else:
             otp.code = code
             await otp.asave()
-
-        email_message = EmailMessage(subject=subject, body=message, to=[user.email])
-        email_message.content_subtype = "html"
-        mail_send.after_response(email_message)
+        asyncio.create_task(mail_send(subject=subject, body=message, to=[user.email]))
         # EmailThread(email_message).start()
 
     async def send_password_change_otp(user):
