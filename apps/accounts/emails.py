@@ -4,6 +4,7 @@ from asgiref.sync import sync_to_async
 from . import models as accounts_models
 import random, threading, asyncio
 
+
 class EmailThread(threading.Thread):
     def __init__(self, email):
         self.email = email
@@ -13,14 +14,13 @@ class EmailThread(threading.Thread):
         self.email.send()
 
 
-async def mail_send(subject, body, to, loop):
-    # I usually use threading but I'm using this instead because of vercel
+async def mail_send(subject, body, to):
+    # Alternate way to send email in background
     print("Working...")
     email_message = EmailMessage(subject=subject, body=body, to=to)
     email_message.content_subtype = "html"
-    # email_message.send()
     async_email_send = sync_to_async(email_message.send)
-    # loop = asyncio.get_event_loop()
+    loop = asyncio.get_event_loop()
     loop.create_task(async_email_send())
     print("Worked")
 
@@ -42,10 +42,10 @@ class Util:
         else:
             otp.code = code
             await otp.asave()
-        loop = asyncio.get_event_loop()
-        loop.create_task(mail_send(subject, message, [user.email], loop))
-        # await mail_send(subject, message, [user.email])
-        # EmailThread(email_message).start()
+
+        email_message = EmailMessage(subject=subject, body=message, to=[user.email])
+        email_message.content_subtype = "html"
+        EmailThread(email_message).start()
 
     async def send_password_change_otp(user):
         subject = "Your account password reset email"
