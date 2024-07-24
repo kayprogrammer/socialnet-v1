@@ -18613,3 +18613,36 @@ Traceback (most recent call last):
     result = await self.awaitable(*args, **kwargs)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: object HttpResponse can't be used in 'await' expression
+2024-07-24 22:02:09,599 django.request WARNING  Not Found: /static/media/banner2-icon3.png
+2024-07-24 22:07:40,741 asyncio      ERROR    Task exception was never retrieved
+future: <Task finished name='Task-6' coro=<SyncToAsync.__call__() done, defined at /home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py:437> exception=SMTPServerDisconnected('Connection unexpectedly closed')>
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 479, in __call__
+    ret: _R = await loop.run_in_executor(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 538, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/mail/message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 127, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 85, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/smtplib.py", line 1022, in __init__
+    SMTP.__init__(self, host, port, local_hostname, timeout,
+  File "/usr/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/smtplib.py", line 343, in connect
+    (code, msg) = self.getreply()
+                  ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/smtplib.py", line 405, in getreply
+    raise SMTPServerDisconnected("Connection unexpectedly closed")
+smtplib.SMTPServerDisconnected: Connection unexpectedly closed

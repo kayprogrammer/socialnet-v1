@@ -4,7 +4,6 @@ from asgiref.sync import sync_to_async
 from . import models as accounts_models
 import random, threading, asyncio
 
-
 class EmailThread(threading.Thread):
     def __init__(self, email):
         self.email = email
@@ -20,7 +19,7 @@ async def mail_send(subject, body, to):
     email_message = EmailMessage(subject=subject, body=body, to=to)
     email_message.content_subtype = "html"
     async_email_send = sync_to_async(email_message.send)
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     loop.create_task(async_email_send())
     print("Worked")
 
