@@ -18431,3 +18431,185 @@ Traceback (most recent call last):
   File "/home/kene/Documents/Projects/Django/socialnet-v1/apps/accounts/emails.py", line 20, in mail_send
     await sync_to_async(email_message.send)
 TypeError: object SyncToAsync can't be used in 'await' expression
+2024-07-24 13:48:08,359 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 13:49:18,274 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 13:53:56,377 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 13:54:18,720 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 15:04:55,592 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 15:12:12,587 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+2024-07-24 15:16:17,410 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2024-07-24 15:26:09,554 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/middleware/clickjacking.py", line 27, in process_response
+    if response.get("X-Frame-Options") is not None:
+       ^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'get'
+2024-07-24 15:26:24,745 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/middleware/clickjacking.py", line 27, in process_response
+    if response.get("X-Frame-Options") is not None:
+       ^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'get'
+2024-07-24 15:30:32,208 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/middleware/clickjacking.py", line 27, in process_response
+    if response.get("X-Frame-Options") is not None:
+       ^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'get'
+2024-07-24 15:30:32,242 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/whitenoise/middleware.py", line 124, in __call__
+    return self.get_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 277, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 353, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object HttpResponse can't be used in 'await' expression
+2024-07-24 15:31:01,250 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/middleware/clickjacking.py", line 27, in process_response
+    if response.get("X-Frame-Options") is not None:
+       ^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'get'
+2024-07-24 15:31:01,278 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/whitenoise/middleware.py", line 124, in __call__
+    return self.get_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 277, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 353, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object HttpResponse can't be used in 'await' expression
+2024-07-24 15:31:57,783 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/apps/common/middlewares.py", line 18, in __call__
+    response.background = request.background
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'background'
+2024-07-24 15:31:57,831 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/whitenoise/middleware.py", line 124, in __call__
+    return self.get_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 277, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 353, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object HttpResponse can't be used in 'await' expression
+2024-07-24 15:32:17,744 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/apps/common/middlewares.py", line 19, in __call__
+    response.background = request.background
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'background'
+2024-07-24 15:32:17,772 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/whitenoise/middleware.py", line 124, in __call__
+    return self.get_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 277, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 353, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object HttpResponse can't be used in 'await' expression
+2024-07-24 15:35:18,326 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/apps/common/middlewares.py", line 23, in __call__
+    response.background = request.background
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'background'
+2024-07-24 15:35:18,353 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
+Traceback (most recent call last):
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/whitenoise/middleware.py", line 124, in __call__
+    return self.get_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 277, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/kene/Documents/Projects/Django/socialnet-v1/env/lib/python3.12/site-packages/asgiref/sync.py", line 353, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object HttpResponse can't be used in 'await' expression

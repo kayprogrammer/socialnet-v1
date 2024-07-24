@@ -60,9 +60,9 @@ def custom_exception_handler(exc, context):
             print(exc)
             return CustomResponse.error(
                 message="Something went wrong!",
-                status_code=response.status_code
-                if hasattr(response, "status_code")
-                else 500,
+                status_code=(
+                    response.status_code if hasattr(response, "status_code") else 500
+                ),
                 err_code=ErrorCode.SERVER_ERROR,
             )
     except APIException as e:
