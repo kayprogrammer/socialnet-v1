@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "cities_light",
     "debug_toolbar",
+    "after_response",
 ]
 
 LOCAL_APPS = [

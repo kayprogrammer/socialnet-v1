@@ -1,7 +1,7 @@
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from . import models as accounts_models
-import random, threading
+import random, threading, after_response
 
 
 class EmailThread(threading.Thread):
@@ -12,6 +12,9 @@ class EmailThread(threading.Thread):
     def run(self):
         self.email.send()
 
+@after_response.enable
+def mail_send(email):
+    email.send()
 
 class Util:
     async def send_activation_otp(user):
@@ -33,7 +36,8 @@ class Util:
 
         email_message = EmailMessage(subject=subject, body=message, to=[user.email])
         email_message.content_subtype = "html"
-        EmailThread(email_message).start()
+        mail_send.after_response(email_message)
+        # EmailThread(email_message).start()
 
     async def send_password_change_otp(user):
         subject = "Your account password reset email"
