@@ -32,3 +32,5 @@ application = ProtocolTypeRouter(
         "websocket": SocketAuthMiddleware(URLRouter(socket_urlpatterns)),
     }
 )
+
+app = application
