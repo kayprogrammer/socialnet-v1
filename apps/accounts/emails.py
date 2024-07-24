@@ -13,13 +13,14 @@ class EmailThread(threading.Thread):
         self.email.send()
 
 
-async def mail_send(subject, body, to):
+async def mail_send(subject, body, to, loop):
     # I usually use threading but I'm using this instead because of vercel
     print("Working...")
     email_message = EmailMessage(subject=subject, body=body, to=to)
     email_message.content_subtype = "html"
+    # email_message.send()
     async_email_send = sync_to_async(email_message.send)
-    loop = asyncio.get_running_loop()
+    # loop = asyncio.get_event_loop()
     loop.create_task(async_email_send())
     print("Worked")
 
@@ -41,7 +42,9 @@ class Util:
         else:
             otp.code = code
             await otp.asave()
-        await mail_send(subject, message, [user.email])
+        loop = asyncio.get_event_loop()
+        loop.create_task(mail_send(subject, message, [user.email], loop))
+        # await mail_send(subject, message, [user.email])
         # EmailThread(email_message).start()
 
     async def send_password_change_otp(user):

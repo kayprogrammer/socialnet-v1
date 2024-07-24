@@ -18646,3 +18646,4 @@ Traceback (most recent call last):
   File "/usr/lib/python3.12/smtplib.py", line 405, in getreply
     raise SMTPServerDisconnected("Connection unexpectedly closed")
 smtplib.SMTPServerDisconnected: Connection unexpectedly closed
+2024-07-24 22:24:14,629 django.request ERROR    Internal Server Error: /api/v1/auth/resend-verification-email/
